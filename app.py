@@ -42,10 +42,6 @@ def create_table():
     conn.close()
     return jsonify({'message': 'Table created successfully'})
 
-'''@app.route('/')
-def home():
-    return "Hello, Flask with Docker!" '''
-
 @app.route('/')
 def home():
     name = os.getenv('NAME', 'World')  # Default to 'World' if NAME is not set
