@@ -52,6 +52,10 @@ def home():
 def student_homepage():
     return render_template('studenthomepage.html')
 
+@app.route('/labmaterialone')
+def labmaterialone_page():
+    return render_template('labmaterialone.html')
+
 @app.route('/add_user', methods=['POST'])
 def add_user():
     name = request.form['name']

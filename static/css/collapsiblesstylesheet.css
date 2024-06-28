@@ -1,0 +1,38 @@
+/* Collapsible Button */
+.container .collapsible {
+    background-color: #777;
+    color: white;
+    cursor: pointer;
+    padding: 1rem;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 1rem; /* Use rem units for font size */
+    box-sizing: border-box;
+}
+
+.container .active, .collapsible:hover {
+    background-color: #555;
+}
+
+.container .collapsible:after {
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 0.5rem; /* Use rem units for margin */
+}
+
+.container .active:after {
+    content: "\2212";
+}
+
+/* Collapsible Content */
+.container .content {
+    padding: 0 1rem; /* Use rem units for padding */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #f1f1f1;
+}
