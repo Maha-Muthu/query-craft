@@ -1,36 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Homepage</title>
-    <link rel="stylesheet" href="static/css/studenthomepage/homescreen.css">
-    <link rel="stylesheet" href="static/css/studenthomepage/dockerinfopopup.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Homepage</title>
+  <link rel="stylesheet" href="static/css/studenthomepage/homescreen.css">
+  <link rel="stylesheet" href="static/css/studenthomepage/docker-info-popup.css">
 </head>
+
 <body>
-    <header>Page Title</header>
-    <div class="container">
-      <nav>
-          <a href="/">Home</a>
-          <a href="#" id="myBtn">Dockers: Read on how this application runs</a>
-          <a href="#">About</a>
-          <a href="#">Services</a>
-          <a href="#">Contact</a>
-      </nav>
-      <main>
-          <h2>Databases</h2>
-          <p>A database is a structured collection of data organized for efficient retrieval, storage, and management. It serves as a repository where data is stored in a structured format, allowing for easy querying, updating, and analysis. Databases are fundamental in applications ranging from simple websites to complex enterprise systems.</p>
-      </main>
+  <header>Query Craft</header>
+  <div class="container">
+    <nav>
+      <a href="/">Home</a>
+      <br>
+      <br>
+      <a href="#" id="myBtn">Dockers: Read on how this application runs</a>
+      <br>
+      <br>
+      <a href="{{ url_for('lab_material_one_page') }}">Lab Material</a>
+      <br>
+      <br>
+      <a href="#">Query Practice</a>
+    </nav>
+    <main>
+      <h2>Introduction to Databases</h2>
+      <br>
+      <h3>
+        What are databases ?
+      </h3>
+      <p>Databases are organized collections of information. While they can be physical collections like a hospital's
+        patient files, in the context of websites and applications, they refer to digital systems managed by Database
+        Management Systems (DBMS). These systems allow users to store, retrieve, and manage data efficiently.</p>
+      <br>
+      <h3>
+        Relational Databases
+      </h3>
+      <p>Relational databases use tables to structure data into rows and columns. Each table includes a primary key to
+        uniquely identify each row. This model supports complex queries through SQL, making it ideal for structured data
+        like employee records or sales data.</p>
+      <br>
+      <h3>
+        Non-Relational Databases
+      </h3>
+      <p>Non-relational databases, or NoSQL databases, are designed for unstructured data and can scale horizontally.
+        They include various models such as key-value stores, document stores, and columnar databases, each suited for
+        different types of data and applications.</p>
+      <br>
+      <h3>
+        Applications of Databases
+      </h3>
+      <p>Databases are vital for managing customer information, inventory, and financial data in businesses, ensuring
+        smooth operations. In healthcare, they store patient records and treatment histories, improving care quality.
+        Academic institutions use databases to manage student records and course information. E-commerce platforms rely
+        on them to track products, customer orders, and transactions. Telecommunications companies use databases for
+        billing systems and customer service records. In finance, databases help manage accounts, transactions, and
+        regulatory compliance.</p>
+      <br>
+      <h3>
+        Database Management and Security
+      </h3>
+      <p>Managing databases involves tools like command line clients and graphical interfaces. As databases grow,
+        techniques like replication and sharding are used to handle large data volumes. Security measures, such as TLS
+        encryption, are essential to protect data in transit and at rest.</p>
+    </main>
   </div>
 
-<div id="myModal" class="docker-info-modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2>Dockers</h2>
-    <h3>What is a Docker ? </h3>
-    <h4>Docker is like a magic box for your software! It's a tool that helps you pack up an entire application and everything it needs to run smoothly, like libraries and settings, into a neat, portable package called a container. Imagine it's like a mini-virtual computer just for your app!<br>Docker is a platform that enables developers to package, deploy, and run applications within containers. Containers are lightweight, portable, and self-sufficient environments that contain everything needed to run an application, including code, runtime, libraries, and depndencies. Docker uses containerization technology to ensure consistency across different computing environments. </h4>.
+  <div id="myModal" class="docker-info-modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Dockers</h2>
+      <h3>What is a Docker ? </h3>
+      <h4>Docker is like a magic box for your software! It's a tool that helps you pack up an entire application and
+        everything it needs to run smoothly, like libraries and settings, into a neat, portable package called a
+        container. Imagine it's like a mini-virtual computer just for your app!<br>Docker is a platform that enables
+        developers to package, deploy, and run applications within containers. Containers are lightweight, portable, and
+        self-sufficient environments that contain everything needed to run an application, including code, runtime,
+        libraries, and depndencies. Docker uses containerization technology to ensure consistency across different
+        computing environments. </h4>.
+    </div>
   </div>
-</div>
-<script src="static/js/studenthomepage/dockerinfopopup.js"></script>
-    </body>
+  <script src="static/js/studenthomepage/dockerinfopopup.js"></script>
+</body>
+
 </html>

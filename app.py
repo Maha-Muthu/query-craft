@@ -46,8 +46,7 @@ def create_table():
 
 @app.route('/')
 def home():
-    name = os.getenv('NAME', 'World')  # Default to 'World' if NAME is not set
-    return render_template('index.html', name=name)
+    return render_template('index.html')
 
 
 @app.route('/student-homepage')
