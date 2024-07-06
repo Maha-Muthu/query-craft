@@ -19,14 +19,16 @@ def get_db_connection():
 
 @app.route('/create_schema', methods=['POST'])
 def create_schema():
-    schema_name = request.json['schema_name']
+    schema_name = request.form['schema_name']
     conn = get_db_connection()
     cur = conn.cursor()
     cur.execute(f"CREATE SCHEMA IF NOT EXISTS {schema_name};")
     conn.commit()
     cur.close()
     conn.close()
-    return jsonify({"message": f"Schema {schema_name} created successfully"}), 201
+    message = f"Schema {schema_name} created successfully"
+    return render_template('lab-material-two.html', message=message)
+    
 
 @app.route('/create_table', methods=['POST'])
 def create_table():
@@ -48,13 +50,17 @@ def home():
     return render_template('index.html', name=name)
 
 
-@app.route('/studenthomepage')
+@app.route('/student-homepage')
 def student_homepage():
-    return render_template('studenthomepage.html')
+    return render_template('student-homepage.html')
 
-@app.route('/labmaterialone')
-def labmaterialone_page():
-    return render_template('labmaterialone.html')
+@app.route('/lab-material-one')
+def lab_material_one_page():
+    return render_template('lab-material-one.html')
+
+@app.route('/lab-material-two')
+def lab_material_two():
+    return render_template('lab-material-two.html')
 
 @app.route('/add_user', methods=['POST'])
 def add_user():

@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Homepage</title>
-    <link rel="stylesheet" href="static/css/pageskeletondesign.css">
-    <link rel="stylesheet" href="static/css/collapsiblesstylesheet.css">
+    <link rel="stylesheet" href="static/css/page-skeleton-design.css">
+    <link rel="stylesheet" href="static/css/collapsible-design.css">
 
 </head>
 
 <body>
-    <header>CSI 2132 Lab #1: PostgreSQL</header>
+    <header>CSI 2132 Lab #2: Basic SQL Programming</header>
     <div class="container">
       <nav>
           <a href="/">Home</a>
@@ -19,15 +19,23 @@
           <a href="#">Contact</a>
       </nav>
       <main>
-          <h2>Introduction to PostgreSQL: Installation, Configuration, and Basic Operations</h2>
-          <p>The material focuses on the installation and setup of PostgreSQL and its client tool, pgAdmin. It guides through installing a database management system (DBMS), logging in, importing sample schemas, and using PostgreSQL's features. Supported and unsupported DBMSs and development tools are outlined, with an emphasis on recommended practices. The lab includes a tutorial on setting up web development stacks (XAMPP, MAMP, LAMP) and generating dummy data for projects. By the end of this lab, learners will have a comprehensive understanding of PostgreSQL installation, configuration, and basic operations, enabling them to effectively manage and interact with databases using pgAdmin.</p>
+          <h2>Basic SQL Programming and Schema Management</h2>
+          <p>This material covers creating a new schema, defining database structures with DDL statements (CREATE, ALTER, DROP), and manipulating data using DML statements (INSERT, SELECT, UPDATE, DELETE). It includes exercises for creating tables from ER diagrams, inserting data, querying the database, updating, and deleting specific data. Gain practical skills in managing PostgreSQL databases, understanding key constraints, and writing SQL queries to effectively manage and manipulate data.</p>
 
 
 <h2>Animated Collapsibles</h2>
 
 <p>Collapsible Set:</p>
-<button class="collapsible">DBMS Installation</button>
+<button class="collapsible">Create Schema</button>
 <div class="content">
+    <form action="/create_schema" method="post">
+        <label for="schema_name">Schema Name:</label>
+        <input type="text" id="schema_name" name="schema_name" required>
+        <button type="submit">Create Schema</button>
+    </form>
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 </div>
 <h2>Databases</h2>

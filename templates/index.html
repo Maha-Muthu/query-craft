@@ -1,12 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Query Craft</title>
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: #93A5CF;
+            background: linear-gradient(#93A5CF, #E4EfE9);
+        }
+
+        h1 {
+            margin-bottom: 2vh;
+            font-family: Copperplate, Papyrus, fantasy;
+            font-size: 4em;
+        }
+
+        button {
+            padding: 1em 2em;
+            font-size: 1.5em;
+            cursor: pointer;
+            background-color: transparent;
+            color: black;
+            border-color: black;
+            border-radius: 20%;
+            text-align: center;
+            font-family: Copperplate, Papyrus, fantasy;
+            text-decoration: none;
+            display: inline-block;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Hello, {{ name }}!</h1>
-    <button onclick="window.location.href='/studenthomepage'">Go to Student Homepage</button>
+    <h1>Query Craft</h1>
+    <button onclick="window.location.href='/student-homepage'">Let's Build !</button>
 </body>
+
 </html>
