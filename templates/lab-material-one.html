@@ -14,21 +14,56 @@
   <header>CSI 2132 Lab #1: PostgreSQL</header>
   <div class="container">
     <nav>
-      <a href="/">Home</a>
-      <a href="#">Lab Material 1</a>  
+      <a href="{{ url_for('student_homepage') }}">Home</a>
+      <br>
+      <a href="#">Lab Material 1</a>
+      <br>
       <a href="#">Lab Material 2</a>
-      <a href="#"></a>
+      <br>
+      <a href="#">Lab Material 3</a>
+      <br>
+      <a href="#">Lab Material 4</a>
+      <br>
+      <a href="#">Lab Material 5</a>
     </nav>
     <main>
       <h2>Introduction to PostgreSQL: Installation & Configuration</h2>
-      <p>Learn about the installation and setup of PostgreSQL and its client tool, pgAdmin. Guide through installing a
+      <p>Learn about the installation and setup of PostgreSQL and its client tool, pgAdmin. A guide through installing a
         Database Management System (DBMS), logging in, importing sample schemas, and using PostgreSQL's features.
         Supported and unsupported DBMSs and development tools are outlined, with an emphasis on recommended practices.
-        The material includes deatils on setting up web development stacks (XAMPP, MAMP, LAMP) and generating dummy data
+        Including deatils on setting up web development stacks (XAMPP, MAMP, LAMP) and generating dummy data
         for projects. At the end learners will have a comprehensive understanding of PostgreSQL installation,
         configuration, and basic operations, enabling them to effectively manage and interact with databases using
         pgAdmin.</p>
-
+      <button class="collapsible">Data Base Management Systems <br> A database management system (DBMS) is a software
+        system for creating and managing databases.</button>
+      <div class="content">
+        <p>The suggested DBMS for this course are:</p>
+        <ul>
+          <li>MySQL</li>
+          <li>MariaDB</li>
+          <li>PostgreSQL</li>
+        </ul>
+        <p>Throughout the lectures and lab will be on PostgresSQL</p>
+        <p>Other DBMS Available include:</p>
+        <ul>
+          <li>ORACLE</li>
+          <li>Microsoft SQL Server</li>
+          <li>IBM DB2</li>
+        </ul>
+        <p>Other types of databases include:</p>
+        <ul>
+          <li>Key/value stores</li>
+          <li>NoSQL databases</li>
+          <li>Column-oriented databases</li>
+          <li>Document-oriented databases</li>
+          <li>Graph databases</li>
+          <li>Object-Oriented databases</li>
+          <li>Map/Reduce frameworks</li>
+          <li>Semantic data stores</li>
+        </ul>
+      </div>
+      <br>
       <button class="collapsible">DBMS Installation</button>
       <div class="content">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et

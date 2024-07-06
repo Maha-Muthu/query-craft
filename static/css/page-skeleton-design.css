@@ -1,18 +1,17 @@
-/*This stylesheet includes the header and side navigation design for all pages*/
-
+/* This stylesheet includes styling for the background of all the pages*/
 body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #79cad047;
+    background-color:#D3D8E3;
     display: flex;
     flex-direction: column;
     height: 100vh;
 }
 
 header {
-    background-color: #333;
+    background-color: #111;
     color: white;
     padding: 1em;
     text-align: center;
@@ -22,7 +21,7 @@ header {
     flex: 1;
 }
 nav {
-    background-color: #333;
+    background-color: #111;
     color: white;
     width: 200px;
     min-height: calc(100vh - 60px);
@@ -39,7 +38,7 @@ nav a {
     display: block;
     margin: 0.5em 0;
 }
-@media (max-width: 600px) {
+@media (max-width: 600px) { /* Collapse the side nav to a column for smaller screen sizes*/
     nav {
         width: 100%;
         min-height: auto;
@@ -49,8 +48,8 @@ nav a {
     }
 }
 
-/* Ensure responsive text sizing */
-h1, h2, p {
+
+h1, h2, h3, p {
     margin: 0 0 1rem;
     padding: 0;
 }
