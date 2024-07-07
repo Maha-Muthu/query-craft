@@ -8,45 +8,36 @@ app = Flask(__name__)
 
 # Database connection
 def get_db_connection():
-    conn = psycopg2.connect(
+    connection = psycopg2.connect(
         dbname='postgres',
         user='postgres',
         password='password',
-        host='db',  # This matches the service name in docker-compose.yml
+        host='db',  # Service name in docker-compose.yml
         port='5432'
     )
-    return conn
+    return connection
 
-'''@app.route('/create_schema', methods=['POST'])
-def create_schema():
-    schema_name = request.form['schema_name']
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute(f"CREATE SCHEMA IF NOT EXISTS {schema_name};")
-    conn.commit()
-    cur.close()
-    conn.close()
-    return jsonify({"message": f"Schema {schema_name} created successfully"}), 201'''
-@app.route('/create_schema', methods=['POST'])
+@app.route('/create-schema', methods=['POST'])
 def create_schema():
     if not request.is_json:
-        return jsonify({"error": "Missing JSON in request"}), 400
-    schema_name = request.json.get('schema_name')
-    if not schema_name:
-        return jsonify({"error": "Missing schema name"}), 400
-
-    conn = get_db_connection()
-    cur = conn.cursor()
-    try:
-        cur.execute(f"CREATE SCHEMA IF NOT EXISTS {schema_name};")
-        conn.commit()
-    except Exception as e:
-        cur.close()
-        conn.close()
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": "Invalid Request"}), 400
     
-    cur.close()
-    conn.close()
+    schema_name = request.json.get('schemaName')    
+    if not schema_name:
+        return jsonify({"error": "Missing Schema Name"}), 400
+
+    db_connection = get_db_connection()
+    db_cursor = db_connection.cursor()
+    try:
+        db_cursor.execute(f"CREATE SCHEMA IF NOT EXISTS {schema_name};")
+        db_connection.commit()
+    except Exception as exception:
+        db_cursor.close()
+        db_connection.close()
+        return jsonify({"Error ! "+str(exception)}), 500
+    
+    db_cursor.close()
+    db_connection.close()
     return jsonify({"message": f"Schema {schema_name} created successfully"}), 201
     
 

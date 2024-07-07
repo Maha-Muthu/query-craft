@@ -4,10 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Homepage</title>
+  <title>Query Craft</title>
   <link rel="stylesheet" href="static/css/page-skeleton-design.css">
   <link rel="stylesheet" href="static/css/collapsible-design.css">
-
 </head>
 
 <body>
@@ -28,28 +27,51 @@
     </nav>
     <main>
       <h2>Basic SQL Programming and Schema Management</h2>
-      <p>This material covers creating a new schema, defining database structures with DDL statements (CREATE, ALTER,
-        DROP), and manipulating data using DML statements (INSERT, SELECT, UPDATE, DELETE). It includes exercises for
-        creating tables from ER diagrams, inserting data, querying the database, updating, and deleting specific data.
-        Gain practical skills in managing PostgreSQL databases, understanding key constraints, and writing SQL queries
+      <p>Disscusses on creating a new schema, defining database structures with DDL statements (CREATE, ALTER, DROP), and manipulating data using DML statements (INSERT, SELECT, UPDATE, DELETE). It includes exercises for
+        creating tables from ER diagrams, inserting data, querying the database, updating, and deleting specific data. Gain practical skills in managing PostgreSQL databases, understanding key constraints, and writing SQL queries
         to effectively manage and manipulate data.</p>
-
-
-      <h2>Animated Collapsibles</h2>
-
-      <p>Collapsible Set:</p>
+      <h2>Schema</h2>
+      <p>A schema is a collection of database objects associated with one particular database username.</p>
       <button class="collapsible">Create Schema</button>
       <div class="content">
+        <br>
+        <p>When naming a PostgreSQL schema, the rules and conventions to follow:</p>
+        <ul>
+          <li><b>Start with a Letter or Underscore('_')</b></li>
+          <li><b>Subsequent Characters:</b>After the first character, the name can include letters, digits (0-9), underscores (_), or dollar signs ($).</li>
+          <li><b>Case Sensitivity:</b>Schema names are case-sensitive. By default, unquoted names are converted to
+            lowercase, so ProductCatalogSchema and productcatalogchema are treated as the same name unless quoted (e.g., "ProductCatalogSchema") when the casing is preserved.</li>
+          <li><b>Length Limit:</b>The maximum length for a schema name is 63 characters.</li>
+          <li><b>Reserved Prefix:</b>Names beginning with "pg_" are reserved for system purposes and cannot be used by
+            users.</li>
+          <li><b>Avoid Keywords:</b>While you can use SQL keywords as schema names if they are quoted, it is generally
+            best to avoid doing so to prevent confusion and potential errors in queries.</li>
+        </ul>
+        <br>
         <form id="schemaForm">
-          <input type="text" id="schema_name" placeholder="Enter schema name" required>
-          <input type="submit" value="Create">
+          <input type="text" id="schemaName" placeholder="Enter Schema Name" required>
+          <input type="submit" value="Create Schema">
         </form>
+        <br>
       </div>
-      <h2>Databases</h2>
-      <p>A database is a structured collection of data organized for efficient retrieval, storage, and management. It
-        serves as a repository where data is stored in a structured format, allowing for easy querying, updating, and
-        analysis. Databases are fundamental in applications ranging from simple websites to complex enterprise systems.
+      <h2>Data Definition Language</h2>
+      <p>Statements used to create the structure of the database 
+        and the other database objects.
       </p>
+      <ul>
+        <li><b>CREATE</b> Used to create new databases and tables<br><b>Syntax</b>CREATE TABLE TableName (
+          attributeName1 type1, 
+          attributeName2 type2, 
+          … attributeNameN typeN, 
+          Constraint1, 
+          Constraint2,
+          …, 
+          ConstraintM
+          );</li>
+
+        <li><b>ALTER</b></li>
+        <li>DROP</li>
+      </ul>
       <button class="collapsible">Other software installation</button>
       <div class="content">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
@@ -74,14 +96,14 @@
   <script>
     document.getElementById('schemaForm').addEventListener('submit', function (event) {
       event.preventDefault();
-      let schemaName = document.getElementById('schema_name').value;
+      let schemaName = document.getElementById('schemaName').value;
 
-      fetch('/create_schema', {
+      fetch('/create-schema', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ schema_name: schemaName })
+        body: JSON.stringify({ schemaName: schemaName })
       })
         .then(response => response.json())
         .then(data => alert(data.message))
