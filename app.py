@@ -17,7 +17,7 @@ def get_db_connection():
     )
     return conn
 
-@app.route('/create_schema', methods=['POST'])
+'''@app.route('/create_schema', methods=['POST'])
 def create_schema():
     schema_name = request.form['schema_name']
     conn = get_db_connection()
@@ -26,8 +26,28 @@ def create_schema():
     conn.commit()
     cur.close()
     conn.close()
-    message = f"Schema {schema_name} created successfully"
-    return render_template('lab-material-two.html', message=message)
+    return jsonify({"message": f"Schema {schema_name} created successfully"}), 201'''
+@app.route('/create_schema', methods=['POST'])
+def create_schema():
+    if not request.is_json:
+        return jsonify({"error": "Missing JSON in request"}), 400
+    schema_name = request.json.get('schema_name')
+    if not schema_name:
+        return jsonify({"error": "Missing schema name"}), 400
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute(f"CREATE SCHEMA IF NOT EXISTS {schema_name};")
+        conn.commit()
+    except Exception as e:
+        cur.close()
+        conn.close()
+        return jsonify({"error": str(e)}), 500
+    
+    cur.close()
+    conn.close()
+    return jsonify({"message": f"Schema {schema_name} created successfully"}), 201
     
 
 @app.route('/create_table', methods=['POST'])
@@ -54,7 +74,7 @@ def student_homepage():
     return render_template('student-homepage.html')
 
 @app.route('/lab-material-one')
-def lab_material_one_page():
+def lab_material_one():
     return render_template('lab-material-one.html')
 
 @app.route('/lab-material-two')

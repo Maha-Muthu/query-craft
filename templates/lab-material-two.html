@@ -1,59 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Homepage</title>
-    <link rel="stylesheet" href="static/css/page-skeleton-design.css">
-    <link rel="stylesheet" href="static/css/collapsible-design.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Homepage</title>
+  <link rel="stylesheet" href="static/css/page-skeleton-design.css">
+  <link rel="stylesheet" href="static/css/collapsible-design.css">
 
 </head>
 
 <body>
-    <header>CSI 2132 Lab #2: Basic SQL Programming</header>
-    <div class="container">
-      <nav>
-          <a href="/">Home</a>
-          <a href="#">About</a>
-          <a href="#">Services</a>
-          <a href="#">Contact</a>
-      </nav>
-      <main>
-          <h2>Basic SQL Programming and Schema Management</h2>
-          <p>This material covers creating a new schema, defining database structures with DDL statements (CREATE, ALTER, DROP), and manipulating data using DML statements (INSERT, SELECT, UPDATE, DELETE). It includes exercises for creating tables from ER diagrams, inserting data, querying the database, updating, and deleting specific data. Gain practical skills in managing PostgreSQL databases, understanding key constraints, and writing SQL queries to effectively manage and manipulate data.</p>
+  <header>CSI 2132 Lab #2: Basic SQL Programming</header>
+  <div class="container">
+    <nav>
+      <a href="{{ url_for('student_homepage') }}">Home</a>
+      <br>
+      <a href="{{ url_for('lab_material_one') }}">Lab Material 1</a>
+      <br>
+      <a href="#">Lab Material 2</a>
+      <br>
+      <a href="#">Lab Material 3</a>
+      <br>
+      <a href="#">Lab Material 4</a>
+      <br>
+      <a href="#">Lab Material 5</a>
+    </nav>
+    <main>
+      <h2>Basic SQL Programming and Schema Management</h2>
+      <p>This material covers creating a new schema, defining database structures with DDL statements (CREATE, ALTER,
+        DROP), and manipulating data using DML statements (INSERT, SELECT, UPDATE, DELETE). It includes exercises for
+        creating tables from ER diagrams, inserting data, querying the database, updating, and deleting specific data.
+        Gain practical skills in managing PostgreSQL databases, understanding key constraints, and writing SQL queries
+        to effectively manage and manipulate data.</p>
 
 
-<h2>Animated Collapsibles</h2>
+      <h2>Animated Collapsibles</h2>
 
-<p>Collapsible Set:</p>
-<button class="collapsible">Create Schema</button>
-<div class="content">
-    <form action="/create_schema" method="post">
-        <label for="schema_name">Schema Name:</label>
-        <input type="text" id="schema_name" name="schema_name" required>
-        <button type="submit">Create Schema</button>
-    </form>
-    {% if message %}
-        <p>{{ message }}</p>
-    {% endif %}
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-</div>
-<h2>Databases</h2>
-<p>A database is a structured collection of data organized for efficient retrieval, storage, and management. It serves as a repository where data is stored in a structured format, allowing for easy querying, updating, and analysis. Databases are fundamental in applications ranging from simple websites to complex enterprise systems.</p>
-<button class="collapsible">Other software installation</button>
-<div class="content">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-</div>
-<button class="collapsible">Overview of PostgreSQL</button>
-<div class="content">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-</div>
-<button class="collapsible">Overview of pgAdmin</button>
-<div class="content">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-</div>
-<script src="static/js/collapsiblescript.js"></script>
-</main>
-</div>
+      <p>Collapsible Set:</p>
+      <button class="collapsible">Create Schema</button>
+      <div class="content">
+        <form id="schemaForm">
+          <input type="text" id="schema_name" placeholder="Enter schema name" required>
+          <input type="submit" value="Create">
+        </form>
+      </div>
+      <h2>Databases</h2>
+      <p>A database is a structured collection of data organized for efficient retrieval, storage, and management. It
+        serves as a repository where data is stored in a structured format, allowing for easy querying, updating, and
+        analysis. Databases are fundamental in applications ranging from simple websites to complex enterprise systems.
+      </p>
+      <button class="collapsible">Other software installation</button>
+      <div class="content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+          commodo consequat.</p>
+      </div>
+      <button class="collapsible">Overview of PostgreSQL</button>
+      <div class="content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+          commodo consequat.</p>
+      </div>
+      <button class="collapsible">Overview of pgAdmin</button>
+      <div class="content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+          commodo consequat.</p>
+      </div>
+      <script src="static/js/collapsiblescript.js"></script>
+    </main>
+  </div>
+  <script>
+    document.getElementById('schemaForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      let schemaName = document.getElementById('schema_name').value;
+
+      fetch('/create_schema', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ schema_name: schemaName })
+      })
+        .then(response => response.json())
+        .then(data => alert(data.message))
+        .catch(error => console.error('Error:', error));
+    });
+  </script>
 </body>
+
 </html>
