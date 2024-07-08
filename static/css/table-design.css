@@ -1,0 +1,34 @@
+.table-container {
+    width: 90%;
+    margin: 0 auto;
+    overflow-x: auto; /* Adds horizontal scroll if needed */
+    box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 0.5em;
+    padding: 1em;
+}
+
+.responsive-table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
+.responsive-table thead {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.responsive-table th, .responsive-table td {
+    padding: 1em;
+    text-align: left;
+    border-bottom: 0.1em solid #ddd;
+}
+
+.responsive-table th {
+    font-size: 1.1em;
+}
+
+.responsive-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}

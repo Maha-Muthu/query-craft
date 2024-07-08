@@ -4,10 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Homepage</title>
+  <title>Databases Lab 1</title>
   <link rel="stylesheet" href="static/css/page-skeleton-design.css">
   <link rel="stylesheet" href="static/css/collapsible-design.css">
-
+  <link rel="stylesheet" href="static/css/table-design.css">
 </head>
 
 <body>
@@ -35,9 +35,10 @@
         for projects. At the end learners will have a comprehensive understanding of PostgreSQL installation,
         configuration, and basic operations, enabling them to effectively manage and interact with databases using
         pgAdmin.</p>
-      <button class="collapsible">Data Base Management Systems <br> A database management system (DBMS) is a software
+      <button class="collapsible">Data Base Management Systems <br> A DataBase Management System (DBMS) is a software
         system for creating and managing databases.</button>
       <div class="content">
+        <br>
         <p>The suggested DBMS for this course are:</p>
         <ul>
           <li>MySQL</li>
@@ -62,13 +63,75 @@
           <li>Map/Reduce frameworks</li>
           <li>Semantic data stores</li>
         </ul>
+        <p>Some DBMS Clients are:</p>
+        <ul>
+          <li>MySQL Workbench</li>
+          <li>Database Workbench</li>
+          <li>Dbeaver</li>
+          <li>Heidisql</li>
+          <li>Phpmyadmin</li>
+          <li>Pgadmin</li>
+        </ul>
+        <p>Some Development Tools include:</p>
+        <ul>
+          <li>Java</li>
+          <li>PHP</li>
+          <li>Nodejs/JavaScript</li>
+          <li>Python</li>
+          <li>.NET</li>
+          <li>C</li>
+          <li>C++</li>
+        </ul>
+        <p>For this course the suggested development tools are Java, PHP, JavaScript and Python</p>
       </div>
       <br>
-      <button class="collapsible">DBMS Installation</button>
+      <h2>Object-Relational Mapping</h2>
+      <p>Object-Relational Mapping (ORM) frameworks simplify database interactions by allowing developers to work with database records using object-oriented programming instead of raw SQL. They enhance productivity, maintainability, and security by abstracting database operations and providing a consistent API. Popular ORM frameworks include Hibernate (Java), Entity Framework (C#), Django ORM (Python), and Sequelize (Node.js).</p>
+      <h2>Web Development Stack</h2>
+      <p>Bundles with <b>A</b>pache, <b>M</b>ySql/ MariaDB, <b>P</b>HP</p>
+      <ul>
+        <li>Windows XAMP</li>
+        <li>Mac MAMP</li>
+        <li>Linux LAMP</li>
+      </ul>
+      <button class="collapsible">MySQL-vs-PostgreSQL Comparision</button>
       <div class="content">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.</p>
+        <br>
+        <p>The table below highlights the key differences between MySQL and PostgreSQL</p>
+        <div class="table-container">
+          <table class="responsive-table">
+              <thead>
+                  <tr>
+                      <th>Feature</th>
+                      <th>MySQL</th>
+                      <th>PostgreSQL</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>Data Safety</td>
+                      <td>Ensures data safety (ACID) based on an explicit setting</td>
+                      <td>Always ensures data safety (ACID) by default</td>
+                  </tr>
+                  <tr>
+                      <td>Following Rules</td>
+                      <td>Doesn't always follow SQL rules strictly</td>
+                      <td>Follows SQL rules very strictly</td>
+                  </tr>
+                  <tr>
+                    <td>JSON Data</td>
+                    <td>Can handle JSON data, but not as well as PostgreSQL</td>
+                    <td>Great at handling JSON data, good for NoSQL tasks</td>
+                </tr>
+                <tr>
+                  <td>Extensibility</td>
+                  <td>MySQL has a more rigid system with limited extensibility features.</td>
+                  <td>PostgreSQL is highly extensible, allowing users to add new data types, index types, and functions.</td>
+              </tr>
+              </tbody>
+          </table>
+          <br><br>
+      </div>
       </div>
       <h2>Databases</h2>
       <p>A database is a structured collection of data organized for efficient retrieval, storage, and management. It
