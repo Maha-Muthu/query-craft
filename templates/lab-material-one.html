@@ -86,7 +86,10 @@
       </div>
       <br>
       <h2>Object-Relational Mapping</h2>
-      <p>Object-Relational Mapping (ORM) frameworks simplify database interactions by allowing developers to work with database records using object-oriented programming instead of raw SQL. They enhance productivity, maintainability, and security by abstracting database operations and providing a consistent API. Popular ORM frameworks include Hibernate (Java), Entity Framework (C#), Django ORM (Python), and Sequelize (Node.js).</p>
+      <p>Object-Relational Mapping (ORM) frameworks simplify database interactions by allowing developers to work with
+        database records using object-oriented programming instead of raw SQL. They enhance productivity,
+        maintainability, and security by abstracting database operations and providing a consistent API. Popular ORM
+        frameworks include Hibernate (Java), Entity Framework (C#), Django ORM (Python), and Sequelize (Node.js).</p>
       <h2>Web Development Stack</h2>
       <p>Bundles with <b>A</b>pache, <b>M</b>ySql/ MariaDB, <b>P</b>HP</p>
       <ul>
@@ -94,63 +97,81 @@
         <li>Mac MAMP</li>
         <li>Linux LAMP</li>
       </ul>
-      <button class="collapsible">MySQL-vs-PostgreSQL Comparision</button>
+
+      <h2>MySQL-vs-PostgreSQL Comparision</h2>
+      <div style="overflow-x: auto; overflow-y: auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>MySQL</th>
+              <th>PostgreSQL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Data Safety</td>
+              <td>Ensures data safety (ACID) based on an explicit setting</td>
+              <td>Always ensures data safety (ACID) by default</td>
+            </tr>
+            <tr>
+              <td>Following Rules</td>
+              <td>Doesn't always follow SQL rules strictly</td>
+              <td>Follows SQL rules very strictly</td>
+            </tr>
+            <tr>
+              <td>JSON Data</td>
+              <td>Can handle JSON data, but not as well as PostgreSQL</td>
+              <td>Great at handling JSON data, good for NoSQL tasks</td>
+            </tr>
+            <tr>
+              <td>Extensibility</td>
+              <td>MySQL has a more rigid system with limited extensibility features.</td>
+              <td>PostgreSQL is highly extensible, allowing users to add new data types, index types, and functions.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <br>
+      <button class="collapsible">Data Generators</button>
       <div class="content">
         <br>
-        <p>The table below highlights the key differences between MySQL and PostgreSQL</p>
-        <div class="table-container">
-          <table class="responsive-table">
-              <thead>
-                  <tr>
-                      <th>Feature</th>
-                      <th>MySQL</th>
-                      <th>PostgreSQL</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                      <td>Data Safety</td>
-                      <td>Ensures data safety (ACID) based on an explicit setting</td>
-                      <td>Always ensures data safety (ACID) by default</td>
-                  </tr>
-                  <tr>
-                      <td>Following Rules</td>
-                      <td>Doesn't always follow SQL rules strictly</td>
-                      <td>Follows SQL rules very strictly</td>
-                  </tr>
-                  <tr>
-                    <td>JSON Data</td>
-                    <td>Can handle JSON data, but not as well as PostgreSQL</td>
-                    <td>Great at handling JSON data, good for NoSQL tasks</td>
-                </tr>
-                <tr>
-                  <td>Extensibility</td>
-                  <td>MySQL has a more rigid system with limited extensibility features.</td>
-                  <td>PostgreSQL is highly extensible, allowing users to add new data types, index types, and functions.</td>
-              </tr>
-              </tbody>
-          </table>
-          <br><br>
+        <p>Online data generators are tools that create dummy datasets for testing and development purposes. They allow
+          users to customize the data fields and formats to mimic real-world data, ensuring the data is varied and
+          realistic.<br>Some of the data generators are:</p>
+        <ul>
+          <li><a href="http://filldb.info/" target="_blank">filldb</a></li>
+          <li><a href="https://generatedata.com/" target="_blank">generatedata</a></li>
+          <li><a href="https://www.mockaroo.com/" target="_blank">mockaroo</a></li>
+          <li><a href="https://cobbl.io/" target="_blank">cobbl</a></li>
+        </ul>
       </div>
-      </div>
-      <h2>Databases</h2>
-      <p>A database is a structured collection of data organized for efficient retrieval, storage, and management. It
-        serves as a repository where data is stored in a structured format, allowing for easy querying, updating, and
-        analysis. Databases are fundamental in applications ranging from simple websites to complex enterprise systems.
-      </p>
-      <button class="collapsible">Other software installation</button>
+      <br>
+      <button class="collapsible">Overview of PostgreSQL & pgAdmin</button>
       <div class="content">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.</p>
+        <br>
+        <h3>PostgreSQL</h3>
+        <ul>
+          <li><a href="https://www.postgresql.org/" target="_blank">PostgreSQL</a></li>
+          <li>It is a powerful, open source object-relational database
+            management system (ORDBMS)</li>
+          <li>Since it is open source, it is not controlled by any single
+            company. Thus, its development relies on the global
+            community of developers and companies</li>
+          <li>We can download, install, use and inspect its source
+            code at no cost.</li>
+          <li><a href="https://www.pgadmin.org/" target="_blank">Client tool: pgAdmin</a></li>
+        </ul>
+        <p>pgAdmin is a comprehensive open-source management tool for PostgreSQL, a powerful relational database system.
+          It provides a graphical interface to manage databases, run SQL queries, and administer database operations.
+          pgAdmin supports a wide range of PostgreSQL features.</p>
+        <br>
+        <p>Using the link below you can use pgAdmin as well to run queries.</p>
+        <a href="http://localhost:8080" target="_blank">pgAdmin</a>
       </div>
-      <button class="collapsible">Overview of PostgreSQL</button>
-      <div class="content">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.</p>
-      </div>
-      <button class="collapsible">Overview of pgAdmin</button>
+      <br>
+      <button class="collapsible">pgAdmin Guide</button>
       <div class="content">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
           dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
