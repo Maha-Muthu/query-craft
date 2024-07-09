@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Query Craft</title>
+  <title>Databases Lab 2</title>
   <link rel="stylesheet" href="static/css/page-skeleton-design.css">
   <link rel="stylesheet" href="static/css/collapsible-design.css">
 </head>
@@ -27,8 +27,10 @@
     </nav>
     <main>
       <h2>Basic SQL Programming and Schema Management</h2>
-      <p>Disscusses on creating a new schema, defining database structures with DDL statements (CREATE, ALTER, DROP), and manipulating data using DML statements (INSERT, SELECT, UPDATE, DELETE). It includes exercises for
-        creating tables from ER diagrams, inserting data, querying the database, updating, and deleting specific data. Gain practical skills in managing PostgreSQL databases, understanding key constraints, and writing SQL queries
+      <p>Disscusses on creating a new schema, defining database structures with DDL statements (CREATE, ALTER, DROP),
+        and manipulating data using DML statements (INSERT, SELECT, UPDATE, DELETE). It includes exercises for
+        creating tables from ER diagrams, inserting data, querying the database, updating, and deleting specific data.
+        Gain practical skills in managing PostgreSQL databases, understanding key constraints, and writing SQL queries
         to effectively manage and manipulate data.</p>
       <h2>Schema</h2>
       <p>A schema is a collection of database objects associated with one particular database username.</p>
@@ -38,9 +40,11 @@
         <p>When naming a PostgreSQL schema, the rules and conventions to follow:</p>
         <ul>
           <li><b>Start with a Letter or Underscore('_')</b></li>
-          <li><b>Subsequent Characters:</b>After the first character, the name can include letters, digits (0-9), underscores (_), or dollar signs ($).</li>
+          <li><b>Subsequent Characters:</b>After the first character, the name can include letters, digits (0-9),
+            underscores (_), or dollar signs ($).</li>
           <li><b>Case Sensitivity:</b>Schema names are case-sensitive. By default, unquoted names are converted to
-            lowercase, so ProductCatalogSchema and productcatalogchema are treated as the same name unless quoted (e.g., "ProductCatalogSchema") when the casing is preserved.</li>
+            lowercase, so ProductCatalogSchema and productcatalogchema are treated as the same name unless quoted (e.g.,
+            "ProductCatalogSchema") when the casing is preserved.</li>
           <li><b>Length Limit:</b>The maximum length for a schema name is 63 characters.</li>
           <li><b>Reserved Prefix:</b>Names beginning with "pg_" are reserved for system purposes and cannot be used by
             users.</li>
@@ -52,31 +56,121 @@
           <input type="text" id="schemaName" placeholder="Enter Schema Name" required>
           <input type="submit" value="Create Schema">
         </form>
-        <br>
+        <br><br><br>
       </div>
       <h2>Data Definition Language</h2>
-      <p>Statements used to create the structure of the database 
+      <p>Statements used to create the structure of the database
         and the other database objects.
       </p>
       <ul>
-        <li><b>CREATE</b> Used to create new databases and tables<br><b>Syntax</b>CREATE TABLE TableName (
-          attributeName1 type1, 
-          attributeName2 type2, 
-          … attributeNameN typeN, 
-          Constraint1, 
-          Constraint2,
-          …, 
-          ConstraintM
-          );</li>
-
-        <li><b>ALTER</b></li>
-        <li>DROP</li>
+        <li><b>CREATE</b>
+          <ul>
+            <li>
+              Use: Used to create new databases and tables
+            </li>
+            <li>Syntax:
+<pre>
+CREATE TABLE TableName (
+attributeName1 type1, 
+attributeName2 type2, 
+… 
+attributeNameN typeN, 
+Constraint1, 
+Constraint2,
+…, 
+ConstraintM
+);
+              </pre>
+            </li>
+          </ul>
+        </li>
+        <li><b>ALTER</b>
+          <ul>
+            <li>
+              Use: Modify an already existing database object such as a table 
+            </li>
+            <li>Syntax: To add column to an existing table
+<pre>
+ALTER TABLE table_name
+ADD column_name datatype;
+              </pre>
+            </li>
+          </ul>
+        </li>
+        <li><b>DROP</b>
+          <ul>
+            <li>
+              Use: Delete databases and tables
+            </li>
+            <li>Syntax:
+<pre>
+DROP TABLE TableName;
+              </pre>
+            </li>
+          </ul>
+        </li>        
       </ul>
-      <button class="collapsible">Other software installation</button>
+      <h2>Data Manipulation Language</h2>
+      <p>Statements used to manage the data stored in the 
+        database.
+      </p>
+      <ul>
+        <li><b>INSERT</b>
+          <ul>
+            <li>
+              Use: Used to create new databases and tables
+            </li>
+            <li>Syntax:
+<pre>
+CREATE TABLE TableName (
+attributeName1 type1, 
+attributeName2 type2, 
+… 
+attributeNameN typeN, 
+Constraint1, 
+Constraint2,
+…, 
+ConstraintM
+);
+              </pre>
+            </li>
+          </ul>
+        </li>
+        <li><b>ALTER</b>
+          <ul>
+            <li>
+              Use: Modify an already existing database object such as a table 
+            </li>
+            <li>Syntax: To add column to an existing table
+<pre>
+ALTER TABLE table_name
+ADD column_name datatype;
+              </pre>
+            </li>
+          </ul>
+        </li>
+        <li><b>DELETE</b>
+          <ul>
+            <li>
+              Use: Delete databases and tables
+            </li>
+            <li>Syntax:
+<pre>
+DROP TABLE TableName;
+              </pre>
+            </li>
+          </ul>
+        </li>        
+      </ul>
+      <button class="collapsible">Pass Query</button>
       <div class="content">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.</p>
+        <p>Pass In Query</p>
+        <br>
+        <form id="queryForm">
+          <input type="text" id="query" placeholder="Query" required>
+          <input type="submit" value="Execute Query">
+        </form>
+        <br><br><br>
       </div>
       <button class="collapsible">Overview of PostgreSQL</button>
       <div class="content">
@@ -110,6 +204,7 @@
         .catch(error => console.error('Error:', error));
     });
   </script>
+  <script src="static/js/query-execution.js"></script>
 </body>
 
 </html>

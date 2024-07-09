@@ -40,6 +40,28 @@ def create_schema():
     db_connection.close()
     return jsonify({"message": f"Schema {schema_name} created successfully"}), 201
     
+@app.route('/execute-query', methods=['POST'])
+def execute_query():
+    if not request.is_json:
+        return jsonify({"error": "Invalid Request"}), 400
+    
+    query = request.json.get('query')    
+    if not query:
+        return jsonify({"error": "Invalid Query"}), 400
+
+    db_connection = get_db_connection()
+    db_cursor = db_connection.cursor()
+    try:
+        db_cursor.execute(query)
+        db_connection.commit()
+    except Exception as exception:
+        db_cursor.close()
+        db_connection.close()
+        return jsonify({"Error ! "+str(exception)}), 500
+    
+    db_cursor.close()
+    db_connection.close()
+    return jsonify({"message": f"Schema {query} created successfully"}), 201
 
 @app.route('/create_table', methods=['POST'])
 def create_table():
