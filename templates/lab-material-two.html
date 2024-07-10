@@ -7,6 +7,8 @@
   <title>Databases Lab 2</title>
   <link rel="stylesheet" href="static/css/page-skeleton-design.css">
   <link rel="stylesheet" href="static/css/collapsible-design.css">
+  <link rel="stylesheet" href="static/css/query-input-design.css">
+
 </head>
 
 <body>
@@ -118,33 +120,39 @@ DROP TABLE TableName;
         <li><b>INSERT</b>
           <ul>
             <li>
-              Use: Used to create new databases and tables
+              Use: 
             </li>
             <li>Syntax:
 <pre>
-CREATE TABLE TableName (
-attributeName1 type1, 
-attributeName2 type2, 
-… 
-attributeNameN typeN, 
-Constraint1, 
-Constraint2,
-…, 
-ConstraintM
-);
+INSERT INTO TableName (attrName1,…,attrNameN)
+VALUES (Value1,…,ValueN);
+</pre>
+            </li>
+          </ul>
+        </li>
+        <li><b>SELECT</b>
+          <ul>
+            <li>
+              Use: 
+            </li>
+            <li>Syntax:
+<pre>
+SELECT attr1,att2,…,attrN
+FROM tableName
+WHERE <CONDITIONS>
               </pre>
             </li>
           </ul>
         </li>
-        <li><b>ALTER</b>
+        <li><b>UPDATE</b>
           <ul>
             <li>
-              Use: Modify an already existing database object such as a table 
+              Use:
             </li>
-            <li>Syntax: To add column to an existing table
+            <li>Syntax:
 <pre>
-ALTER TABLE table_name
-ADD column_name datatype;
+UPDATE TableName SET Att1 = NewValueAtt1,
+Att2 = NewValueAtt2 WHERE Condition
               </pre>
             </li>
           </ul>
@@ -152,11 +160,11 @@ ADD column_name datatype;
         <li><b>DELETE</b>
           <ul>
             <li>
-              Use: Delete databases and tables
+              Use:
             </li>
             <li>Syntax:
 <pre>
-DROP TABLE TableName;
+DELETE FROM TableName WHERE Condition
               </pre>
             </li>
           </ul>
@@ -168,6 +176,7 @@ DROP TABLE TableName;
         <br>
         <form id="queryForm">
           <input type="text" id="query" placeholder="Query" required>
+          <br><br>
           <input type="submit" value="Execute Query">
         </form>
         <br><br><br>
