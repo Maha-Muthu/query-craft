@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import psycopg2
+from psycopg2 import sql, errors
 
 app = Flask(__name__)
 
@@ -16,6 +17,15 @@ def get_db_connection():
         port='5432'
     )
     return connection
+
+def format_pg_error(err):
+    return {
+        "error": str(err),
+        "pgcode": err.pgcode,
+        "pgerror": err.pgerror,
+        "details": err.diag.message_detail,
+        "hint": err.diag.message_hint
+    }
 
 @app.route('/create-schema', methods=['POST'])
 def create_schema():
@@ -54,28 +64,30 @@ def execute_query():
     try:
         db_cursor.execute(query)
         db_connection.commit()
-    except Exception as exception:
+    except (errors.UniqueViolation, errors.DuplicateTable, errors.SyntaxError) as e:
+        error_details = format_pg_error(e)
         db_cursor.close()
         db_connection.close()
-        return jsonify({"Error ! "+str(exception)}), 500
+        #return jsonify(error_details), 400
+        return jsonify({"message": error_details['error']}), 201
+
+    except Exception as e:
+        error_details = {
+            "error": str(e),
+            "pgcode": getattr(e, 'pgcode', None),
+            "pgerror": getattr(e, 'pgerror', None),
+            "details": getattr(e, 'diag', {}).get('message_detail', None),
+            "hint": getattr(e, 'diag', {}).get('message_hint', None)
+        }
+        db_cursor.close()
+        db_connection.close()
+        #return jsonify(error_details), 500
+        return jsonify({"message":  error_details['error']}), 201
+
     
     db_cursor.close()
     db_connection.close()
-    return jsonify({"message": f"Schema {query} created successfully"}), 201
-
-@app.route('/create_table', methods=['POST'])
-def create_table():
-    schema_name = request.json['schema_name']
-    table_name = request.json['table_name']
-    columns = request.json['columns']  # Example: "id SERIAL PRIMARY KEY, name VARCHAR(100)"
-    
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    cursor.execute(f'CREATE TABLE IF NOT EXISTS {schema_name}.{table_name} ({columns})')
-    conn.commit()
-    cursor.close()
-    conn.close()
-    return jsonify({'message': 'Table created successfully'})
+    return jsonify({"messsage": "Query Executed Successfully"}), 201
 
 @app.route('/')
 def home():

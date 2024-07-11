@@ -10,6 +10,11 @@ document.getElementById('queryForm').addEventListener('submit', function (event)
       body: JSON.stringify({ query: query })
     })
       .then(response => response.json())
-      .then(data => alert(data.message))
+      .then(data => showAlert(data.message))
       .catch(error => console.error('Error:', error));
   });
+
+ function showAlert(message) {
+            const alertContainer = document.getElementById('alert-container');
+            alertContainer.innerHTML = `<div class="alert-box">${message}</div>`;
+        }
