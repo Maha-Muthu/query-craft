@@ -64,7 +64,7 @@ def execute_query():
     try:
         db_cursor.execute(query)
         db_connection.commit()
-    except (errors.UniqueViolation, errors.DuplicateTable, errors.SyntaxError) as e:
+    except psycopg2.Error as e:
         error_details = format_pg_error(e)
         db_cursor.close()
         db_connection.close()
