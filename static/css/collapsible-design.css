@@ -1,0 +1,58 @@
+/* This stylesheet includes styling for collapsibles for all the pages */
+
+.container .collapsible {
+    background-color: #777;
+    color: white;
+    cursor: pointer;
+    padding: 1rem;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 1rem;
+    box-sizing: border-box;
+    overflow-x: visible;
+}
+
+.container .active,
+.collapsible:hover {
+    background-color: #555;
+}
+
+.container .collapsible:after {
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 0.5rem;
+}
+
+.container .active:after {
+    content: "\2212";
+}
+
+.container .content {
+    padding: 0 1rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #f1f1f1;
+}
+
+.container .active + .content {
+    max-height: none;
+    overflow: auto;
+}
+
+/* Styling for the responsive image */
+.responsive-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto; /* Center the image */
+}
+
+/* Ensure the collapsible expands to fit the iframe */
+.container .content.open {
+    max-height: none; /* Remove the max-height restriction when open */
+}
