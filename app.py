@@ -1,9 +1,5 @@
-import os
 from flask import Flask, render_template, request, redirect, jsonify
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 import psycopg2
-from psycopg2 import sql, errors
 
 app = Flask(__name__)
 
@@ -27,29 +23,6 @@ def format_pg_error(err):
         "hint": err.diag.message_hint
     }
 
-@app.route('/create-schema', methods=['POST'])
-def create_schema():
-    if not request.is_json:
-        return jsonify({"error": "Invalid Request"}), 400
-    
-    schema_name = request.json.get('schemaName')    
-    if not schema_name:
-        return jsonify({"error": "Missing Schema Name"}), 400
-
-    db_connection = get_db_connection()
-    db_cursor = db_connection.cursor()
-    try:
-        db_cursor.execute(f"CREATE SCHEMA IF NOT EXISTS {schema_name};")
-        db_connection.commit()
-    except Exception as exception:
-        db_cursor.close()
-        db_connection.close()
-        return jsonify({"Error ! "+str(exception)}), 500
-    
-    db_cursor.close()
-    db_connection.close()
-    return jsonify({"message": f"Schema {schema_name} created successfully"}), 201
-    
 @app.route('/execute-query', methods=['POST'])
 def execute_query():
     if not request.is_json:
@@ -63,12 +36,24 @@ def execute_query():
     db_cursor = db_connection.cursor()
     try:
         db_cursor.execute(query)
-        db_connection.commit()
+        if db_cursor.description:  # This checks if the query returned rows (i.e., SELECT)
+            rows = db_cursor.fetchall()
+            columns = [desc[0] for desc in db_cursor.description]
+            results = [dict(zip(columns, row)) for row in rows]
+            db_cursor.close()
+            db_connection.close()
+            result_string = '+'.join('+'.join(f"{key}:{value}" for key, value in result.items()) for result in results)
+            return jsonify({"message": result_string}), 200
+        else:
+            db_connection.commit()
+            db_cursor.close()
+            db_connection.close()
+            return jsonify({"message": "Query executed successfully"}), 201
+        
     except psycopg2.Error as e:
         error_details = format_pg_error(e)
         db_cursor.close()
         db_connection.close()
-        #return jsonify(error_details), 400
         return jsonify({"message": error_details['error']}), 201
 
     except Exception as e:
@@ -83,11 +68,6 @@ def execute_query():
         db_connection.close()
         #return jsonify(error_details), 500
         return jsonify({"message":  error_details['error']}), 201
-
-    
-    db_cursor.close()
-    db_connection.close()
-    return jsonify({"messsage": "Query Executed Successfully"}), 201
 
 @app.route('/')
 def home():

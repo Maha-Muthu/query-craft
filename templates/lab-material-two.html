@@ -8,17 +8,6 @@
   <link rel="stylesheet" href="static/css/page-skeleton-design.css">
   <link rel="stylesheet" href="static/css/collapsible-design.css">
   <link rel="stylesheet" href="static/css/query-input-design.css">
-  <style>
-    .alert-box {
-        border: 1px solid #007bff;
-        background-color: #e7f3ff;
-        padding: 1em;
-        border-radius: 0.5em;
-        color: #007bff;
-        font-family: Arial, sans-serif;
-        white-space: pre-line; /* Preserve new lines */
-    }
-</style>
 </head>
 
 <body>
@@ -49,6 +38,10 @@
       <button class="collapsible">Create Schema</button>
       <div class="content">
         <br>
+        Syntax To Create Schema:
+<pre>
+CREATE SCHEMA SchemaName;
+        </pre>
         <p>When naming a PostgreSQL schema, the rules and conventions to follow:</p>
         <ul>
           <li><b>Start with a Letter or Underscore('_')</b></li>
@@ -64,12 +57,16 @@
             best to avoid doing so to prevent confusion and potential errors in queries.</li>
         </ul>
         <br>
-        <form id="schemaForm">
-          <input type="text" id="schemaName" placeholder="Enter Schema Name" required>
-          <input type="submit" value="Create Schema">
+        <p>For this lab work let's create a schema ! Create a Schema called 'laboratories'</p>
+        <br>
+        <form class="queryForm">
+          <input type="text" class="query" placeholder="Query to Create Schema" required>
+          <br><br>
+          <input type="submit" value="Create Schema"><br><div class="alert-container"></div>
         </form>
-        <br><br><br>
+        <br><br>
       </div>
+      <br>
       <h2>Data Definition Language</h2>
       <p>Statements used to create the structure of the database
         and the other database objects.
@@ -184,10 +181,10 @@ DELETE FROM TableName WHERE Condition
       <div class="content">
         <p>Pass In Query</p>
         <br>
-        <form id="queryForm">
-          <input type="text" id="query" placeholder="Query" required>
+        <form class="queryForm">
+          <input type="text" class="query" placeholder="Query" required>
           <br><br>
-          <input type="submit" value="Execute Query"><div id="alert-container"></div>
+          <input type="submit" value="Execute Query"><div class="alert-container"></div>
         </form>
         <br><br><br>
       </div>
@@ -206,23 +203,7 @@ DELETE FROM TableName WHERE Condition
       <script src="static/js/collapsiblescript.js"></script>
     </main>
   </div>
-  <script>
-    document.getElementById('schemaForm').addEventListener('submit', function (event) {
-      event.preventDefault();
-      let schemaName = document.getElementById('schemaName').value;
-
-      fetch('/create-schema', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ schemaName: schemaName })
-      })
-        .then(response => response.json())
-        .then(data => alert(data.message))
-        .catch(error => console.error('Error:', error));
-    });
-  </script>
+  
   <script src="static/js/query-execution.js"></script>
 </body>
 

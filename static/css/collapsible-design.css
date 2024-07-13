@@ -11,7 +11,7 @@
     outline: none;
     font-size: 1rem;
     box-sizing: border-box;
-    overflow-x: auto;
+    overflow-x: visible;
 }
 
 .container .active,
@@ -37,6 +37,11 @@
     overflow: hidden;
     transition: max-height 0.2s ease-out;
     background-color: #f1f1f1;
+}
+
+.container .active + .content {
+    max-height: none;
+    overflow: auto;
 }
 
 /* Styling for the responsive image */
