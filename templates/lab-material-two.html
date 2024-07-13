@@ -76,7 +76,7 @@ SET search_path = "requiredSchema" </pre>
         <button class="collapsible">Create Laboratories Schema</button>
         <div class="content">
           <br>
-          <p>Create Schema laboratories</p>
+          <p>CREATE SCHEMA laboratories</p>
         </div>
         </div>
       <br>
@@ -219,7 +219,7 @@ DELETE FROM TableName WHERE Condition
           the first 
           attribute(s) in the 
           tables</p>
-      <button class="collapsible">Create Tables</button>
+      <button class="collapsible">Create Art Tables</button>
       <div class="content">
         <br>        
         <p>The lab material is based on the Artwork ER Diagram as shown below:</p>
@@ -229,13 +229,17 @@ DELETE FROM TableName WHERE Condition
         <br>
         <p>The reqired tables are shown below:</p>
         <br>
-        <img src="{{ url_for('static', filename='images/artTables.png') }}" alt="Artwork Tables."
-          class="responsive-image">
+        <img src="{{ url_for('static', filename='images/artTables.png') }}" alt="Artwork Tables." class="responsive-image">
+        <br>
+        <p>
+          Execute Create table queries to create the above 4 tables
+        </p>
         <br>
         <form class="queryForm">
-          <input type="text" class="query" placeholder="Query" required>
+          <input type="text" class="query" placeholder="Create Table Query" required>
           <br><br>
-          <input type="submit" value="Execute Query"><div class="alert-container"></div>
+          <input type="submit" value="Execute Query">
+          <div class="alert-container"></div>
         </form>
         <br>
         <button class="collapsible">Create Art Work Tables</button>
@@ -279,24 +283,72 @@ DELETE FROM TableName WHERE Condition
           </p>
         </div>
         </div>
+        <br>        
+        <button class="collapsible">Insert Values</button>
+        <div class="content">
+          <br>
+          <p>Character values are quoted by '' , and numerical values are unquoted when inserting</p>
+          <p>Several inserts can be done consecutively in Query Tool</p>
+          <p>Multiple inserts into the same table can be done by separating them with a comma(,)</p>
+          <p>Insert the following 3 Rows:</p>
+          <ul>
+            <li>Artist Table: </li>
+            <ul>
+              <li>AName: Caravaggio, Smith, Picasso</li>
+              <li>BirthPlace: Milan, Ottawa, Malaga</li>
+              <li>Style: Baroque, Modern, Cubism</li>
+              <li>DateOfBirth: 1571-09-28, 1977-12-12, 1881-10-25</li>
+            </ul>
+            <li>Customer Table:</li>
+            <ul>
+              <li>CustId: 1,2,3</li>
+              <li>Name: John, Amy, Peter</li>
+              <li>Address: Ottawa, Orleans, Gatineau</li>
+            </ul>
+            <li>Artwork Table:</li>
+            <ul>
+              <li>Title: Blue, The Cardsharps</li>
+              <li>Year: 2000, 1594</li>
+              <li>Type: Modern, Baroque</li>
+              <li>Price: 10000.00, 400000</li>
+              <li>AName: Smith, Caravaggio</li>
+            </ul>
+          </ul>
+          <br>
+          <form class="queryForm">
+            <input type="text" class="query" placeholder="Create Table Query" required>
+            <br><br>
+            <input type="submit" value="Execute Query">
+            <div class="alert-container"></div>
+          </form>
+          <br>
+          <button class="collapsible">Insert Into Art Work Tables</button>
+          <div class="content">
+            <br><br>
+            <p>INSERT INTO laboratories.Artist(AName,Birthplace, Style, DateOfBirth) VALUES ('Caravaggio','Milan','Baroque','1571-09-28' ), ('Smith', 'Ottawa', 'Modern', '1977-12-12'), ('Picasso','Malaga','Cubism','1881-10-25')
+            </p>
+            <p>
+              INSERT INTO laboratories.Customer(CustId,Name,Address,Amount) VALUES (1,'John','Ottawa',8.5), (2,'Amy','Orleans',9.0), (3,'Peter','Gatineau',6.3) 
+            </p>
+            <p>
+              INSERT INTO laboratories.Artwork(Title,Year,Type,Price,AName) VALUES ('Blue', 2000,'Modern',10000.00,'Smith'), ('The Cardsharps', 1594,'Baroque',40000.00,'Caravaggio')
+            </p>
+          </div>
+          <br>
+        </div>
         <br>
         <button class="collapsible">Pass Query</button>
         <div class="content">
           <p>Pass In Query</p>
           <br>
-        <form class="queryForm">
-          <input type="text" class="query" placeholder="Query" required>
-          <br><br>
-          <input type="submit" value="Execute Query"><div class="alert-container"></div>
-        </form>
-        <br><br><br>
-      </div>
-      <button class="collapsible">Overview of PostgreSQL</button>
-      <div class="content">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.</p>
-      </div>
+          <form class="queryForm">
+            <input type="text" class="query" placeholder="Query" required>
+            <br><br>
+            <input type="submit" value="Execute Query">
+            <div class="alert-container"></div>
+          </form>
+          <br><br><br>
+        </div>
       <button class="collapsible">Overview of pgAdmin</button>
       <div class="content">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et

@@ -66,13 +66,11 @@ def execute_query():
         }
         db_cursor.close()
         db_connection.close()
-        #return jsonify(error_details), 500
         return jsonify({"message":  error_details['error']}), 201
 
 @app.route('/')
 def home():
     return render_template('index.html')
-
 
 @app.route('/student-homepage')
 def student_homepage():
@@ -85,14 +83,6 @@ def lab_material_one():
 @app.route('/lab-material-two')
 def lab_material_two():
     return render_template('lab-material-two.html')
-
-@app.route('/add_user', methods=['POST'])
-def add_user():
-    name = request.form['name']
-    new_user = User(name=name)
-    db.session.add(new_user)
-    db.session.commit()
-    return redirect('/')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
