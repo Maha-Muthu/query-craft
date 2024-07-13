@@ -57,6 +57,14 @@ CREATE SCHEMA SchemaName;
             best to avoid doing so to prevent confusion and potential errors in queries.</li>
         </ul>
         <br>
+        <p>In pgAdmin Right Click over Schemas Section and Select "New 
+          Schema"</p>
+        <p>The default schema is "public", in order to use this another  schema, first to execute 
+<pre>
+SET search_path = "requiredSchema" </pre>
+          in the SQL tool. This sentence has to be executed everytime we start the SQL tool in pgAdmin.
+          </p>
+        <p>While not using pgAdmin and just append the queries with "requiredSchema" before the table name.</p>
         <p>For this lab work let's create a schema ! Create a Schema called 'laboratories'</p>
         <br>
         <form class="queryForm">
@@ -65,7 +73,12 @@ CREATE SCHEMA SchemaName;
           <input type="submit" value="Create Schema"><br><div class="alert-container"></div>
         </form>
         <br><br>
-      </div>
+        <!--<button class="collapsible">Create Laboratories Schema</button>
+        <div class="content">
+          <br>
+          <p>Create Schema laboratories</p>
+        </div>-->
+        </div>
       <br>
       <h2>Data Definition Language</h2>
       <p>Statements used to create the structure of the database
@@ -177,10 +190,100 @@ DELETE FROM TableName WHERE Condition
           </ul>
         </li>        
       </ul>
-      <button class="collapsible">Pass Query</button>
+      <h2>Table</h2>
+        <p>
+          A table is a structured collection of data organized into rows and columns, where each column represents a specific attribute, and each row represents a single record or data entry.
+        </p>
+        <h2>Data Types</h2>
+        <p>
+          PostgreSQL supports various datatypes, the categories of datatypes it supports are: Numeric Types, Monetory Types, Character Types, Binary Data Types, Date/Time Types, Boolean Type, Array Types, JSON Types, Geometric Types, ENUM etc <a href="https://www.postgresql.org/docs/9.5/datatype.html" target="_blank">read more on datatypes</a>. Some of the commonly used data types are:
+        </p>
+        <ul>
+          <li>INTEGER: Standard integer (-2147483648 to 2147483647)</li>
+          <li>VARCHAR: Variable-length character string with a limit(n)</li>
+          <li>DATE: Calendar date (year, month, day)</li>
+          <li>TEXT: Variable-length character string with no limit</li>
+          <li>CHAR(n): Fixed-length character string</li>
+          <li>BOOLEAN: Logical boolean (true/false)</li>
+        </ul>
+        <h2>Primary & Foreign Key Constraints</h2>
+        <p>
+          A primary key constraint ensures that a column (or a set of columns) uniquely identifies each row in a table. It enforces uniqueness and implicitly creates a unique index on the column(s). A table can have only one primary key, which cannot contain NULL values.
+        </p>
+        <p>
+          A foreign key constraint establishes a relationship between columns in two tables. It ensures that the value in a column (or a set of columns) in one table matches values in a column (or a set of columns) in another table, enforcing referential integrity. This means the foreign key value in the referencing table must correspond to an existing primary key value in the referenced table.  
+        </p>
+        <p>A good convention 
+          is declaring the 
+          Primary Key(s) as 
+          the first 
+          attribute(s) in the 
+          tables</p>
+      <button class="collapsible">Create Tables</button>
       <div class="content">
-        <p>Pass In Query</p>
+        <br>        
+        <p>The lab material is based on the Artwork ER Diagram as shown below:</p>
         <br>
+        <img src="{{ url_for('static', filename='images/artER.png') }}" alt="ER Diagram for Artwork Tables."
+          class="responsive-image">
+        <br>
+        <p>The reqired tables are shown below:</p>
+        <br>
+        <img src="{{ url_for('static', filename='images/artTables.png') }}" alt="Artwork Tables."
+          class="responsive-image">
+        <br>
+        <form class="queryForm">
+          <input type="text" class="query" placeholder="Query" required>
+          <br><br>
+          <input type="submit" value="Execute Query"><div class="alert-container"></div>
+        </form>
+        <br>
+        <!--<button class="collapsible">Create Art Work Tables</button>
+        <div class="content">
+          <br>
+          <p>CREATE TABLE laboratories.Artist(
+            AName VARCHAR(20),
+            Birthplace
+            VARCHAR(20),
+            Style VARCHAR(20),
+            DateOfBirth DATE,
+            PRIMARY KEY
+            (AName));</p>
+          <p>
+            CREATE TABLE laboratories.Customer(
+            CustId INTEGER,
+            Name VARCHAR(20),
+            Address VARCHAR(20),
+            Amount NUMERIC(8,2),
+            PRIMARY KEY (CustId));
+          </p>
+          <p>CREATE TABLE laboratories.Artwork(
+            Title VARCHAR(20),
+            Year INTEGER,
+            Type VARCHAR(20),
+            Price NUMERIC(8,2),
+            AName VARCHAR(20),
+            PRIMARY KEY (Title),
+            FOREIGN KEY(AName)
+            REFERENCES Artist);</p>
+          <p>
+            CREATE TABLE laboratories.LikeArtist(
+            CustId INTEGER,
+            AName VARCHAR(20),
+            PRIMARY KEY(Aname,
+            CustId),
+            FOREIGN KEY (Aname)
+            REFERENCES Artist,
+            FOREIGN KEY (CustId)
+            REFERENCES Customer);
+          </p>
+        </div>-->
+        </div>
+        <br>
+        <button class="collapsible">Pass Query</button>
+        <div class="content">
+          <p>Pass In Query</p>
+          <br>
         <form class="queryForm">
           <input type="text" class="query" placeholder="Query" required>
           <br><br>
