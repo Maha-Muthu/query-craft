@@ -28,7 +28,7 @@
     </nav>
     <main>
       <h2>Basic SQL Programming and Schema Management</h2>
-      <p>Disscusses on creating a new schema, defining database structures with DDL statements (CREATE, ALTER, DROP),
+      <p>Discusses on creating a new schema, defining database structures with DDL statements (CREATE, ALTER, DROP),
         and manipulating data using DML statements (INSERT, SELECT, UPDATE, DELETE). It includes exercises for
         creating tables from ER diagrams, inserting data, querying the database, updating, and deleting specific data.
         Gain practical skills in managing PostgreSQL databases, understanding key constraints, and writing SQL queries
@@ -38,48 +38,57 @@
       <button class="collapsible">Create Schema</button>
       <div class="content">
         <br>
-        Syntax To Create Schema:
-<pre>
-CREATE SCHEMA SchemaName;
-        </pre>
         <p>When naming a PostgreSQL schema, the rules and conventions to follow:</p>
         <ul>
-          <li><b>Start with a Letter or Underscore('_')</b></li>
-          <li><b>Subsequent Characters:</b>After the first character, the name can include letters, digits (0-9),
+          <li><b>Start with a letter or underscore('_')</b>.</li>
+          <li><b>Subsequent characters:</b>After the first character, the name can include letters, digits (0-9),
             underscores (_), or dollar signs ($).</li>
-          <li><b>Case Sensitivity:</b>Schema names are case-sensitive. By default, unquoted names are converted to
-            lowercase, so ProductCatalogSchema and productcatalogchema are treated as the same name unless quoted (e.g.,
+          <li><b>Case sensitivity:</b>Schema names are case-sensitive. By default, unquoted names are converted to
+            lowercase, so ProductCatalogSchema and productcatalogchema are treated as the same name unless quoted (eg.
             "ProductCatalogSchema") when the casing is preserved.</li>
-          <li><b>Length Limit:</b>The maximum length for a schema name is 63 characters.</li>
-          <li><b>Reserved Prefix:</b>Names beginning with "pg_" are reserved for system purposes and cannot be used by
+          <li><b>Length limit:</b>The maximum length for a schema name is 63 characters.</li>
+          <li><b>Reserved prefix:</b>Names beginning with "pg_" are reserved for system purposes and cannot be used by
             users.</li>
-          <li><b>Avoid Keywords:</b>While you can use SQL keywords as schema names if they are quoted, it is generally
+          <li><b>Avoid keywords:</b>While you can use keywords as schema names if they are quoted, it is generally
             best to avoid doing so to prevent confusion and potential errors in queries.</li>
         </ul>
+        <h3>Create a schema using pgAdmin</h3>
+        <a href="http://localhost:8080" target="_blank">Open pgAdmin</a>
         <br>
-        <p>In pgAdmin Right Click over Schemas Section and Select "New 
-          Schema"</p>
-        <p>The default schema is "public", in order to use this another  schema, first to execute 
+        <p>After logging in and reaching the homepage, expand the Servers section and enter the database password.</p>
+        <p>Right Click over Schemas Section and Select "Create Schema"</p>
+        <img src="{{ url_for('static', filename='images/createSchema.png') }}" alt="Create Schema"
+          class="responsive-image">
+        <p>Name the new schema ("laboratories")</p>
+        <img src="{{ url_for('static', filename='images/createSchemaDialog.png') }}" alt="Create Schema Dialog"
+          class="responsive-image">
+        <br>
+        <p>The default schema is "public", in order to use another schema, first execute 
 <pre>
 SET search_path = "requiredSchema" </pre>
-          in the SQL tool. This sentence has to be executed everytime we start the SQL tool in pgAdmin.
-          </p>
-        <p>While not using pgAdmin and just append the queries with "requiredSchema" before the table name.</p>
+          in the Query Tool. This sentence has to be executed everytime we start the Query Tool in pgAdmin.</p>
+        <h2>Alternatively query syntax to create schema:</h2>
+<pre>
+CREATE SCHEMA SchemaName;</pre>
+        <br>
+        <p>The default schema is "public", in order to use another schema, just append the queries with "requiredSchema" before
+          the table name.</p>
         <p>For this lab work let's create a schema ! Create a Schema called 'laboratories'</p>
         <br>
         <form class="queryForm">
           <input type="text" class="query" placeholder="Query to Create Schema" required>
           <br><br>
-          <input type="submit" value="Create Schema"><br><div class="alert-container"></div>
+          <input type="submit" value="Create Schema"><br>
+          <div class="alert-container"></div>
         </form>
-        <br><br>
+        <br>
         <button class="collapsible">Create Laboratories Schema</button>
         <div class="content">
           <br>
           <p>CREATE SCHEMA laboratories</p>
         </div>
         </div>
-      <br>
+        <br>
       <h2>Data Definition Language</h2>
       <p>Statements used to create the structure of the database
         and the other database objects.
@@ -88,140 +97,148 @@ SET search_path = "requiredSchema" </pre>
         <li><b>CREATE</b>
           <ul>
             <li>
-              Use: Used to create new databases and tables
+              Use: To create/form entities like databases, schema, tables, triggers, indexes, etc.
             </li>
             <li>Syntax:
 <pre>
 CREATE TABLE TableName (
-attributeName1 type1, 
-attributeName2 type2, 
+attributeName1 datatype, 
+attributeName2 datatype, 
 … 
-attributeNameN typeN, 
+attributeNameN datatype, 
 Constraint1, 
 Constraint2,
 …, 
 ConstraintM
 );
               </pre>
-            </li>
-          </ul>
-        </li>
-        <li><b>ALTER</b>
-          <ul>
-            <li>
-              Use: Modify an already existing database object such as a table 
-            </li>
-            <li>Syntax: To add column to an existing table
+              </li>
+              </ul>
+              </li>
+              <li><b>ALTER</b>
+                <ul>
+                  <li>
+                    Use: To modify, add, or delete some already existing constraints or columns from the database table like adding a
+                    column, droping a column, or changing the data type of a column.
+                  </li>
+                  <li>Syntax: To add column to an existing table
 <pre>
 ALTER TABLE table_name
 ADD column_name datatype;
               </pre>
             </li>
-          </ul>
-        </li>
-        <li><b>DROP</b>
-          <ul>
-            <li>
-              Use: Delete databases and tables
+            </ul>
             </li>
-            <li>Syntax:
+            <li><b>DROP</b>
+              <ul>
+                <li>
+                  Use: To delete entire database and tables
+                </li>
+                <li>Syntax:
 <pre>
 DROP TABLE TableName;
               </pre>
             </li>
-          </ul>
-        </li>        
-      </ul>
-      <h2>Data Manipulation Language</h2>
-      <p>Statements used to manage the data stored in the 
-        database.
-      </p>
-      <ul>
-        <li><b>INSERT</b>
-          <ul>
-            <li>
-              Use: 
+            </ul>
             </li>
-            <li>Syntax:
+            </ul>
+            <h2>Data Manipulation Language</h2>
+            <p>Statements used to manage the data stored in the
+              database.
+            </p>
+            <ul>
+              <li><b>INSERT</b>
+                <ul>
+                  <li>
+                    Use: To add or insert rows/data into the table.
+                  </li>
+                  <li>Syntax:
 <pre>
 INSERT INTO TableName (attrName1,…,attrNameN)
 VALUES (Value1,…,ValueN);
 </pre>
             </li>
-          </ul>
-        </li>
-        <li><b>SELECT</b>
-          <ul>
-            <li>
-              Use: 
+            </ul>
             </li>
-            <li>Syntax:
+            <li><b>SELECT</b>
+              <ul>
+                <li>
+                  Use: To retrieve data from tables.
+                </li>
+                <li>Syntax:
 <pre>
 SELECT attr1,att2,…,attrN
 FROM tableName
-WHERE <CONDITIONS>
+WHERE &lt;Conditions&gt;
               </pre>
             </li>
-          </ul>
-        </li>
-        <li><b>UPDATE</b>
-          <ul>
-            <li>
-              Use:
+            </ul>
             </li>
-            <li>Syntax:
+            <li><b>UPDATE</b>
+              <ul>
+                <li>
+                  Use: To modify or update the pre-existing data in a database
+                </li>
+                <li>Syntax:
 <pre>
-UPDATE TableName SET Att1 = NewValueAtt1,
-Att2 = NewValueAtt2 WHERE Condition
+UPDATE TableName
+SET Att1 = NewValueAtt1,
+Att2 = NewValueAtt2 
+WHERE &lt;Conditions&gt;
               </pre>
             </li>
-          </ul>
-        </li>
-        <li><b>DELETE</b>
-          <ul>
-            <li>
-              Use:
+            </ul>
             </li>
-            <li>Syntax:
+            <li><b>DELETE</b>
+              <ul>
+                <li>
+                  Use: To delete row/rows from a table
+                </li>
+                <li>Syntax:
 <pre>
-DELETE FROM TableName WHERE Condition
+DELETE FROM TableName 
+WHERE &lt;Conditions&gt;
               </pre>
             </li>
           </ul>
         </li>        
       </ul>
       <h2>Table</h2>
-        <p>
-          A table is a structured collection of data organized into rows and columns, where each column represents a specific attribute, and each row represents a single record or data entry.
-        </p>
-        <h2>Data Types</h2>
-        <p>
-          PostgreSQL supports various datatypes, the categories of datatypes it supports are: Numeric Types, Monetory Types, Character Types, Binary Data Types, Date/Time Types, Boolean Type, Array Types, JSON Types, Geometric Types, ENUM etc <a href="https://www.postgresql.org/docs/9.5/datatype.html" target="_blank">read more on datatypes</a>. Some of the commonly used data types are:
-        </p>
-        <ul>
-          <li>INTEGER: Standard integer (-2147483648 to 2147483647)</li>
-          <li>VARCHAR: Variable-length character string with a limit(n)</li>
-          <li>DATE: Calendar date (year, month, day)</li>
-          <li>TEXT: Variable-length character string with no limit</li>
-          <li>CHAR(n): Fixed-length character string</li>
-          <li>BOOLEAN: Logical boolean (true/false)</li>
-        </ul>
-        <h2>Primary & Foreign Key Constraints</h2>
-        <p>
-          A primary key constraint ensures that a column (or a set of columns) uniquely identifies each row in a table. It enforces uniqueness and implicitly creates a unique index on the column(s). A table can have only one primary key, which cannot contain NULL values.
-        </p>
-        <p>
-          A foreign key constraint establishes a relationship between columns in two tables. It ensures that the value in a column (or a set of columns) in one table matches values in a column (or a set of columns) in another table, enforcing referential integrity. This means the foreign key value in the referencing table must correspond to an existing primary key value in the referenced table.  
-        </p>
-        <p>A good convention 
-          is declaring the 
-          Primary Key(s) as 
-          the first 
-          attribute(s) in the 
-          tables</p>
+      <p>
+        A table is a structured collection of data organized into rows and columns, where each column represents a specific
+        attribute, and each row represents a single record or data entry.
+      </p>
+      <h2>Data Types</h2>
+      <p>
+        PostgreSQL supports various datatypes, the categories of datatypes it supports are: numeric types, monetory type,
+        character types, binary data types, date/time types, boolean type, array types, JSON types, geometric types, ENUM etc.
+        <a href="https://www.postgresql.org/docs/9.5/datatype.html" target="_blank">more on datatypes</a>. Some of the
+        commonly used data types are:
+      </p>
+      <ul>
+        <li>INTEGER: Standard integer (-2147483648 to 2147483647)</li>
+        <li>VARCHAR: Variable-length character string with a limit(n)</li>
+        <li>DATE: Calendar date (year, month, day)</li>
+        <li>TEXT: Variable-length character string with no limit</li>
+        <li>CHAR(n): Fixed-length character string</li>
+        <li>BOOLEAN: Logical boolean (true/false)</li>
+      </ul>
+      <h2>Primary & Foreign Key Constraints</h2>
+      <p>
+        A primary key constraint ensures that a column (or a set of columns) uniquely identifies each row in a table. It
+        enforces uniqueness and implicitly creates a unique index on the column(s). A table can have only one primary key,
+        which cannot contain NULL values.
+      </p>
+      <p>
+        A foreign key constraint establishes a relationship between columns in two tables. It ensures that the value in a
+        column (or a set of columns) in one table matches values in a column (or a set of columns) in another table, enforcing
+        referential integrity. This means the foreign key value in the referencing table must correspond to an existing
+        primary key value in the referenced table.
+      </p>
+      <p>A good convention is declaring the Primary Key(s) as the first attribute(s) in the tables</p>
       <button class="collapsible">Create Art Tables</button>
       <div class="content">
-        <br>        
+        <br>
         <p>The lab material is based on the Artwork ER Diagram as shown below:</p>
         <br>
         <img src="{{ url_for('static', filename='images/artER.png') }}" alt="ER Diagram for Artwork Tables."
@@ -232,7 +249,7 @@ DELETE FROM TableName WHERE Condition
         <img src="{{ url_for('static', filename='images/artTables.png') }}" alt="Artwork Tables." class="responsive-image">
         <br>
         <p>
-          Execute Create table queries to create the above 4 tables
+          Execute create table queries to create the above 4 tables. Make sure to use the laboratories schema created above (append schemaName to the tableName).
         </p>
         <br>
         <form class="queryForm">
@@ -283,14 +300,14 @@ DELETE FROM TableName WHERE Condition
           </p>
         </div>
         </div>
-        <br>        
+        <br>
         <button class="collapsible">Insert Values</button>
         <div class="content">
           <br>
-          <p>Character values are quoted by '' , and numerical values are unquoted when inserting</p>
+          <p>Character values are quoted by ' ' , and numerical values are unquoted when inserting</p>
           <p>Several inserts can be done consecutively in Query Tool</p>
           <p>Multiple inserts into the same table can be done by separating them with a comma(,)</p>
-          <p>Insert the following 3 Rows:</p>
+          <p>Insert the following 3 Rows, make sure to use the laboratories schema created above (append schemaName to the tableName):</p>
           <ul>
             <li>Artist Table: </li>
             <ul>
@@ -316,7 +333,7 @@ DELETE FROM TableName WHERE Condition
           </ul>
           <br>
           <form class="queryForm">
-            <input type="text" class="query" placeholder="Create Table Query" required>
+            <input type="text" class="query" placeholder="Insert Query" required>
             <br><br>
             <input type="submit" value="Execute Query">
             <div class="alert-container"></div>
@@ -325,18 +342,35 @@ DELETE FROM TableName WHERE Condition
           <button class="collapsible">Insert Into Art Work Tables</button>
           <div class="content">
             <br><br>
-            <p>INSERT INTO laboratories.Artist(AName,Birthplace, Style, DateOfBirth) VALUES ('Caravaggio','Milan','Baroque','1571-09-28' ), ('Smith', 'Ottawa', 'Modern', '1977-12-12'), ('Picasso','Malaga','Cubism','1881-10-25')
+            <p>INSERT INTO laboratories.Artist(AName,Birthplace, Style, DateOfBirth) VALUES
+              ('Caravaggio','Milan','Baroque','1571-09-28' ), ('Smith', 'Ottawa', 'Modern', '1977-12-12'),
+              ('Picasso','Malaga','Cubism','1881-10-25')
             </p>
             <p>
-              INSERT INTO laboratories.Customer(CustId,Name,Address,Amount) VALUES (1,'John','Ottawa',8.5), (2,'Amy','Orleans',9.0), (3,'Peter','Gatineau',6.3) 
+              INSERT INTO laboratories.Customer(CustId,Name,Address,Amount) VALUES (1,'John','Ottawa',8.5),
+              (2,'Amy','Orleans',9.0), (3,'Peter','Gatineau',6.3)
             </p>
             <p>
-              INSERT INTO laboratories.Artwork(Title,Year,Type,Price,AName) VALUES ('Blue', 2000,'Modern',10000.00,'Smith'), ('The Cardsharps', 1594,'Baroque',40000.00,'Caravaggio')
+              INSERT INTO laboratories.Artwork(Title,Year,Type,Price,AName) VALUES ('Blue', 2000,'Modern',10000.00,'Smith'),
+              ('The Cardsharps', 1594,'Baroque',40000.00,'Caravaggio')
             </p>
           </div>
           <br>
         </div>
         <br>
+        <button class="collapsible">Retrieve Values</button>
+        <div class="content">
+          <br>
+          <p>Retrieve data using SELECT Statement</p>
+          <p>Get the style of the artist whose name is Smith</p>          
+          <form class="queryForm">
+            <input type="text" class="query" placeholder="Query" required>
+            <br><br>
+            <input type="submit" value="Execute Query">
+            <div class="alert-container"></div>
+          </form>
+          <br><br><br>
+        </div>
         <button class="collapsible">Pass Query</button>
         <div class="content">
           <p>Pass In Query</p>
@@ -349,17 +383,17 @@ DELETE FROM TableName WHERE Condition
           </form>
           <br><br><br>
         </div>
-      <button class="collapsible">Overview of pgAdmin</button>
-      <div class="content">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.</p>
-      </div>
-      <script src="static/js/collapsiblescript.js"></script>
-    </main>
-  </div>
-  
-  <script src="static/js/query-execution.js"></script>
-</body>
-
-</html>
+        <button class="collapsible">Overview of pgAdmin</button>
+        <div class="content">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat.</p>
+        </div>
+        <script src="static/js/collapsiblescript.js"></script>
+        </main>
+        </div>
+        
+        <script src="static/js/query-execution.js"></script>
+        </body>
+        
+        </html>
