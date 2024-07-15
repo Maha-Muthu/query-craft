@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, jsonify
+from flask import Flask, render_template, request, jsonify, json
 import psycopg2
 
 app = Flask(__name__)
@@ -26,47 +26,51 @@ def format_pg_error(err):
 @app.route('/execute-query', methods=['POST'])
 def execute_query():
     if not request.is_json:
-        return jsonify({"error": "Invalid Request"}), 400
+        results = {"ResponseSource": ["Before Execution"], "Message":["Invalid Request"]}
+        message_results = json.dumps(results)
+        return jsonify({"message": message_results}), 400
     
     query = request.json.get('query')    
     if not query:
-        return jsonify({"error": "Invalid Query"}), 400
+        results = {"ResponseSource": ["Before Execution"], "Message":["Invalid Query"]}
+        message_results = json.dumps(results)
+        return jsonify({"message": message_results}), 400
 
     db_connection = get_db_connection()
     db_cursor = db_connection.cursor()
     try:
         db_cursor.execute(query)
-        if db_cursor.description:  # This checks if the query returned rows (i.e., SELECT)
+        if db_cursor.description:  # Check if query response includes rows
             rows = db_cursor.fetchall()
+            transposed_rows = list(zip(*rows))
             columns = [desc[0] for desc in db_cursor.description]
-            results = [dict(zip(columns, row)) for row in rows]
             db_cursor.close()
             db_connection.close()
-            result_string = '+'.join('+'.join(f"{key}:{value}" for key, value in result.items()) for result in results)
-            return jsonify({"message": result_string}), 200
+            results = {columns[row]: list(transposed_rows[row]) for row in range(len(columns))}
+            message_results = json.dumps(results)
+            return jsonify({"message": message_results}), 200
         else:
             db_connection.commit()
             db_cursor.close()
             db_connection.close()
-            return jsonify({"message": "Query executed successfully"}), 201
+            results = {"ResponseSource": ["No Data - No Rows"], "Message":["Query executed successfully"]}
+            message_results = json.dumps(results)
+            return jsonify({"message": message_results}), 201
         
     except psycopg2.Error as e:
         error_details = format_pg_error(e)
         db_cursor.close()
         db_connection.close()
-        return jsonify({"message": error_details['error']}), 201
+        results = {"ResponseSource": ["No Data - psycopg2 Error"], "Message":[error_details['error']]}
+        message_results = json.dumps(results)
+        return jsonify({"message": message_results}), 400
 
     except Exception as e:
-        error_details = {
-            "error": str(e),
-            "pgcode": getattr(e, 'pgcode', None),
-            "pgerror": getattr(e, 'pgerror', None),
-            "details": getattr(e, 'diag', {}).get('message_detail', None),
-            "hint": getattr(e, 'diag', {}).get('message_hint', None)
-        }
         db_cursor.close()
         db_connection.close()
-        return jsonify({"message":  error_details['error']}), 201
+        results = {"ResponseSource": ["No Data - General Exception"], "Message":[repr(e)]}
+        message_results = json.dumps(results)
+        return jsonify({"message": message_results}), 500
 
 @app.route('/')
 def home():
