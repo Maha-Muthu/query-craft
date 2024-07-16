@@ -21,17 +21,17 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function showAlert(message, alertContainer) {
-  if (message === "Query Executed Successfully") {
-    alertContainer.innerHTML = `<div class="alert-box"><br>${message}</div>`;
-  } else {
-    try {
-      // Parse the JSON string into an object
-      let resultDict = JSON.parse(message);
-      showTable(resultDict, alertContainer);
-    } catch (e) {
-      console.error('Error parsing JSON:', e);
-      alertContainer.innerHTML = `<div class="alert-box"><br>Error parsing the response</div>`;
+  try {
+    let deserializeMessage = JSON.parse(message);
+    if (deserializeMessage.ResponseSource != undefined) {
+      alertContainer.innerHTML = `<div class="alert-box"><br>${deserializeMessage.Message}</div>`;
     }
+    else {
+      showTable(deserializeMessage, alertContainer);
+    }
+
+  } catch (exception) {
+    alertContainer.innerHTML = `<div class="alert-box"><br>Error parsing the response !</div>`;
   }
 }
 

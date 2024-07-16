@@ -256,6 +256,7 @@ WHERE &lt;Conditions&gt;
           <input type="text" class="query" placeholder="Create Table Query" required>
           <br><br>
           <input type="submit" value="Execute Query">
+          <br>
           <div class="alert-container"></div>
         </form>
         <br>
@@ -299,6 +300,7 @@ WHERE &lt;Conditions&gt;
             REFERENCES Customer);
           </p>
         </div>
+        <br>
         </div>
         <br>
         <button class="collapsible">Insert Values</button>
@@ -356,44 +358,73 @@ WHERE &lt;Conditions&gt;
             </p>
           </div>
           <br>
-        </div>
-        <br>
-        <button class="collapsible">Retrieve Values</button>
-        <div class="content">
+          </div>
           <br>
-          <p>Retrieve data using SELECT Statement</p>
-          <p>Get the style of the artist whose name is Smith</p>          
-          <form class="queryForm">
-            <input type="text" class="query" placeholder="Query" required>
-            <br><br>
-            <input type="submit" value="Execute Query">
-            <div class="alert-container"></div>
-          </form>
-          <br><br><br>
-        </div>
-        <button class="collapsible">Pass Query</button>
-        <div class="content">
-          <p>Pass In Query</p>
-          <br>
-          <form class="queryForm">
-            <input type="text" class="query" placeholder="Query" required>
-            <br><br>
-            <input type="submit" value="Execute Query">
-            <div class="alert-container"></div>
-          </form>
-          <br><br><br>
-        </div>
-        <button class="collapsible">Overview of pgAdmin</button>
-        <div class="content">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-            commodo consequat.</p>
-        </div>
-        <script src="static/js/collapsiblescript.js"></script>
-        </main>
-        </div>
-        
-        <script src="static/js/query-execution.js"></script>
-        </body>
-        
-        </html>
+          <button class="collapsible">Retrieve Values</button>
+          <div class="content">
+            <br>
+            <p>Retrieve data using SELECT Statement</p>
+            <p>Get the style of the artist whose name is Smith</p>
+            <form class="queryForm">
+              <input type="text" class="query" placeholder="Query" required>
+              <br><br>
+              <input type="submit" value="Execute Query">
+              <div class="alert-container"></div>
+            </form>
+            <br>
+            <p>List all artists that are born in Ottawa</p>
+            <form class="queryForm">
+              <input type="text" class="query" placeholder="Query" required>
+              <br><br>
+              <input type="submit" value="Execute Query">
+              <div class="alert-container"></div>
+            </form>
+            <br>
+            <p>List the titles and prices of all artworks painted in 2000</p>
+            <form class="queryForm">
+              <input type="text" class="query" placeholder="Query" required>
+              <br><br>
+              <input type="submit" value="Execute Query">
+              <div class="alert-container"></div>
+            </form>
+            <br>
+            <button class="collapsible">Insert Into Art Work Tables</button>
+            <div class="content">
+              <br><br>
+              <p>SELECT Style FROM Artist WHERE AName = 'Smith'</p>
+              <p>
+                SELECT A.Aname FROM "Artist" A WHERE Birthplace = 'Ottawa';
+              </p>
+              <p>          
+                SELECT Title,Price FROM "Artwork" WHERE Year =2000;          
+              </p>
+              <br>
+            </div>
+            <br>
+          </div>
+          <button class="collapsible">Pass Query</button>
+          <div class="content">
+            <p>Pass In Query</p>
+            <br>
+            <form class="queryForm">
+              <input type="text" class="query" placeholder="Query" required>
+              <br><br>
+              <input type="submit" value="Execute Query">
+              <div class="alert-container"></div>
+            </form>
+            <br><br><br>
+          </div>
+          <button class="collapsible">Overview of pgAdmin</button>
+          <div class="content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+              commodo consequat.</p>
+          </div>
+          <script src="static/js/collapsiblescript.js"></script>
+          </main>
+          </div>
+          
+          <script src="static/js/query-execution.js"></script>
+          </body>
+          
+          </html>
