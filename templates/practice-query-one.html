@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databases Lab 2</title>
+    <link rel="stylesheet" href="static/css/page-skeleton-design.css">
+    <link rel="stylesheet" href="static/css/collapsible-design.css">
+    <link rel="stylesheet" href="static/css/query-input-design.css">
+</head>
+
+<body>
+    <header>CSI 2132 Lab #2: Basic SQL Programming</header>
+    <div class="container">
+        <nav>
+            <a href="{{ url_for('student_homepage') }}">Home</a>
+            <br>
+            <a href="#">Practice Query 1</a>
+            <br>
+            <a href="#">Practice Query 2</a>
+            <br>
+            <a href="#">Practice Query 3</a>
+        </nav>
+        <main>
+            <h2>Periodic Table Schema</h2>
+            <p>The PeriodicTable schema is a structured representation of chemical elements, capturing key properties
+                such as atomic number, name, and symbol, along with atomic mass and subatomic particle counts. It
+                includes details on the element's period, phase (like gas or solid), natural occurrence, and type (e.g.,
+                nonmetal or noble gas). Each element is uniquely identified by its atomic number, ensuring precise and
+                organized data management.</p>
+            <h3>The Description of the table:</h3>
+            <img src="{{ url_for('static', filename='images/periodicTableSchema.png') }}"
+                alt="Periodic Table Table Description" class="responsive-image">
+            <br>
+            <h3>Sample Data from Periodic Table</h3>
+            <img src="{{ url_for('static', filename='images/PeriodicTable.png') }}" alt="Create Schema"
+                class="responsive-image">
+            <br>
+            <h3>Attributes</h3>
+            <ul>
+                <li>Schema Name: periodictableschema</li>
+                <li>Table Name: PeriodicTable</li>
+                <li>Attributes:</li>
+                <ul>
+                    <li>AtomicNumber</li>
+                    <li>ElementName</li>
+                    <li>Symbol</li>
+                    <li>AtomicMass</li>
+                    <li>NumberOfNeutrons</li>
+                    <li>NumberOfProtons</li>
+                    <li>NumberOfElectrons</li>
+                    <li>PeriodNumber</li>
+                    <li>Phase</li>
+                    <li>NaturallyOccuring</li>
+                    <li>ElementType</li>
+                </ul>
+            </ul>
+            <h3>Query Periodic Table</h3>
+            <p>List the names of nonmetals that are gases.</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p>What are the top 5 elements with the highest number of neutrons?</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p>Find the lightest element in each phase.</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <button class="collapsible">Query Periodic Table</button>
+            <div class="content">
+                <br>
+                <p>List the names of nonmetals that are gases.</p>
+
+                <p>SELECT ElementName
+                    FROM periodictableschema.PeriodicTable
+                    WHERE ElementType = 'Nonmetal' AND Phase = 'gas'
+                </p>
+                <p>What are the top 5 elements with the highest number of neutrons?</p>
+
+                <p>SELECT ElementName, NumberOfNeutrons
+                    FROM periodictableschema.PeriodicTable
+                    ORDER BY NumberOfNeutrons DESC
+                    LIMIT 5
+                </p>
+                <p>Find the lightest element in each phase.</p>
+
+                <p>SELECT Phase, ElementName, MIN(AtomicMass) AS LightestElementMass
+                    FROM periodictableschema.PeriodicTable
+                    GROUP BY Phase
+                </p>
+                <br>
+            </div>
+            <br>
+            <script src="static/js/collapsiblescript.js"></script>
+        </main>
+    </div>
+
+    <script src="static/js/query-execution.js"></script>
+</body>
+
+</html>

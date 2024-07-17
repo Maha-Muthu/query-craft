@@ -88,5 +88,9 @@ def lab_material_one():
 def lab_material_two():
     return render_template('lab-material-two.html')
 
+@app.route('/practice-query-one')
+def practice_query_one():
+    return render_template('practice-query-one.html')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
