@@ -52,7 +52,30 @@
     margin: 0 auto; /* Center the image */
 }
 
-/* Ensure the collapsible expands to fit the iframe */
 .container .content.open {
     max-height: none; /* Remove the max-height restriction when open */
+}
+
+/* Additional styling for nested collapsibles */
+.container .content .collapsible {
+    margin-top: 1rem;
+    background-color: #666;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: visible;
+}
+
+.container .content .content {
+    padding: 0 1rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #e1e1e1;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.container .content .active + .content {
+    max-height: none;
+    overflow: visible;
 }
