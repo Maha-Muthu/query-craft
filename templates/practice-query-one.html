@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="static/css/page-skeleton-design.css">
     <link rel="stylesheet" href="static/css/collapsible-design.css">
     <link rel="stylesheet" href="static/css/query-input-design.css">
+    <style> 
+        .prevent-select {
+          -webkit-user-select: none; /* Safari */
+          -ms-user-select: none; /* IE 10 and IE 11 */
+          user-select: none; /* Standard syntax */
+        }
+        </style>
 </head>
 
 <body>
@@ -86,22 +93,26 @@
                 <br>
                 <p>List the names of nonmetals that are gases.</p>
 
-                <p>SELECT ElementName
+                <p class="prevent-select">SELECT ElementName
                     FROM periodictableschema.PeriodicTable
                     WHERE ElementType = 'Nonmetal' AND Phase = 'gas'
                 </p>
                 <p>What are the top 5 elements with the highest number of neutrons?</p>
 
-                <p>SELECT ElementName, NumberOfNeutrons
+                <p class="prevent-select">SELECT ElementName, NumberOfNeutrons
                     FROM periodictableschema.PeriodicTable
                     ORDER BY NumberOfNeutrons DESC
                     LIMIT 5
                 </p>
                 <p>Find the lightest element in each phase.</p>
 
-                <p>SELECT Phase, ElementName, MIN(AtomicMass) AS LightestElementMass
+                <p class="prevent-select">SELECT Phase, ElementName, AtomicMass AS LightestElementMass
                     FROM periodictableschema.PeriodicTable
-                    GROUP BY Phase
+                    WHERE (Phase, AtomicMass) IN (
+                        SELECT Phase, MIN(AtomicMass)
+                        FROM periodictableschema.PeriodicTable
+                        GROUP BY Phase
+                    )
                 </p>
                 <br>
             </div>
