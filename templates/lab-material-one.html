@@ -174,9 +174,37 @@
       <button class="collapsible">pgAdmin Guide</button>
       <div class="content">
         <br>
+        <h3>Setting up and using pgAdmin in your local machine or use the pgAdmin Tool from <a
+            href="http://localhost:8080" target="_blank">here</a></h3>
+        <ul>
+          <li>Download and install PostgreSQL</li>
+          <li>The installation includes pgadmin</li>
+          <li>Select the latest versions</li>
+          <li>Select your operating system</li>
+          <li>Select the defaults (port, locale)</li>
+          <li>Select admin password
+          </li>
+        </ul>
+        <h3>Main Window - Tree Control: Server tree and the objects that reside on a server</h3>
+        <img src="{{ url_for('static', filename='images/pgAdminServerTree.png') }}" alt="pgAdmin Server Tree"
+          class="responsive-image">
+        <br>
+        <h3>Main Window - Dashboard: Provides an
+          active analysis
+          of the usage
+          statistics for the
+          selected server
+          or database
+        </h3>
         <img src="{{ url_for('static', filename='images/dashboard.png') }}" alt="pgAdmin Dashboard"
           class="responsive-image">
-        <p>Dashboard Screen</p>
+        <br>
+        <h3>Query Tool: Can be accessed through Tools->Query Tool or Right click on resource->Query Tool. Used to type
+          sql statements to create query. After running the query, query results displayed at the bottom.
+        </h3>
+        <img src="{{ url_for('static', filename='images/queryTool.png') }}" alt="pgAdmin Query Tool"
+          class="responsive-image">
+        <br>
       </div>
       <script src="static/js/collapsiblescript.js"></script>
     </main>
