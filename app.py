@@ -88,6 +88,10 @@ def lab_material_one():
 def lab_material_two():
     return render_template('lab-material-two.html')
 
+@app.route('/lab-material-three')
+def lab_material_three():
+    return render_template('lab-material-three.html')
+
 @app.route('/practice-query-one')
 def practice_query_one():
     return render_template('practice-query-one.html')
