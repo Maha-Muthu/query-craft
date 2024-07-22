@@ -55,12 +55,12 @@ ALTER TABLE TableName ADD COLUMN ColumnName ColumnType
             <pre>
 ALTER TABLE TableName ADD COLUMN ColumnName ColumnType CHECK ( Constraint );                   
             </pre>
-            <button class="collapsible">Alter Tables</button>
+            <button class="collapsible"><b>Exercise 7:</b> Alter Tables</button>
             <div class="content">
                 <br>
                 <p>This exercise requires the completion of all queries in all previous exercises. The schema name is
-                    "laboratories" and it includes the following tables (to look at the schema refer to Create Art
-                    Tables in Lab Material 1.):
+                    "laboratories" and it includes the following tables (to look at the schema refer to Exercise 2 in
+                    Lab Material 1.): </p>
                 <ul>
                     <li>laboratories.Artist( AName VARCHAR(20), Birthplace VARCHAR(20), Style VARCHAR(20), DateOfBirth
                         DATE, PRIMARY KEY (AName))</li>
@@ -72,8 +72,8 @@ ALTER TABLE TableName ADD COLUMN ColumnName ColumnType CHECK ( Constraint );
                         KEY (Aname) REFERENCES laboratories.Artist, FOREIGN KEY (CustId) REFERENCES
                         laboratories.Customer)</li>
                 </ul>
-                </p>
-                <h3>Excercise :</h3>
+
+
                 <p>Add Country column to Artist table (type VARCHAR(20))</p>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
@@ -100,7 +100,7 @@ ALTER TABLE TableName ADD COLUMN ColumnName ColumnType CHECK ( Constraint );
                         has
                         to be BETWEEN 1 AND 10</h3>
                     <p>
-                        ALTER TABLE Customer
+                        ALTER TABLE laboratories.Customer
                         ADD Rating Numeric
                         CONSTRAINT Rating CHECK (Rating &gt;= 1 and Rating &lt;=10) </p>
                     <br>
@@ -128,7 +128,7 @@ ALTER TABLE TableName ADD COLUMN ColumnName ColumnType CHECK ( Constraint );
                 </li>
             </ul>
             <br>
-            <button class="collapsible">Query Practice</button>
+            <button class="collapsible"><b>Exercise 8:</b> Query Practice</button>
             <div class="content">
                 <br>
                 <p>Let's insert additional data into the previously created tables, then delete specific rows from those
@@ -191,7 +191,7 @@ ALTER TABLE TableName ADD COLUMN ColumnName ColumnType CHECK ( Constraint );
                         'Preston', 20000.00, 5), (2, 'Saeid', null, 40000.00, 6)
                     </p>
                     <p>
-                        INSERT INTO laboratories.LikeArtist (CustId, AName) (1, 'Picasso'), (2, 'Picasso') and (2,
+                        INSERT INTO laboratories.LikeArtist (CustId, AName) VALUES (1, 'Picasso'), (2, 'Picasso'), (2,
                         'Leonardo')
                     </p>
                     <br>
@@ -207,27 +207,138 @@ ALTER TABLE TableName ADD COLUMN ColumnName ColumnType CHECK ( Constraint );
                     permanently deleted.</li>
                 <pre>
 <b>DELETE FROM</b> TableName <b>WHERE</b> Condition           
-                    </pre>
-                </li>
+                </pre>
                 <li>When a record being deleted is referenced by a foreign key in another table, the database management
                     system (DBMS) checks for these dependencies to maintain referential integrity. If such a dependency
-                    exists and the foreign key constraint, the delete operation will fail to prevent orphaned records in
-                    the child table.</li>
-                <li> A solution to this issue is to use the ON DELETE CASCADE option when defining the foreign key
-                    constraint. With ON DELETE CASCADE, deleting a record in the parent table will automatically delete
-                    all related records in the child table, ensuring that no orphaned records are left and maintaining
-                    the consistency of the database relationships.</li>
+                    exists, the delete operation will fail to prevent orphaned records in the child table.</li>
+                <li>To handle this:
+                    <ul>
+                        <li>Either manually delete the dependent rows first</li>
+                        <li>Or use the ON DELETE CASCADE option when defining the foreign key
+                            constraint. With ON DELETE CASCADE, deleting a record in the parent table will automatically
+                            delete all related records in the child table, ensuring that no orphaned records are left
+                            and maintaining the consistency of the database relationships.</li>
+                        <li>If you have already created the tables, you can alter the table to include delete cascade
+                            using:</li>
+                        <pre>
+ALTER TABLE [ParentTable] WITH CHECK ADD CONSTRAINT [FK_ChildParent] FOREIGN KEY([ParentID])
+REFERENCES [ParentTable] ([ParentID])
+ON DELETE CASCADE                            
+                        </pre>
+                    </ul>
+                </li>
             </ul>
             <h3>Backup & Restore</h3>
+            <p><b>Backup:</b> A snapshot of the database (including data and structure) at any point in time. Generates
+                a
+                data file *.backup that you save on disk.</p>
+            <p><b>Restore:</b> Uses a previously generated backup file to bring the database to a certain state in time.
+                Before restore, we need to:
+            <ul>
+                <li>Either remove all tables (DROP TABLE)</li>
+                <li>Or remove the table data (DELETE FROM…)</li>
+            </ul>
+            to avoid data conflicts.
+            </p>
             <br>
-            <button class="collapsible">Query Practice</button>
+            <button class="collapsible"><b>Exercise 9:</b> Query Practice</button>
             <div class="content">
                 <br>
-                <p>Let's insert additional data into the previously created tables, then delete specific rows from those
-                    tables. Next code queries involving both single and multiple tables.</p>
-                <p>Insert the following rows, make sure to use the laboratories schema created above (append
-                    schemaName to the tableName):</p>
+                <p>Retrieve data using SELECT Statement</p>
+                <p>List the names and birthplaces of all Artists.</p>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <p>List the title and price of all Artworks that were painted after 1600.</p>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <p>List the title and type of all Artworks that was either painted in 2000 or was painted by Picasso.
+                </p>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <p>List the names and birthplaces of all Artists who were born between 1880 and 1930. (HINT:
+                    EXTRACT(YEAR FROM Dateofbirth) gives you the year from a DATE attribute)
+                </p>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <p>List the names and country of birth of all Artists whose painting style are Modern, Baroque or
+                    Renaissance. (HINT: Use the IN keyword).
+                </p>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <p>List all details of the Artworks in the database, ordered by Title.
+                </p>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <button class="collapsible">Retrieve Data From Art Work Tables</button>
+                <div class="content">
+                    <br><br>
+                    <h3>List the names and birthplaces of all Artists.
+                    </h3>
+                    <p>SELECT Aname, Birthplace FROM laboratories.Artist
+                    </p>
+                    <h3>List the title and price of all Artworks that were painted after 1600.</h3>
+                    <p>
+                        SELECT Title, Price FROM laboratories.Artwork where Year>1600
+                    </p>
+                    <h3>List the title and type of all Artworks that was either painted in 2000 or was painted by
+                        Picasso.
+                    </h3>
+                    <p>
+                        SELECT Title, Type FROM laboratories.Artwork where Year=2000 OR Aname='Picasso'
+                    </p>
+                    <h3>List the names and birthplaces of all Artists who were born between 1880 and 1930.
+                    </h3>
+                    <p>
+                        SELECT Aname, Birthplace FROM laboratories.Artist
+                        WHERE (EXTRACT(YEAR FROM Dateofbirth) BETWEEN 1880 AND 1930)
+                    </p>
+                    <h3>List the names and country of birth of all Artists whose painting style are Modern, Baroque or
+                        Renaissance.
+                    </h3>
+                    <p>
+                        SELECT Aname, Country FROM laboratories.Artist
+                        WHERE Style IN ('Modern','Baroque','Renaissance')
+                    </p>
+                    <h3>List all details of the Artworks in the database, ordered by Title.
+                    </h3>
+                    <p>
+                        SELECT * FROM laboratories.Artwork Order By Title
+                    </p>
+                    <br>
+                </div>
+                <br>
             </div>
+            <br>
         </main>
     </div>
     <script src="static/js/query-execution.js"></script>
