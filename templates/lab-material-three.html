@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databases Lab 3</title>
+    <link rel="stylesheet" href="static/css/page-skeleton-design.css">
+    <link rel="stylesheet" href="static/css/collapsible-design.css">
+    <link rel="stylesheet" href="static/css/query-input-design.css">
+</head>
+
+<body>
+    <header>CSI 2132 Lab #3: More on SQL</header>
+    <div class="container">
+        <nav>
+            <a href="{{ url_for('student_homepage') }}">Home</a>
+            <br>
+            <a href="{{ url_for('lab_material_one') }}">Lab Material 1</a>
+            <br>
+            <a href="{{ url_for('lab_material_two') }}">Lab Material 2</a>
+            <br>
+            <a href="#">Lab Material 3</a>
+            <br>
+            <a href="#">Lab Material 4</a>
+            <br>
+            <a href="#">Lab Material 5</a>
+        </nav>
+        <main>
+            <h2>More SQL Commands: Drop, Alter, and Query</h2>
+            <p>Focus on advanced SQL commands and practices, including altering and destroying database tables,
+                performing insertions and deletions, and writing complex queries involving multiple tables. Key topics
+                covered include the use of DROP TABLE and ALTER TABLE commands for modifying table structures, inserting
+                data into existing tables, deleting rows based on conditions, and employing SELECT statements with
+                clauses like GROUP BY, HAVING, and ORDER BY. Provides practical exercises to reinforce these concepts,
+                such as adding columns with constraints, inserting specific records, and crafting queries to retrieve
+                and manipulate data. Learning outcomes include a deeper understanding of SQL syntax, database
+                management, and the ability to execute complex data operations.</p>
+            <h2>Destroying and Altering Relations</h2>
+            <p>The command <b>DROP TABLE</b> destroys the table and
+                deletes all records on that relation.</p>
+            <pre>
+DROP TABLE TableName;
+            </pre>
+            <p>The command <b>ALTER TABLE</b> allows us to make several
+                modifications to a table we have created before.</p>
+            <p>We can add/drop columns and constraints, rename
+                table name, columns and do much more.</p>
+            <p>Adding a column to an already created table</p>
+            <pre>
+ALTER TABLE TableName ADD COLUMN ColumnName ColumnType
+            </pre>
+            <p>We can also add a column with an additional integrity
+                constraint.</p>
+            <pre>
+ALTER TABLE TableName ADD COLUMN ColumnName ColumnType CHECK ( Constraint );                   
+            </pre>
+            <button class="collapsible"><b>Exercise 7:</b> Alter Tables</button>
+            <div class="content">
+                <br>
+                <p>This exercise requires the completion of all queries in all previous exercises. The schema name is
+                    "laboratories" and it includes the following tables (to look at the schema refer to Exercise 2 in
+                    Lab Material 1.): </p>
+                <ul>
+                    <li>laboratories.Artist( AName VARCHAR(20), Birthplace VARCHAR(20), Style VARCHAR(20), DateOfBirth
+                        DATE, PRIMARY KEY (AName))</li>
+                    <li>laboratories.Customer( CustId INTEGER, Name VARCHAR(20), Address VARCHAR(20), Amount
+                        NUMERIC(8,2), PRIMARY KEY (CustId))</li>
+                    <li>laboratories.Artwork( Title VARCHAR(20), Year INTEGER, Type VARCHAR(20), Price NUMERIC(8,2),
+                        AName VARCHAR(20), PRIMARY KEY (Title), FOREIGN KEY(AName) REFERENCES laboratories.Artist)</li>
+                    <li>laboratories.LikeArtist( CustId INTEGER, AName VARCHAR(20), PRIMARY KEY(Aname, CustId), FOREIGN
+                        KEY (Aname) REFERENCES laboratories.Artist, FOREIGN KEY (CustId) REFERENCES
+                        laboratories.Customer)</li>
+                </ul>
+
+
+                <p>Add Country column to Artist table (type VARCHAR(20))</p>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Update Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <p>Add a Rating column to the Customer table, with the following check constraint: the rating value has
+                    to be BETWEEN 1 AND 10</p>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Update Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <button class="collapsible">Update Art Work Tables</button>
+                <div class="content">
+                    <br><br>
+                    <h3>Add Country column to Artist table (type VARCHAR(20))</h3>
+                    <p>ALTER TABLE laboratories.Artist ADD Country VARCHAR(20)</p>
+                    <h3>Add a Rating column to the Customer table, with the following check constraint: the rating value
+                        has
+                        to be BETWEEN 1 AND 10</h3>
+                    <p>
+                        ALTER TABLE laboratories.Customer
+                        ADD Rating Numeric
+                        CONSTRAINT Rating CHECK (Rating &gt;= 1 and Rating &lt;=10) </p>
+                    <br>
+                </div>
+                <br>
+            </div>
+            <br>
+            <h2>More on <b>SELECT</b> statements</h2>
+            <ul>
+                <li><b>GROUP BY</b>: Groups all resulting rows of our query
+                    in terms of one or more attributes with this clause.</li>
+                <li><b>HAVING</b>: Group qualification is specified here.
+                    Groups which satisfy this qualification will be
+                    displayed.</li>
+                <li><b>ORDER BY</b>: We can sort the data based on one or
+                    more attributes with this clause.</li>
+                <li>
+                    <pre>
+<b>SELECT</b> [ <b>DISTINCT</b> ] select-list
+<b>FROM</b> from-list
+<b>WHERE</b> record-qualification
+<b>GROUP</b> BY grouping-list
+<b>HAVING</b> group-qualification           
+                    </pre>
+                </li>
+            </ul>
+            <br>
+            <button class="collapsible"><b>Exercise 8:</b> Query Practice</button>
+            <div class="content">
+                <br>
+                <p>Let's insert additional data into the previously created tables, then delete specific rows from those
+                    tables. Next code queries involving both single and multiple tables.</p>
+                <p>Insert the following rows, make sure to use the laboratories schema created above (append
+                    schemaName to the tableName):</p>
+                <ul>
+                    <li>Artist Table: </li>
+                    <ul>
+                        <li>AName: Leonardo, Michelangelo, Josefa, Hans Hofmann, John</li>
+                        <li>BirthPlace: Florence, Arezzo, Seville, Weisenburg, San Francisco</li>
+                        <li>Style: Renaissance, Renaissance, Baroque, Modern, Modern</li>
+                        <li>DateOfBirth: 1452-04-15, 1475-03-06, 1630-09-09, 1966-02-17, 1920-02-17</li>
+                        <li>Country: Italy, Italy, Spain, Germany, USA</li>
+                    </ul>
+                    <li>Customer Table:</li>
+                    <ul>
+                        <li>CustId: 1, 2</li>
+                        <li>Name: Emre, Saeid</li>
+                        <li>Address: Preston, null</li>
+                        <li>Amount: 20000.00, 40000</li>
+                        <li>Rating: 5,6</li>
+                    </ul>
+                    <li>Artwork Table:</li>
+                    <ul>
+                        <li>Title: Waves, Three Musicians</li>
+                        <li>Year: 2000, 1921</li>
+                        <li>Type: null, Modern</li>
+                        <li>Price: 4000.00, 11000.00</li>
+                        <li>AName: John, Picasso</li>
+                    </ul>
+                    <li>LikeArtist Table:</li>
+                    <ul>
+                        <li>CustId: 1, 2, 2</li>
+                        <li>AName: Picasso, Picasso, Leonardo</li>
+                    </ul>
+                </ul>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Insert Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <button class="collapsible">Insert Into Art Work Tables</button>
+                <div class="content">
+                    <br><br>
+                    <p>INSERT INTO laboratories.Artist (AName,Birthplace, Style, DateOfBirth, Country)
+                        VALUES('Leonardo', 'Florence', 'Renaissance', '1452-04-15', 'Italy'), ('Michelangelo', 'Arezzo',
+                        'Renaissance', '1475-03-06','Italy'), ('Josefa', 'Seville', 'Baroque', '1630-09-09', 'Spain'),
+                        ('Hans Hofmann', 'Weisenburg', 'Modern', '1966-02-17', 'Germany'), ('John', 'San Francisco',
+                        'Modern', '1920-02-17', 'USA')
+                    </p>
+                    <p>
+                        INSERT INTO laboratories.Artwork (Title,Year,Type,Price,AName) VALUES('Waves', 2000, null,
+                        4000.00, 'John'), ('Three Musicians', 1921, 'Modern', 11000.00, 'Picasso')
+                    </p>
+                    <p>
+                        INSERT INTO laboratories.Customer (CustId,Name,Address,Amount, Rating) VALUES(1, 'Emre',
+                        'Preston', 20000.00, 5), (2, 'Saeid', null, 40000.00, 6)
+                    </p>
+                    <p>
+                        INSERT INTO laboratories.LikeArtist (CustId, AName) VALUES (1, 'Picasso'), (2, 'Picasso'), (2,
+                        'Leonardo')
+                    </p>
+                    <br>
+                </div>
+                <br>
+            </div>
+            <br>
+            <h2>Deleting Rows</h2>
+            <ul>
+                <li>We can delete certain rows satisfying a condition from a
+                    table with the <b>DELETE</b> command.</li>
+                <li>If you omit the <b>WHERE</b> clause, all records will be
+                    permanently deleted.</li>
+                <pre>
+<b>DELETE FROM</b> TableName <b>WHERE</b> Condition           
+                </pre>
+                <li>When a record being deleted is referenced by a foreign key in another table, the database management
+                    system (DBMS) checks for these dependencies to maintain referential integrity. If such a dependency
+                    exists, the delete operation will fail to prevent orphaned records in the child table.</li>
+                <li>To handle this:
+                    <ul>
+                        <li>Either manually delete the dependent rows first</li>
+                        <li>Or use the ON DELETE CASCADE option when defining the foreign key
+                            constraint. With ON DELETE CASCADE, deleting a record in the parent table will automatically
+                            delete all related records in the child table, ensuring that no orphaned records are left
+                            and maintaining the consistency of the database relationships.</li>
+                        <li>If you have already created the tables, you can alter the table to include delete cascade
+                            using:</li>
+                        <pre>
+ALTER TABLE [ParentTable] WITH CHECK ADD CONSTRAINT [FK_ChildParent] FOREIGN KEY([ParentID])
+REFERENCES [ParentTable] ([ParentID])
+ON DELETE CASCADE                            
+                        </pre>
+                    </ul>
+                </li>
+            </ul>
+            <h3>Backup & Restore</h3>
+            <p><b>Backup:</b> A snapshot of the database (including data and structure) at any point in time. Generates
+                a
+                data file *.backup that you save on disk.</p>
+            <p><b>Restore:</b> Uses a previously generated backup file to bring the database to a certain state in time.
+                Before restore, we need to:
+            <ul>
+                <li>Either remove all tables (DROP TABLE)</li>
+                <li>Or remove the table data (DELETE FROM…)</li>
+            </ul>
+            to avoid data conflicts.
+            </p>
+            <br>
+            <button class="collapsible"><b>Exercise 9:</b> Query Practice</button>
+            <div class="content">
+                <br>
+                <p>Retrieve data using SELECT Statement</p>
+                <p>List the names and birthplaces of all Artists.</p>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <p>List the title and price of all Artworks that were painted after 1600.</p>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <p>List the title and type of all Artworks that was either painted in 2000 or was painted by Picasso.
+                </p>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <p>List the names and birthplaces of all Artists who were born between 1880 and 1930. (HINT:
+                    EXTRACT(YEAR FROM Dateofbirth) gives you the year from a DATE attribute)
+                </p>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <p>List the names and country of birth of all Artists whose painting style are Modern, Baroque or
+                    Renaissance. (HINT: Use the IN keyword).
+                </p>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <p>List all details of the Artworks in the database, ordered by Title.
+                </p>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <button class="collapsible">Retrieve Data From Art Work Tables</button>
+                <div class="content">
+                    <br><br>
+                    <h3>List the names and birthplaces of all Artists.
+                    </h3>
+                    <p>SELECT Aname, Birthplace FROM laboratories.Artist
+                    </p>
+                    <h3>List the title and price of all Artworks that were painted after 1600.</h3>
+                    <p>
+                        SELECT Title, Price FROM laboratories.Artwork where Year>1600
+                    </p>
+                    <h3>List the title and type of all Artworks that was either painted in 2000 or was painted by
+                        Picasso.
+                    </h3>
+                    <p>
+                        SELECT Title, Type FROM laboratories.Artwork where Year=2000 OR Aname='Picasso'
+                    </p>
+                    <h3>List the names and birthplaces of all Artists who were born between 1880 and 1930.
+                    </h3>
+                    <p>
+                        SELECT Aname, Birthplace FROM laboratories.Artist
+                        WHERE (EXTRACT(YEAR FROM Dateofbirth) BETWEEN 1880 AND 1930)
+                    </p>
+                    <h3>List the names and country of birth of all Artists whose painting style are Modern, Baroque or
+                        Renaissance.
+                    </h3>
+                    <p>
+                        SELECT Aname, Country FROM laboratories.Artist
+                        WHERE Style IN ('Modern','Baroque','Renaissance')
+                    </p>
+                    <h3>List all details of the Artworks in the database, ordered by Title.
+                    </h3>
+                    <p>
+                        SELECT * FROM laboratories.Artwork Order By Title
+                    </p>
+                    <br>
+                </div>
+                <br>
+            </div>
+            <br>
+        </main>
+    </div>
+    <script src="static/js/query-execution.js"></script>
+    <script src="static/js/collapsiblescript.js"></script>
+</body>
+
+</html>

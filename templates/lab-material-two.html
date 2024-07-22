@@ -20,7 +20,7 @@
       <br>
       <a href="#">Lab Material 2</a>
       <br>
-      <a href="#">Lab Material 3</a>
+      <a href="{{ url_for('lab_material_three') }}">Lab Material 3</a>
       <br>
       <a href="#">Lab Material 4</a>
       <br>
@@ -52,28 +52,11 @@
           <li><b>Avoid keywords:</b>While you can use keywords as schema names if they are quoted, it is generally
             best to avoid doing so to prevent confusion and potential errors in queries.</li>
         </ul>
-        <h3>Create a schema using pgAdmin</h3>
-        <a href="http://localhost:8080" target="_blank">Open pgAdmin</a>
-        <br>
-        <p>After logging in and reaching the homepage, expand the Servers section and enter the database password.</p>
-        <p>Right Click over Schemas Section and Select "Create Schema"</p>
-        <img src="{{ url_for('static', filename='images/createSchema.png') }}" alt="Create Schema"
-          class="responsive-image">
-        <p>Name the new schema ("laboratories")</p>
-        <img src="{{ url_for('static', filename='images/createSchemaDialog.png') }}" alt="Create Schema Dialog"
-          class="responsive-image">
-        <br>
-        <p>The default schema is "public", in order to use another schema, first execute 
-<pre>
-SET search_path = "requiredSchema" </pre>
-          in the Query Tool. This sentence has to be executed everytime we start the Query Tool in pgAdmin.</p>
-        <h2>Alternatively query syntax to create schema:</h2>
-<pre>
-CREATE SCHEMA SchemaName;</pre>
-        <br>
-        <p>The default schema is "public", in order to use another schema, just append the queries with "requiredSchema" before
-          the table name.</p>
-        <p>For this lab work let's create a schema ! Create a Schema called 'laboratories'</p>
+        <h3>Query syntax to create schema:</h3>
+        <pre>
+CREATE SCHEMA SchemaName;
+        </pre>
+        <p><b>Exercise 1:</b> For this lab work let's create a schema ! Create a Schema called 'laboratories'</p>
         <br>
         <form class="queryForm">
           <input type="text" class="query" placeholder="Query to Create Schema" required>
@@ -89,8 +72,26 @@ CREATE SCHEMA SchemaName;</pre>
           <br>
         </div>
         <br>
-        </div>
+        <p>The default schema is "public", in order to use another schema, just append the queries with "requiredSchema"
+          before the table name.</p>
+        <h3>Alternatively, Create a schema using pgAdmin</h3>
+        <a href="http://localhost:8080" target="_blank">Open pgAdmin</a>
+        <br><br>
+        <p>After logging in and reaching the homepage, expand the Servers section and enter the database password.</p>
+        <p>Right Click over Schemas Section and Select "Create Schema"</p>
+        <img src="{{ url_for('static', filename='images/createSchema.png') }}" alt="Create Schema"
+          class="responsive-image">
+        <p>Name the new schema ("laboratories")</p>
+        <img src="{{ url_for('static', filename='images/createSchemaDialog.png') }}" alt="Create Schema Dialog"
+          class="responsive-image">
         <br>
+        <p>The default schema is "public", in order to use another schema, first execute
+        <pre>
+  SET search_path = "requiredSchema" </pre>
+        in the Query Tool. This sentence has to be executed everytime we start the Query Tool in pgAdmin.</p>
+        <br>
+      </div>
+      <br>
       <h2>Data Definition Language</h2>
       <p>Statements used to create the structure of the database
         and the other database objects.
@@ -102,7 +103,7 @@ CREATE SCHEMA SchemaName;</pre>
               Use: To create/form entities like databases, schema, tables, triggers, indexes, etc.
             </li>
             <li>Syntax:
-<pre>
+              <pre>
 CREATE TABLE TableName (
 attributeName1 datatype, 
 attributeName2 datatype, 
@@ -114,106 +115,113 @@ Constraint2,
 ConstraintM
 );
               </pre>
-              </li>
-              </ul>
-              </li>
-              <li><b>ALTER</b>
-                <ul>
-                  <li>
-                    Use: To modify, add, or delete some already existing constraints or columns from the database table like adding a
-                    column, droping a column, or changing the data type of a column.
-                  </li>
-                  <li>Syntax: To add column to an existing table
-<pre>
+            </li>
+          </ul>
+        </li>
+        <li><b>ALTER</b>
+          <ul>
+            <li>
+              Use: To modify, add, or delete some already existing constraints or columns from the database table like
+              adding a
+              column, droping a column, or changing the data type of a column.
+            </li>
+            <li>Syntax: To add column to an existing table
+              <pre>
 ALTER TABLE table_name
 ADD column_name datatype;
               </pre>
             </li>
-            </ul>
+          </ul>
+        </li>
+        <li><b>DROP</b>
+          <ul>
+            <li>
+              Use: To delete entire database and tables
             </li>
-            <li><b>DROP</b>
-              <ul>
-                <li>
-                  Use: To delete entire database and tables
-                </li>
-                <li>Syntax:
-<pre>
+            <li>Syntax:
+              <pre>
 DROP TABLE TableName;
               </pre>
             </li>
-            </ul>
+          </ul>
+        </li>
+      </ul>
+      <h2>Data Manipulation Language</h2>
+      <p>Statements used to manage the data stored in the
+        database.
+      </p>
+      <ul>
+        <li><b>INSERT</b>
+          <ul>
+            <li>
+              Use: To add or insert rows/data into the table.
             </li>
-            </ul>
-            <h2>Data Manipulation Language</h2>
-            <p>Statements used to manage the data stored in the
-              database.
-            </p>
-            <ul>
-              <li><b>INSERT</b>
-                <ul>
-                  <li>
-                    Use: To add or insert rows/data into the table.
-                  </li>
-                  <li>Syntax:
-<pre>
+            <li>Syntax:
+              <pre>
 INSERT INTO TableName (attrName1,…,attrNameN)
 VALUES (Value1,…,ValueN);
 </pre>
             </li>
-            </ul>
+          </ul>
+        </li>
+        <li><b>SELECT</b>
+          <ul>
+            <li>
+              Use: To retrieve data from tables.
             </li>
-            <li><b>SELECT</b>
-              <ul>
-                <li>
-                  Use: To retrieve data from tables.
-                </li>
-                <li>Syntax:
-<pre>
+            <li>Syntax:
+              <pre>
 SELECT attr1,att2,…,attrN
 FROM tableName
 WHERE &lt;Conditions&gt;
               </pre>
             </li>
-            </ul>
+          </ul>
+        </li>
+        <li><b>UPDATE</b>
+          <ul>
+            <li>
+              Use: To modify or update the pre-existing data in a database
             </li>
-            <li><b>UPDATE</b>
-              <ul>
-                <li>
-                  Use: To modify or update the pre-existing data in a database
-                </li>
-                <li>Syntax:
-<pre>
+            <li>Syntax:
+              <pre>
 UPDATE TableName
 SET Att1 = NewValueAtt1,
 Att2 = NewValueAtt2 
 WHERE &lt;Conditions&gt;
               </pre>
             </li>
-            </ul>
+          </ul>
+        </li>
+        <li><b>DELETE</b>
+          <ul>
+            <li>
+              Use: To delete row/rows from a table
             </li>
-            <li><b>DELETE</b>
-              <ul>
-                <li>
-                  Use: To delete row/rows from a table
-                </li>
-                <li>Syntax:
-<pre>
+            <li>Syntax:
+              <pre>
 DELETE FROM TableName 
 WHERE &lt;Conditions&gt;
               </pre>
             </li>
           </ul>
-        </li>        
+        </li>
       </ul>
+      <h3>More on SQL Syntax</h3>
+      <a href="http://www.faqs.org/docs/ppbook/c22759.htm" target="_blank">About SQL Syntax</a>
+      <br> <br>
       <h2>Table</h2>
       <p>
-        A table is a structured collection of data organized into rows and columns, where each column represents a specific
+        A table is a structured collection of data organized into rows and columns, where each column represents a
+        specific
         attribute, and each row represents a single record or data entry.
       </p>
       <h2>Data Types</h2>
       <p>
-        PostgreSQL supports various datatypes, the categories of datatypes it supports are: numeric types, monetory type,
-        character types, binary data types, date/time types, boolean type, array types, JSON types, geometric types, ENUM etc.
+        PostgreSQL supports various datatypes, the categories of datatypes it supports are: numeric types, monetory
+        type,
+        character types, binary data types, date/time types, boolean type, array types, JSON types, geometric types,
+        ENUM etc.
         <a href="https://www.postgresql.org/docs/9.5/datatype.html" target="_blank">more on datatypes</a>. Some of the
         commonly used data types are:
       </p>
@@ -228,17 +236,20 @@ WHERE &lt;Conditions&gt;
       <h2>Primary & Foreign Key Constraints</h2>
       <p>
         A primary key constraint ensures that a column (or a set of columns) uniquely identifies each row in a table. It
-        enforces uniqueness and implicitly creates a unique index on the column(s). A table can have only one primary key,
+        enforces uniqueness and implicitly creates a unique index on the column(s). A table can have only one primary
+        key,
         which cannot contain NULL values.
       </p>
       <p>
-        A foreign key constraint establishes a relationship between columns in two tables. It ensures that the value in a
-        column (or a set of columns) in one table matches values in a column (or a set of columns) in another table, enforcing
+        A foreign key constraint establishes a relationship between columns in two tables. It ensures that the value in
+        a
+        column (or a set of columns) in one table matches values in a column (or a set of columns) in another table,
+        enforcing
         referential integrity. This means the foreign key value in the referencing table must correspond to an existing
         primary key value in the referenced table.
       </p>
-      <p>A good convention is declaring the Primary Key(s) as the first attribute(s) in the tables</p>
-      <button class="collapsible">Create Art Tables</button>
+      <p>A good convention is declaring the Primary Key(s) as the first attribute(s) in the tables.</p>
+      <button class="collapsible"><b>Exercise 2:</b> Create Art Tables</button>
       <div class="content">
         <br>
         <p>The lab material is based on the Artwork ER Diagram as shown below:</p>
@@ -248,10 +259,12 @@ WHERE &lt;Conditions&gt;
         <br>
         <p>The reqired tables are shown below:</p>
         <br>
-        <img src="{{ url_for('static', filename='images/artTables.png') }}" alt="Artwork Tables." class="responsive-image">
+        <img src="{{ url_for('static', filename='images/artTables.png') }}" alt="Artwork Tables."
+          class="responsive-image">
         <br>
         <p>
-          Execute create table queries to create the above 4 tables. Make sure to use the laboratories schema created above (append schemaName to the tableName).
+          Execute create table queries to create the above 4 tables. Make sure to use the laboratories schema created
+          above (append schemaName to the tableName).
         </p>
         <br>
         <form class="queryForm">
@@ -304,175 +317,206 @@ WHERE &lt;Conditions&gt;
           <br>
         </div>
         <br>
+      </div>
+      <br>
+      <button class="collapsible"><b>Exercise 3:</b> Insert Values</button>
+      <div class="content">
+        <br>
+        <ul>
+          <li>Character values are quoted by ' ' , and numerical values are unquoted when inserting</li>
+          <li>Several inserts can be done consecutively in Query Tool</li>
+          <li>Multiple inserts into the same table can be done by separating them with a comma(,)</li>
+        </ul>
+        <p>Insert the following 3 Rows, make sure to use the laboratories schema created above (append schemaName to the
+          tableName):</p>
+        <ul>
+          <li>Artist Table: </li>
+          <ul>
+            <li>AName: Caravaggio, Smith, Picasso</li>
+            <li>BirthPlace: Milan, Ottawa, Malaga</li>
+            <li>Style: Baroque, Modern, Cubism</li>
+            <li>DateOfBirth: 1571-09-28, 1977-12-12, 1881-10-25</li>
+          </ul>
+          <li>Customer Table:</li>
+          <ul>
+            <li>CustId: 1,2,3</li>
+            <li>Name: John, Amy, Peter</li>
+            <li>Address: Ottawa, Orleans, Gatineau</li>
+            <li>Amount: 8.5, 9.0, 6.3</li>
+          </ul>
+          <li>Artwork Table:</li>
+          <ul>
+            <li>Title: Blue, The Cardsharps</li>
+            <li>Year: 2000, 1594</li>
+            <li>Type: Modern, Baroque</li>
+            <li>Price: 10000.00, 400000.00</li>
+            <li>AName: Smith, Caravaggio</li>
+          </ul>
+        </ul>
+        <br>
+        <form class="queryForm">
+          <input type="text" class="query" placeholder="Insert Query" required>
+          <br><br>
+          <input type="submit" value="Execute Query">
+          <div class="alert-container"></div>
+        </form>
+        <br>
+        <button class="collapsible">Insert Into Art Work Tables</button>
+        <div class="content">
+          <br><br>
+          <p>INSERT INTO laboratories.Artist(AName,Birthplace, Style, DateOfBirth) VALUES
+            ('Caravaggio','Milan','Baroque','1571-09-28' ), ('Smith', 'Ottawa', 'Modern', '1977-12-12'),
+            ('Picasso','Malaga','Cubism','1881-10-25')
+          </p>
+          <p>
+            INSERT INTO laboratories.Customer(CustId,Name,Address,Amount) VALUES (1,'John','Ottawa',8.5),
+            (2,'Amy','Orleans',9.0), (3,'Peter','Gatineau',6.3)
+          </p>
+          <p>
+            INSERT INTO laboratories.Artwork(Title,Year,Type,Price,AName) VALUES ('Blue',
+            2000,'Modern',10000.00,'Smith'),
+            ('The Cardsharps', 1594,'Baroque',40000.00,'Caravaggio')
+          </p>
+          <br>
         </div>
         <br>
-        <button class="collapsible">Insert Values</button>
+      </div>
+      <br>
+      <button class="collapsible"><b>Exercise 4:</b> Retrieve Values</button>
+      <div class="content">
+        <br>
+        <p>Retrieve data using SELECT Statement</p>
+        <p>Get the style of the artist whose name is Smith</p>
+        <form class="queryForm">
+          <input type="text" class="query" placeholder="Query" required>
+          <br><br>
+          <input type="submit" value="Execute Query">
+          <div class="alert-container"></div>
+        </form>
+        <br>
+        <p>List all artists that are born in Ottawa</p>
+        <form class="queryForm">
+          <input type="text" class="query" placeholder="Query" required>
+          <br><br>
+          <input type="submit" value="Execute Query">
+          <div class="alert-container"></div>
+        </form>
+        <br>
+        <p>List the titles and prices of all artworks painted in 2000</p>
+        <form class="queryForm">
+          <input type="text" class="query" placeholder="Query" required>
+          <br><br>
+          <input type="submit" value="Execute Query">
+          <div class="alert-container"></div>
+
+        </form>
+        <br>
+        <button class="collapsible">Retrieve Data From Art Work Tables</button>
         <div class="content">
+          <br><br>
+          <h3>Get the style of the artist whose name is Smith.</h3>
+          <p>SELECT Style FROM laboratories.Artist WHERE AName = 'Smith'</p>
+          <h3>List all artists that are born in Ottawa.</h3>
+          <p>
+            SELECT A.Aname FROM laboratories.Artist A WHERE Birthplace = 'Ottawa';
+          </p>
+          <h3>List the titles and prices of all artworks painted in 2000.</h3>
+          <p>
+            SELECT Title,Price FROM laboratories.Artwork WHERE Year =2000;
+          </p>
           <br>
-          <p>Character values are quoted by ' ' , and numerical values are unquoted when inserting</p>
-          <p>Several inserts can be done consecutively in Query Tool</p>
-          <p>Multiple inserts into the same table can be done by separating them with a comma(,)</p>
-          <p>Insert the following 3 Rows, make sure to use the laboratories schema created above (append schemaName to the tableName):</p>
-          <ul>
-            <li>Artist Table: </li>
-            <ul>
-              <li>AName: Caravaggio, Smith, Picasso</li>
-              <li>BirthPlace: Milan, Ottawa, Malaga</li>
-              <li>Style: Baroque, Modern, Cubism</li>
-              <li>DateOfBirth: 1571-09-28, 1977-12-12, 1881-10-25</li>
-            </ul>
-            <li>Customer Table:</li>
-            <ul>
-              <li>CustId: 1,2,3</li>
-              <li>Name: John, Amy, Peter</li>
-              <li>Address: Ottawa, Orleans, Gatineau</li>
-            </ul>
-            <li>Artwork Table:</li>
-            <ul>
-              <li>Title: Blue, The Cardsharps</li>
-              <li>Year: 2000, 1594</li>
-              <li>Type: Modern, Baroque</li>
-              <li>Price: 10000.00, 400000</li>
-              <li>AName: Smith, Caravaggio</li>
-            </ul>
-          </ul>
+        </div>
+        <br>
+      </div>
+      <br>
+      <button class="collapsible"><b>Exercise 5:</b> Update Values</button>
+      <div class="content">
+        <br>
+        <p>Modify certain data satisfying a condition
+          from a table with UPDATE command. If the WHERE clause is omitted, all records will be
+          updated permanently</p>
+        <p>Change the name of the customer with id 1 to Bruce.</p>
+        <form class="queryForm">
+          <input type="text" class="query" placeholder="Query" required>
+          <br><br>
+          <input type="submit" value="Execute Query">
+          <div class="alert-container"></div>
+        </form>
+        <br>
+        <p>Update the Amount value for all the Customers in the
+          Database to be 9.8 and the address to be Gatineau.
+        </p>
+        <form class="queryForm">
+          <input type="text" class="query" placeholder="Query" required>
+          <br><br>
+          <input type="submit" value="Execute Query">
+          <div class="alert-container"></div>
+        </form>
+        <br>
+        <button class="collapsible">Update Data From Art Work Tables</button>
+        <div class="content">
+          <br><br>
+          <h3>Change the name of the customer with id 1 to Bruce.</h3>
+          <p>UPDATE laboratories.Customer SET Name = 'Bruce' WHERE CustId = 1
+          </p>
+          <h3>Update the Amount value for all the Customers in the
+            Database to be 9.8 and the address to be Gatineau.</h3>
+          <p>
+            UPDATE laboratories.Customer SET Amount = 9.8, Address = 'Gatineau'
+          </p>
           <br>
-          <form class="queryForm">
-            <input type="text" class="query" placeholder="Insert Query" required>
-            <br><br>
-            <input type="submit" value="Execute Query">
-            <div class="alert-container"></div>
-          </form>
+        </div>
+        <br>
+      </div>
+      <br>
+      <button class="collapsible"><b>Exercise 6:</b> Delete Values</button>
+      <div class="content">
+        <br>
+        <p>We can delete certain rows satisfying a condition from a table
+          with DELETE command. If the WHERE clause is omitted, all records will be
+          deleted permanently</p>
+        <pre>
+DELETE FROM TableName WHERE Condition
+          </pre>
+        <p>Remove Customer Bruce from our Database</p>
+        <form class="queryForm">
+          <input type="text" class="query" placeholder="Query" required>
+          <br><br>
+          <input type="submit" value="Execute Query">
+          <div class="alert-container"></div>
+        </form>
+        <br>
+        <p>Remove all the remaining Customers from the Database
+        </p>
+        <form class="queryForm">
+          <input type="text" class="query" placeholder="Query" required>
+          <br><br>
+          <input type="submit" value="Execute Query">
+          <div class="alert-container"></div>
+        </form>
+        <br>
+        <button class="collapsible">Delete Data From Art Work Tables</button>
+        <div class="content">
+          <br><br>
+          <h3>Remove Customer Bruce from our Database</h3>
+          <p>DELETE FROM laboratories.Customer WHERE Name = 'Bruce'
+
+          </p>
+          <h3>Remove all the remaining Customers from the Database
+          </h3>
+          <p>
+            DELETE FROM laboratories.Customer
+          </p>
           <br>
-          <button class="collapsible">Insert Into Art Work Tables</button>
-          <div class="content">
-            <br><br>
-            <p>INSERT INTO laboratories.Artist(AName,Birthplace, Style, DateOfBirth) VALUES
-              ('Caravaggio','Milan','Baroque','1571-09-28' ), ('Smith', 'Ottawa', 'Modern', '1977-12-12'),
-              ('Picasso','Malaga','Cubism','1881-10-25')
-            </p>
-            <p>
-              INSERT INTO laboratories.Customer(CustId,Name,Address,Amount) VALUES (1,'John','Ottawa',8.5),
-              (2,'Amy','Orleans',9.0), (3,'Peter','Gatineau',6.3)
-            </p>
-            <p>
-              INSERT INTO laboratories.Artwork(Title,Year,Type,Price,AName) VALUES ('Blue', 2000,'Modern',10000.00,'Smith'),
-              ('The Cardsharps', 1594,'Baroque',40000.00,'Caravaggio')
-            </p>
-            <br>
-          </div>
-          <br>
-          </div>
-          <br>
-          <button class="collapsible">Retrieve Values</button>
-          <div class="content">
-            <br>
-            <p>Retrieve data using SELECT Statement</p>
-            <p>Get the style of the artist whose name is Smith</p>
-            <form class="queryForm">
-              <input type="text" class="query" placeholder="Query" required>
-              <br><br>
-              <input type="submit" value="Execute Query">
-              <div class="alert-container"></div>
-            </form>
-            <br>
-            <p>List all artists that are born in Ottawa</p>
-            <form class="queryForm">
-              <input type="text" class="query" placeholder="Query" required>
-              <br><br>
-              <input type="submit" value="Execute Query">
-              <div class="alert-container"></div>
-            </form>
-            <br>
-            <p>List the titles and prices of all artworks painted in 2000</p>
-            <form class="queryForm">
-              <input type="text" class="query" placeholder="Query" required>
-              <br><br>
-              <input type="submit" value="Execute Query">
-              <div class="alert-container"></div>
-            </form>
-            <br>
-            <button class="collapsible">Retrieve Data From Art Work Tables</button>
-            <div class="content">
-              <br><br>
-              <h3>Get the style of the artist whose name is Smith.</h3>
-              <p>SELECT Style FROM Artist WHERE AName = 'Smith'</p>
-              <h3>List all artists that are born in Ottawa.</h3>
-              <p>
-                SELECT A.Aname FROM "Artist" A WHERE Birthplace = 'Ottawa';
-              </p>
-              <h3>List the titles and prices of all artworks painted in 2000.</h3>
-              <p>          
-                SELECT Title,Price FROM "Artwork" WHERE Year =2000;          
-              </p>
-              <br>
-            </div>
-            <br>
-          </div>
-          <br>
-          <button class="collapsible">Update Values</button>
-          <div class="content">
-            <br>
-            <p>Modify certain data satisfying a condition 
-              from a table with UPDATE command. If the WHERE clause is omitted, all records will be 
-              updated permanently</p>
-            <p>Change the name of the customer with id 1 to Bruce.</p>
-            <form class="queryForm">
-              <input type="text" class="query" placeholder="Query" required>
-              <br><br>
-              <input type="submit" value="Execute Query">
-              <div class="alert-container"></div>
-            </form>
-            <br>
-            <p>Update the Amount value for all the Customers in the 
-              Database to be 9.8 and the address to be Gatineau.
-              </p>
-            <form class="queryForm">
-              <input type="text" class="query" placeholder="Query" required>
-              <br><br>
-              <input type="submit" value="Execute Query">
-              <div class="alert-container"></div>
-            </form>
-            <br>
-            <button class="collapsible">Update Data From Art Work Tables</button>
-            <div class="content">
-              <br><br>
-              <h3>Change the name of the customer with id 1 to Bruce.</h3>
-              <p>UPDATE Customer SET Name = 'Bruce' WHERE CustId = 1
-              </p>
-              <h3>Update the Amount value for all the Customers in the 
-                Database to be 9.8 and the address to be Gatineau.</h3>
-              <p>
-                UPDATE Customer SET Amount = 9.8, Address = 'Gatineau'
-              </p>
-              <br>
-            </div>
-            <br>
-          </div>
-          <br>
-          <button class="collapsible">Pass Query</button>
-          <div class="content">
-            <p>Pass In Query</p>
-            <br>
-            <form class="queryForm">
-              <input type="text" class="query" placeholder="Query" required>
-              <br><br>
-              <input type="submit" value="Execute Query">
-              <div class="alert-container"></div>
-            </form>
-            <br><br><br>
-          </div>
-          <button class="collapsible">Overview of pgAdmin</button>
-          <div class="content">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-              commodo consequat.</p>
-          </div>
-          <script src="static/js/collapsiblescript.js"></script>
-          </main>
-          </div>
-          
-          <script src="static/js/query-execution.js"></script>
-          </body>
-          
-          </html>
+        </div>
+        <br>
+      </div>
+      <br>
+      <script src="static/js/collapsiblescript.js"></script>
+    </main>
+  </div>
+
+  <script src="static/js/query-execution.js"></script>
+</body>
+
+</html>
