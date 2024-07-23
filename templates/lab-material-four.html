@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="static/css/page-skeleton-design.css">
     <link rel="stylesheet" href="static/css/collapsible-design.css">
     <link rel="stylesheet" href="static/css/query-input-design.css">
+    <link rel="stylesheet" href="static/css/query-response-table-design.css">
+    <link rel="stylesheet" href="static/css/query-solution-table-design.css">
 </head>
 
 <body>
@@ -64,14 +66,16 @@
                         Table B.</li>
                     <li>Cross join table of A and B
                         (cardinality m * n)</li>
-                    <li>Syntax:</li>
+                    <li><b>Syntax:</b></li>
                     <pre>
 SELECT &lt;column_names&gt; FROM &lt;table_name&gt; CROSS JOIN &lt;table_name&gt;;
                     </pre>
-                    <li>Use Case: Normal uses are for checking the database server's performance.</li>
+                    <li><b>Use Case:</b> Normal uses are for checking the database server's performance. Used to
+                        generate all possible combinations of two sets of data</li>
+                    <li><b>Representation:</b></li>
                 </ul>
-                <p>List all possible combinations of customers and artworks, regardless of whether the customer has
-                    shown interest in the artwork.</p>
+                <h4>List all possible combinations of customers and artworks, regardless of whether the customer has
+                    shown interest in the artwork.</h4>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
                     <br><br>
@@ -79,20 +83,167 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; CROSS JOIN &lt;table_name&gt
                     <div class="alert-container"></div>
                 </form>
                 <br>
-                <button class="collapsible">Update Data From Art Work Tables</button>
+                <button class="collapsible">Cross Join on Work Tables</button>
                 <div class="content">
                     <br><br>
-                    <h3>List all possible combinations of customers and artworks, regardless of whether the customer has
-                        shown interest in the artwork.</h3>
-                    <p>SELECT *
+                    <h4>List all possible combinations of customers and artworks, regardless of whether the customer has
+                        shown interest in the artwork.</h4>
+                    <p><b>Expected Results: </b></p>
+                    <p><b>Query: </b>SELECT *
                         FROM laboratories.Customer
                         CROSS JOIN laboratories.Artwork;
+                    </p>
+                    <p><b>Explanation: </b>This query will return the Cartesian product of all customers and artworks,
+                        meaning every possible combination of customer and artwork pairs.</p>
+                    <br>
+                </div>
+                <br>
+            </div>
+            <br>
+            <button class="collapsible"><b>Exercise 11:</b> Natural Join</button>
+            <div class="content">
+                <br>
+                <ul>
+                    <li>Join is based on the same
+                        attribute name between the
+                        two tables.</li>
+                    <li>Join table contains all the
+                        attributes of each table but
+                        only one copy of each
+                        common column.</li>
+                    <li>Cardinality &lt; n*m</li>
+                    <li>Cross join table of A and B
+                        (cardinality m * n)</li>
+                    <li><b>Syntax:</b></li>
+                    <pre>
+SELECT &lt;column_names&gt; FROM &lt;table_name&gt; CROSS JOIN &lt;table_name&gt;;
+                    </pre>
+                    <li><b>Use Case:</b> Combining rows from two tables based on columns with the same names.
+                    </li>
+                    <li><b>Representation:</b></li>
+                </ul>
+                <h4>Find the list of artists who have artworks and display their names along with their birthplaces.
+                </h4>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <button class="collapsible">Natural Join on Art Work Tables</button>
+                <div class="content">
+                    <br><br>
+                    <h4>Find the list of artists who have artworks and display their names along with their birthplaces.
+                    </h4>
+                    <p><b>Expected Results: </b></p>
+                    <p><b>Query: </b>SELECT AName, Birthplace
+                        FROM laboratories.Artist
+                        NATURAL JOIN laboratories.Artwork;
+                    </p>
+                    <p><b>Explanation: </b>This query will automatically join 'Artist' and 'Artwork' tables based on the
+                        common column 'AName', returning artists who have artworks along with their birthplaces.</p>
+                    <br>
+                </div>
+                <br>
+            </div>
+            <br>
+            <button class="collapsible"><b>Exercise 12:</b> Full Outer Join</button>
+            <div class="content">
+                <br>
+                <ul>
+                    <li>Every column of table A is matched with every column of table B
+                        based on the join condition.</li>
+                    <li>Contains null padded values from both tables in case the
+                        condition does not match.</li>
+                    <li>Cardinality &lt; n*m</li>
+                    <li>Cross join table of A and B
+                        (cardinality m * n)</li>
+                    <li><b>Syntax:</b></li>
+                    <pre>
+SELECT &lt;column_names&gt; FROM &lt;table_name&gt; FULL OUTER JOIN &lt;table_name&gt; ON &lt;join_condition&gt;;
+                    </pre>
+                    <li><b>Use Case:</b> Retrieving all records when there is a match in either left or right table.
+                    </li>
+                    <li><b>Representation:</b></li>
+                </ul>
+                <h4>Get a list of all customers and artists, showing which customers like which artists. Include
+                    customers who haven't liked any artists and artists who haven't been liked by any customers.
+                </h4>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <button class="collapsible">Full Outer Join on ArtWork Tables</button>
+                <div class="content">
+                    <br><br>
+                    <h4>Get a list of all customers and artists, showing which customers like which artists. Include
+                        customers who haven't liked any artists and artists who haven't been liked by any customers.
+                    </h4>
+                    <p><b>Expected Results: </b></p>
+                    <p><b>Query: </b>SELECT c.Name AS CustomerName, a.AName AS ArtistName
+                        FROM laboratories.Customer c
+                        FULL OUTER JOIN laboratories.LikeArtist l ON c.CustId = l.CustId
+                        FULL OUTER JOIN laboratories.Artist a ON l.AName = a.AName;
+                    </p>
+                    <p><b>Explanation: </b>This query will return all combinations of customers and artists, including
+                        those customers who haven't liked any artist and those artists who haven't been liked by any
+                        customer using Full Outer Join.</p>
+                    <br>
+                </div>
+                <br>
+            </div>
+            <br>
+            <button class="collapsible"><b>Exercise 19:</b> Joins Query Practice</button>
+            <div class="content">
+                <br>
+                <p>Retrieve data using SELECT Statement</p>
+                <p>Get the style of the artist whose name is Smith</p>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <p>List all artists that are born in Ottawa</p>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <p>List the titles and prices of all artworks painted in 2000</p>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+
+                </form>
+                <br>
+                <button class="collapsible">Retrieve Data From Art Work Tables</button>
+                <div class="content">
+                    <br><br>
+                    <h3>Get the style of the artist whose name is Smith.</h3>
+                    <p>SELECT Style FROM laboratories.Artist WHERE AName = 'Smith'</p>
+
+                    <h3>List all artists that are born in Ottawa.</h3>
+                    <p>
+                        SELECT A.Aname FROM laboratories.Artist A WHERE Birthplace = 'Ottawa';
+                    </p>
+                    <h3>List the titles and prices of all artworks painted in 2000.</h3>
+                    <p>
+                        SELECT Title,Price FROM laboratories.Artwork WHERE Year =2000;
                     </p>
                     <br>
                 </div>
                 <br>
             </div>
-
         </main>
     </div>
     <script src="static/js/query-execution.js"></script>
