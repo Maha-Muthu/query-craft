@@ -25,8 +25,8 @@ header {
 nav {
     background-color: #111;
     color: white;
-    width: 200px;
-    min-height: calc(100vh - 60px);
+    width: 15%;
+    min-height: calc(100vh - 10%);
     padding: 1em;
     box-sizing: border-box;
 }

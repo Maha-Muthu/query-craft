@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="static/css/page-skeleton-design.css">
   <link rel="stylesheet" href="static/css/collapsible-design.css">
   <link rel="stylesheet" href="static/css/query-input-design.css">
+  <link rel="stylesheet" href="static/css/query-response-table-design.css">
+  <link rel="stylesheet" href="static/css/query-solution-table-design.css">
 </head>
 
 <body>
@@ -257,7 +259,7 @@ WHERE &lt;Conditions&gt;
         <img src="{{ url_for('static', filename='images/artER.png') }}" alt="ER Diagram for Artwork Tables."
           class="responsive-image">
         <br>
-        <p>The reqired tables are shown below:</p>
+        <p>The required tables are shown below:</p>
         <br>
         <img src="{{ url_for('static', filename='images/artTables.png') }}" alt="Artwork Tables."
           class="responsive-image">
@@ -416,6 +418,7 @@ WHERE &lt;Conditions&gt;
           <br><br>
           <h3>Get the style of the artist whose name is Smith.</h3>
           <p>SELECT Style FROM laboratories.Artist WHERE AName = 'Smith'</p>
+          
           <h3>List all artists that are born in Ottawa.</h3>
           <p>
             SELECT A.Aname FROM laboratories.Artist A WHERE Birthplace = 'Ottawa';
