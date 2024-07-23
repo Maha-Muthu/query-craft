@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databases Lab 4</title>
+    <link rel="stylesheet" href="static/css/page-skeleton-design.css">
+    <link rel="stylesheet" href="static/css/collapsible-design.css">
+    <link rel="stylesheet" href="static/css/query-input-design.css">
+</head>
+
+<body>
+    <header>CSI 2132 Lab #4: Joins</header>
+    <div class="container">
+        <nav>
+            <a href="{{ url_for('student_homepage') }}">Home</a>
+            <br>
+            <a href="{{ url_for('lab_material_one') }}">Lab Material 1</a>
+            <br>
+            <a href="{{ url_for('lab_material_two') }}">Lab Material 2</a>
+            <br>
+            <a href="{{ url_for('lab_material_three') }}">Lab Material 3</a>
+            <br>
+            <a href="#">Lab Material 4</a>
+            <br>
+            <a href="{{ url_for('lab_material_five') }}">Lab Material 5</a>
+        </nav>
+        <main>
+            <h2>Advanced Database Queries with SQL Joins</h2>
+            <p>
+                This material provides a comprehensive guide on SQL joins, explaining various types of joins and their
+                applications. The document covers Cross Join, Natural Join, Full Outer Join, Left Outer Join, Right
+                Outer Join, Inner Join, Self Join, Semi Join, and Anti Join. Each join type is described with its
+                syntax, use cases, and impact on table cardinality. Learning outcomes include mastering different join
+                operations, understanding table relationships, and enhancing data retrieval techniques in SQL.
+            </p>
+            <h2>Foreign Key Constraint</h2>
+            <ul>
+                <li>Verify that the values in one table exist in another table</li>
+                <li>It is not necessary to have a foreign key constraint in place in order
+                    to join two tables</li>
+                <li> Uses the "REFERENCES constraint" in create table command
+                    <pre>
+&lt;col_name&gt; &lt;col_type&gt; &lt;constraints&gt; REFERENCES 
+&lt;table_name&gt;(&lt;column_name&gt;);  
+                    </pre>
+                </li>
+            </ul>
+            <h2>Cardinality & Degree</h2>
+            <p><b>Cardinality:</b> Number of tuples or rows in a table is
+                called the cardinality of the table.</p>
+            <p><b>Degree:</b> Number of attributes or columns in a table is
+                called degree of the table.
+            </p>
+            <button class="collapsible"><b>Exercise 10:</b> Cross Join or Cartesian Product</button>
+            <div class="content">
+                <br>
+                <ul>
+                    <li>Table A (Cardinality m)</li>
+                    <li>Table B (Cardinality n)</li>
+                    <li>Every column of Table A is
+                        matched with every column of
+                        Table B.</li>
+                    <li>Cross join table of A and B
+                        (cardinality m * n)</li>
+                    <li>Syntax:</li>
+                    <pre>
+SELECT &lt;column_names&gt; FROM &lt;table_name&gt; CROSS JOIN &lt;table_name&gt;;
+                    </pre>
+                    <li>Use Case: Normal uses are for checking the database server's performance.</li>
+                </ul>
+                <p>List all possible combinations of customers and artworks, regardless of whether the customer has
+                    shown interest in the artwork.</p>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <button class="collapsible">Update Data From Art Work Tables</button>
+                <div class="content">
+                    <br><br>
+                    <h3>List all possible combinations of customers and artworks, regardless of whether the customer has
+                        shown interest in the artwork.</h3>
+                    <p>SELECT *
+                        FROM laboratories.Customer
+                        CROSS JOIN laboratories.Artwork;
+                    </p>
+                    <br>
+                </div>
+                <br>
+            </div>
+
+        </main>
+    </div>
+    <script src="static/js/query-execution.js"></script>
+    <script src="static/js/collapsiblescript.js"></script>
+</body>
+
+</html>

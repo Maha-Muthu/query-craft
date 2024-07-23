@@ -22,9 +22,9 @@
       <br>
       <a href="{{ url_for('lab_material_three') }}">Lab Material 3</a>
       <br>
-      <a href="#">Lab Material 4</a>
+      <a href="{{ url_for('lab_material_four') }}">Lab Material 4</a>
       <br>
-      <a href="#">Lab Material 5</a>
+      <a href="{{ url_for('lab_material_five') }}">Lab Material 5</a>
     </nav>
     <main>
       <h2>Basic SQL Programming and Schema Management</h2>
@@ -123,7 +123,7 @@ ConstraintM
             <li>
               Use: To modify, add, or delete some already existing constraints or columns from the database table like
               adding a
-              column, droping a column, or changing the data type of a column.
+              column, dropping a column, or changing the data type of a column.
             </li>
             <li>Syntax: To add column to an existing table
               <pre>
@@ -218,7 +218,7 @@ WHERE &lt;Conditions&gt;
       </p>
       <h2>Data Types</h2>
       <p>
-        PostgreSQL supports various datatypes, the categories of datatypes it supports are: numeric types, monetory
+        PostgreSQL supports various datatypes, the categories of datatypes it supports are: numeric types, monetary
         type,
         character types, binary data types, date/time types, boolean type, array types, JSON types, geometric types,
         ENUM etc.

@@ -92,6 +92,14 @@ def lab_material_two():
 def lab_material_three():
     return render_template('lab-material-three.html')
 
+@app.route('/lab-material-four')
+def lab_material_four():
+    return render_template('lab-material-four.html')
+
+@app.route('/lab-material-five')
+def lab_material_five():
+    return render_template('lab-material-five.html')
+
 @app.route('/practice-query-one')
 def practice_query_one():
     return render_template('practice-query-one.html')

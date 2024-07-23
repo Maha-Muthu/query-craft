@@ -22,9 +22,9 @@
             <br>
             <a href="#">Lab Material 3</a>
             <br>
-            <a href="#">Lab Material 4</a>
+            <a href="{{ url_for('lab_material_four') }}">Lab Material 4</a>
             <br>
-            <a href="#">Lab Material 5</a>
+            <a href="{{ url_for('lab_material_five') }}">Lab Material 5</a>
         </nav>
         <main>
             <h2>More SQL Commands: Drop, Alter, and Query</h2>
@@ -228,7 +228,7 @@ ON DELETE CASCADE
                     </ul>
                 </li>
             </ul>
-            <h3>Backup & Restore</h3>
+            <h2>Backup & Restore</h2>
             <p><b>Backup:</b> A snapshot of the database (including data and structure) at any point in time. Generates
                 a
                 data file *.backup that you save on disk.</p>
