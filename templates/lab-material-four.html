@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="static/css/collapsible-design.css">
     <link rel="stylesheet" href="static/css/query-input-design.css">
     <link rel="stylesheet" href="static/css/query-response-table-design.css">
-    <link rel="stylesheet" href="static/css/query-solution-table-design.css">
+    <link rel="stylesheet" href="static/css/table-design.css">
 </head>
 
 <body>
@@ -55,6 +55,22 @@
             <p><b>Degree:</b> Number of attributes or columns in a table is
                 called degree of the table.
             </p>
+            <br>
+            <p>This material requires the completion of all queries in all previous exercises. The schema used is
+                "laboratories" and it includes the following tables (to look at the schema refer to Exercise 2 in
+                Lab Material 1): </p>
+            <ul>
+                <li>laboratories.Artist(AName VARCHAR(20), Birthplace VARCHAR(20), Style VARCHAR(20), DateOfBirth
+                    DATE, PRIMARY KEY (AName))</li>
+                <li>laboratories.Customer(CustId INTEGER, Name VARCHAR(20), Address VARCHAR(20), Amount
+                    NUMERIC(8,2), PRIMARY KEY (CustId))</li>
+                <li>laboratories.Artwork(Title VARCHAR(20), Year INTEGER, Type VARCHAR(20), Price NUMERIC(8,2),
+                    AName VARCHAR(20), PRIMARY KEY (Title), FOREIGN KEY(AName) REFERENCES laboratories.Artist)</li>
+                <li>laboratories.LikeArtist(CustId INTEGER, AName VARCHAR(20), PRIMARY KEY(Aname, CustId), FOREIGN
+                    KEY (Aname) REFERENCES laboratories.Artist, FOREIGN KEY (CustId) REFERENCES
+                    laboratories.Customer)</li>
+            </ul>
+            <br>
             <button class="collapsible"><b>Exercise 10:</b> Cross Join or Cartesian Product</button>
             <div class="content">
                 <br>
@@ -72,10 +88,14 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; CROSS JOIN &lt;table_name&gt
                     </pre>
                     <li><b>Use Case:</b> Normal uses are for checking the database server's performance. Used to
                         generate all possible combinations of two sets of data</li>
-                    <li><b>Representation:</b></li>
+                    <li><b>Representation:</b><br>
+                        <img src="{{ url_for('static', filename='images/crossJoin.png') }}" alt="Cross Join"
+                            class="responsive-image">
+                        <br>
+                    </li>
                 </ul>
-                <h4>List all possible combinations of customers and artworks, regardless of whether the customer has
-                    shown interest in the artwork.</h4>
+                <h3>List all possible combinations of customers and artworks, regardless of whether the customer has
+                    shown interest in the artwork.</h3>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
                     <br><br>
@@ -83,12 +103,125 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; CROSS JOIN &lt;table_name&gt
                     <div class="alert-container"></div>
                 </form>
                 <br>
-                <button class="collapsible">Cross Join on Work Tables</button>
+                <button class="collapsible">Cross Join on Art Work Tables</button>
                 <div class="content">
-                    <br><br>
-                    <h4>List all possible combinations of customers and artworks, regardless of whether the customer has
-                        shown interest in the artwork.</h4>
+                    <br>
+                    <h3>List all possible combinations of customers and artworks, regardless of whether the customer has
+                        shown interest in the artwork.</h3>
                     <p><b>Expected Results: </b></p>
+                    <div style="overflow-x: auto; overflow-y: auto;">
+                        <table>
+                            <tr>
+                                <th>address</th>
+                                <th>amount</th>
+                                <th>aname</th>
+                                <th>custid</th>
+                                <th>name</th>
+                                <th>price</th>
+                                <th>rating</th>
+                                <th>title</th>
+                                <th>type</th>
+                                <th>year</th>
+                            </tr>
+                            <tr>
+                                <td>Preston</td>
+                                <td>20000.00</td>
+                                <td>Smith</td>
+                                <td>1</td>
+                                <td>Emre</td>
+                                <td>10000.00</td>
+                                <td>5</td>
+                                <td>Blue</td>
+                                <td>Modern</td>
+                                <td>2000</td>
+                            </tr>
+                            <tr>
+                                <td>Preston</td>
+                                <td>20000.00</td>
+                                <td>Caravaggio</td>
+                                <td>1</td>
+                                <td>Emre</td>
+                                <td>40000.00</td>
+                                <td>5</td>
+                                <td>The Cardsharps</td>
+                                <td>Baroque</td>
+                                <td>1594</td>
+                            </tr>
+                            <tr>
+                                <td>Preston</td>
+                                <td>20000.00</td>
+                                <td>John</td>
+                                <td>1</td>
+                                <td>Emre</td>
+                                <td>4000.00</td>
+                                <td>5</td>
+                                <td>Waves</td>
+                                <td></td>
+                                <td>2000</td>
+                            </tr>
+                            <tr>
+                                <td>Preston</td>
+                                <td>20000.00</td>
+                                <td>Picasso</td>
+                                <td>1</td>
+                                <td>Emre</td>
+                                <td>11000.00</td>
+                                <td>5</td>
+                                <td>Three Musicians</td>
+                                <td>Modern</td>
+                                <td>1921</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>40000.00</td>
+                                <td>Smith</td>
+                                <td>2</td>
+                                <td>Saeid</td>
+                                <td>10000.00</td>
+                                <td>6</td>
+                                <td>Blue</td>
+                                <td>Modern</td>
+                                <td>2000</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>40000.00</td>
+                                <td>Caravaggio</td>
+                                <td>2</td>
+                                <td>Saeid</td>
+                                <td>40000.00</td>
+                                <td>6</td>
+                                <td>The Cardsharps</td>
+                                <td>Baroque</td>
+                                <td>1594</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>40000.00</td>
+                                <td>John</td>
+                                <td>2</td>
+                                <td>Saeid</td>
+                                <td>4000.00</td>
+                                <td>6</td>
+                                <td>Waves</td>
+                                <td></td>
+                                <td>2000</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>40000.00</td>
+                                <td>Picasso</td>
+                                <td>2</td>
+                                <td>Saeid</td>
+                                <td>11000.00</td>
+                                <td>6</td>
+                                <td>Three Musicians</td>
+                                <td>Modern</td>
+                                <td>1921</td>
+                            </tr>
+                        </table>
+                        <br>
+                    </div>
                     <p><b>Query: </b>SELECT *
                         FROM laboratories.Customer
                         CROSS JOIN laboratories.Artwork;
@@ -116,14 +249,18 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; CROSS JOIN &lt;table_name&gt
                         (cardinality m * n)</li>
                     <li><b>Syntax:</b></li>
                     <pre>
-SELECT &lt;column_names&gt; FROM &lt;table_name&gt; CROSS JOIN &lt;table_name&gt;;
+SELECT &lt;column_names&gt; FROM &lt;table_name&gt; NATURAL JOIN &lt;table_name&gt;;
                     </pre>
                     <li><b>Use Case:</b> Combining rows from two tables based on columns with the same names.
                     </li>
-                    <li><b>Representation:</b></li>
+                    <li><b>Representation:</b><br>
+                        <img src="{{ url_for('static', filename='images/naturalJoin.png') }}" alt="Natural Join"
+                            class="responsive-image">
+                        <br>
+                    </li>
                 </ul>
-                <h4>Find the list of artists who have artworks and display their names along with their birthplaces.
-                </h4>
+                <h3>Find the list of artists who have artworks and display their names along with their birthplaces.
+                </h3>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
                     <br><br>
@@ -133,10 +270,35 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; CROSS JOIN &lt;table_name&gt
                 <br>
                 <button class="collapsible">Natural Join on Art Work Tables</button>
                 <div class="content">
-                    <br><br>
-                    <h4>Find the list of artists who have artworks and display their names along with their birthplaces.
-                    </h4>
+                    <br>
+                    <h3>Find the list of artists who have artworks and display their names along with their birthplaces.
+                    </h3>
                     <p><b>Expected Results: </b></p>
+                    <div style="overflow-x: auto; overflow-y: auto;">
+                        <table>
+                            <tr>
+                                <th>aname</th>
+                                <th>birthplace</th>
+                            </tr>
+                            <tr>
+                                <td>Smith</td>
+                                <td>Ottawa</td>
+                            </tr>
+                            <tr>
+                                <td>Caravaggio</td>
+                                <td>Milan</td>
+                            </tr>
+                            <tr>
+                                <td>John</td>
+                                <td>San Francisco</td>
+                            </tr>
+                            <tr>
+                                <td>Picasso</td>
+                                <td>Malaga</td>
+                            </tr>
+                        </table>
+                        <br>
+                    </div>
                     <p><b>Query: </b>SELECT AName, Birthplace
                         FROM laboratories.Artist
                         NATURAL JOIN laboratories.Artwork;
@@ -165,11 +327,15 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; FULL OUTER JOIN &lt;table_na
                     </pre>
                     <li><b>Use Case:</b> Retrieving all records when there is a match in either left or right table.
                     </li>
-                    <li><b>Representation:</b></li>
+                    <li><b>Representation:</b><br>
+                        <img src="{{ url_for('static', filename='images/fullOuterJoin.png') }}" alt="Full Outer Join"
+                            class="responsive-image">
+                        <br>
+                    </li>
                 </ul>
-                <h4>Get a list of all customers and artists, showing which customers like which artists. Include
+                <h3>Get a list of all customers and artists, showing which customers like which artists. Include
                     customers who haven't liked any artists and artists who haven't been liked by any customers.
-                </h4>
+                </h3>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
                     <br><br>
@@ -177,13 +343,58 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; FULL OUTER JOIN &lt;table_na
                     <div class="alert-container"></div>
                 </form>
                 <br>
-                <button class="collapsible">Full Outer Join on ArtWork Tables</button>
+                <button class="collapsible">Full Outer Join on Art Work Tables</button>
                 <div class="content">
                     <br><br>
-                    <h4>Get a list of all customers and artists, showing which customers like which artists. Include
+                    <h3>Get a list of all customers and artists, showing which customers like which artists. Include
                         customers who haven't liked any artists and artists who haven't been liked by any customers.
-                    </h4>
+                    </h3>
                     <p><b>Expected Results: </b></p>
+                    <div style="overflow-x: auto; overflow-y: auto;">
+                        <table>
+                            <tr>
+                                <th>artistname</th>
+                                <th>customername</th>
+                            </tr>
+                            <tr>
+                                <td>Picasso</td>
+                                <td>Emre</td>
+                            </tr>
+                            <tr>
+                                <td>Picasso</td>
+                                <td>Saeid</td>
+                            </tr>
+                            <tr>
+                                <td>Leonardo</td>
+                                <td>Saeid</td>
+                            </tr>
+                            <tr>
+                                <td>Smith</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Josefa</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Michelangelo</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Caravaggio</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Hans Hofmann</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>John</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <br>
+                    </div>
                     <p><b>Query: </b>SELECT c.Name AS CustomerName, a.AName AS ArtistName
                         FROM laboratories.Customer c
                         FULL OUTER JOIN laboratories.LikeArtist l ON c.CustId = l.CustId
@@ -201,7 +412,7 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; FULL OUTER JOIN &lt;table_na
             <div class="content">
                 <br>
                 <p>Retrieve data using SELECT Statement</p>
-                <p>List the names and customer ids of all customers who 
+                <p>List the names and customer ids of all customers who
                     like Picasso</p>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
@@ -210,9 +421,9 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; FULL OUTER JOIN &lt;table_na
                     <div class="alert-container"></div>
                 </form>
                 <br>
-                <p>List the names of all customers who like Artists from the 
-                    Cubism style and having an amount larger than 30000. 
-                    </p>
+                <p>List the names of all customers who like Artists from the
+                    Cubism style and having an amount larger than 30000.
+                </p>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
                     <br><br>
@@ -220,7 +431,9 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; FULL OUTER JOIN &lt;table_na
                     <div class="alert-container"></div>
                 </form>
                 <br>
-                <p>List the titles and prices of all artworks painted in 2000</p>
+                <p>Find names of Customers who
+                    likes both an artist born in Malaga and an artist born in
+                    Florence.</p>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
                     <br><br>

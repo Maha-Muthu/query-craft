@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="static/css/page-skeleton-design.css">
     <link rel="stylesheet" href="static/css/collapsible-design.css">
     <link rel="stylesheet" href="static/css/query-input-design.css">
+    <link rel="stylesheet" href="static/css/query-response-table-design.css">
+    <link rel="stylesheet" href="static/css/table-design.css">
 </head>
 
 <body>
@@ -35,20 +37,14 @@
             <button class="collapsible"><b>Exercise 20:</b> Create Sailor Tables</button>
             <div class="content">
                 <br>
-                <p>The lab material is based on the Sailors ER Diagram as shown below:</p>
+                <p>The lab material is based on the Sailor tables as shown below:</p>
                 <br>
-                <img src="{{ url_for('static', filename='images/artER.png') }}" alt="ER Diagram for Artwork Tables."
-                    class="responsive-image">
-                <br>
-                <p>The required tables are shown below:</p>
-                <br>
-                <img src="{{ url_for('static', filename='images/artTables.png') }}" alt="Artwork Tables."
+                <img src="{{ url_for('static', filename='images/sailorTables.png') }}" alt="Sailor Tables."
                     class="responsive-image">
                 <br>
                 <p>
-                    Execute create table queries to create the above 4 tables. Make sure to use the laboratories schema
-                    created
-                    above (append schemaName to the tableName).
+                    Execute create table queries to create the above 3 tables. Make sure to use the laboratories schema
+                    created previously (append schemaName to the tableName).
                 </p>
                 <br>
                 <form class="queryForm">
@@ -59,22 +55,211 @@
                     <div class="alert-container"></div>
                 </form>
                 <br>
-                <button class="collapsible">Create Art Work Tables</button>
+                <button class="collapsible">Create Sailor Tables</button>
                 <div class="content">
                     <br>
-                    <p>CREATE TABLE laboratories.Artist(
-                        AName VARCHAR(20),
-                        Birthplace
-                        VARCHAR(20),
-                        Style VARCHAR(20),
-                        DateOfBirth DATE,
-                        PRIMARY KEY
-                        (AName));</p>
-                    <p>
+                    <p>CREATE TABLE laboratories.Sailors(
+                        sid INTEGER,
+                        sname VARCHAR(50),
+                        age INTEGER,
+                        rating VARCHAR(20),
+                        PRIMARY KEY (sid));
                     </p>
+                    <p>CREATE TABLE laboratories.Boats(
+                        bid INTEGER,
+                        color VARCHAR(20),
+                        PRIMARY KEY (bid));
+                    </p>
+                    <p>CREATE TABLE laboratories.Reserves(
+                        sid INTEGER,
+                        bid INTEGER,
+                        PRIMARY KEY(sid, bid),
+                        FOREIGN KEY (sid) REFERENCES laboratories.Sailors,
+                        FOREIGN KEY (bid) REFERENCES laboratories.Boats);
+                    </p>
+                    <br>
                 </div>
                 <br>
-            </div><br>
+            </div>
+            <br>
+            <button class="collapsible"><b>Exercise 21:</b> Insert Values into Sailor Tables</button>
+            <div class="content">
+                <br>
+                <p>Insert the following Rows, make sure to use the laboratories schema created previously (append
+                    schemaName to the
+                    tableName):</p>
+                <ul>
+                    <li>Sailors Table: </li>
+                    <ul>
+                        <li>sid: 1, 2, 3, 4, 5, 6, 7</li>
+                        <li>sname: Salvador, Rafael, John, Bruce, James, Smith, Peter</li>
+                        <li>age: 26, 28, 10, 18, 17, 18, 22</li>
+                        <li>rating: Good, Good, Good, Fair, Fair, Poor, Poor</li>
+                    </ul>
+                    <li>Boats Table:</li>
+                    <ul>
+                        <li>bid: 1,2</li>
+                        <li>color: red, green</li>
+                    </ul>
+                    <li>Reserves Table:</li>
+                    <ul>
+                        <li>sid: 1,1,2</li>
+                        <li>bid: 1,2,1</li>
+                    </ul>
+                </ul>
+                <br>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Insert Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <button class="collapsible">Insert Into Sailor Tables</button>
+                <div class="content">
+                    <br><br>
+                    <p>INSERT INTO laboratories.Sailors(sid, sname) VALUES
+                        (1, 'Salvador', 26, 'Good'), (2, 'Rafael', 28, 'Good'), (3, 'John', 10, 'Good'), (4, 'Bruce',
+                        18, 'Fair'), (5, 'James', 17, 'Fair'), (6, 'Smith', 18, 'Poor'), (7, 'Peter', 22, 'Poor');
+                    </p>
+                    <p>
+                        INSERT INTO laboratories.Boats(bid, color) VALUES
+                        (1, 'red'), (2, 'green')
+                    </p>
+                    <p>
+                        INSERT INTO laboratories.Reserves(sid, bid) VALUES (1,1), (1,2), (2,1)
+                    </p>
+                    <br>
+                </div>
+                <br>
+            </div>
+            <br>
+            <br>
+            <h2>More on Select Statements</h2>
+            <p>Select statements with GROUP BY and HAVING clauses</p>
+            <pre>
+SELECT select-list FROM from-list
+WHERE record-qualification GROUP BY
+grouping-list HAVING 
+group-qualification                               
+            </pre>
+            <p>Tip</p>
+            <ul>
+                <li>
+                    WHERE→SELECT 
+                </li>
+                <li>
+                    HAVING→GROUP BY
+                </li>
+            </ul>
+            <br>
+            <button class="collapsible"><b>Exercise 22:</b> Retrieve Values from Sailor Tables</button>
+            <div class="content">
+                <br>
+                <p>Find the names of sailors who have reserved both a red and a green boat.</p>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <p>Find the average age of sailors who are at least 18 years old, for each rating
+                    level that has at least two such sailors.</p>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <p>Find the age of the youngest sailor with age > 18, for each rating level 
+                    with at least 2 sailors (of any age).</p>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+
+                </form>
+                <br>
+                <button class="collapsible">Retrieve Data From Sailor Tables</button>
+                <div class="content">
+                    <br>
+                    <h3>Find the names of sailors who have reserved both a red and a green boat.</h3>
+                    <p><b>Expected Results: </b></p>
+                    <div style="overflow-x: auto; overflow-y: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>sname</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Salvador</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                    </div>
+                    <p><b>Query: </b>SELECT S.sname FROM laboratories.Sailors S, laboratories.Reserves R, laboratories.Boats B WHERE
+                        S.sid = R.sid AND R.bid = B.bid AND B.color = 'red' AND S.sid IN (SELECT S2.sid FROM
+                        laboratories.Sailors S2,laboratories.Boats B2, laboratories.Reserves R2 WHERE S2.sid = R2.sid
+                        AND R2.bid = B2.bid AND B2.color = 'green' );
+                    </p>
+                    <p><b>Explanation: </b>The query between () will return the sailor IDs who have reserved a green
+                        boat. First part of the query will find sailors who reserved a red boat. Thus, in the 4th
+                        line, we will have the ID of a sailor who reserved a red boat, and check
+                        if this same sailor also reserved a green boat by <b>IN</b> keyword
+                    </p>
+                    <br>
+                    <h3>Find the average age of sailors who are at least 18 years old, for each rating
+                        level that has at least two such sailors.</h3>
+                    <p><b>Expected Results: </b></p>
+                    <div style="overflow-x: auto; overflow-y: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>rating</th>
+                                    <th>avgage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Good</td>
+                                    <td>27</td>
+                                </tr>
+                                <tr>
+                                    <td>Poor</td>
+                                    <td>20</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                    </div>
+                    <p><b>Query: </b>
+                        SELECT S.rating, AVG(S.age) AS avgage FROM Sailors S WHERE S.age
+                        >= 18 GROUP BY S.rating HAVING COUNT(*) > 1
+                    </p>
+                    <p><b>Explanation: </b>HAVING clause allows us to specify a qualification (filter) for each 
+                        group. COUNT(*) >1 in the HAVING clause eliminates all the rating groups 
+                        which do not have at least two sailors.</p>
+                    <h3>Find the age of the youngest sailor with age > 18, for each rating level 
+                        with at least 2 sailors (of any age).</h3>
+                    <p><b>Query: </b>
+                        SELECT S.rating, MIN(S.age) AS minage FROM laboratories.Sailors S WHERE S.age 
+>= 18 GROUP BY S.rating HAVING ( SELECT COUNT (*) FROM laboratories.Sailors 
+S2 WHERE S.rating=S2.rating ) >= 2
+                    </p>
+                    <p><b>Explanation: </b>Since group qualification is having 2 sailors of any age, we 
+                        get the total number of rows for that rating group with the query inside 
+                        HAVING clause, and check if this number is at least 2.</p>
+                    <br>
+                </div>
+                <br>
+            </div>
+            
         </main>
     </div>
     <script src="static/js/query-execution.js"></script>
