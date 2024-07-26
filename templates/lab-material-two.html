@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="static/css/query-input-design.css">
   <link rel="stylesheet" href="static/css/query-response-table-design.css">
   <link rel="stylesheet" href="static/css/query-solution-table-design.css">
+  <link rel="stylesheet" href="static/css/table-design.css">
 </head>
 
 <body>
@@ -417,8 +418,24 @@ WHERE &lt;Conditions&gt;
         <div class="content">
           <br><br>
           <h3>Get the style of the artist whose name is Smith.</h3>
+          <p><b>Expected Results: </b></p>
+          <div style="overflow-x: auto; overflow-y: auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>style</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Modern</td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+          </div>
           <p>SELECT Style FROM laboratories.Artist WHERE AName = 'Smith'</p>
-          
+
           <h3>List all artists that are born in Ottawa.</h3>
           <p>
             SELECT A.Aname FROM laboratories.Artist A WHERE Birthplace = 'Ottawa';
