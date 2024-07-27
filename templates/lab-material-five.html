@@ -118,7 +118,7 @@
                 <button class="collapsible">Insert Into Sailor Tables</button>
                 <div class="content">
                     <br><br>
-                    <p>INSERT INTO laboratories.Sailors(sid, sname) VALUES
+                    <p>INSERT INTO laboratories.Sailors(sid, sname, age, rating) VALUES
                         (1, 'Salvador', 26, 'Good'), (2, 'Rafael', 28, 'Good'), (3, 'John', 10, 'Good'), (4, 'Bruce',
                         18, 'Fair'), (5, 'James', 17, 'Fair'), (6, 'Smith', 18, 'Poor'), (7, 'Peter', 22, 'Poor');
                     </p>
@@ -145,12 +145,12 @@ group-qualification
             </pre>
             <p>Tip</p>
             <ul>
-                <li>
-                    WHERE→SELECT 
+                <li>WHERE → Filters individual rows (use with SELECT).
                 </li>
                 <li>
-                    HAVING→GROUP BY
+                    HAVING → Filters groups of rows (use with GROUP BY).
                 </li>
+                <li>So, when using SELECT without GROUP BY, use WHERE to filter rows. When using GROUP BY, use HAVING to filter groups.</li>
             </ul>
             <br>
             <button class="collapsible"><b>Exercise 22:</b> Retrieve Values from Sailor Tables</button>
@@ -239,7 +239,7 @@ group-qualification
                         <br>
                     </div>
                     <p><b>Query: </b>
-                        SELECT S.rating, AVG(S.age) AS avgage FROM Sailors S WHERE S.age
+                        SELECT S.rating, AVG(S.age) AS avgage FROM laboratories.Sailors S WHERE S.age
                         >= 18 GROUP BY S.rating HAVING COUNT(*) > 1
                     </p>
                     <p><b>Explanation: </b>HAVING clause allows us to specify a qualification (filter) for each 
