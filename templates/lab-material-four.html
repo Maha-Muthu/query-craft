@@ -245,8 +245,6 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; CROSS JOIN &lt;table_name&gt
                         only one copy of each
                         common column.</li>
                     <li>Cardinality &lt; n*m</li>
-                    <li>Cross join table of A and B
-                        (cardinality m * n)</li>
                     <li><b>Syntax:</b></li>
                     <pre>
 SELECT &lt;column_names&gt; FROM &lt;table_name&gt; NATURAL JOIN &lt;table_name&gt;;
@@ -318,9 +316,6 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; NATURAL JOIN &lt;table_name&
                         based on the join condition.</li>
                     <li>Contains null padded values from both tables in case the
                         condition does not match.</li>
-                    <li>Cardinality &lt; n*m</li>
-                    <li>Cross join table of A and B
-                        (cardinality m * n)</li>
                     <li><b>Syntax:</b></li>
                     <pre>
 SELECT &lt;column_names&gt; FROM &lt;table_name&gt; FULL OUTER JOIN &lt;table_name&gt; ON &lt;join_condition&gt;;
@@ -408,12 +403,393 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; FULL OUTER JOIN &lt;table_na
                 <br>
             </div>
             <br>
+            <button class="collapsible"><b>Exercise 13:</b> Left Outer Join</button>
+            <div class="content">
+                <br>
+                <ul>
+                    <li>Join table is created based on
+                        the join condition.</li>
+                    <li>Contains all columns of the
+                        table on the left (the one in
+                        the FROM clause).</li>
+                    <li>Full outer join table of A and B
+                        (cardinality m * n)</li>
+                    <li><b>Syntax:</b></li>
+                    <pre>
+SELECT &lt;column_names&gt; FROM &lt;table_name&gt; LEFT OUTER JOIN &lt;table_name&gt; ON &lt;join_condition&gt;;
+                    </pre>
+                    <li><b>Use Case:</b> Retrieving all records from the left table and matching records from the right
+                        table.
+                    </li>
+                    <li><b>Representation:</b><br>
+                        <img src="{{ url_for('static', filename='images/leftOuterJoin.png') }}" alt="Left Outer Join"
+                            class="responsive-image">
+                        <br>
+                    </li>
+                </ul>
+                <h3>Find all customers and the artists they like, including customers who do not like any artist.
+                </h3>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <button class="collapsible">Left Outer Join on Art Work Tables</button>
+                <div class="content">
+                    <br>
+                    <h3>Find all customers and the artists they like, including customers who do not like any artist.
+                    </h3>
+                    <p><b>Expected Results: </b></p>
+                    <div style="overflow-x: auto; overflow-y: auto;">
+                        <table>
+                            <tr>
+                                <th>artistname</th>
+                                <th>customername</th>
+                            </tr>
+                            <tr>
+                                <td>Picasso</td>
+                                <td>Emre</td>
+                            </tr>
+                            <tr>
+                                <td>Picasso</td>
+                                <td>Saeid</td>
+                            </tr>
+                            <tr>
+                                <td>Leonardo</td>
+                                <td>Saeid</td>
+                            </tr>
+                        </table>
+                        <br>
+                    </div>
+                    <p><b>Query: </b>SELECT Customer.Name AS CustomerName, LikeArtist.AName AS ArtistName FROM
+                        laboratories.Customer LEFT OUTER JOIN laboratories.LikeArtist ON Customer.CustId =
+                        LikeArtist.CustId;
+                    </p>
+                    <p><b>Explanation: </b>This query returns all customers, including those who do not like any artist,
+                        with nulls in the artist column where there is no match. Left Outer Join is used to ensure that
+                        no customer is left out of the result.</p>
+                    <br>
+                </div>
+                <br>
+            </div>
+            <br>
+            <button class="collapsible"><b>Exercise 14:</b> Right Outer Join</button>
+            <div class="content">
+                <br>
+                <ul>
+                    <li>Join table is created based on
+                        the join condition.</li>
+                    <li>Contains all columns of the
+                        table on the right (the one in
+                        the JOIN clause).</li>
+                    <li>Full outer join table of A and B
+                        (cardinality m * n)</li>
+                    <li><b>Syntax:</b></li>
+                    <pre>
+SELECT &lt;column_names&gt; FROM &lt;table_name&gt; RIGHT OUTER JOIN &lt;table_name&gt; ON &lt;join_condition&gt;;
+                    </pre>
+                    <li><b>Use Case:</b> Retrieving all records from the right table and matching records from the left
+                        table.
+                    </li>
+                    <li><b>Representation:</b><br>
+                        <img src="{{ url_for('static', filename='images/rightOuterJoin.png') }}" alt="Right Outer Join"
+                            class="responsive-image">
+                        <br>
+                    </li>
+                </ul>
+                <h3>List all artists and the customers who like them, including artists that no customer likes.
+                </h3>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <button class="collapsible">Right Outer Join on Art Work Tables</button>
+                <div class="content">
+                    <br><br>
+                    <h3>List all artists and the customers who like them, including artists that no customer likes.
+                    </h3>
+                    <p><b>Expected Results: </b></p>
+                    <div style="overflow-x: auto; overflow-y: auto;">
+                        <table>
+                            <tr>
+                                <th>artistname</th>
+                                <th>customername</th>
+                            </tr>
+                            <tr>
+                                <td>Picasso</td>
+                                <td>Emre</td>
+                            </tr>
+                            <tr>
+                                <td>Picasso</td>
+                                <td>Saeid</td>
+                            </tr>
+                            <tr>
+                                <td>Leonardo</td>
+                                <td>Saeid</td>
+                            </tr>
+                        </table>
+                        <br>
+                    </div>
+                    <p><b>Query: </b>SELECT Customer.Name AS CustomerName, LikeArtist.AName AS ArtistName
+                        FROM laboratories.Customer
+                        RIGHT OUTER JOIN laboratories.LikeArtist
+                        ON Customer.CustId = LikeArtist.CustId;
+                    </p>
+                    <p><b>Explanation: </b>This query returns all artists, including those who are not liked by any
+                        customer, with nulls in the customer column where there is no match. Right Outer Join is used to
+                        ensure that all artists are included in the result.</p>
+                    <br>
+                </div>
+                <br>
+            </div>
+            <br>
+            <button class="collapsible"><b>Exercise 15:</b> Inner Join or Join</button>
+            <div class="content">
+                <br>
+                <ul>
+                    <li>Contains a condition using
+                        which the join table is created,
+                        usually compares primary key
+                        of one table to the foreign key
+                        in the other table.</li>
+                    <li>Cardinality of join table &lt; m*n</li>
+                    <li><b>Syntax:</b></li>
+                    <pre>
+SELECT &lt;column_names&gt; FROM &lt;table_name&gt; [INNER] JOIN &lt;table_name&gt; ON &lt;join_condition&gt; ;
+                    </pre>
+                    <li><b>Use Case:</b> Retrieving records that have matching values in both tables.
+                    </li>
+                    <li><b>Representation:</b><br>
+                        <img src="{{ url_for('static', filename='images/innerJoin.png') }}" alt="Left Outer Join"
+                            class="responsive-image">
+                        <br>
+                    </li>
+                </ul>
+                <h3>Find the names of customers and the artists they specifically like.
+                </h3>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <button class="collapsible">Inner Join on Art Work Tables</button>
+                <div class="content">
+                    <br>
+                    <h3>Find the names of customers and the artists they specifically like.
+                    </h3>
+                    <p><b>Expected Results: </b></p>
+                    <div style="overflow-x: auto; overflow-y: auto;">
+                        <table>
+                            <tr>
+                                <th>artistname</th>
+                                <th>customername</th>
+                            </tr>
+                            <tr>
+                                <td>Picasso</td>
+                                <td>Emre</td>
+                            </tr>
+                            <tr>
+                                <td>Picasso</td>
+                                <td>Saeid</td>
+                            </tr>
+                            <tr>
+                                <td>Leonardo</td>
+                                <td>Saeid</td>
+                            </tr>
+                        </table>
+                        <br>
+                    </div>
+                    <p><b>Query: </b>SELECT Customer.Name AS CustomerName, LikeArtist.AName AS ArtistName FROM
+                        laboratories.Customer INNER JOIN laboratories.LikeArtist ON Customer.CustId = LikeArtist.CustId;
+                    </p>
+                    <p><b>Explanation: </b>This query only includes customers and artists where there is a match in the
+                        CustId column. Inner Join used for finding explicit relationships between customers and artists.
+                    </p>
+                    <br>
+                </div>
+                <br>
+            </div>
+            <br>
+            <button class="collapsible"><b>Exercise 16:</b> Self (Inner) Join</button>
+            <div class="content">
+                <br>
+                <ul>
+                    <li>Inner join where both Table A and Table B refer to the
+                        same table.</li>
+                    <li>Cardinality of the join table &lt; n*n</li>
+                    <li>Each table is referred using a different alias.</li>
+                    <li><b>Use Case:</b> Joining a table with itself to compare rows within the same table.
+                    </li>
+                    <li><b>Representation:</b><br>
+                        <img src="{{ url_for('static', filename='images/selfJoin.png') }}" alt="Self Join"
+                            class="responsive-image">
+                        <br>
+                    </li>
+                </ul>
+                <h3>List pairs of artists from the same birthplace.
+                </h3>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <button class="collapsible">Self Join on Art Work Tables</button>
+                <div class="content">
+                    <br><br>
+                    <h3>List pairs of artists from the same birthplace.
+                    </h3>
+                    <p><b>Expected Results: </b></p>
+                    <div style="overflow-x: auto; overflow-y: auto;">
+                        <table>
+                        </table>
+                        <br>
+                    </div>
+                    <p><b>Query: </b>SELECT A1.AName AS Artist1, A2.AName AS Artist2
+                        FROM laboratories.Artist A1
+                        JOIN laboratories.Artist A2
+                        ON A1.Birthplace = A2.Birthplace AND A1.AName &lt;&gt; A2.AName;
+                    </p>
+                    <p><b>Explanation: </b> This query joins the Artist table with itself to find pairs of artists with
+                        the same birthplace. Self Join is useful for finding relationships within the same table.</p>
+                    <br>
+                </div>
+                <br>
+            </div>
+            <br>
+            <button class="collapsible"><b>Exercise 17:</b> Semi Join</button>
+            <div class="content">
+                <br>
+                <ul>
+                    <li>A semi join between Table A
+                        and Table B, will return one
+                        row of table A, when it
+                        matches with at least one
+                        row of Table B, based on the
+                        join condition.</li>
+                    <li>Cardinality of resulting table
+                        &lt;= n
+                    </li>
+                    <li><b>Use Case:</b> Retrieving rows from one table where a related row exists in another table.
+                    </li>
+                    <li><b>Representation:</b><br>
+                        <img src="{{ url_for('static', filename='images/semiJoin.png') }}" alt="Semi Join"
+                            class="responsive-image">
+                        <br>
+                    </li>
+                </ul>
+                <h3>Find customers who like at least one artist.
+                </h3>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <button class="collapsible">Semi Join on Art Work Tables</button>
+                <div class="content">
+                    <br>
+                    <h3>Find customers who like at least one artist.
+                    </h3>
+                    <p><b>Expected Results: </b></p>
+                    <div style="overflow-x: auto; overflow-y: auto;">
+                        <table>
+                            <tr>
+                                <th>name</th>
+                            </tr>
+                            <tr>
+                                <td>Emre</td>
+                            </tr>
+                            <tr>
+                                <td>Saeid</td>
+                            </tr>
+                        </table>r>
+                    </div>
+                    <p><b>Query: </b>SELECT DISTINCT Customer.Name FROM laboratories.Customer WHERE EXISTS (SELECT 1
+                        FROM laboratories.LikeArtist WHERE LikeArtist.CustId = Customer.CustId );
+                    </p>
+                    <p><b>Explanation: </b>This query uses a subquery to check for the existence of a relationship
+                        between customers and liked artists. Semi Join used for finding entities that meet a certain
+                        condition without needing to return the related rows.
+                    </p>
+                    <br>
+                </div>
+                <br>
+            </div>
+            <br>
+            <button class="collapsible"><b>Exercise 18:</b> Anti Join</button>
+            <div class="content">
+                <br>
+                <ul>
+                    <li>An anti join between Table A
+                        and Table B, will return one
+                        row of table A, when it DOES
+                        NOT match any row of Table
+                        B, based on the join
+                        condition.</li>
+                    <li>Cardinality of resulting table
+                        &lt;= n
+                    </li>
+                    <li><b>Use Case:</b> Retrieving rows from one table where no related row exists in another table.
+                    </li>
+                    <li><b>Representation:</b><br>
+                        <img src="{{ url_for('static', filename='images/antiJoin.png') }}" alt="Anti Join"
+                            class="responsive-image">
+                        <br>
+                    </li>
+                </ul>
+                <h3>Find customers who do not like any artist.
+                </h3>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <button class="collapsible">Anti Join on Art Work Tables</button>
+                <div class="content">
+                    <br>
+                    <h3>Find customers who do not like any artist.
+                    </h3>
+                    <p><b>Expected Results: </b></p>
+                    <div style="overflow-x: auto; overflow-y: auto;">
+                        <table>
+
+                        </table>
+                        <br>
+                    </div>
+                    <p><b>Query: </b>SELECT Customer.Name
+                        FROM laboratories.Customer
+                        WHERE NOT EXISTS (
+                        SELECT 1
+                        FROM laboratories.LikeArtist
+                        WHERE LikeArtist.CustId = Customer.CustId
+                        );
+                    </p>
+                    <p><b>Explanation: </b>This query uses an anti join pattern with `NOT EXISTS` to exclude customers
+                        who have liked any artist. It's useful for filtering and including only those entities that do
+                        not have related entries in another table.
+                    </p>
+                    <br>
+                </div>
+                <br>
+            </div>
+            <br>
             <button class="collapsible"><b>Exercise 19:</b> Joins Query Practice</button>
             <div class="content">
                 <br>
-                <p>Retrieve data using SELECT Statement</p>
                 <p>List the names and customer ids of all customers who
-                    like Picasso</p>
+                    like Picasso.</p>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
                     <br><br>
@@ -431,30 +807,60 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; FULL OUTER JOIN &lt;table_na
                     <div class="alert-container"></div>
                 </form>
                 <br>
-                <p>Find names of Customers who
-                    likes both an artist born in Malaga and an artist born in
-                    Florence.</p>
-                <form class="queryForm">
-                    <input type="text" class="query" placeholder="Query" required>
-                    <br><br>
-                    <input type="submit" value="Execute Query">
-                    <div class="alert-container"></div>
-
-                </form>
-                <br>
                 <button class="collapsible">Retrieve Data From Art Work Tables</button>
                 <div class="content">
                     <br><br>
-                    <h3>Get the style of the artist whose name is Smith.</h3>
-                    <p>SELECT Style FROM laboratories.Artist WHERE AName = 'Smith'</p>
+                    <h3>List the names and customer ids of all customers who
+                        like Picasso.</h3>
+                    <p><b>Expected Results: </b></p>
+                    <div style="overflow-x: auto; overflow-y: auto;">
+                        <table>
+                            <tr>
+                                <th>custid</th>
+                                <th>name</th>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Emre</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Saeid</td>
+                            </tr>
+                        </table>
 
-                    <h3>List all artists that are born in Ottawa.</h3>
-                    <p>
-                        SELECT A.Aname FROM laboratories.Artist A WHERE Birthplace = 'Ottawa';
+                        <br>
+                    </div>
+                    <p><b>Query: </b>SELECT c.name, c.custid
+                        from laboratories.customer c
+                        inner join laboratories.likeartist l
+                        on c.custid=l.custid
+                        where aname='Picasso';
                     </p>
-                    <h3>List the titles and prices of all artworks painted in 2000.</h3>
-                    <p>
-                        SELECT Title,Price FROM laboratories.Artwork WHERE Year =2000;
+
+                    <h3>List the names of all customers who like Artists from the
+                        Cubism style and having an amount larger than 30000.</h3>
+                    <p><b>Expected Results: </b></p>
+                    <div style="overflow-x: auto; overflow-y: auto;">
+                        <table>
+                            <tr>
+                                <th>name</th>
+                            </tr>
+                            <tr>
+                                <td>Saeid</td>
+                            </tr>
+                        </table>
+                        <br>
+                    </div>
+                    <p><b>Query: </b>
+                        SELECT c.name
+                        FROM laboratories.customer c
+                        INNER JOIN laboratories.likeartist l
+                        on c.custid=l.custid
+                        inner join laboratories.Artist a
+                        on l.aname=a.aname
+                        where a.style = 'Cubism'
+                        and c.amount > 30000;
                     </p>
                     <br>
                 </div>
