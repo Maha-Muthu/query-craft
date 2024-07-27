@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="static/css/page-skeleton-design.css">
     <link rel="stylesheet" href="static/css/collapsible-design.css">
     <link rel="stylesheet" href="static/css/query-input-design.css">
+    <link rel="stylesheet" href="static/css/query-response-table-design.css">
+    <link rel="stylesheet" href="static/css/table-design.css">
 </head>
 
 <body>
@@ -22,9 +24,9 @@
             <br>
             <a href="#">Lab Material 3</a>
             <br>
-            <a href="#">Lab Material 4</a>
+            <a href="{{ url_for('lab_material_four') }}">Lab Material 4</a>
             <br>
-            <a href="#">Lab Material 5</a>
+            <a href="{{ url_for('lab_material_five') }}">Lab Material 5</a>
         </nav>
         <main>
             <h2>More SQL Commands: Drop, Alter, and Query</h2>
@@ -74,7 +76,7 @@ ALTER TABLE TableName ADD COLUMN ColumnName ColumnType CHECK ( Constraint );
                 </ul>
 
 
-                <p>Add Country column to Artist table (type VARCHAR(20))</p>
+                <p>Add Country column to Artist table (type VARCHAR(20)).</p>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
                     <br><br>
@@ -83,7 +85,7 @@ ALTER TABLE TableName ADD COLUMN ColumnName ColumnType CHECK ( Constraint );
                 </form>
                 <br>
                 <p>Add a Rating column to the Customer table, with the following check constraint: the rating value has
-                    to be BETWEEN 1 AND 10</p>
+                    to be BETWEEN 1 AND 10.</p>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
                     <br><br>
@@ -94,15 +96,14 @@ ALTER TABLE TableName ADD COLUMN ColumnName ColumnType CHECK ( Constraint );
                 <button class="collapsible">Update Art Work Tables</button>
                 <div class="content">
                     <br><br>
-                    <h3>Add Country column to Artist table (type VARCHAR(20))</h3>
-                    <p>ALTER TABLE laboratories.Artist ADD Country VARCHAR(20)</p>
+                    <h3>Add Country column to Artist table (type VARCHAR(20)).</h3>
+                    <p>ALTER TABLE laboratories.Artist ADD Country VARCHAR(20);</p>
                     <h3>Add a Rating column to the Customer table, with the following check constraint: the rating value
                         has
                         to be BETWEEN 1 AND 10</h3>
                     <p>
-                        ALTER TABLE laboratories.Customer
-                        ADD Rating Numeric
-                        CONSTRAINT Rating CHECK (Rating &gt;= 1 and Rating &lt;=10) </p>
+                        ALTER TABLE laboratories.Customer ADD Rating Numeric CONSTRAINT Rating CHECK (Rating &gt;= 1 and
+                        Rating &lt;=10); </p>
                     <br>
                 </div>
                 <br>
@@ -146,24 +147,24 @@ ALTER TABLE TableName ADD COLUMN ColumnName ColumnType CHECK ( Constraint );
                     </ul>
                     <li>Customer Table:</li>
                     <ul>
-                        <li>CustId: 1, 2</li>
-                        <li>Name: Emre, Saeid</li>
-                        <li>Address: Preston, null</li>
-                        <li>Amount: 20000.00, 40000</li>
-                        <li>Rating: 5,6</li>
+                        <li>CustId: 1, 2, 3</li>
+                        <li>Name: Emre, Saeid, Kate</li>
+                        <li>Address: Preston, null, Laurier</li>
+                        <li>Amount: 20000.00, 40000.00, 30000.00</li>
+                        <li>Rating: 5, 6, 4</li>
                     </ul>
                     <li>Artwork Table:</li>
                     <ul>
-                        <li>Title: Waves, Three Musicians</li>
-                        <li>Year: 2000, 1921</li>
-                        <li>Type: null, Modern</li>
-                        <li>Price: 4000.00, 11000.00</li>
-                        <li>AName: John, Picasso</li>
+                        <li>Title: Waves, Three Musicians, Saints, Hand of god, Murder, Green</li>
+                        <li>Year: 2000, 1921, 1470, 1510, 1600, 1950</li>
+                        <li>Type: null, Modern, Renaissance, Renaissance, Baroque, Modern</li>
+                        <li>Price: 4000.00, 11000.00, 30000.00, 52000.00, 15000.00, 5000.00</li>
+                        <li>AName: John, Picasso, Leonardo, Michelangelo, Caravaggio, John</li>
                     </ul>
                     <li>LikeArtist Table:</li>
                     <ul>
-                        <li>CustId: 1, 2, 2</li>
-                        <li>AName: Picasso, Picasso, Leonardo</li>
+                        <li>CustId: 1, 2, 2, 2, 2, 2, 2, 2</li>
+                        <li>AName: Picasso, Picasso, Leonardo, Caravaggio, Hans Hofmann, John, Josefa, Michelangelo</li>
                     </ul>
                 </ul>
                 <form class="queryForm">
@@ -180,19 +181,22 @@ ALTER TABLE TableName ADD COLUMN ColumnName ColumnType CHECK ( Constraint );
                         VALUES('Leonardo', 'Florence', 'Renaissance', '1452-04-15', 'Italy'), ('Michelangelo', 'Arezzo',
                         'Renaissance', '1475-03-06','Italy'), ('Josefa', 'Seville', 'Baroque', '1630-09-09', 'Spain'),
                         ('Hans Hofmann', 'Weisenburg', 'Modern', '1966-02-17', 'Germany'), ('John', 'San Francisco',
-                        'Modern', '1920-02-17', 'USA')
+                        'Modern', '1920-02-17', 'USA');
                     </p>
                     <p>
                         INSERT INTO laboratories.Artwork (Title,Year,Type,Price,AName) VALUES('Waves', 2000, null,
-                        4000.00, 'John'), ('Three Musicians', 1921, 'Modern', 11000.00, 'Picasso')
+                        4000.00, 'John'), ('Three Musicians', 1921, 'Modern', 11000.00, 'Picasso'), ('Saints', 1470,
+                        'Renaissance', 30000.00, 'Leonardo'), ('Hand of god', 1510, 'Renaissance', 52000.00,
+                        'Michelangelo'), ('Murder', 1600, 'Baroque', 15000.00, 'Caravaggio'), ('Green', 1950, 'Modern',
+                        5000.00, 'John');
                     </p>
                     <p>
                         INSERT INTO laboratories.Customer (CustId,Name,Address,Amount, Rating) VALUES(1, 'Emre',
-                        'Preston', 20000.00, 5), (2, 'Saeid', null, 40000.00, 6)
+                        'Preston', 20000.00, 5), (2, 'Saeid', null, 40000.00, 6), (3, 'Kate', 'Laurier', 30000.00, 4);
                     </p>
                     <p>
                         INSERT INTO laboratories.LikeArtist (CustId, AName) VALUES (1, 'Picasso'), (2, 'Picasso'), (2,
-                        'Leonardo')
+                        'Leonardo'), (2,'Caravaggio'), (2,'Hans Hofmann'), (2,'John'), (2,'Josefa'), (2,'Michelangelo');
                     </p>
                     <br>
                 </div>
@@ -228,7 +232,7 @@ ON DELETE CASCADE
                     </ul>
                 </li>
             </ul>
-            <h3>Backup & Restore</h3>
+            <h2>Backup & Restore</h2>
             <p><b>Backup:</b> A snapshot of the database (including data and structure) at any point in time. Generates
                 a
                 data file *.backup that you save on disk.</p>
@@ -281,7 +285,7 @@ ON DELETE CASCADE
                 </form>
                 <br>
                 <p>List the names and country of birth of all Artists whose painting style are Modern, Baroque or
-                    Renaissance. (HINT: Use the IN keyword).
+                    Renaissance. (HINT: Use the IN keyword)
                 </p>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
@@ -304,35 +308,251 @@ ON DELETE CASCADE
                     <br><br>
                     <h3>List the names and birthplaces of all Artists.
                     </h3>
-                    <p>SELECT Aname, Birthplace FROM laboratories.Artist
+                    <p><b>Expected Results: </b></p>
+                    <div style="overflow-x: auto; overflow-y: auto;">
+                        <table>
+                            <tr>
+                                <th>aname</th>
+                                <th>birthplace</th>
+                            </tr>
+                            <tr>
+                                <td>Caravaggio</td>
+                                <td>Milan</td>
+                            </tr>
+                            <tr>
+                                <td>Smith</td>
+                                <td>Ottawa</td>
+                            </tr>
+                            <tr>
+                                <td>Picasso</td>
+                                <td>Malaga</td>
+                            </tr>
+                            <tr>
+                                <td>Leonardo</td>
+                                <td>Florence</td>
+                            </tr>
+                            <tr>
+                                <td>Michelangelo</td>
+                                <td>Arezzo</td>
+                            </tr>
+                            <tr>
+                                <td>Josefa</td>
+                                <td>Seville</td>
+                            </tr>
+                            <tr>
+                                <td>Hans Hofmann</td>
+                                <td>Weisenburg</td>
+                            </tr>
+                            <tr>
+                                <td>John</td>
+                                <td>San Francisco</td>
+                            </tr>
+                        </table>
+
+                        <br>
+                    </div>
+                    <p><b>Query: </b>SELECT Aname, Birthplace FROM laboratories.Artist;
                     </p>
                     <h3>List the title and price of all Artworks that were painted after 1600.</h3>
+                    <p><b>Expected Results: </b></p>
+                    <div style="overflow-x: auto; overflow-y: auto;">
+                        <table>
+                            <tr>
+                                <th>price</th>
+                                <th>title</th>
+                            </tr>
+                            <tr>
+                                <td>10000.00</td>
+                                <td>Blue</td>
+                            </tr>
+                            <tr>
+                                <td>4000.00</td>
+                                <td>Waves</td>
+                            </tr>
+                            <tr>
+                                <td>11000.00</td>
+                                <td>Three Musicians</td>
+                            </tr>
+                            <tr>
+                                <td>5000.00</td>
+                                <td>Green</td>
+                            </tr>
+                        </table>
+                        <br>
+                    </div>
                     <p>
-                        SELECT Title, Price FROM laboratories.Artwork where Year>1600
+                        <b>Query: </b>SELECT Title, Price FROM laboratories.Artwork where Year>1600;
                     </p>
                     <h3>List the title and type of all Artworks that was either painted in 2000 or was painted by
                         Picasso.
                     </h3>
-                    <p>
-                        SELECT Title, Type FROM laboratories.Artwork where Year=2000 OR Aname='Picasso'
+                    <p><b>Expected Results: </b></p>
+                    <div style="overflow-x: auto; overflow-y: auto;">
+                        <table>
+                            <tr>
+                                <th>title</th>
+                                <th>type</th>
+                            </tr>
+                            <tr>
+                                <td>Blue</td>
+                                <td>Modern</td>
+                            </tr>
+                            <tr>
+                                <td>Waves</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Three Musicians</td>
+                                <td>Modern</td>
+                            </tr>
+                        </table>
+                        <br>
+                    </div>
+                    <p><b>Query: </b>
+                        SELECT Title, Type FROM laboratories.Artwork where Year=2000 OR Aname='Picasso';
                     </p>
                     <h3>List the names and birthplaces of all Artists who were born between 1880 and 1930.
                     </h3>
-                    <p>
+                    <p><b>Expected Results: </b></p>
+                    <div style="overflow-x: auto; overflow-y: auto;">
+                        <table>
+                            <tr>
+                                <th>aname</th>
+                                <th>birthplace</th>
+                            </tr>
+                            <tr>
+                                <td>Picasso</td>
+                                <td>Malaga</td>
+                            </tr>
+                            <tr>
+                                <td>John</td>
+                                <td>San Francisco</td>
+                            </tr>
+                        </table>
+                        <br>
+                    </div>
+                    <p><b>Query: </b>
                         SELECT Aname, Birthplace FROM laboratories.Artist
-                        WHERE (EXTRACT(YEAR FROM Dateofbirth) BETWEEN 1880 AND 1930)
+                        WHERE (EXTRACT(YEAR FROM Dateofbirth) BETWEEN 1880 AND 1930);
                     </p>
                     <h3>List the names and country of birth of all Artists whose painting style are Modern, Baroque or
                         Renaissance.
                     </h3>
-                    <p>
+                    <p><b>Expected Results: </b></p>
+                    <div style="overflow-x: auto; overflow-y: auto;">
+                        <table>
+                            <tr>
+                                <th>aname</th>
+                                <th>country</th>
+                            </tr>
+                            <tr>
+                                <td>Caravaggio</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Smith</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Leonardo</td>
+                                <td>Italy</td>
+                            </tr>
+                            <tr>
+                                <td>Michelangelo</td>
+                                <td>Italy</td>
+                            </tr>
+                            <tr>
+                                <td>Josefa</td>
+                                <td>Spain</td>
+                            </tr>
+                            <tr>
+                                <td>Hans Hofmann</td>
+                                <td>Germany</td>
+                            </tr>
+                            <tr>
+                                <td>John</td>
+                                <td>USA</td>
+                            </tr>
+                        </table>
+                        <br>
+                    </div>
+                    <p><b>Query: </b>
                         SELECT Aname, Country FROM laboratories.Artist
-                        WHERE Style IN ('Modern','Baroque','Renaissance')
+                        WHERE Style IN ('Modern','Baroque','Renaissance');
                     </p>
                     <h3>List all details of the Artworks in the database, ordered by Title.
                     </h3>
-                    <p>
-                        SELECT * FROM laboratories.Artwork Order By Title
+                    <p><b>Expected Results: </b></p>
+                    <div style="overflow-x: auto; overflow-y: auto;">
+                        <table>
+                            <tr>
+                                <th>aname</th>
+                                <th>price</th>
+                                <th>title</th>
+                                <th>type</th>
+                                <th>year</th>
+                            </tr>
+                            <tr>
+                                <td>Smith</td>
+                                <td>10000.00</td>
+                                <td>Blue</td>
+                                <td>Modern</td>
+                                <td>2000</td>
+                            </tr>
+                            <tr>
+                                <td>John</td>
+                                <td>5000.00</td>
+                                <td>Green</td>
+                                <td>Modern</td>
+                                <td>1950</td>
+                            </tr>
+                            <tr>
+                                <td>Michelangelo</td>
+                                <td>52000.00</td>
+                                <td>Hand of god</td>
+                                <td>Renaissance</td>
+                                <td>1510</td>
+                            </tr>
+                            <tr>
+                                <td>Caravaggio</td>
+                                <td>15000.00</td>
+                                <td>Murder</td>
+                                <td>Baroque</td>
+                                <td>1600</td>
+                            </tr>
+                            <tr>
+                                <td>Leonardo</td>
+                                <td>30000.00</td>
+                                <td>Saints</td>
+                                <td>Renaissance</td>
+                                <td>1470</td>
+                            </tr>
+                            <tr>
+                                <td>Caravaggio</td>
+                                <td>40000.00</td>
+                                <td>The Cardsharps</td>
+                                <td>Baroque</td>
+                                <td>1594</td>
+                            </tr>
+                            <tr>
+                                <td>Picasso</td>
+                                <td>11000.00</td>
+                                <td>Three Musicians</td>
+                                <td>Modern</td>
+                                <td>1921</td>
+                            </tr>
+                            <tr>
+                                <td>John</td>
+                                <td>4000.00</td>
+                                <td>Waves</td>
+                                <td></td>
+                                <td>2000</td>
+                            </tr>
+                        </table>
+                        <br>
+                    </div>
+                    <p><b>Query: </b>
+                        SELECT * FROM laboratories.Artwork Order By Title;
                     </p>
                     <br>
                 </div>
