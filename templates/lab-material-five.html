@@ -180,7 +180,14 @@ group-qualification
                     <br><br>
                     <input type="submit" value="Execute Query">
                     <div class="alert-container"></div>
-
+                </form>
+                <br>
+                <p>Find name of the sailors who reserved all the boats.</p>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
                 </form>
                 <br>
                 <button class="collapsible">Retrieve Data From Sailor Tables</button>
@@ -211,7 +218,7 @@ group-qualification
                     <p><b>Explanation: </b>The query between () will return the sailor IDs who have reserved a green
                         boat. First part of the query will find sailors who reserved a red boat. Thus, in the 4th
                         line, we will have the ID of a sailor who reserved a red boat, and check
-                        if this same sailor also reserved a green boat by <b>IN</b> keyword
+                        if this same sailor also reserved a green boat by <b>IN</b> keyword.
                     </p>
                     <br>
                     <h3>Find the average age of sailors who are at least 18 years old, for each rating
@@ -247,6 +254,27 @@ group-qualification
                         which do not have at least two sailors.</p>
                     <h3>Find the age of the youngest sailor with age > 18, for each rating level 
                         with at least 2 sailors (of any age).</h3>
+                    <p><b>Expected Results: </b></p>
+                    <div style="overflow-x: auto; overflow-y: auto;">
+                        <table>
+                            <tr>
+                              <th>minage</th>
+                              <th>rating</th>
+                            </tr>
+                            <tr>
+                              <td>18</td>
+                              <td>Poor</td>
+                            </tr>
+                            <tr>
+                              <td>18</td>
+                              <td>Fair</td>
+                            </tr>
+                            <tr>
+                              <td>26</td>
+                              <td>Good</td>
+                            </tr>
+                          </table>                          
+                    </div>
                     <p><b>Query: </b>
                         SELECT S.rating, MIN(S.age) AS minage FROM laboratories.Sailors S WHERE S.age 
 >= 18 GROUP BY S.rating HAVING ( SELECT COUNT (*) FROM laboratories.Sailors 
@@ -259,7 +287,137 @@ S2 WHERE S.rating=S2.rating ) >= 2
                 </div>
                 <br>
             </div>
-            
+            <br>
+            <button class="collapsible"><b>Exercise 23:</b> Retrieve Values from Art Work Tables</button>
+            <div class="content">
+                <br>
+                <p>Find names of Customers who likes both an artist born in Malaga and an artist born in Florence.</p>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <p>Find the average price of artworks which are painted after 1490, for each artwork type that has at least two such artworks. 
+                </p>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+                </form>
+                <br>
+                <p>Find the average price of artworks which are painted after 1490, for each artwork type that has at least two artworks (painted in any year)
+                </p>
+                <form class="queryForm">
+                    <input type="text" class="query" placeholder="Query" required>
+                    <br><br>
+                    <input type="submit" value="Execute Query">
+                    <div class="alert-container"></div>
+
+                </form>
+                <br>
+                <button class="collapsible">Retrieve Data From Art Work Tables</button>
+                <div class="content">
+                    <br>
+                    <h3>Find names of Customers who likes both an artist born in Malaga and an artist born in Florence.</h3>
+                    <p><b>Expected Results: </b></p>
+                    <div style="overflow-x: auto; overflow-y: auto;">
+                        <table>
+                            <tr>
+                              <th>name</th>
+                            </tr>
+                            <tr>
+                              <td>Saeid</td>
+                            </tr>
+                          </table>                          
+                        <br>
+                    </div>
+                    <p><b>Query: </b>Select c.name
+                        from laboratories.Customer c
+                        inner join laboratories.likeartist l
+                        on c.custid=l.custid
+                        inner join laboratories.Artist a
+                        on l.aname = a.aname
+                        where a.birthplace='Florence'
+                        and c.custid IN (
+                        Select c.custid
+                        from laboratories.Customer c
+                        inner join laboratories.likeartist l
+                        on c.custid=l.custid
+                        inner join laboratories.Artist a
+                        on l.aname = a.aname
+                        where a.birthplace='Malaga');
+                    </p>
+                    <br>
+                    <h3>Find the average price of artworks which are painted after 1490, for each artwork type that has at least two such artworks. 
+                    </h3>
+                    <p><b>Expected Results: </b></p>
+                    <div style="overflow-x: auto; overflow-y: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>rating</th>
+                                    <th>avgage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Good</td>
+                                    <td>27</td>
+                                </tr>
+                                <tr>
+                                    <td>Poor</td>
+                                    <td>20</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                    </div>
+                    <p><b>Query: </b>
+                        SELECT S.rating, AVG(S.age) AS avgage FROM laboratories.Sailors S WHERE S.age
+                        >= 18 GROUP BY S.rating HAVING COUNT(*) > 1
+                    </p>
+                    <p><b>Explanation: </b>HAVING clause allows us to specify a qualification (filter) for each 
+                        group. COUNT(*) >1 in the HAVING clause eliminates all the rating groups 
+                        which do not have at least two sailors.</p>
+                    <h3>Find the age of the youngest sailor with age > 18, for each rating level 
+                        with at least 2 sailors (of any age).</h3>
+                    <p><b>Expected Results: </b></p>
+                    <div style="overflow-x: auto; overflow-y: auto;">
+                        <table>
+                            <tr>
+                              <th>minage</th>
+                              <th>rating</th>
+                            </tr>
+                            <tr>
+                              <td>18</td>
+                              <td>Poor</td>
+                            </tr>
+                            <tr>
+                              <td>18</td>
+                              <td>Fair</td>
+                            </tr>
+                            <tr>
+                              <td>26</td>
+                              <td>Good</td>
+                            </tr>
+                          </table>
+                          <br>                          
+                    </div>
+                    <p><b>Query: </b>
+                        SELECT S.rating, MIN(S.age) AS minage FROM laboratories.Sailors S WHERE S.age 
+>= 18 GROUP BY S.rating HAVING ( SELECT COUNT (*) FROM laboratories.Sailors 
+S2 WHERE S.rating=S2.rating ) >= 2
+                    </p>
+                    <p><b>Explanation: </b>Since group qualification is having 2 sailors of any age, we 
+                        get the total number of rows for that rating group with the query inside 
+                        HAVING clause, and check if this number is at least 2.</p>
+                    <br>
+                </div>
+                <br>
+            </div>
         </main>
     </div>
     <script src="static/js/query-execution.js"></script>

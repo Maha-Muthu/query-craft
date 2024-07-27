@@ -70,7 +70,7 @@ CREATE SCHEMA SchemaName;
         <button class="collapsible">Create Laboratories Schema</button>
         <div class="content">
           <br>
-          <p>CREATE SCHEMA laboratories</p>
+          <p>CREATE SCHEMA laboratories;</p>
           <br>
         </div>
         <br>
@@ -368,16 +368,16 @@ WHERE &lt;Conditions&gt;
           <br><br>
           <p>INSERT INTO laboratories.Artist(AName,Birthplace, Style, DateOfBirth) VALUES
             ('Caravaggio','Milan','Baroque','1571-09-28' ), ('Smith', 'Ottawa', 'Modern', '1977-12-12'),
-            ('Picasso','Malaga','Cubism','1881-10-25')
+            ('Picasso','Malaga','Cubism','1881-10-25');
           </p>
           <p>
             INSERT INTO laboratories.Customer(CustId,Name,Address,Amount) VALUES (1,'John','Ottawa',8.5),
-            (2,'Amy','Orleans',9.0), (3,'Peter','Gatineau',6.3)
+            (2,'Amy','Orleans',9.0), (3,'Peter','Gatineau',6.3);
           </p>
           <p>
             INSERT INTO laboratories.Artwork(Title,Year,Type,Price,AName) VALUES ('Blue',
             2000,'Modern',10000.00,'Smith'),
-            ('The Cardsharps', 1594,'Baroque',40000.00,'Caravaggio')
+            ('The Cardsharps', 1594,'Baroque',40000.00,'Caravaggio');
           </p>
           <br>
         </div>
@@ -388,7 +388,7 @@ WHERE &lt;Conditions&gt;
       <div class="content">
         <br>
         <p>Retrieve data using SELECT Statement</p>
-        <p>Get the style of the artist whose name is Smith</p>
+        <p>Get the style of the artist whose name is Smith.</p>
         <form class="queryForm">
           <input type="text" class="query" placeholder="Query" required>
           <br><br>
@@ -396,7 +396,7 @@ WHERE &lt;Conditions&gt;
           <div class="alert-container"></div>
         </form>
         <br>
-        <p>List all artists that are born in Ottawa</p>
+        <p>List all artists that are born in Ottawa.</p>
         <form class="queryForm">
           <input type="text" class="query" placeholder="Query" required>
           <br><br>
@@ -404,7 +404,7 @@ WHERE &lt;Conditions&gt;
           <div class="alert-container"></div>
         </form>
         <br>
-        <p>List the titles and prices of all artworks painted in 2000</p>
+        <p>List the titles and prices of all artworks painted in 2000.</p>
         <form class="queryForm">
           <input type="text" class="query" placeholder="Query" required>
           <br><br>
@@ -433,14 +433,40 @@ WHERE &lt;Conditions&gt;
             </table>
             <br>
           </div>
-          <p>SELECT Style FROM laboratories.Artist WHERE AName = 'Smith'</p>
+          <p><b>Query: </b>SELECT Style FROM laboratories.Artist WHERE AName = 'Smith';</p>
 
           <h3>List all artists that are born in Ottawa.</h3>
-          <p>
-            SELECT A.Aname FROM laboratories.Artist A WHERE Birthplace = 'Ottawa';
+          <p><b>Expected Results: </b></p>
+          <div style="overflow-x: auto; overflow-y: auto;">
+            <table>
+              <tr>
+                <th>aname</th>
+              </tr>
+              <tr>
+                <td>Smith</td>
+              </tr>
+            </table>
+            <br>
+          </div>
+          <p><b>Query: </b>
+            SELECT Aname FROM laboratories.Artist WHERE Birthplace = 'Ottawa';
           </p>
           <h3>List the titles and prices of all artworks painted in 2000.</h3>
-          <p>
+          <p><b>Expected Results: </b></p>
+          <div style="overflow-x: auto; overflow-y: auto;">
+            <table>
+              <tr>
+                <th>price</th>
+                <th>title</th>
+              </tr>
+              <tr>
+                <td>10000.00</td>
+                <td>Blue</td>
+              </tr>
+            </table>
+            <br>
+          </div>
+          <p><b>Query: </b>
             SELECT Title,Price FROM laboratories.Artwork WHERE Year =2000;
           </p>
           <br>
@@ -476,12 +502,12 @@ WHERE &lt;Conditions&gt;
         <div class="content">
           <br><br>
           <h3>Change the name of the customer with id 1 to Bruce.</h3>
-          <p>UPDATE laboratories.Customer SET Name = 'Bruce' WHERE CustId = 1
+          <p>UPDATE laboratories.Customer SET Name = 'Bruce' WHERE CustId = 1;
           </p>
           <h3>Update the Amount value for all the Customers in the
             Database to be 9.8 and the address to be Gatineau.</h3>
           <p>
-            UPDATE laboratories.Customer SET Amount = 9.8, Address = 'Gatineau'
+            UPDATE laboratories.Customer SET Amount = 9.8, Address = 'Gatineau';
           </p>
           <br>
         </div>
@@ -497,7 +523,7 @@ WHERE &lt;Conditions&gt;
         <pre>
 DELETE FROM TableName WHERE Condition
           </pre>
-        <p>Remove Customer Bruce from our Database</p>
+        <p>Remove Customer Bruce from our Database.</p>
         <form class="queryForm">
           <input type="text" class="query" placeholder="Query" required>
           <br><br>
@@ -505,7 +531,7 @@ DELETE FROM TableName WHERE Condition
           <div class="alert-container"></div>
         </form>
         <br>
-        <p>Remove all the remaining Customers from the Database
+        <p>Remove all the remaining Customers from the Database.
         </p>
         <form class="queryForm">
           <input type="text" class="query" placeholder="Query" required>
@@ -517,14 +543,14 @@ DELETE FROM TableName WHERE Condition
         <button class="collapsible">Delete Data From Art Work Tables</button>
         <div class="content">
           <br><br>
-          <h3>Remove Customer Bruce from our Database</h3>
-          <p>DELETE FROM laboratories.Customer WHERE Name = 'Bruce'
+          <h3>Remove Customer Bruce from our Database.</h3>
+          <p>DELETE FROM laboratories.Customer WHERE Name = 'Bruce';
 
           </p>
-          <h3>Remove all the remaining Customers from the Database
+          <h3>Remove all the remaining Customers from the Database.
           </h3>
           <p>
-            DELETE FROM laboratories.Customer
+            DELETE FROM laboratories.Customer;
           </p>
           <br>
         </div>
