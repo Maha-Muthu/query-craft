@@ -100,6 +100,10 @@ def lab_material_four():
 def lab_material_five():
     return render_template('lab-material-five.html')
 
+@app.route('/lab-material-six')
+def lab_material_six():
+    return render_template('lab-material-six.html')
+
 @app.route('/practice-query-one')
 def practice_query_one():
     return render_template('practice-query-one.html')
