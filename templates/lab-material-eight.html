@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databases Lab 8</title>
+    <link rel="stylesheet" href="static/css/page-skeleton-design.css">
+    <link rel="stylesheet" href="static/css/collapsible-design.css">
+    <link rel="stylesheet" href="static/css/query-input-design.css">
+    <link rel="stylesheet" href="static/css/query-response-table-design.css">
+    <link rel="stylesheet" href="static/css/table-design.css">
+</head>
+
+<body>
+    <header>CSI 2132 Lab #8: Normalisation</header>
+    <div class="container">
+        <nav>
+            <a href="{{ url_for('student_homepage') }}">Home</a>
+            <br>
+            <a href="{{ url_for('lab_material_one') }}">Lab Material 1</a>
+            <br>
+            <a href="{{ url_for('lab_material_two') }}">Lab Material 2</a>
+            <br>
+            <a href="{{ url_for('lab_material_three') }}">Lab Material 3</a>
+            <br>
+            <a href="{{ url_for('lab_material_four') }}">Lab Material 4</a>
+            <br>
+            <a href="{{ url_for('lab_material_five') }}">Lab Material 5</a>
+            <br>
+            <a href="{{ url_for('lab_material_six') }}">Lab Material 6</a>
+            <br>
+            <a href="#">Lab Material 8</a>
+        </nav>
+        <main>
+            <h2>Principles of Database Normalization</h2>
+            <p>This material focuses on the topic of database normalization, covering its theoretical and practical
+                applications. It introduces functional dependencies as constraints between attributes and explains how
+                they are used to define relation schemas. Practical exercises involve creating tables and normalizing
+                them according to the discussed normal forms.</p>
+            <h2>DB Design Theory and Normalization</h2>
+            <p>DB Design</p>
+            <ul>
+                <li>So far, we have assumed that attributes are grouped to form
+                    a relation schema by using the common sense of the database
+                    designer, leading to natural and logical grouping of the
+                    attributes.</li>
+                <li>But it is very important to have a measure of the goodness or
+                    the quality of our relation schemas. </li>
+            </ul>
+            <p>Some of the most common problems that we usually have in our schemas are: </p>
+            <ul>
+                <li>Anomalies that cause redundant work during insertion,
+                    modification or deletion of a relation.</li>
+                <li>Waste of storage space due to NULLs and the difficult to
+                    perform selections, aggregations and joins due to NULL values.</li>
+                <li>Generation of invalid data during joins, matching attributes
+                    that may not represent a proper relationship.</li>
+            </ul>
+            <p>Functional Dependencies</p>
+            <ul>
+                <li>A constraint between two sets of attributes from the database.</li>
+                <li>A functional dependency, denoted by <b>X → Y</b>, means that the value of Y
+                    <b>depend on</b>, or is determined by, the value of X.<br>
+                    X → Y doesn't infer Y → X
+                </li>
+                <li>The main use is to describe a relation schema by specifying constrains on its
+                    attributes that must hold at all times.</li>
+            </ul>
+            <p>Normalization</p>
+            <ul>
+                <li>
+                    The normalization process apply several tests to a relation
+                    schema to certify that it satisfies a certain normal form.
+                </li>
+                <li>The normal form of a relation refers to the highest normal
+                    form condition that it meets.</li>
+            </ul>
+            <p>Normalization based on Primary Key</p>
+            <ul>
+                <li>The defined and commonly used normal forms are:</li>
+                <ul>
+                    <li>1 NF</li>
+                    <li>2 NF</li>
+                    <li>3 NF</li>
+                    <li>BCNF</li>
+                </ul>
+                <li>Other normal forms that are impractical to use are: </li>
+                <ul>
+                    <li>4 NF </li>
+                    <li>5 NF</li>
+                </ul>
+            </ul>
+            <button class="collapsible">1NF First Normal Form</button>
+            <div class="content">
+                <br>
+                <ul>
+                    <li>
+                        <b>All the attributes must be atomic (simple and indivisible).</b>
+                    </li>
+                </ul>
+                <br>
+                <img src="{{ url_for('static', filename='images/firstNormalFormCombined.png') }}"
+                    alt="Combined Department Table Violating First Normal Form" class="responsive-image">
+                <br>
+                <p>In the Department Table shown above, the Dlocations column contains sets of locations (e.g.,
+                    "Bellaire, Sugarland, Houston") rather than single, atomic values. This violates the principle of
+                    atomicity required for 1NF.</p>
+                <br>
+                <img src="{{ url_for('static', filename='images/firstNormalFormSeparated.png') }}"
+                    alt="Separated Department Tables Holding First Normal Form" class="responsive-image">
+                <br>
+                <p>To address this, as shown above the Dlocations column should be split into individual rows so that
+                    each row contains only one location. This ensures that each attribute contains atomic values.</p>
+            </div>
+            <br>
+            <button class="collapsible">2NF Second Normal Form</button>
+            <div class="content">
+                <br>
+                <ul>
+                    <li><b>Must satisfy 1NF.</b></li>
+                    <li><b>No Partial Dependency.</b></li>
+                    <ul>
+                        <li>All non-prime attributes
+                            should be fully functionally dependent on the candidate
+                            key.</li>
+                    </ul>
+                </ul>
+            </div>
+            <br>
+            <button class="collapsible">3NF Third Normal Form</button>
+            <div class="content">
+                <br>
+                <ul>
+                    <li><b>Must satisfy 2NF.</b></li>
+                    <li><b>There should NOT be transitive functional dependencies from the PK.
+                        </b></li>
+                </ul>
+            </div>
+            <br>
+            <button class="collapsible">BCNF Boyce-Codd Normal Form</button>
+            <div class="content">
+                <br>
+                <ul>
+                    <li><b>Must satisfy 3NF.</b></li>
+                    <li><b>Every determinant in a FD rule has to be a candidate key.
+                        </b></li>
+                </ul>
+            </div>
+            <br>
+        </main>
+    </div>
+    <script src="static/js/query-execution.js"></script>
+    <script src="static/js/collapsiblescript.js"></script>
+</body>
+
+</html>

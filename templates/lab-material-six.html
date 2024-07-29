@@ -48,23 +48,29 @@
                     implemented (as drivers) for a particular DB. i.e.
                     PostgreSQL and MySQL have different JDBC drivers</li>
             </ul>
-            <h2>Download & Install IntelliJ</h2>
-            <ul>
-                <li>In the Jet Brains IntelliJ IDEA Download page scroll down to reach the Community Edition or use the
-                    Ultimate Version by using the University of Ottawa Jet Brains License. </li>
-                <li><a href="https://www.jetbrains.com/idea/" target="_blank">Download IntelliJ</a></li>
-                <li>If you decide to use the Ultimate Version, Login In/ Create a account on JetBrains with your
-                    University of Ottawa student email.</li>
+            <br>
+            <button class="collapsible">Download & Install IntelliJ</button>
+            <div class="content">
                 <br>
-                <img src="{{ url_for('static', filename='images/intelliJLicensePage.png') }}"
-                    alt="IntelliJ License Page" class="responsive-image">
-                <br><br>
-                <img src="{{ url_for('static', filename='images/jetBrainsAccount.png') }}"
-                    alt="Jet Brains Account Creation" class="responsive-image">
-                <br><br>
-                <li>Setup IntelliJ and select Open JDK
-                </li>
-            </ul>
+                <ul>
+                    <li>In the Jet Brains IntelliJ IDEA Download page scroll down to reach the Community Edition or use
+                        the
+                        Ultimate Version by using the University of Ottawa Jet Brains License. </li>
+                    <li><a href="https://www.jetbrains.com/idea/" target="_blank">Download IntelliJ</a></li>
+                    <li>If you decide to use the Ultimate Version, Login In/ Create a account on JetBrains with your
+                        University of Ottawa student email.</li>
+                    <br>
+                    <img src="{{ url_for('static', filename='images/intelliJLicensePage.png') }}"
+                        alt="IntelliJ License Page" class="responsive-image">
+                    <br><br>
+                    <img src="{{ url_for('static', filename='images/jetBrainsAccount.png') }}"
+                        alt="Jet Brains Account Creation" class="responsive-image">
+                    <br><br>
+                    <li>Setup IntelliJ and select Open JDK
+                    </li>
+                </ul>
+            </div>
+            <br>
             <h2>Download the Driver</h2>
             <ul>
                 <li><a href="https://jdbc.postgresql.org/" target="_blank">Download JDBC</a></li>
@@ -76,7 +82,8 @@
                 <br>
                 <h3>Create a new Java Project</h3>
                 <ul>
-                    <li>If the Add Sample Code is checked during project creation, a Main class will be added. If not create a new class inside the package with a static
+                    <li>If the Add Sample Code is checked during project creation, a Main class will be added. If not
+                        create a new class inside the package with a static
                         main method.
                     </li>
                     <li>From the Project Properties, click on</li>
@@ -88,7 +95,18 @@
                             alt="Adding JAR File in IntelliJ" class="responsive-image">
                         <br><br>
                     </ol>
-                    <li>Code 
+                    <li>JDBC Coding in Java</li>
+                    <ol>
+                        <li>
+                            Import the JDBC driver
+                        </li>
+                        <li>
+                            Connect to a Database
+                        </li>
+                        <li>Issue a Query and process the result
+                        </li>
+                    </ol>
+                    <li>Code
                         <pre>
                             <code>
 import java.sql.Connection;
@@ -127,12 +145,42 @@ public class Main {
         } catch (SQLException exception) {
             System.out.println("An exception was thrown: " + exception.getMessage());
         }
-    }
+    }   
 }
                             </code>
                         </pre>
                     </li>
-                </ul> 
+                    <li>JDBC Coding in Java</li>
+                    <ul>
+                        <li>Import the JDBC driver & other libraries.</li>
+                        <li>It is NOT appropriate to import org.postgresql directly.</li>
+                        <li>Remember the import lines go after the package line.</li>
+                        <li>Connect to a Database.</li>
+                        <ul>
+                            <li>
+                                Connection db = DriverManager.getConnection(url,
+                                username, password);
+                            </li>
+                            <li>URL is in the form of:</li>
+                            <ul>
+                                <li>jdbc:postgresql:database</li>
+                                <li>jdbc:postgresql://host:port/database</li>
+                                <li>Username:</li>
+                                <li>Password:</li>
+                            </ul>
+                        </ul>
+                        <li>Issue a Query and process the result.</li>
+                        <ul>
+                            <li>Statement st = db.createStatement(); </li>
+                            <li>ResultSet rs = st.executeQuery(query);</li>
+                            <li>//Process the Result Set </li>
+                            <li>rs.close();</li>
+                            <li>st.close();
+                            </li>
+                        </ul>
+                    </ul>
+                </ul>
+
             </div>
             <br>
         </main>
