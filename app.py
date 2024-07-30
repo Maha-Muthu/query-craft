@@ -104,9 +104,25 @@ def lab_material_five():
 def lab_material_six():
     return render_template('lab-material-six.html')
 
+@app.route('/lab-material-seven')
+def lab_material_seven():
+    return render_template('lab-material-seven.html')
+
 @app.route('/lab-material-eight')
 def lab_material_eight():
     return render_template('lab-material-eight.html')
+
+@app.route('/lab-material-nine')
+def lab_material_nine():
+    return render_template('lab-material-nine.html')
+
+@app.route('/lab-material-ten')
+def lab_material_ten():
+    return render_template('lab-material-ten.html')
+
+@app.route('/lab-material-eleven')
+def lab_material_eleven():
+    return render_template('lab-material-eleven.html')
 
 @app.route('/practice-query-one')
 def practice_query_one():

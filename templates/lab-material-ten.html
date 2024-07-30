@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databases Lab 10</title>
+    <link rel="stylesheet" href="static/css/page-skeleton-design.css">
+    <link rel="stylesheet" href="static/css/collapsible-design.css">
+    <link rel="stylesheet" href="static/css/query-input-design.css">
+    <link rel="stylesheet" href="static/css/query-response-table-design.css">
+    <link rel="stylesheet" href="static/css/table-design.css">
+</head>
+
+<body>
+    <header>CSI 2132 Lab #10: Indexes in PostgresSQL</header>
+    <div class="container">
+        <nav>
+            <a href="{{ url_for('student_homepage') }}">Home</a>
+            <br>
+            <a href="{{ url_for('lab_material_one') }}">Lab Material 1</a>
+            <br>
+            <a href="{{ url_for('lab_material_two') }}">Lab Material 2</a>
+            <br>
+            <a href="{{ url_for('lab_material_three') }}">Lab Material 3</a>
+            <br>
+            <a href="{{ url_for('lab_material_four') }}">Lab Material 4</a>
+            <br>
+            <a href="{{ url_for('lab_material_five') }}">Lab Material 5</a>
+            <br>
+            <a href="{{ url_for('lab_material_six') }}">Lab Material 6</a>
+            <br>
+            <a href="{{ url_for('lab_material_seven') }}">Lab Material 7</a>
+            <br>
+            <a href="{{ url_for('lab_material_eight') }}">Lab Material 8</a>
+            <br>
+            <a href="{{ url_for('lab_material_nine') }}">Lab Material 9</a>
+            <br>
+            <a href="#">Lab Material 10</a>
+            <br>
+            <a href="{{ url_for('lab_material_eleven') }}">Lab Material 11</a>
+        </nav>
+        <main>
+            <h2>Indexing Strategies in PostgreSQL</h2>
+            <p>This PDF material delves into the topic of indexes in PostgreSQL. It categorizes PostgreSQL indexes based
+                on definition and structure, covering single-column, multi-column, partial, and unique indexes The
+                exercises show the impact of adding indexes on query efficiency. The content emphasizes how indexes can
+                optimize data retrieval and improve database performance.</p>
+            <h3>Indexes in PostgreSQL</h3>
+            <p><b>Types of Indexes in PostgreSQL - definition</b></p>
+            <p>PostgreSQL indexes are categorized based on their definition as:</p>
+            <ul>
+                <li>Single-column index</li>
+                <ul>
+                    <li>
+                        An index defined on a single table column.
+                    </li>
+                </ul>
+                <li>Multi-column index</li>
+                <ul>
+                    <li>
+                        An index defined on multiple table columns.
+                    </li>
+                </ul>
+                <li>Partial index </li>
+                <ul>
+                    <li>
+                        An index defined on both columns and rows.
+                    </li>
+                </ul>
+                <li>Unique index</li>
+                <ul>
+                    <li>
+                        An index which enforces that the indexed keys are unique.
+                    </li>
+                </ul>
+            </ul>
+            <p><b>Types of Indexes in PostgreSQL - structure</b></p>
+            <p>PostgreSQL indexes are categorized based on their structure as:</p>
+            <ul>
+                <li>B-Tree Index</li>
+                <ul>
+                    <li>
+                        Useful for single value search or to scan a range, but also
+                        for pattern matching.
+                    </li>
+                </ul>
+                <li>Hash Index
+                </li>
+                <ul>
+                    <li>
+                        Efficient when querying for equality.
+                    </li>
+                </ul>
+                <li>Generalized Inverted Index (GIN)</li>
+                <ul>
+                    <li>
+                        Useful for indexing array values and testing the presence of an item.
+
+                    </li>
+                </ul>
+                <li>Generalized Search Tree (GiST)</li>
+                <ul>
+                    <li>
+                        Complex index structure useful for searches such as nearest-neighbor or pattern matching.
+                    </li>
+                </ul>
+                <li>Space Partitioned GiST (SP-GiST)</li>
+                <ul>
+                    <li>
+                        Similar to GiST, this index supports space partitioned trees such as quadtrees, k-d trees, and
+                        radix trees.
+                    </li>
+                </ul>
+                <li>Block Range Index (BRIN) </li>
+                <ul>
+                    <li>
+                        This index stores summary information for each table block range.
+                    </li>
+                </ul>
+            </ul>
+            <p>Simplified definition of in index in PostgreSQL
+            </p>
+            <pre>
+CREATE INDEX [index_name] ON table_name [USING method] 
+( column_name [ASC | DESC] [NULLS {FIRST | LAST }], ... );
+            </pre>
+            <ul>
+                <li>Specify the index name after the CREATE INDEX clause. The index name
+                    should be meaningful and easy to remember. If the name is omitted,
+                    PostgreSQL chooses a suitable name based on the parent table's name and the
+                    indexed column name(s).</li>
+                <li>Specify the name of the table to which the index belongs.</li>
+                <li>Specify the index method such as btree, hash, gist, spgist, gin, and brin. </li>
+                <li>PostgreSQL uses btree by default.</li>
+                <li>List one or more columns that to be stored in the index.</li>
+                <li>The ASC and DESC specify the sort order. ASC is the default. NULLS
+                    FIRST or NULLS LAST specifies nulls sort before or after non-nulls. The NULLS
+                    FIRST is the default when DESC is specified and NULLS LAST is the default
+                    when DESC is not specified.</li>
+                <li>To check if a query uses an index or not, you use the EXPLAIN statement.</li>
+            </ul>
+            <button class="collapsible">Example Database Schema</button>
+            <div class="content">
+                <br>
+            </div>
+            <br>
+            <button class="collapsible">Example Database Schema</button>
+            <div class="content">
+                <br>
+            </div>
+            <br>
+        </main>
+    </div>
+    <script src="static/js/query-execution.js"></script>
+    <script src="static/js/collapsiblescript.js"></script>
+</body>
+
+</html>

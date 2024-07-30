@@ -10,7 +10,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "8082:5432"
 
   web:
     build: .
@@ -27,7 +27,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
     ports:
-      - "8080:80"
+      - "8081:80"
     volumes:
       - pgadmin_data:/var/lib/pgadmin
     depends_on:

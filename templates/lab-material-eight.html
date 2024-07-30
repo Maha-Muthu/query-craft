@@ -95,6 +95,8 @@
             <div class="content">
                 <br>
                 <ul>
+                    <li><b>All rows must be unique.</b></li>
+                    <li><b>All cells must contain only a single value.</b></li>
                     <li>
                         <b>All the attributes must be atomic (simple and indivisible).</b>
                     </li>
@@ -112,6 +114,12 @@
                 <br>
                 <p>To address this, as shown above the Dlocations column should be split into individual rows so that
                     each row contains only one location. This ensures that each attribute contains atomic values.</p>
+                <h3>Consider the schema shown below</h3>
+                <br>
+                <img src="{{ url_for('static', filename='images/normalizationSchema.png') }}" alt="Schema for Normalization"
+                    class="responsive-image">
+                <br>
+                <p>Making the schema in 1 NF</p>
             </div>
             <br>
             <button class="collapsible">2NF Second Normal Form</button>
