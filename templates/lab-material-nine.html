@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databases Lab 9</title>
+    <link rel="stylesheet" href="static/css/page-skeleton-design.css">
+    <link rel="stylesheet" href="static/css/collapsible-design.css">
+    <link rel="stylesheet" href="static/css/query-input-design.css">
+    <link rel="stylesheet" href="static/css/query-response-table-design.css">
+    <link rel="stylesheet" href="static/css/table-design.css">
+</head>
+
+<body>
+    <header>CSI 2132 Lab #9: Assertions and Triggers</header>
+    <div class="container">
+        <nav>
+            <a href="{{ url_for('student_homepage') }}">Home</a>
+            <br>
+            <a href="{{ url_for('lab_material_one') }}">Lab Material 1</a>
+            <br>
+            <a href="#">Lab Material 2</a>
+            <br>
+            <a href="{{ url_for('lab_material_three') }}">Lab Material 3</a>
+            <br>
+            <a href="{{ url_for('lab_material_four') }}">Lab Material 4</a>
+            <br>
+            <a href="{{ url_for('lab_material_five') }}">Lab Material 5</a>
+        </nav>
+        <main>
+            <h2>Advanced Database Management: Assertions and Triggers</h2>
+            <p>This material focuses on assertions and triggers in PostgreSQL, key elements for maintaining data
+                integrity and automating database tasks. It introduces assertions, which are special types of integrity
+                constraints applicable to the entire database. Examples demonstrate how to create and use triggers for
+                different scenarios. The lab also includes practical exercises on writing and testing trigger procedures
+                using PL-PGSQL in pgAdmin.</p>
+            <h3>
+                Integrity Constraints
+            </h3>
+            <p>Integrity constraints are rules used in databases to ensure the accuracy and consistency of data. These
+                constraints help maintain the integrity of the data by enforcing certain conditions whenever data is
+                inserted, updated, or deleted.</p>
+            <p>Note - Operations that violate any integrity constraint at the tuple level are disallowed.</p>
+            <button class="collapsible">Primary key constraints</button>
+            <div class="content">
+                <br>
+                <p>By default, DBMS checks that the
+                    combination of values for those attributes declared as
+                    primary key remains unique in the relation and that none of
+                    them are null.</p>
+                <pre>
+CREATE TABLE table_name (
+column1 datatype,
+column2 datatype,
+...
+CONSTRAINT constraint_name PRIMARY KEY (column_name)
+);
+        </pre>
+            </div>
+            <br>
+            <button class="collapsible">Foreign key constraints</button>
+            <div class="content">
+                <br>
+                <p>Control what attribute values can
+                    be stored in the relation holding the foreign key field. It can
+                    point to a primary key attribute in another relation or to a
+                    non-PK attribute having the UNIQUE constraint.
+                </p>
+                <pre>
+CREATE TABLE table_name (
+column1 datatype,
+column2 datatype,
+...
+CONSTRAINT constraint_name PRIMARY KEY (column_name)
+CONSTRAINT constraint_name FOREIGN KEY (column_name) REFERENCES parent_table(parent_column) MATCH SIMPLE 
+ON UPDATE CASCADE ON DELETE CASCADE
+);
+        </pre>
+            </div>
+            <br>
+            <button class="collapsible">Referential integrity constraints</button>
+            <div class="content">
+                <br>
+                <p>Specifies what happens
+                    to the tuples in the foreign relation when a deletion or
+                    update of a primary key attribute value is about to occur in
+                    the main table.
+                </p>
+                <pre>
+CREATE TABLE table_name (
+column1 datatype,
+column2 datatype,
+...
+CONSTRAINT constraint_name PRIMARY KEY (column_name)
+CONSTRAINT constraint_name FOREIGN KEY (column_name) REFERENCES parent_table(parent_column) MATCH SIMPLE 
+ON UPDATE CASCADE ON DELETE CASCADE
+);
+        </pre>
+            </div>
+            <br>
+            <button class="collapsible">Domain constraints</button>
+            <div class="content">
+                <br>
+                <p>Restricts the set of values an attribute
+                    can take to lie within a particular domain.
+                </p>
+                <p>A CHECK clause is added to the attribute definition.</p>
+                <pre>
+CREATE TABLE table_name (
+column1 datatype,
+column2 datatype,
+...
+CONSTRAINT constraint_name PRIMARY KEY (column_name)
+CONSTRAINT constraint_name CHECK (condition)
+);
+        </pre>
+            </div>
+            <br>
+            <button class="collapsible">General constraints</button>
+            <div class="content">
+                <br>
+                <p>Additional constraints applicable to the environment being modeled.</p>
+                <ul>
+                    <li>They are highly model-specific and cannot be captured by
+                        any of the previous types of constraints.</li>
+                    <li>The way to do this in SQL is through declarative
+                        assertions.
+                    </li>
+                </ul>
+            </div>
+            <br>
+            <button class="collapsible">Assertions</button>
+            <div class="content">
+                <br>
+                <ul>
+                    <li>Special type of integrity constraint and shares the same
+                        namespace as other constraints.</li>
+                    <li>Assertion is not necessarily dependent on one particular table.
+                    </li>
+                    <pre>
+CREATE ASSERTION &lt;name&gt; CHECK (&lt;condition&gt;)                        
+                    </pre>
+                    <li>&lt;name&gt; is a mandatory identifier for the constraint.</li>
+                    <li>It can be used later on to modify or drop the constraint. </li>
+                    <li>&lt;condition&gt; can be written as in the WHERE clause
+                        If it holds true, the assertion is not violated and the integrity
+                        of the data is guaranteed.
+                    </li>
+                    <li>
+                        <b>Example:</b> Limit the number of sailors and boats to 100 in total.
+                    </li>
+                    <pre>
+create assertion smallClub
+check (
+    (select count(*) from sailors s) +
+    (select count(*) from boats b) &lt; 100
+)
+                        </pre>
+                    <li><b>Note - PostgreSQL does not implement assertions at present !
+                        </b></li>
+                </ul>
+            </div>
+            <br>
+            <button class="collapsible">Triggers</button>
+            <div class="content">
+                <br>
+                <p>Triggers are database objects that are automatically executed or fired when a specified event occurs
+                    on a particular table or view. Events that can activate a trigger include INSERT, UPDATE, and
+                    DELETE. Triggers can be used to validate input data, or maintain audit trails.</p>
+                <p>They are database callback functions, which are automatically performed/ invoked when a specified
+                    database event occurs.</p>
+                <h3>Trigger Procedures (functions)</h3>
+                <ul>
+                    <li>Must be defined before the CREATE TRIGGER statement can execute.</li>
+                    <li>Must be declared as a function taking no arguments and returning type trigger.</li>
+                    <li>Can be written in C (low-level) or PL-PGSQL (high-level).</li>
+                    <li>This material uses PL-PGSQL (Procedural Language for PostgresSQL) from pgAdmin.</li>
+                    <li>Some variables that are often needed:</li>
+                    <ul>
+                        <li>NEW</li>
+                        <ul>
+                            <li>Holds the contents of the row to insert or update.</li>
+                        </ul>
+                        <li>OLD</li>
+                        <ul>
+                            <li>Holds the contents of the original row.</li>
+                        </ul>
+                        <li>TG_NARGS</li>
+                        <ul>
+                            <li>Number of input arguments passed on to
+                                the trigger procedure.</li>
+                        </ul>
+                        <li>TG_ARGV[ ]</li>
+                        <ul>
+                            <li>Text array containing the arguments,
+                                accessed as $1, $2, etc.
+                            </li>
+                        </ul>
+                    </ul>
+                </ul>
+                <h3>Components of a Trigger Query</h3>
+                <pre>
+CREATE TRIGGER name {BEFORE | AFTER} 
+{ event [OR… ] } [OF attribute] ON table 
+[ FOR [EACH] {ROW | STATEMENT} ] 
+[ WHEN (condition) ] 
+EXECUTE PROCEDURE functionname(arguments)                         
+                </pre>
+                <ul>
+                    <li>Event(s)</li>
+                    <ul>
+                        <li>An INSERT, UPDATE or DELETE operation on a particular tuple.</li>
+                    </ul>
+                    <li>Condition</li>
+                    <ul>
+                        <li>Determines whether the action should be executed. If no condition is specified, the
+                            trigger is executed once the event takes place.</li>
+                    </ul>
+                    <li>Action</li>
+                    <ul>
+                        <li>Usually a sequence of SQL statements, but could be also a database transaction or
+                            running an external program.</li>
+                    </ul>
+                    <li>BEFORE</li>
+                    <ul>
+                        <li>Constraints are checked before the operation
+                            is attempted.</li>
+                    </ul>
+                    <li>AFTER</li>
+                    <ul>
+                        <li>Constraints are checked after the operation has
+                            been carried out.</li>
+                    </ul>
+                    <li>OF</li>
+                    <ul>
+                        <li>Column associated with the UPDATE operation.</li>
+                    </ul>
+                    <li>ROW</li>
+                    <ul>
+                        <li>The trigger is invoked once per row affected by
+                            the underlying operation. Individual attribute values per
+                            row are available.</li>
+                    </ul>
+                    <li>STATEMENT </li>
+                    <ul>
+                        <li>The trigger is invoked only once for the
+                            entire operation no matter how many rows are affected. No attribute values are available.
+                        </li>
+                    </ul>
+                </ul>
+                <p>The following examples and exercises use the sailors, bots and reserves tables in the laboratories
+                    schema created in Exercise 20 in Lab Material 5.</p>
+                <h3>Example: Create a trigger procedure with PL-PGSQL to ensure that a sailor's name is not null and
+                    their age
+                    does not exceed 50, raising exceptions if these conditions are not met.</h3>
+                <pre>
+CREATE FUNCTION laboratories.check_sailor_name_age()
+    RETURNS trigger AS
+$BODY$
+BEGIN
+
+IF NEW.sname IS NULL THEN
+    RAISE EXCEPTION 'The sailor must have a name';
+END IF;
+
+IF NEW.age > 50 THEN
+    RAISE EXCEPTION 'The sailor must be 50 or below';
+END IF;
+                
+RETURN NEW;
+                
+END
+$BODY$ LANGUAGE plpgsql;                
+                </pre>
+                <h3>Create a trigger to invoke the check_sailor_name_age() procedure before updating each row in the
+                    sailors table.</h3>
+                <pre>
+CREATE TRIGGER check_sailor
+BEFORE UPDATE ON laboratories.sailors
+FOR EACH ROW
+EXECUTE PROCEDURE check_sailor_name_age();
+                </pre>
+            </div>
+            <br>
+            <h3>References</h3>
+            <ul>
+                <li><a href="http://www.postgresql.org/docs/8.1/static/triggers.html" target="_blank">Triggers in
+                        PostgreSQL</a></li>
+                <li><a href="http://www.postgresql.org/docs/8.1/static/plpgsql-trigger.html" target="_blank">Creating
+                        trigger procedures with PL-PGSQL</a></li>
+            </ul>
+            <br>
+
+        </main>
+    </div>
+    <script src="static/js/collapsiblescript.js"></script>
+    <script src="static/js/query-execution.js"></script>
+</body>
+
+</html>
