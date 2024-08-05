@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databases Lab 11</title>
+    <link rel="stylesheet" href="static/css/page-skeleton-design.css">
+    <link rel="stylesheet" href="static/css/collapsible-design.css">
+    <link rel="stylesheet" href="static/css/query-input-design.css">
+    <link rel="stylesheet" href="static/css/query-response-table-design.css">
+    <link rel="stylesheet" href="static/css/table-design.css">
+</head>
+
+<body>
+    <header>CSI 2132 Lab #11: Development in Django Framework</header>
+    <div class="container">
+        <nav>
+            <a href="{{ url_for('student_homepage') }}">Home</a>
+            <br>
+            <a href="{{ url_for('lab_material_one') }}">Lab Material 1</a>
+            <br>
+            <a href="{{ url_for('lab_material_two') }}">Lab Material 2</a>
+            <br>
+            <a href="{{ url_for('lab_material_three') }}">Lab Material 3</a>
+            <br>
+            <a href="{{ url_for('lab_material_four') }}">Lab Material 4</a>
+            <br>
+            <a href="{{ url_for('lab_material_five') }}">Lab Material 5</a>
+            <br>
+            <a href="{{ url_for('lab_material_six') }}">Lab Material 6</a>
+            <br>
+            <a href="{{ url_for('lab_material_seven') }}">Lab Material 7</a>
+            <br>
+            <a href="{{ url_for('lab_material_eight') }}">Lab Material 8</a>
+            <br>
+            <a href="{{ url_for('lab_material_nine') }}">Lab Material 9</a>
+            <br>
+            <a href="{{ url_for('lab_material_ten') }}">Lab Material 10</a>
+            <br>
+            <a href="#">Lab Material 11</a>
+        </nav>
+        <main>
+            <h2>Web Development with Django Framework</h2>
+            <p>This material provides a detailed guide on web application development using the Django framework. It covers
+                installation of necessary tools, setting up Django projects and applications, and using models, views,
+                and templates within the Django architecture. Learning outcomes include understanding the Django MVT architecture, setting up and managing Django projects, creating and using models, views, and templates, and handling database
+                migrations.</p>
+            <h3>Installation</h3>
+            <ul>
+                <li>Django needs python 3.x.x and above.</li>
+                <li>We use pip for managing packages, <a href="https://pip.pypa.io/en/stable/" target="_blank">pip documentation</a></li>
+                <li>To install pip if you don't already have it, there are two ways:</li>
+                <ul>
+                    <li>Ensurepip</li>
+                    <ul>
+                        <li>python -m ensurepip -upgrade</li>
+                    </ul>
+                    <li>Using get-pip.py script:</li>
+                    <ul>
+                        <li>Get the script from: <a href="https://bootstrap.pypa.io/get-pip.py" target="_blank">pip documentation</a></li>
+                        <li>python get-pip.py</li>
+                    </ul>
+                </ul>
+                <li>In order to manage environments per project, we use pipenv.</li>
+                <ul>
+                    <li>To install run the following: pip install pipenv</li>
+                </ul>
+            </ul>
+            <h3>Django Framework</h3>
+            <ul>
+                <li>
+                    Python based web development framework.
+                </li>
+                <li>It is follows the model-view-template architecture.</li>
+                <li><a href="https://docs.djangoproject.com/en/4.1/" target="_blank">Documentation Link</a></li>
+                <li><b>Model: </b>A model corresponds to a table in the database, and 
+                    instance of the model corresponds of the row of the table, the 
+                    properties of the model make the columns of the table.</li>
+                <li><b>View: </b>A view can be thought of as the controller, it is a place 
+                    which decides from where we fetch the data and which 
+                    template needs to be rendered.</li>
+                <li><b>Template: </b>This can be thought of as the html page which will 
+                    be rendered on the web.
+                    </li>
+            </ul>
+        </main>
+    </div>
+</body>
+
+</html>

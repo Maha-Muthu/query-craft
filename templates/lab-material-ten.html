@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databases Lab 10</title>
+    <link rel="stylesheet" href="static/css/page-skeleton-design.css">
+    <link rel="stylesheet" href="static/css/collapsible-design.css">
+    <link rel="stylesheet" href="static/css/query-input-design.css">
+    <link rel="stylesheet" href="static/css/query-response-table-design.css">
+    <link rel="stylesheet" href="static/css/table-design.css">
+</head>
+
+<body>
+    <header>CSI 2132 Lab #10: Indexes in PostgresSQL</header>
+    <div class="container">
+        <nav>
+            <a href="{{ url_for('student_homepage') }}">Home</a>
+            <br>
+            <a href="{{ url_for('lab_material_one') }}">Lab Material 1</a>
+            <br>
+            <a href="{{ url_for('lab_material_two') }}">Lab Material 2</a>
+            <br>
+            <a href="{{ url_for('lab_material_three') }}">Lab Material 3</a>
+            <br>
+            <a href="{{ url_for('lab_material_four') }}">Lab Material 4</a>
+            <br>
+            <a href="{{ url_for('lab_material_five') }}">Lab Material 5</a>
+            <br>
+            <a href="{{ url_for('lab_material_six') }}">Lab Material 6</a>
+            <br>
+            <a href="{{ url_for('lab_material_seven') }}">Lab Material 7</a>
+            <br>
+            <a href="{{ url_for('lab_material_eight') }}">Lab Material 8</a>
+            <br>
+            <a href="{{ url_for('lab_material_nine') }}">Lab Material 9</a>
+            <br>
+            <a href="#">Lab Material 10</a>
+            <br>
+            <a href="{{ url_for('lab_material_eleven') }}">Lab Material 11</a>
+        </nav>
+        <main>
+            <h2>Indexing Strategies in PostgreSQL</h2>
+            <p>This PDF material delves into the topic of indexes in PostgreSQL. It categorizes PostgreSQL indexes based
+                on definition and structure, covering single-column, multi-column, partial, and unique indexes The
+                exercises show the impact of adding indexes on query efficiency. The content emphasizes how indexes can
+                optimize data retrieval and improve database performance.</p>
+            <h3>Indexes in PostgreSQL</h3>
+            <p><b>Types of Indexes in PostgreSQL - definition</b></p>
+            <p>PostgreSQL indexes are categorized based on their definition as:</p>
+            <ul>
+                <li>Single-column index</li>
+                <ul>
+                    <li>
+                        An index defined on a single table column.
+                    </li>
+                </ul>
+                <li>Multi-column index</li>
+                <ul>
+                    <li>
+                        An index defined on multiple table columns.
+                    </li>
+                </ul>
+                <li>Partial index </li>
+                <ul>
+                    <li>
+                        An index defined on both columns and rows.
+                    </li>
+                </ul>
+                <li>Unique index</li>
+                <ul>
+                    <li>
+                        An index which enforces that the indexed keys are unique.
+                    </li>
+                </ul>
+            </ul>
+            <p><b>Types of Indexes in PostgreSQL - structure</b></p>
+            <p>PostgreSQL indexes are categorized based on their structure as:</p>
+            <ul>
+                <li>B-Tree Index</li>
+                <ul>
+                    <li>
+                        Useful for single value search or to scan a range, but also
+                        for pattern matching.
+                    </li>
+                </ul>
+                <li>Hash Index
+                </li>
+                <ul>
+                    <li>
+                        Efficient when querying for equality.
+                    </li>
+                </ul>
+                <li>Generalized Inverted Index (GIN)</li>
+                <ul>
+                    <li>
+                        Useful for indexing array values and testing the presence of an item.
+
+                    </li>
+                </ul>
+                <li>Generalized Search Tree (GiST)</li>
+                <ul>
+                    <li>
+                        Complex index structure useful for searches such as nearest-neighbor or pattern matching.
+                    </li>
+                </ul>
+                <li>Space Partitioned GiST (SP-GiST)</li>
+                <ul>
+                    <li>
+                        Similar to GiST, this index supports space partitioned trees such as quadtrees, k-d trees, and
+                        radix trees.
+                    </li>
+                </ul>
+                <li>Block Range Index (BRIN) </li>
+                <ul>
+                    <li>
+                        This index stores summary information for each table block range.
+                    </li>
+                </ul>
+            </ul>
+            <p>Simplified definition of in index in PostgreSQL
+            </p>
+            <pre>
+CREATE INDEX [index_name] ON table_name [USING method] 
+( column_name [ASC | DESC] [NULLS {FIRST | LAST }], ... );
+            </pre>
+            <ul>
+                <li>Specify the index name after the CREATE INDEX clause. The index name
+                    should be meaningful and easy to remember. If the name is omitted,
+                    PostgreSQL chooses a suitable name based on the parent table's name and the
+                    indexed column name(s).</li>
+                <li>Specify the name of the table to which the index belongs.</li>
+                <li>Specify the index method such as btree, hash, gist, spgist, gin, and brin. </li>
+                <li>PostgreSQL uses btree by default.</li>
+                <li>List one or more columns that to be stored in the index.</li>
+                <li>The ASC and DESC specify the sort order. ASC is the default. NULLS
+                    FIRST or NULLS LAST specifies nulls sort before or after non-nulls. The NULLS
+                    FIRST is the default when DESC is specified and NULLS LAST is the default
+                    when DESC is not specified.</li>
+                <li>To check if a query uses an index or not, you use the EXPLAIN statement.</li>
+            </ul>
+            <button class="collapsible">Indexes Implementation</button>
+            <div class="content">
+                <br>
+                <p>We will use a database with two tables: Employees and Addresses.</p>
+                <p>To create and populate the tables you can use the provided script (create_data.sql) from <a
+                        href="https://github.com/sebrestin/postgres-btree-dataset"
+                        target="_blank">postgres-btree-dataset</a>.</p>
+                <button class="collapsible">Single-column indexes</button>
+                <div class="content">
+                    <br>
+                    <p>To see single-column indexes in practice one can run the simple query that
+                        retrieves employees based on their id, such as the one below.</p>
+                    <p> Because there is no index yet on the id column of the employees table when running
+                        the query, the output does not include any trace of using an index.</p>
+                    <p>After creating a primary key on id column (which is an index with a unique constraint), the
+                        outcome is different.
+                    </p>
+                    <p>When executing a query with EXPLAIN, the output is a query plan that describes the steps the
+                        database will take in order to deliver the records.</p>
+                    <p>In the query plan below we see that the database will perform a sequential scan and will use a
+                        filter to eliminate records which do not respect the WHERE condition.</p>
+                    <p>Finally it estimates the execution time.</p>
+                    <p>In this plan there is no sign of any index - but there is no index yet.</p>
+                    <p>For the
+                        next query, a primary key is added and finally the same query is ran again.</p>
+                    <p>For better exemplification, after each statement that alters a table, a
+                        VACUUM ANALYZE is performed in order to refresh database statistics.
+                    </p>
+                    <p></p>
+                    <img src="{{ url_for('static', filename='images/indexesQueryExample1.png') }}"
+                        alt="Index Query Example 1" class="responsive-image">
+                    <br>
+                    <p>In this example the scan and condition type changes once an index can be
+                        used. </p>
+                    <p>The difference between the two query plans is as follow:</p>
+                    <p><b>Index Scan</b> is used instead of Sequential Scan because the database can
+                        take advantage of the primary key.</p>
+                    <p>The Filter section was replaced with Index Cond which represents the index
+                        lookup condition.</p>
+                    <p>The estimated time is less than the previous run.
+                    </p>
+                    <img src="{{ url_for('static', filename='images/indexesQueryExample2.png') }}"
+                        alt="Index Query Example 2" class="responsive-image">
+                    <br>
+                </div>
+                <button class="collapsible">Multi-column indexes</button>
+                <div class="content">
+                    <br>
+                    <p>PostgreSQL supports multi-column indexes up to 32 columns.</p>
+                    <p> The composite key is represented as a tuple. Thus, the index is
+                        ordered by the first key element, then by second and so on.</p>
+                    <p>We can define multi-column indexes by finding which columns have a
+                        smaller granularity within the data, and using them as leading keys
+                        in the index creation.
+                    </p>
+                    <p>In other words, a column with fewer data groups, but larger in
+                        size than any other column, should lead in the index definition. </p>
+                    <p>If this is respected for all index columns, then inside each of
+                        these groups, elements represent a contiguous sorted range
+                        within the leaf node chain, thus it is faster for an index lookup to
+                        traverse the leaf nodes once it has found where to start and
+                        where to stop, because it can traverse it in one iteration without
+                        interruption.
+                    </p>
+                    <p>In the example database, the multi-column index is built using the company, the
+                        department and the employee's last name, in this order.</p>
+                    <p>This index reflects a "belonging" relationship: an employee belongs to a
+                        department which belongs to a company.</p>
+                    <img src="{{ url_for('static', filename='images/indexesQueryExample3.png') }}"
+                        alt="Index Query Example 3" class="responsive-image">
+                    <br>
+                    <p>As previously, because there is no index yet, a sequential scan is
+                        performed to which a filter is applied.</p>
+
+                    <p>The query plan indicates that the index is used: the sequential scan is replaced
+                        by an index scan and the filter is now an index condition. Also there is an
+                        outstanding difference in time execution.
+                    </p>
+                    <img src="{{ url_for('static', filename='images/indexesQueryExample4.png') }}"
+                        alt="Index Query Example 4" class="responsive-image">
+                    <br>
+                </div>
+                <button class="collapsible">Partial indexes</button>
+                <div class="content">
+                    <br>
+                    <p>Partial indexes allow an index to be defined on the column, but also on
+                        the row, by using a condition.</p>
+                    <ul>
+                        <li>Partial indexes are suited for skewed datasets, in which one defines
+                            an index for the smaller part of the table.</li>
+                        <ul>
+                            <li>Queries that try to retrieve records from the smaller part will benefit from
+                                an index scan while when accessing the larger part it will fall back to a
+                                sequential scan as it would anyway, because of the large data percentage
+                                being accessed.</li>
+                        </ul>
+                        <li>A partial index has the following advantages:</li>
+                        <ul>
+                            <li>The index is smaller - it takes less memory and the lookup is faster.</li>
+                            <li>Write operations are faster, because the index does not have to
+                                update for every case.</li>
+                        </ul>
+                    </ul>
+                    <p>Indexes may be scanned depending on the query.</p>
+                    <p>In case of a partial index, an index scan is performed only when the
+                        query predicates match the partial index condition, otherwise it will
+                        execute a sequential scan.
+                    </p>
+                    <p>The queries that follow, will first illustrate the difference in space
+                        between a standard index and a partial index and afterwards the
+                        difference in execution. In order to see the size for tables and indexes
+                        one can run the following query:
+                    </p>
+                    <img src="{{ url_for('static', filename='images/indexesQueryExample5.png') }}"
+                        alt="Index Query Example 5" class="responsive-image">
+                    <br>
+                    <p>Indexes may be scanned depending on the query.</p>
+                    <p>In case of a partial index, an index scan is performed only when the
+                        query predicates match the partial index condition, otherwise a
+                        sequential scan is executed.</p>
+                    <p>The queries that follow, will first illustrate the difference in space
+                        between a standard index and a partial index and afterwards the
+                        difference in execution. In order to see the size for tables and
+                        indexes one can run the following query:
+                    </p>
+                    <img src="{{ url_for('static', filename='images/indexesQueryExample5Results.png') }}"
+                        alt="Index Query Example 5 with Results" class="responsive-image">
+                    <br>
+                    <p>The output shows statistics for the existing indexes.
+                    </p>
+                    <p>A standard index is added to the salary column. We run the
+                        statistics query and the output includes the new index.
+                    </p>
+                    <img src="{{ url_for('static', filename='images/indexesQueryExample6Results.png') }}"
+                        alt="Index Query Example 6 with Results" class="responsive-image">
+                    <br>
+                    <p>The standard index is dropped and instead a partial index is created on
+                        the same column.</p>
+                    <p>The difference between the partial index and
+                        standard index, is the WHERE clause which specifies only a small part
+                        of the rows to include.</p>
+                    <p>If we run the statistics query again, the space
+                        occupied by the partial index is significantly less: 16kB from 2208kB.
+                    </p>
+                    <img src="{{ url_for('static', filename='images/indexesQueryExample7Results.png') }}"
+                        alt="Index Query Example 7 with Results" class="responsive-image">
+                    <br>
+                    <p>If the predicates do not match the partial index condition, the index
+                        will not be used, instead a sequential scan is used.
+                    </p>
+                    <img src="{{ url_for('static', filename='images/indexesQueryExample8.png') }}"
+                        alt="Index Query Example 8" class="responsive-image">
+                    <br>
+                    <p>
+                        If the predicates, match the partial index condition, the index will be used.
+                    </p>
+                    <img src="{{ url_for('static', filename='images/indexesQueryExample9.png') }}"
+                        alt="Index Query Example 9" class="responsive-image">
+                    <br>
+                    <p>In the above query plan, the index is used as part of a bitmap
+                        index scan, i.e. a bitmap arrays have been created for the index.
+                    </p>
+                    <p>In order to force an index scan, one can limit the expected results:</p>
+                    <img src="{{ url_for('static', filename='images/indexesQueryExample10.png') }}"
+                        alt="Index Query Example 10" class="responsive-image">
+                    <br>
+                    <p>In this case, the database detects that it is much more efficient
+                        to just use the index, without building a bitmap.
+                    </p>
+                    <br>
+                </div>
+                <button class="collapsible">Unique indexes</button>
+                <div class="content">
+                    <br>
+                    <p>Unique indexes are indexes that enforce tree keys to be
+                        distinct.</p>
+                    <ul>
+                        <li>They are supported only with the B-Tree indexes.</li>
+                        <li>Primary keys are by default unique indexes, as presented earlier.
+                        </li>
+                    </ul>
+                    <br>
+                </div>
+                <br>
+            </div>
+            <br>
+            <h3>References</h3>
+            <ul>
+                <li><a href="https://www.qwertee.io/blog/postgresql-b-tree-index-explained-part-1/"
+                        target="_blank">Indexes in PostgreSQL</a></li>
+                <li><a href="https://www.postgresqltutorial.com/postgresql-indexes/postgresql-create-index/"
+                        target="_blank">Tutorial on indexes in PostgreSQL</a></li>
+            </ul>
+            <br>
+        </main>
+    </div>
+    <script src="static/js/query-execution.js"></script>
+    <script src="static/js/collapsiblescript.js"></script>
+</body>
+
+</html>

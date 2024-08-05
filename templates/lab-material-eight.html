@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databases Lab 8</title>
+    <link rel="stylesheet" href="static/css/page-skeleton-design.css">
+    <link rel="stylesheet" href="static/css/collapsible-design.css">
+    <link rel="stylesheet" href="static/css/query-input-design.css">
+    <link rel="stylesheet" href="static/css/query-response-table-design.css">
+    <link rel="stylesheet" href="static/css/table-design.css">
+</head>
+
+<body>
+    <header>CSI 2132 Lab #8: Normalisation</header>
+    <div class="container">
+        <nav>
+            <a href="{{ url_for('student_homepage') }}">Home</a>
+            <br>
+            <a href="{{ url_for('lab_material_one') }}">Lab Material 1</a>
+            <br>
+            <a href="{{ url_for('lab_material_two') }}">Lab Material 2</a>
+            <br>
+            <a href="{{ url_for('lab_material_three') }}">Lab Material 3</a>
+            <br>
+            <a href="{{ url_for('lab_material_four') }}">Lab Material 4</a>
+            <br>
+            <a href="{{ url_for('lab_material_five') }}">Lab Material 5</a>
+            <br>
+            <a href="{{ url_for('lab_material_six') }}">Lab Material 6</a>
+            <br>
+            <a href="{{ url_for('lab_material_seven') }}">Lab Material 7</a>
+            <br>
+            <a href="#">Lab Material 8</a>
+            <br>
+            <a href="{{ url_for('lab_material_nine') }}">Lab Material 9</a>
+            <br>
+            <a href="{{ url_for('lab_material_ten') }}">Lab Material 10</a>
+            <br>
+            <a href="{{ url_for('lab_material_eleven') }}">Lab Material 11</a>
+        </nav>
+        <main>
+            <h2>Principles of Database Normalization</h2>
+            <p>This material focuses on the topic of database normalization, covering its theoretical and practical
+                applications. It introduces functional dependencies as constraints between attributes and explains how
+                they are used to define relation schemas. Practical exercises involve creating tables and normalizing
+                them according to the discussed normal forms.</p>
+            <h2>DB Design Theory and Normalization</h2>
+            <p>DB Design</p>
+            <ul>
+                <li>So far, we have assumed that attributes are grouped to form
+                    a relation schema by using the common sense of the database
+                    designer, leading to natural and logical grouping of the
+                    attributes.</li>
+                <li>But it is very important to have a measure of the goodness or
+                    the quality of our relation schemas. </li>
+            </ul>
+            <p>Some of the most common problems that we usually have in our schemas are: </p>
+            <ul>
+                <li>Anomalies that cause redundant work during insertion,
+                    modification or deletion of a relation.</li>
+                <li>Waste of storage space due to NULLs and the difficult to
+                    perform selections, aggregations and joins due to NULL values.</li>
+                <li>Generation of invalid data during joins, matching attributes
+                    that may not represent a proper relationship.</li>
+            </ul>
+            <p>Functional Dependencies</p>
+            <ul>
+                <li>A constraint between two sets of attributes from the database.</li>
+                <li>A functional dependency, denoted by <b>X → Y</b>, means that the value of Y
+                    <b>depend on</b>, or is determined by, the value of X.<br>
+                    X → Y doesn't infer Y → X
+                </li>
+                <li>The main use is to describe a relation schema by specifying constrains on its
+                    attributes that must hold at all times.</li>
+            </ul>
+            <p>Normalization</p>
+            <ul>
+                <li>
+                    The normalization process apply several tests to a relation
+                    schema to certify that it satisfies a certain normal form.
+                </li>
+                <li>The normal form of a relation refers to the highest normal
+                    form condition that it meets.</li>
+            </ul>
+            <p>Normalization based on Primary Key</p>
+            <ul>
+                <li>The defined and commonly used normal forms are:</li>
+                <ul>
+                    <li>1 NF</li>
+                    <li>2 NF</li>
+                    <li>3 NF</li>
+                    <li>BCNF</li>
+                </ul>
+                <li>Other normal forms that are impractical to use are: </li>
+                <ul>
+                    <li>4 NF </li>
+                    <li>5 NF</li>
+                </ul>
+            </ul>
+            <button class="collapsible">1NF First Normal Form</button>
+            <div class="content">
+                <br>
+                <ul>
+                    <li><b>All rows must be unique.</b></li>
+                    <li><b>All cells must contain only a single value.</b></li>
+                    <li>
+                        <b>All the attributes must be atomic (simple and indivisible).</b>
+                    </li>
+                </ul>
+                <br>
+                <img src="{{ url_for('static', filename='images/firstNormalFormCombined.png') }}"
+                    alt="Combined Department Table Violating First Normal Form" class="responsive-image">
+                <br>
+                <p>In the Department Table shown above, the Dlocations column contains sets of locations (e.g.,
+                    "Bellaire, Sugarland, Houston") rather than single, atomic values. This violates the principle of
+                    atomicity required for 1NF.</p>
+                <br>
+                <img src="{{ url_for('static', filename='images/firstNormalFormSeparated.png') }}"
+                    alt="Separated Department Tables Holding First Normal Form" class="responsive-image">
+                <br>
+                <p>To address this, as shown above the Dlocations column should be split into individual rows so that
+                    each row contains only one location. This ensures that each attribute contains atomic values.</p>
+                <h4>Consider the schema shown below:</h4>
+                <br>
+                <img src="{{ url_for('static', filename='images/normalizationSchema.png') }}"
+                    alt="Schema for Normalization" class="responsive-image">
+                <br>
+                <p><b>Normalizing the table to First Normal Form:</b></p>
+                <br>
+                <img src="{{ url_for('static', filename='images/normalizationFirstNFAtomic.png') }}"
+                    alt="Make the Table in 1 NF: Each attribute has a single value." class="responsive-image">
+                <br>
+                <img src="{{ url_for('static', filename='images/normalizationFirstNFAtomic.png') }}"
+                    alt="Make the Table in 1 NF: Atomic Values." class="responsive-image">
+                <br>
+                <p><b>Tables in 1 NF:</b></p>
+                <br>
+                <img src="{{ url_for('static', filename='images/normalizationFirstNF.png') }}" alt="Tables in 1 NF."
+                    class="responsive-image">
+                <br>
+            </div>
+            <br>
+            <button class="collapsible">2NF Second Normal Form</button>
+            <div class="content">
+                <br>
+                <ul>
+                    <li><b>Must satisfy 1NF.</b></li>
+                    <li><b>No Partial Dependency.</b></li>
+                    <ul>
+                        <li>All non-prime attributes
+                            should be fully functionally dependent on the candidate
+                            key.</li>
+                    </ul>
+                </ul>
+                <br>
+                <img src="{{ url_for('static', filename='images/normalizationSecondNF.png') }}"
+                    alt="Combined Student Table Violating Second Normal Form" class="responsive-image">
+                <br>
+                <p><b>Tables in 2 NF:</b></p>
+                <img src="{{ url_for('static', filename='images/normalizedSecondNF.png') }}" alt="Tables in 2 NF."
+                    class="responsive-image">
+                <br>
+            </div>
+            <br>
+            <button class="collapsible">3NF Third Normal Form</button>
+            <div class="content">
+                <br>
+                <ul>
+                    <li><b>Must satisfy 2NF.</b></li>
+                    <li><b>No Transitive dependencies.
+                        </b></li>
+                    <ul>
+                        <li>All attributes must only be determinable by the primary/composite key, not by other keys.
+                        </li>
+                    </ul>
+                </ul>
+                <br>
+                <img src="{{ url_for('static', filename='images/normalizationThirdNF.png') }}"
+                    alt="Combined Tournament Table Violating Second Normal Form" class="responsive-image">
+                <br>
+                <p><b>Tables in 3 NF:</b></p>
+                <img src="{{ url_for('static', filename='images/normalizedThirdNF.png') }}" alt="Tables in 3 NF."
+                    class="responsive-image">
+                <br>
+            </div>
+            <br>
+            <button class="collapsible">BCNF Boyce-Codd Normal Form</button>
+            <div class="content">
+                <br>
+                <ul>
+                    <li><b>Must satisfy 3NF.</b></li>
+                    <li><b>Every determinant in a FD rule has to be a candidate key.
+                        </b></li>
+                    <ul>
+                        <li>For any dependency A → B, A should be a candidate key.</li>
+                    </ul>
+                </ul>
+                <br>
+                <img src="{{ url_for('static', filename='images/normalizationBCNF.png') }}"
+                    alt="Combined Student Table Violating Second Normal Form" class="responsive-image">
+                <br>
+                <p><b>Tables in BCNF:</b></p>
+                <img src="{{ url_for('static', filename='images/normalizedBCNF.png') }}" alt="Tables in BCNF NF."
+                    class="responsive-image">
+                <br>
+            </div>
+            <br>
+            <button class="collapsible">Understanding Normalization</button>
+            <div class="content">
+                <br>
+                <h3>Normalization: The Journey of the Messy Library</h3>
+                <p>Imagine a grand, ancient library filled with countless books. This library is a treasure trove of
+                    knowledge, but over the years, it has become disorganized. Books are scattered, some shelves hold
+                    mixed genres, and finding a specific book is like finding a needle in a haystack. The librarians,
+                    with their love for order, decide to embark on a journey to reorganize the library, making it a
+                    place where any book can be found with ease. This journey is akin to the process of normalization in
+                    databases.</p>
+                <h3>First Normal Form (1NF): Organizing by Genre</h3>
+                <p>The first step the librarians take is to ensure that each shelf holds books of a single genre only.
+                    No more shelves with both mystery novels and cookbooks mixed together. Every shelf is dedicated to a
+                    single genre.</p>
+                <ul>
+                    <li><b>Example:</b></li>
+                    <ul>
+                        <li>
+                            Before 1NF:
+                        </li>
+                        <ul>
+                            <li>
+                                Shelf 1: Mystery, Cooking, Sci-Fi
+                            </li>
+                            <li>Shelf 2: Romance, History</li>
+                        </ul>
+                        <li>
+                            After 1NF:
+                        </li>
+                        <ul>
+                            <li>Shelf 1: Mystery</li>
+                            <li>Shelf 2: Cooking</li>
+                            <li>Shelf 3: Sci-Fi</li>
+                            <li>Shelf 4: Romance</li>
+                            <li>Shelf 5: History</li>
+                        </ul>
+                    </ul>
+                    <li>Now, every shelf has books from only one genre, making it easier to find a book of a specific
+                        type.</li>
+                    <li><b>Synonym:</b> Sorting by genre.</li>
+                    <li><b>Rule:</b>Each column in a table must contain atomic, indivisible values.</li>
+                </ul>
+                <br>
+                <h3>Second Normal Form (2NF): Grouping by Author</h3>
+                <p>Next, the librarians realize that within each genre, books by the same author should be grouped
+                    together. This way, readers who enjoy a particular author's style can easily find all their works.
+                </p>
+                <ul>
+                    <li><b>Example:</b></li>
+                    <ul>
+                        <li>
+                            Before 2NF:
+                        </li>
+                        <ul>
+                            <li>
+                                Shelf 1: Mystery (Agatha Christie, Arthur Conan Doyle, Various Authors)
+                            </li>
+                            <li>Shelf 2: Sci-Fi (Isaac Asimov, Philip K. Dick, Various Authors)</li>
+                        </ul>
+                        <li>
+                            After 2NF:
+                        </li>
+                        <ul>
+                            <li>
+                                Shelf 1: Mystery (Agatha Christie)
+                            </li>
+                            <li>Shelf 2: Mystery (Arthur Conan Doyle)</li>
+                            <li>Shelf 3: Sci-Fi (Isaac Asimov)</li>
+                            <li>Shelf 4: Sci-Fi (Philip K. Dick)</li>
+                        </ul>
+                    </ul>
+                    <li>Books by the same author are now together within their genre, making it even easier to locate
+                        specific books.</li>
+                    <li><b>Synonym:</b> Grouping by author.</li>
+                    <li><b>Rule:</b>The table must be in 1NF, and all non-key attributes must be fully functionally
+                        dependent on the entire primary key.</li>
+                </ul>
+                <br>
+                <h3>Third Normal Form (3NF): Detailing Editions</h3>
+                <p>As the librarians continue their work, they notice that some authors have multiple editions of their
+                    books. To make it more convenient, they decide to separate books not just by author, but by edition
+                    as well.</p>
+                <ul>
+                    <li><b>Example:</b></li>
+                    <ul>
+                        <li>
+                            Before 3NF:
+                        </li>
+                        <ul>
+                            <li>
+                                Shelf 1: Agatha Christie (Mixed Editions)
+                            </li>
+                            <li>Shelf 2: Arthur Conan Doyle (Mixed Editions)</li>
+                        </ul>
+                        <li>
+                            After 3NF:
+                        </li>
+                        <ul>
+                            <li>
+                                Shelf 1: Agatha Christie (1st Edition)
+                            </li>
+                            <li>Shelf 2: Agatha Christie (2nd Edition)</li>
+                            <li>Shelf 3: Arthur Conan Doyle (1st Edition)</li>
+                            <li>Shelf 4: Arthur Conan Doyle (2nd Edition)</li>
+                        </ul>
+                    </ul>
+                    <li>Now, each shelf is dedicated to a specific author and edition, making it extremely
+                        straightforward to find exactly what you're looking for.</li>
+                    <li><b>Synonym:</b> Separating by edition.</li>
+                    <li><b>Rule:</b>The table must be in 2NF, and all attributes must depend only on the primary key.
+                    </li>
+                </ul>
+                <br>
+                <h3>Boyce-Codd Normal Form (BCNF): Ensuring Uniqueness</h3>
+                <p>Finally, the most powerful enchantment, Boyce-Codd Normal Form (BCNF), was the Ultimate Spell of
+                    Purity. This spell ensured that every determinant in the table was a candidate key, perfecting the
+                    organization.</p>
+                <ul>
+                    <li><b>Example:</b>Imagine we have a situation where multiple attributes together form the primary
+                        key:</li>
+                    <ul>
+                        <li>
+                            Before BCNF:
+                        </li>
+                        <ul>
+                            <li>
+                                Shelf 1: Agatha Christie (1st Edition, 2nd Edition)
+                            </li>
+                            <li>Shelf 2: Arthur Conan Doyle (1st Edition, 2nd Edition)</li>
+                            <li>Shelf 3: Mixed Authors and Editions</li>
+                        </ul>
+                        <li>
+                            After BCNF:
+                        </li>
+                        <ul>
+                            <li>
+                                Shelf 1: Agatha Christie (1st Edition)
+                            </li>
+                            <li>Shelf 2: Agatha Christie (2nd Edition)</li>
+                            <li>Shelf 3: Arthur Conan Doyle (1st Edition)</li>
+                            <li>Shelf 4: Arthur Conan Doyle (2nd Edition)</li>
+                        </ul>
+                    </ul>
+                    <li>Every shelf now represents a unique combination of genre, author, and edition, ensuring the
+                        highest level of organization.</li>
+                    <li><b>Synonym:</b> The table must be in 3NF, and for every functional dependency (X → Y), X should
+                        be a super key.</li>
+                </ul>
+                <p>Through this journey of normalization, the library transforms from a chaotic collection of books into
+                    a well-organized sanctuary of knowledge. Each step in normalization—organizing by genre, grouping by
+                    author, detailing by edition, and ensuring uniqueness—mirrors the process of structuring a database
+                    to make it efficient and easy to navigate. Just as the librarians brought order to their library,
+                    normalization brings order to data.</p>
+                <br>
+            </div>
+            <br>
+        </main>
+    </div>
+    <script src="static/js/query-execution.js"></script>
+    <script src="static/js/collapsiblescript.js"></script>
+</body>
+
+</html>

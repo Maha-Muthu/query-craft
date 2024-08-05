@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databases Lab 6</title>
+    <link rel="stylesheet" href="static/css/page-skeleton-design.css">
+    <link rel="stylesheet" href="static/css/collapsible-design.css">
+    <link rel="stylesheet" href="static/css/query-input-design.css">
+    <link rel="stylesheet" href="static/css/query-response-table-design.css">
+    <link rel="stylesheet" href="static/css/table-design.css">
+</head>
+
+<body>
+    <header>CSI 2132 Lab #6: JDBC Installation & Use</header>
+    <div class="container">
+        <nav>
+            <a href="{{ url_for('student_homepage') }}">Home</a>
+            <br>
+            <a href="{{ url_for('lab_material_one') }}">Lab Material 1</a>
+            <br>
+            <a href="{{ url_for('lab_material_two') }}">Lab Material 2</a>
+            <br>
+            <a href="{{ url_for('lab_material_three') }}">Lab Material 3</a>
+            <br>
+            <a href="{{ url_for('lab_material_four') }}">Lab Material 4</a>
+            <br>
+            <a href="{{ url_for('lab_material_five') }}">Lab Material 5</a>
+            <br>
+            <a href="#">Lab Material 6</a>
+            <br>            
+            <a href="{{ url_for('lab_material_seven') }}">Lab Material 7</a>
+            <br>
+            <a href="{{ url_for('lab_material_eight') }}">Lab Material 8</a>
+            <br>
+            <a href="{{ url_for('lab_material_nine') }}">Lab Material 9</a>
+            <br>
+            <a href="{{ url_for('lab_material_ten') }}">Lab Material 10</a>
+            <br>
+            <a href="{{ url_for('lab_material_eleven') }}">Lab Material 11</a>
+            </nav>
+            <main>
+            <h2>SQL Data Manipulation and Retrieval</h2>
+            <p>This material covers the fundamentals of JDBC (Java Database Connectivity) and its application in
+                database programming using Java. It outlines the steps for setting up JDBC, including downloading and
+                installing the PostgreSQL JDBC driver and setting up IntelliJ IDEA. It details the process of writing
+                Java code to connect to a database, issue SQL queries, and process the results. The lab exercises
+                provide practical examples of coding with JDBC to perform database operations, such as querying tables
+                and handling query results dynamically.</p>
+            <h2>What is JDBC</h2>
+            <ul>
+                <li>Java Database Connectivity (JDBC)</li>
+                <li>It is an API by Sun Microsystems to allow Java
+                    programmers to access SQL databases</li>
+                <li>Available since JDK 1.1</li>
+                <li>JDBC is an API not a library. It needs to be
+                    implemented (as drivers) for a particular DB. i.e.
+                    PostgreSQL and MySQL have different JDBC drivers</li>
+            </ul>
+            <br>
+            <button class="collapsible">Download & Install IntelliJ</button>
+            <div class="content">
+                <br>
+                <ul>
+                    <li>In the Jet Brains IntelliJ IDEA Download page scroll down to reach the Community Edition or use
+                        the
+                        Ultimate Version by using the University of Ottawa Jet Brains License. </li>
+                    <li><a href="https://www.jetbrains.com/idea/" target="_blank">Download IntelliJ</a></li>
+                    <li>If you decide to use the Ultimate Version, Login In/ Create a account on JetBrains with your
+                        University of Ottawa student email.</li>
+                    <br>
+                    <img src="{{ url_for('static', filename='images/intelliJLicensePage.png') }}"
+                        alt="IntelliJ License Page" class="responsive-image">
+                    <br><br>
+                    <img src="{{ url_for('static', filename='images/jetBrainsAccount.png') }}"
+                        alt="Jet Brains Account Creation" class="responsive-image">
+                    <br><br>
+                    <li>Setup IntelliJ and select Open JDK
+                    </li>
+                </ul>
+            </div>
+            <br>
+            <h2>Download the Driver</h2>
+            <ul>
+                <li><a href="https://jdbc.postgresql.org/" target="_blank">Download JDBC</a></li>
+                <li>Use the latest version</li>
+            </ul>
+            <br>
+            <button class="collapsible">JDBC Enabled Project in IntelliJ IDEA</button>
+            <div class="content">
+                <br>
+                <h3>Create a new Java Project</h3>
+                <ul>
+                    <li>If the Add Sample Code is checked during project creation, a Main class will be added. If not
+                        create a new class inside the package with a static
+                        main method.
+                    </li>
+                    <li>From the Project Properties, click on</li>
+                    <ol>
+                        <li>Project structure → Libraries → Add jar using "+"</li>
+                        <li>Select the downloaded JAR file</li>
+                        <br><br>
+                        <img src="{{ url_for('static', filename='images/intelliJAddJAR.png') }}"
+                            alt="Adding JAR File in IntelliJ" class="responsive-image">
+                        <br><br>
+                    </ol>
+                    <li>JDBC Coding in Java</li>
+                    <ol>
+                        <li>
+                            Import the JDBC driver
+                        </li>
+                        <li>
+                            Connect to a Database
+                        </li>
+                        <li>Issue a Query and process the result
+                        </li>
+                    </ol>
+                    <li>Code
+                        <pre>
+                            <code>
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+                                
+public class Main {
+    public static void main(String[] args) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "password");
+            Statement statement = connection.createStatement();
+            ResultSet resultSetSelectQuery = statement.executeQuery("SELECT * FROM sampleschema.sampletable");
+            ResultSetMetaData resultSetMetaData = resultSetSelectQuery.getMetaData();
+            while (resultSetSelectQuery.next()) {
+                System.out.print("Column 1: ");
+                System.out.println(resultSetSelectQuery.getString(1));
+                System.out.print("Column 2: ");
+                System.out.println(resultSetSelectQuery.getString(2));
+                System.out.print("Column 3: ");
+                System.out.println(resultSetSelectQuery.getString(3));
+            }
+            String whereCondition = "true";
+            String query = "SELECT column2 FROM sampleschema.sampletable WHERE column3 = '" + whereCondition + "'";
+            ResultSet resultSetSelectQueryWithWhereClause= statement.executeQuery(query);
+            System.out.print("Column 2: ");
+            while (resultSetSelectQueryWithWhereClause.next()) {
+                System.out.println(resultSetSelectQueryWithWhereClause.getString(1));
+            }
+            resultSetSelectQuery.close();
+            resultSetSelectQueryWithWhereClause.close();
+            statement.close();
+            connection.close();
+        } catch (SQLException exception) {
+            System.out.println("An exception was thrown: " + exception.getMessage());
+        }
+    }   
+}
+                            </code>
+                        </pre>
+                    </li>
+                    <li>JDBC Coding in Java</li>
+                    <ul>
+                        <li>Import the JDBC driver & other libraries.</li>
+                        <li>It is NOT appropriate to import org.postgresql directly.</li>
+                        <li>Remember the import lines go after the package line.</li>
+                        <li>Connect to a Database.</li>
+                        <ul>
+                            <li>
+                                Connection db = DriverManager.getConnection(url,
+                                username, password);
+                            </li>
+                            <li>URL is in the form of:</li>
+                            <ul>
+                                <li>jdbc:postgresql:database</li>
+                                <li>jdbc:postgresql://host:port/database</li>
+                                <li>Username:</li>
+                                <li>Password:</li>
+                            </ul>
+                        </ul>
+                        <li>Issue a Query and process the result.</li>
+                        <ul>
+                            <li>Statement st = db.createStatement(); </li>
+                            <li>ResultSet rs = st.executeQuery(query);</li>
+                            <li>//Process the Result Set </li>
+                            <li>rs.close();</li>
+                            <li>st.close();
+                            </li>
+                        </ul>
+                    </ul>
+                </ul>
+
+            </div>
+            <br>
+        </main>
+    </div>
+    <script src="static/js/collapsiblescript.js"></script>
+</body>
+
+</html>

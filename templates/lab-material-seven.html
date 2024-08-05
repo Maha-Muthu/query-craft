@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databases Lab 7</title>
+    <link rel="stylesheet" href="static/css/page-skeleton-design.css">
+    <link rel="stylesheet" href="static/css/collapsible-design.css">
+    <link rel="stylesheet" href="static/css/query-input-design.css">
+    <link rel="stylesheet" href="static/css/query-response-table-design.css">
+    <link rel="stylesheet" href="static/css/table-design.css">
+</head>
+
+<body>
+    <header>CSI 2132 Lab #7: Demo Web Application</header>
+    <div class="container">
+        <nav>
+            <a href="{{ url_for('student_homepage') }}">Home</a>
+            <br>
+            <a href="{{ url_for('lab_material_one') }}">Lab Material 1</a>
+            <br>
+            <a href="{{ url_for('lab_material_two') }}">Lab Material 2</a>
+            <br>
+            <a href="{{ url_for('lab_material_three') }}">Lab Material 3</a>
+            <br>
+            <a href="{{ url_for('lab_material_four') }}">Lab Material 4</a>
+            <br>
+            <a href="{{ url_for('lab_material_five') }}">Lab Material 5</a>
+            <br>
+            <a href="{{ url_for('lab_material_six') }}">Lab Material 6</a>
+            <br>
+            <a href="#">Lab Material 7</a>
+            <br>
+            <a href="{{ url_for('lab_material_eight') }}">Lab Material 8</a>
+            <br>
+            <a href="{{ url_for('lab_material_nine') }}">Lab Material 9</a>
+            <br>
+            <a href="{{ url_for('lab_material_ten') }}">Lab Material 10</a>
+            <br>
+            <a href="{{ url_for('lab_material_eleven') }}">Lab Material 11</a>
+        </nav>
+        <main>
+            <h2>Java Web Development: Servlet, JSP, and Tomcat Integration</h2>
+            <p>This material provides a comprehensive guide on web database programming using Java, JSP (Java Server
+                Pages), and Tomcat. Key principles include the separation of JSP for the interface and Servlet for
+                application flow control and logic processing. Practical exercises involve creating a web application
+                project in IntelliJ and deploying a simple "Hello World" web application using Tomcat.</p>
+            <h3>
+                Principle for programming Servlet + JSP
+            </h3>
+            <ul>
+                <li>Never allow users to directly access to your JSP page.</li>
+                <li>JSP is only considered as the place to display interface.</li>
+                <li>Servlet acts as the controller of the application flows
+                    and program logical processing.</li>
+                <li>Open the JDBC connection and transaction management
+                    in Filter (Optional).
+                </li>
+                <br><br>
+                <img src="{{ url_for('static', filename='images/servlet.png') }}" alt="Browser Servlet Communication"
+                    class="responsive-image">
+                <br><br>
+            </ul>
+            <h3>Install Apache Tomcat</h3>
+            <ul>
+                <li>Requires Java Installed.</li>
+                <li><a href="https://tomcat.apache.org/download-10.cgi" target="_blank">Download Tomcat from here</a>
+                </li>
+                <li>Select the version that suits your operating system</li>
+                <li>Check instructions to deploy Tomcat here:</li>
+                <ul>
+                    <li>Check instructions to deploy Tomcat here:
+                        <ul>
+                            <li><a href="https://cwiki.apache.org/confluence/display/tomcat/TomcatOnMacOS"
+                                    target="_blank">For MacOS</a>
+                            <li><a href="https://phoenixnap.com/kb/install-tomcat-windows" target="_blank">For
+                                    Windows</a>
+                            <li><a href="https://phoenixnap.com/kb/install-tomcat-ubuntu" target="_blank">For Linux use
+                                    the package manager</a>
+                        </ul>
+                    </li>
+                </ul>
+            </ul>
+            <h3>Integrate Tomcat with IntelliJ</h3>
+            <ul>
+                <li>Once you are sure that Tomcat runs as expected, shut it down.</li>
+                <li>Start it from within IntelliJ.</li>
+                <li>Go to IntelliJ and in Preferences → Plugins.</li>
+                <li>Search and install the plugin Smart Tomcat.
+                </li>
+            </ul>
+            <h3>Create Web Application Project</h3>
+            <ul>
+                <li>Create a web project in IntelliJ</li>
+                <li>Select: File → New → Project</li>
+                <li>Select: Maven Archetype → maven.archetype.webapp (in the archetype 
+                    dropdown menu)</li>
+                    <li>You can test your 'Hello World' web application can run with the local 
+                        Tomcat - you can use the 'run' button</li>
+            </ul>
+        </main>
+
+    </div>
+</body>
+
+</html>
