@@ -46,7 +46,11 @@ def execute_query():
             columns = [desc[0] for desc in db_cursor.description]
             db_cursor.close()
             db_connection.close()
-            results = {columns[row]: list(transposed_rows[row]) for row in range(len(columns))}
+            results = {}
+            if len(transposed_rows) > 0:
+                results = {columns[row]: list(transposed_rows[row]) for row in range(len(columns))}
+            else:
+                results = {column: [] for column in columns}
             message_results = json.dumps(results)
             return jsonify({"message": message_results}), 200
         else:

@@ -51,6 +51,14 @@ function showTable(resultDict, alertContainer) {
   thead.appendChild(headerRow);
   table.appendChild(thead);
 
+  // Clear previous content and display the table
+  alertContainer.innerHTML = '';
+  alertContainer.appendChild(table);
+
+  if (Object.keys(resultDict).length === 0 || !resultDict[Object.keys(resultDict)[0]].length) {
+    return;
+  }
+
   // Determine the number of rows
   let numRows = resultDict[Object.keys(resultDict)[0]].length;
 
@@ -67,7 +75,4 @@ function showTable(resultDict, alertContainer) {
   }
   table.appendChild(tbody);
 
-  // Clear previous content and display the table
-  alertContainer.innerHTML = '';
-  alertContainer.appendChild(table);
 }
