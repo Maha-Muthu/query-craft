@@ -35,14 +35,14 @@ echo All Docker images loaded successfully !
 REM Create and restore Docker volumes
 echo Creating and restoring Docker Volumes...
 
-docker volume create --name query-craft_postgres_data_c
+docker volume create --name query-craft_postgres_data
 if %ERRORLEVEL% neq 0 (
     echo Error: Failed to create volume query-craft_postgres_data. Exiting...
     pause
     exit /b %ERRORLEVEL%
 )
 
-docker volume create --name query-craft_pgadmin_data_c
+docker volume create --name query-craft_pgadmin_data
 if %ERRORLEVEL% neq 0 (
     echo Error: Failed to create volume query-craft_pgadmin_data. Exiting...
     pause
@@ -57,7 +57,7 @@ set BACKUP_DIR="%cd%\backup"
 REM Restore the volumes
 echo Restoring the postgres_data volume...
 
-docker run --rm -v query-craft_postgres_data_c:/volume -v %BACKUP_DIR%:/backup ubuntu sh -c "mkdir -p /backup && tar xvf /backup/postgres_data.tar -C /volume --strip-components=1"
+docker run --rm -v query-craft_postgres_data:/volume -v %BACKUP_DIR%:/backup ubuntu sh -c "mkdir -p /backup && tar xvf /backup/postgres_data.tar -C /volume --strip-components=1"
 if errorlevel 1 (
     echo Failed to restore the postgres_data volume. Exiting...
     pause
@@ -66,7 +66,7 @@ if errorlevel 1 (
 
 
 echo Restoring the pgadmin_data volume...
-docker run --rm -v query-craft_pgadmin_data_c:/volume -v %BACKUP_DIR%:/backup ubuntu sh -c "mkdir -p /backup && tar xvf /backup/pgadmin_data.tar -C /volume --strip-components=1"
+docker run --rm -v query-craft_pgadmin_data:/volume -v %BACKUP_DIR%:/backup ubuntu sh -c "mkdir -p /backup && tar xvf /backup/pgadmin_data.tar -C /volume --strip-components=1"
 if errorlevel 1 (
     echo Failed to restore the pgadmin_data volume. Exiting...
     pause

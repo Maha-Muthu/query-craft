@@ -7,7 +7,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     volumes:
-      - query-craft_postgres_data_c:/var/lib/postgresql/data
+      - query-craft_postgres_data:/var/lib/postgresql/data
     ports:
       - "8082:5432" #Change the Port 8082 if aldready beimg used.
 
@@ -26,12 +26,12 @@ services:
     ports:
       - "8081:80" #Change the Port 8082 if aldready beimg used.
     volumes:
-      - query-craft_pgadmin_data_c:/var/lib/pgadmin
+      - query-craft_pgadmin_data:/var/lib/pgadmin
     depends_on:
       - db
 
 volumes:
-  query-craft_postgres_data_c:
+  query-craft_postgres_data:
     external: true
-  query-craft_pgadmin_data_c:
+  query-craft_pgadmin_data:
     external: true
