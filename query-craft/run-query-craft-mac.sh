@@ -53,14 +53,14 @@ BACKUP_DIR="$(pwd)/backup"
 # Restore the volumes
 echo "Restoring the postgres_data volume..."
 
-docker run --rm -v query-craft_postgres_data:/volume -v "$BACKUP_DIR":/backup ubuntu sh -c "mkdir -p /backup && tar xvf /backup/postgres_data.tar -C /volume --strip-components=1"
+docker run --rm -v query-craft_postgres_data:/volume -v "$BACKUP_DIR":/backup ubuntu sh -c "mkdir -p /backup && tar xvf /backup/postgres_data.tar -C /volume --strip-components=1 && chown -R 999:999 /volume"
 if [ $? -ne 0 ]; then
     echo "Failed to restore the postgres_data volume. Exiting..."
     exit 1
 fi
 
 echo "Restoring the pgadmin_data volume..."
-docker run --rm -v query-craft_pgadmin_data:/volume -v "$BACKUP_DIR":/backup ubuntu sh -c "mkdir -p /backup && tar xvf /backup/pgadmin_data.tar -C /volume --strip-components=1"
+docker run --rm -v query-craft_pgadmin_data:/volume -v "$BACKUP_DIR":/backup ubuntu sh -c "mkdir -p /backup && tar xvf /backup/pgadmin_data.tar -C /volume --strip-components=1 && chown -R 5050:5050 /volume"
 if [ $? -ne 0 ]; then
     echo "Failed to restore the pgadmin_data volume. Exiting..."
     exit 1

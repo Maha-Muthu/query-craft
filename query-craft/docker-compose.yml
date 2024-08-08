@@ -14,7 +14,7 @@ services:
   web:
     image: query-craft-web
     ports:
-      - "5000:5000"
+      - "8083:5000"
     depends_on:
       - db
 

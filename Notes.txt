@@ -1,0 +1,9 @@
+- Changed port number
+- Command to run the app : docker-compose up --build
+- Used Command : sudo chmod -R 755 /Users/harsha/.docker/buildx
+- Used Command : sudo chmod -R 777 query-craft
+- Commands in Export
+- Changed psycopg2-binary==2.9.9
+- Command to run sh files: sh run-query-craft-mac.sh
+- Change port number in the export folder
+- Enable Read Write Permission
