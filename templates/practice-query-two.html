@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databases Practice Query 2</title>
+    <link rel="stylesheet" href="static/css/page-skeleton-design.css">
+    <link rel="stylesheet" href="static/css/collapsible-design.css">
+    <link rel="stylesheet" href="static/css/query-input-design.css">
+    <link rel="stylesheet" href="static/css/query-response-table-design.css">
+    <link rel="stylesheet" href="static/css/table-design.css">
+</head>
+
+<body>
+    <header>CSI 2132 Practice #2: Organization</header>
+    <div class="container">
+        <nav>
+            <a href="{{ url_for('student_homepage') }}">Home</a>
+            <br>
+            <a href="{{ url_for('practice_query_one') }}">Practice Query 1</a>
+            <br>
+            <a href="#">Practice Query 2</a>
+            <br>
+            <a href="{{ url_for('practice_query_three') }}">Practice Query 3</a>
+            <br>
+            <a href="{{ url_for('practice_query_four') }}">Practice Query 4</a>
+            <br>
+            <a href="{{ url_for('practice_query_five') }}">Practice Query 5</a>
+        </nav>
+        <main>
+            <h2>Organization Schema</h2>
+            <p>This schema defines an organization with two tables: "department" and "employee." The "department" table
+                stores information about different departments, with each department having a unique identifier and a
+                name. The "employee" table records employee details, including their name, salary, and a reference to
+                the department they belong to, establishing a relationship between employees and their respective
+                departments.</p>
+            <h3>The Description of the tables:</h3>
+            <img src="{{ url_for('static', filename='images/organizationSchema.png') }}"
+                alt="Periodic Table Table Description" class="responsive-image">
+            <br>
+            <h3>Sample Data from Department Table</h3>
+            <img src="{{ url_for('static', filename='images/departmentTable.png') }}"
+                alt="Organization Schema Department Table" class="responsive-image">
+            <br>
+            <h3>Sample Data from Employee Table</h3>
+            <img src="{{ url_for('static', filename='images/employeeTable.png') }}"
+                alt="Organization Table Employee Table" class="responsive-image">
+            <br>
+            <h3>Attributes</h3>
+            <ul>
+                <li>Schema Name: organization</li>
+                <ul>
+                    <li>Table Name: department</li>
+                    <ul>
+                        <li>Attributes</li>
+                        <ul>
+                            <li>id</li>
+                            <li>name</li>
+                        </ul>
+                    </ul>
+                    <li>Table Name: employee</li>
+                    <ul>
+                        <li>Attributes</li>
+                        <ul>
+                            <li>id</li>
+                            <li>name</li>
+                            <li>salary</li>
+                            <li>department_id</li>
+                        </ul>
+                    </ul>
+                </ul>
+            </ul>
+            <h3>Query Organization Schema</h3>
+            <p>A</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p>B</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p>C</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <button class="collapsible">Query Organization Schema</button>
+            <div class="content">
+                <br>
+                <h3>A</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+
+                    </table>
+                </div>
+                <p><b>Query: </b>a
+                </p>
+                <p><b>Explanation: </b></p>
+                <br>
+                <h3>B</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+
+                    </table>
+                </div>
+                <p><b>Query: </b>b
+                </p>
+                <p><b>Explanation: </b></p>
+                <br>
+            </div>
+            <br>
+        </main>
+    </div>
+    <script src="static/js/collapsiblescript.js"></script>
+    <script src="static/js/query-execution.js"></script>
+</body>
+
+</html>

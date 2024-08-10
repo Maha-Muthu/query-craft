@@ -132,5 +132,21 @@ def lab_material_eleven():
 def practice_query_one():
     return render_template('practice-query-one.html')
 
+@app.route('/practice-query-two')
+def practice_query_two():
+    return render_template('practice-query-two.html')
+
+@app.route('/practice-query-three')
+def practice_query_three():
+    return render_template('practice-query-three.html')
+
+@app.route('/practice-query-four')
+def practice_query_four():
+    return render_template('practice-query-four.html')
+
+@app.route('/practice-query-five')
+def practice_query_five():
+    return render_template('practice-query-five.html')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
