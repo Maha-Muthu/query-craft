@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databases Practice Query 3</title>
+    <link rel="stylesheet" href="static/css/page-skeleton-design.css">
+    <link rel="stylesheet" href="static/css/collapsible-design.css">
+    <link rel="stylesheet" href="static/css/query-input-design.css">
+    <link rel="stylesheet" href="static/css/query-response-table-design.css">
+    <link rel="stylesheet" href="static/css/table-design.css">
+</head>
+
+<body>
+    <header>CSI 2132 Practice #3: Security Contests</header>
+    <div class="container">
+        <nav>
+            <a href="{{ url_for('student_homepage') }}">Home</a>
+            <br>
+            <a href="{{ url_for('practice_query_one') }}">Practice Query 1</a>
+            <br>
+            <a href="{{ url_for('practice_query_two') }}">Practice Query 2</a>
+            <br>
+            <a href="{{ url_for('practice_query_three') }}">Practice Query 3</a>
+            <br>
+            <a href="#">Practice Query 4</a>
+            <br>
+            <a href="{{ url_for('practice_query_five') }}">Practice Query 5</a>
+        </nav>
+        <main>
+            <h2>Security Contests Schema</h2>
+            <p>The schema "Security_Contests" consists of two tables: "Hackers" and "Submissions." The "Hackers" table holds unique identifiers and names of hackers. The "Submissions" table records the details of submissions made by hackers, including the submission date, a reference to the hacker who made the submission, and the score awarded. The schema establishes a relationship between hackers and their submissions through a foreign key.</p>
+            <h3>The Description of the tables:</h3>
+            <img src="{{ url_for('static', filename='images/organizationSchema.png') }}"
+                alt="Periodic Table Table Description" class="responsive-image">
+            <br>
+            <h3>Sample Data from Department Table</h3>
+            <img src="{{ url_for('static', filename='images/departmentTable.png') }}"
+                alt="Organization Schema Department Table" class="responsive-image">
+            <br>
+            <h3>Sample Data from Employee Table</h3>
+            <img src="{{ url_for('static', filename='images/employeeTable.png') }}"
+                alt="Organization Table Employee Table" class="responsive-image">
+            <br>
+            <h3>Attributes</h3>
+            <ul>
+                <li>Schema Name: organization</li>
+                <ul>
+                    <li>Table Name: department</li>
+                    <ul>
+                        <li>Attributes</li>
+                        <ul>
+                            <li>id</li>
+                            <li>name</li>
+                        </ul>
+                    </ul>
+                    <li>Table Name: employee</li>
+                    <ul>
+                        <li>Attributes</li>
+                        <ul>
+                            <li>id</li>
+                            <li>name</li>
+                            <li>salary</li>
+                            <li>department_id</li>
+                        </ul>
+                    </ul>
+                </ul>
+            </ul>
+            <h3>Query Organization Schema</h3>
+            <p>A</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p>B</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p>C</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p>D</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p>E</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <button class="collapsible">Query Organization Schema</button>
+            <div class="content">
+                <br>
+                <h3>a</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        
+                    </table>
+                </div>
+                <p><b>Query: </b>
+                </p>
+                <p><b>Explanation: </b></p>
+                <br>
+                <h3>b</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+
+                    </table>
+                </div>
+                <p><b>Query: </b>
+                </p>
+                <p><b>Explanation: </b></p>
+                <br>
+                <h3>c</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+
+                    </table>
+                </div>
+                <p><b>Query: </b>
+                </p>
+                <p><b>Explanation: </b></p>
+                <h3>d</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+
+                    </table>
+                </div>
+                <p><b>Query: </b>
+                </p>
+                <p><b>Explanation: </b></p>
+                <br>
+                <h3>e</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+
+                    </table>
+                </div>
+                <p><b>Query: </b>
+                </p>
+                <p><b>Explanation: </b></p>
+                <br>
+            </div>
+            <br>
+        </main>
+    </div>
+    <script src="static/js/collapsiblescript.js"></script>
+    <script src="static/js/query-execution.js"></script>
+</body>
+
+</html>
