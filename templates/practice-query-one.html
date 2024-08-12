@@ -4,23 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Databases Lab 2</title>
+    <title>Databases Practice 1</title>
     <link rel="stylesheet" href="static/css/page-skeleton-design.css">
     <link rel="stylesheet" href="static/css/collapsible-design.css">
     <link rel="stylesheet" href="static/css/query-input-design.css">
     <link rel="stylesheet" href="static/css/query-response-table-design.css">
     <link rel="stylesheet" href="static/css/table-design.css">
-    <style> 
+    <!--<style>
         .prevent-select {
-          -webkit-user-select: none; /* Safari */
-          -ms-user-select: none; /* IE 10 and IE 11 */
-          user-select: none; /* Standard syntax */
+            -webkit-user-select: none;
+            /* Safari */
+            -ms-user-select: none;
+            /* IE 10 and IE 11 */
+            user-select: none;
+            /* Standard syntax */
         }
-        </style>
+    </style>-->
 </head>
 
 <body>
-    <header>CSI 2132 Lab #2: Basic SQL Programming</header>
+    <header>CSI 2132 Practice #1: Periodic Table</header>
     <div class="container">
         <nav>
             <a href="{{ url_for('student_homepage') }}">Home</a>
@@ -52,25 +55,25 @@
             <br>
             <h3>Attributes</h3>
             <ul>
-                <li>Schema Name: periodictableschema</li>
+                <li>Schema Name: periodic_table_schema</li>
                 <li>Table Name: PeriodicTable</li>
                 <li>Attributes:</li>
                 <ul>
-                    <li>AtomicNumber</li>
-                    <li>ElementName</li>
-                    <li>Symbol</li>
-                    <li>AtomicMass</li>
-                    <li>NumberOfNeutrons</li>
-                    <li>NumberOfProtons</li>
-                    <li>NumberOfElectrons</li>
-                    <li>PeriodNumber</li>
-                    <li>Phase</li>
-                    <li>NaturallyOccuring</li>
-                    <li>ElementType</li>
+                    <li>atomic_number</li>
+                    <li>element_name</li>
+                    <li>symbol</li>
+                    <li>atomic_mass</li>
+                    <li>number_of_neutrons</li>
+                    <li>number_of_protons</li>
+                    <li>number_of_electrons</li>
+                    <li>period_number</li>
+                    <li>phase</li>
+                    <li>naturally_occurring</li>
+                    <li>element_type</li>
                 </ul>
             </ul>
             <h3>Query Periodic Table</h3>
-            <p>List the names of nonmetals that are gases.</p>
+            <p><b>1. </b>List the names of nonmetals('Nonmetal') that are gases('gas').</p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -78,7 +81,7 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p>What are the top 5 elements with the highest number of neutrons?</p>
+            <p><b>2. </b>What are the top 5 elements with the highest number of neutrons?</p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -86,7 +89,63 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p>Find the lightest element in each phase.</p>
+            <p><b>3. </b>Find the lightest element in each phase.</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p><b>4. </b>Find the Heaviest Element.</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p><b>5. </b>Count the Number of Naturally Occurring(naturally_occurring) Elements.</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p><b>6. </b>Find Elements with More Protons Than Neutrons.</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p><b>7. </b> Select Elements that are Either Metals or Metalloids.</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p><b>8. </b>Find the Heaviest Element in Each Period.</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p><b>9. </b>Count the Number of Elements in Each Phase.</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p><b>10. </b>List All Nonmetal('Nonmetal') Elements in Descending Order of Atomic Mass.</p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -97,36 +156,417 @@
             <button class="collapsible">Query Periodic Table</button>
             <div class="content">
                 <br>
-                <p>List the names of nonmetals that are gases.</p>
-
-                <p class="prevent-select">SELECT ElementName
-                    FROM periodictableschema.PeriodicTable
-                    WHERE ElementType = 'Nonmetal' AND Phase = 'gas'
+                <h3><b>1. </b>List the names of nonmetals('Nonmetal') that are gases('gas').</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>element_name</th>
+                        </tr>
+                        <tr>
+                            <td>Hydrogen</td>
+                        </tr>
+                        <tr>
+                            <td>Oxygen</td>
+                        </tr>
+                        <tr>
+                            <td>Nitrogen</td>
+                        </tr>
+                        <tr>
+                            <td>Fluorine</td>
+                        </tr>
+                        <tr>
+                            <td>Chlorine</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p class="prevent-select"><b>Query: </b>SELECT element_name
+                    FROM periodic_table_schema.periodic_table
+                    WHERE element_Type = 'Nonmetal' AND Phase = 'gas';
                 </p>
-                <p>What are the top 5 elements with the highest number of neutrons?</p>
-
-                <p class="prevent-select">SELECT ElementName, NumberOfNeutrons
-                    FROM periodictableschema.PeriodicTable
-                    ORDER BY NumberOfNeutrons DESC
-                    LIMIT 5
+                <p><b>Explanation: </b>The query filters the periodic table data by checking for elements where
+                    element_type is 'Nonmetal' and phase is 'gas'. By using the WHERE clause, it ensures that only rows
+                    matching both conditions are considered. The SELECT statement then extracts the element_name for
+                    these specific rows.
                 </p>
-                <p>Find the lightest element in each phase.</p>
-
-                <p class="prevent-select">SELECT Phase, ElementName, AtomicMass AS LightestElementMass
-                    FROM periodictableschema.PeriodicTable
-                    WHERE (Phase, AtomicMass) IN (
-                        SELECT Phase, MIN(AtomicMass)
-                        FROM periodictableschema.PeriodicTable
-                        GROUP BY Phase
-                    )
+                <h3><b>2. </b>What are the top 5 elements with the highest number of neutrons?</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>element_name</th>
+                            <th>number_of_neutrons</th>
+                        </tr>
+                        <tr>
+                            <td>Tennessine</td>
+                            <td>178</td>
+                        </tr>
+                        <tr>
+                            <td>Oganesson</td>
+                            <td>176</td>
+                        </tr>
+                        <tr>
+                            <td>Livermorium</td>
+                            <td>176</td>
+                        </tr>
+                        <tr>
+                            <td>Flerovium</td>
+                            <td>175</td>
+                        </tr>
+                        <tr>
+                            <td>Copernicium</td>
+                            <td>173</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p class="prevent-select"><b>Query: </b>SELECT element_name, number_of_neutrons
+                    FROM periodic_table_schema.periodic_table
+                    ORDER BY number_of_neutrons DESC
+                    LIMIT 5;
+                </p>
+                <p><b>Explanation: </b>Retrieves the top 5 elements with the highest number of neutrons by first
+                    ordering the elements in descending order using ORDER BY number_of_neutrons DESC. The LIMIT 5 clause
+                    then restricts the result to the first five rows, which correspond to the elements with the most
+                    neutrons.
+                </p>
+                <h3><b>3. </b>Find the lightest element in each phase.</h3>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>element_name</th>
+                            <th>lightest_element_mass</th>
+                            <th>phase</th>
+                        </tr>
+                        <tr>
+                            <td>Hydrogen</td>
+                            <td>1.007</td>
+                            <td>gas</td>
+                        </tr>
+                        <tr>
+                            <td>Lithium</td>
+                            <td>6.941</td>
+                            <td>solid</td>
+                        </tr>
+                        <tr>
+                            <td>Bromine</td>
+                            <td>79.904</td>
+                            <td>liq</td>
+                        </tr>
+                        <tr>
+                            <td>Technetium</td>
+                            <td>98</td>
+                            <td>artificial</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p class="prevent-select"><b>Query: </b>SELECT phase, element_name, atomic_mass AS Lightest_Element_Mass
+                    FROM periodic_table_schema.periodic_table
+                    WHERE (phase, atomic_mass) IN (
+                    SELECT phase, MIN(atomic_mass)
+                    FROM periodic_table_schema.periodic_table
+                    GROUP BY phase
+                    );
+                </p>
+                <p><b>Explanation: </b>Identifies the lightest element in each phase by first determining the minimum
+                    atomic mass within each phase using GROUP BY phase and MIN(atomic_mass) in a subquery. The main
+                    query then matches these minimum atomic masses with their corresponding phases to retrieve the
+                    element_name, phase, and atomic mass (aliased as Lightest_Element_Mass).
+                </p>
+                <h3><b>4. </b>Find the Heaviest Element.</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>atomic_mass</th>
+                            <th>element_name</th>
+                        </tr>
+                        <tr>
+                            <td>295</td>
+                            <td>Tennessine</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p class="prevent-select"><b>Query: </b>SELECT element_name, atomic_mass
+                    FROM periodic_table_schema.periodic_table
+                    ORDER BY atomic_mass DESC
+                    LIMIT 1;
+                </p>
+                <p><b>Explanation: </b>The query finds the heaviest element by ordering the elements in descending order
+                    based on atomic_mass using ORDER BY atomic_mass DESC. The LIMIT 1 clause ensures that only the first
+                    row, which represents the element with the highest atomic mass, is returned.
+                </p>
+                <h3><b>5. </b>Count the Number of Naturally Occurring(naturally_occurring) Elements.</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>count</th>
+                        </tr>
+                        <tr>
+                            <td>90</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p class="prevent-select"><b>Query: </b>SELECT COUNT(*) FROM periodic_table_schema.periodic_table WHERE
+                    naturally_occurring = true;
+                </p>
+                <p><b>Explanation: </b>The query counts the number of naturally occurring elements by filtering the rows
+                    where naturally_occurring is true using the WHERE clause. The COUNT(*) function then tallies the
+                    number of rows that meet this condition, providing the total count of naturally occurring elements
+                    in the table.
+                </p>
+                <h3><b>6. </b>Find Elements with More Protons Than Neutrons.</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>element_name</th>
+                            <th>number_of_neutrons</th>
+                            <th>number_of_protons</th>
+                        </tr>
+                        <tr>
+                            <td>Hydrogen</td>
+                            <td>0</td>
+                            <td>1</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p class="prevent-select"><b>Query: </b>SELECT element_name, number_of_neutrons, number_of_protons FROM
+                    periodic_table_schema.periodic_table WHERE number_of_protons &gt; number_of_neutrons;
+                </p>
+                <p><b>Explanation: </b>The query identifies elements with more protons than neutrons by using the WHERE
+                    clause to filter rows where the number_of_protons is greater than the number_of_neutrons. The query
+                    then selects and returns the element_name, along with the counts of number_of_neutrons and
+                    number_of_protons, for these elements.
+                </p>
+                <h3><b>7. </b> Select Elements that are Either Metals('Metal') or Metalloids('Metalloid').</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>element_name</th>
+                            <th>element_type</th>
+                        </tr>
+                        <tr>
+                            <td>Boron</td>
+                            <td>Metalloid</td>
+                        </tr>
+                        <tr>
+                            <td>Aluminum</td>
+                            <td>Metal</td>
+                        </tr>
+                        <tr>
+                            <td>Silicon</td>
+                            <td>Metalloid</td>
+                        </tr>
+                        <tr>
+                            <td>Gallium</td>
+                            <td>Metal</td>
+                        </tr>
+                        <tr>
+                            <td>Germanium</td>
+                            <td>Metalloid</td>
+                        </tr>
+                        <tr>
+                            <td>Arsenic</td>
+                            <td>Metalloid</td>
+                        </tr>
+                        <tr>
+                            <td>Indium</td>
+                            <td>Metal</td>
+                        </tr>
+                        <tr>
+                            <td>Tin</td>
+                            <td>Metal</td>
+                        </tr>
+                        <tr>
+                            <td>Antimony</td>
+                            <td>Metalloid</td>
+                        </tr>
+                        <tr>
+                            <td>Tellurium</td>
+                            <td>Metalloid</td>
+                        </tr>
+                        <tr>
+                            <td>Thallium</td>
+                            <td>Metal</td>
+                        </tr>
+                        <tr>
+                            <td>Lead</td>
+                            <td>Metal</td>
+                        </tr>
+                        <tr>
+                            <td>Bismuth</td>
+                            <td>Metal</td>
+                        </tr>
+                        <tr>
+                            <td>Polonium</td>
+                            <td>Metalloid</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p class="prevent-select"><b>Query: </b>SELECT element_name, element_type
+                    FROM periodic_table_schema.periodic_table
+                    WHERE element_type IN ('Metal', 'Metalloid');
+                </p>
+                <p><b>Explanation: </b>The query selects elements that are either metals or metalloids by using the
+                    WHERE clause with the IN operator, which checks if the element_type is either 'Metal' or
+                    'Metalloid'. The query then retrieves and returns the element_name and element_type for those
+                    elements that meet the condition.
+                </p>
+                <h3><b>8. </b>Find the Heaviest Element in Each Period.</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>element_name</th>
+                            <th>heaviest_element_mass</th>
+                            <th>period_number</th>
+                        </tr>
+                        <tr>
+                            <td>Helium</td>
+                            <td>4.002</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>Neon</td>
+                            <td>20.18</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>Argon</td>
+                            <td>39.948</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>Krypton</td>
+                            <td>83.798</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>Xenon</td>
+                            <td>131.293</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>Radon</td>
+                            <td>222</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>Tennessine</td>
+                            <td>295</td>
+                            <td>7</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p class="prevent-select"><b>Query: </b>SELECT period_number, element_name, atomic_mass AS
+                    Heaviest_Element_Mass FROM periodic_table_schema.periodic_table WHERE (period_number, atomic_mass)
+                    IN ( SELECT period_number, MAX(atomic_mass) FROM periodic_table_schema.periodic_table GROUP BY
+                    period_number );
+                </p>
+                <p><b>Explanation: </b>The query finds the heaviest element in each period by first determining the
+                    maximum atomic mass for each period using GROUP BY period_number and MAX(atomic_mass) in a subquery.
+                    The main query then uses the WHERE clause to filter elements matching both the period number and the
+                    maximum atomic mass. It retrieves the period_number, element_name, and atomic_mass (aliased as
+                    HeaviestElementMass), ensuring that only the heaviest element for each period is returned.
+                </p>
+                <h3><b>9. </b>Count the Number of Elements in Each Phase.</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>number_of_elements</th>
+                            <th>phase</th>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>liq</td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td>gas</td>
+                        </tr>
+                        <tr>
+                            <td>77</td>
+                            <td>solid</td>
+                        </tr>
+                        <tr>
+                            <td>28</td>
+                            <td>artificial</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p class="prevent-select"><b>Query: </b>SELECT phase, COUNT(*) AS number_of_elements
+                    FROM periodic_table_schema.periodic_table
+                    GROUP BY phase;
+                </p>
+                <p><b>Explanation: </b>The query counts the number of elements in each phase by grouping the elements
+                    based on the phase column using GROUP BY phase. The COUNT(*) function then counts the number of
+                    elements within each group, and the results are returned with the phase and the corresponding count,
+                    labeled as num_elements.
+                </p>
+                <h3><b>10. </b>List All Nonmetal('Nonmetal') Elements in Descending Order of Atomic Mass.</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>atomic_mass</th>
+                            <th>element_name</th>
+                        </tr>
+                        <tr>
+                            <td>78.96</td>
+                            <td>Selenium</td>
+                        </tr>
+                        <tr>
+                            <td>32.065</td>
+                            <td>Sulfur</td>
+                        </tr>
+                        <tr>
+                            <td>30.974</td>
+                            <td>Phosphorus</td>
+                        </tr>
+                        <tr>
+                            <td>15.999</td>
+                            <td>Oxygen</td>
+                        </tr>
+                        <tr>
+                            <td>14.007</td>
+                            <td>Nitrogen</td>
+                        </tr>
+                        <tr>
+                            <td>12.011</td>
+                            <td>Carbon</td>
+                        </tr>
+                        <tr>
+                            <td>1.007</td>
+                            <td>Hydrogen</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p class="prevent-select"><b>Query: </b>SELECT element_name, atomic_mass FROM
+                    periodic_table_schema.periodic_table WHERE element_type = 'Nonmetal' ORDER BY atomic_mass DESC;
+                </p>
+                <p><b>Explanation: </b>The query lists all nonmetal elements by first filtering the elements where
+                    element_type is 'Nonmetal' using the WHERE clause. The query then orders these nonmetal elements in
+                    descending order of their atomic mass with ORDER BY atomic_mass DESC.
                 </p>
                 <br>
             </div>
             <br>
-            <script src="static/js/collapsiblescript.js"></script>
         </main>
     </div>
-
+    <script src="static/js/collapsiblescript.js"></script>
     <script src="static/js/query-execution.js"></script>
 </body>
 

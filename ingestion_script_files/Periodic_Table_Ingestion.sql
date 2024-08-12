@@ -1,23 +1,23 @@
-CREATE SCHEMA periodictableschema;
+CREATE SCHEMA periodic_table_schema;
 
-CREATE TABLE periodictableschema.PeriodicTable (
-    AtomicNumber integer NOT NULL,
-    ElementName text,
-    Symbol text,
-    AtomicMass numeric,
-    NumberOfNeutrons integer,
-    NumberOfProtons integer,
-    NumberOfElectrons integer,
-    PeriodNumber integer,
-    Phase text,
-    NaturallyOccurring boolean,
-    ElementType text,
-    PRIMARY KEY (AtomicNumber)
+CREATE TABLE periodic_table_schema.periodic_table (
+    atomic_number integer NOT NULL,
+    element_name text,
+    symbol text,
+    atomic_mass numeric,
+    number_of_neutrons integer,
+    number_of_protons integer,
+    number_of_electrons integer,
+    period_number integer,
+    phase text,
+    naturally_occurring boolean,
+    element_type text,
+    PRIMARY KEY (atomic_number)
 );
 
-INSERT INTO periodictableschema.PeriodicTable (AtomicNumber,ElementName,Symbol,AtomicMass,NumberOfNeutrons,NumberOfProtons,NumberOfElectrons,PeriodNumber,Phase,NaturallyOccurring,ElementType) VALUES (1,'Hydrogen','H',1.007,0,1,1,1,'gas',true,'Nonmetal');
+INSERT INTO periodic_table_schema.periodic_table VALUES (1,'Hydrogen','H',1.007,0,1,1,1,'gas',true,'Nonmetal');
 
-INSERT INTO periodictableschema.PeriodicTable (AtomicNumber,ElementName,Symbol,AtomicMass,NumberOfNeutrons,NumberOfProtons,NumberOfElectrons,PeriodNumber,Phase,NaturallyOccurring,ElementType) VALUES (2,'Helium','He',4.002,2,2,2,1,'gas',true,'NobleGas'),
+INSERT INTO periodic_table_schema.periodic_table VALUES (2,'Helium','He',4.002,2,2,2,1,'gas',true,'NobleGas'),
 (3,'Lithium','Li',6.941,4,3,3,2,'solid',true,'AlkaliMetal'),
 (4,'Beryllium','Be',9.012,5,4,4,2,'solid',true,'AlkalineEarthMetal'),
 (5,'Boron','B',10.811,6,5,5,2,'solid',true,'Metalloid'),
@@ -27,7 +27,7 @@ INSERT INTO periodictableschema.PeriodicTable (AtomicNumber,ElementName,Symbol,A
 (9,'Fluorine','F',18.998,10,9,9,2,'gas',true,'Halogen'),
 (10,'Neon','Ne',20.18,10,10,10,2,'gas',true,'NobleGas');
 
-INSERT INTO periodictableschema.PeriodicTable (AtomicNumber,ElementName,Symbol,AtomicMass,NumberOfNeutrons,NumberOfProtons,NumberOfElectrons,PeriodNumber,Phase,NaturallyOccurring,ElementType) VALUES 
+INSERT INTO periodic_table_schema.periodic_table VALUES 
 (11,'Sodium','Na',22.99,12,11,11,3,'solid',true,'AlkaliMetal'),
 (12,'Magnesium','Mg',24.305,12,12,12,3,'solid',true,'AlkalineEarthMetal'),
 (13,'Aluminum','Al',26.982,14,13,13,3,'solid',true,'Metal'),
