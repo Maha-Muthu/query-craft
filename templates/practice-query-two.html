@@ -128,7 +128,7 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p><b>8. </b></p>
+            <p><b>8. </b>Find employees who earn more than the average salary of their department and also more than the overall company average salary.</p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -136,7 +136,7 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p><b>9. </b></p>
+            <p><b>9. </b>Find the employee with the fifth highest salary.</p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -144,7 +144,7 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p><b>10. </b></p>
+            <p><b>10. </b>Find the top 3 highest-paid employees in each department.</p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -432,39 +432,184 @@
                     GROUP BY department.name;
                 </p>
                 <p><b>Explanation: </b>The query counts the number of employees in each department by using a LEFT JOIN to include all departments, even those with no employees. The COUNT(*) function tallies the employees in each department, and GROUP BY department.name groups the results by department. </p>
-                <h3><b>8. </b></h3>
+                <h3><b>8. </b>Find employees who earn more than the average salary of their department and also more than the overall company average salary.</h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
                     <table>
-
-                    </table>
+                        <tr>
+                          <th>department_id</th>
+                          <th>name</th>
+                          <th>salary</th>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>Bob</td>
+                          <td>70000</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>Charlie</td>
+                          <td>80000</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>Diana</td>
+                          <td>75000</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>Grace</td>
+                          <td>72000</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>Hank</td>
+                          <td>85000</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>Ivy</td>
+                          <td>78000</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>Leo</td>
+                          <td>73000</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>Mia</td>
+                          <td>88000</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>Nick</td>
+                          <td>79000</td>
+                        </tr>
+                      </table>                      
                 </div>
                 <br>
-                <p><b>Query: </b>
+                <p><b>Query: </b>SELECT name, salary, department_id
+                    FROM organization.employee
+                    WHERE salary > (SELECT AVG(salary) FROM organization.employee WHERE department_id = employee.department_id)
+                      AND salary > (SELECT AVG(salary) FROM organization.employee);
                 </p>
-                <p><b>Explanation: </b></p>
-                <h3><b>9. </b></h3>
+                <p><b>Explanation: </b>The query identifies employees earning more than both their department's average salary and the company's overall average. It uses two subqueries: one to calculate the average salary within each department and another for the company's overall average. The WHERE clause filters employees whose salaries exceed both these averages, ensuring only the highest earners in both contexts are selected.</p>
+                <h3><b>9. </b>Find the employee with the fifth highest salary.</h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
                     <table>
-
-                    </table>
+                        <tr>
+                          <th>name</th>
+                          <th>salary</th>
+                        </tr>
+                        <tr>
+                          <td>Ivy</td>
+                          <td>78000</td>
+                        </tr>
+                      </table>
                 </div>
                 <br>
-                <p><b>Query: </b>
+                <p><b>Query: </b>SELECT name, salary
+                    FROM organization.employee e1
+                    WHERE 4 = (
+                        SELECT COUNT(DISTINCT salary)
+                        FROM organization.employee e2
+                        WHERE e2.salary &gt; e1.salary
+                    );
                 </p>
-                <p><b>Explanation: </b></p>
-                <h3><b>10. </b></h3>
+                <p><b>Explanation: </b>The query identifies the employee with the fifth highest salary by using a correlated subquery. The subquery, SELECT COUNT(DISTINCT salary) FROM organization.employee e2 WHERE e2.salary &gt; e1.salary, calculates the number of distinct salaries (e2.salary) that are greater than the current employee's salary (e1.salary). The outer query then applies the condition WHERE 4 = (...), which filters the results to find the employee for whom there are exactly two higher salaries, thus making that employee's salary the fifth highest in the organization.</p>
+                <h3><b>10. </b>Find the top 3 highest-paid employees in each department.</h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
                     <table>
-
-                    </table>
+                        <tr>
+                          <th>department_id</th>
+                          <th>name</th>
+                          <th>salary</th>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Frank</td>
+                          <td>65000</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Kate</td>
+                          <td>61000</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Alice</td>
+                          <td>60000</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>Leo</td>
+                          <td>73000</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>Grace</td>
+                          <td>72000</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>Bob</td>
+                          <td>70000</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>Mia</td>
+                          <td>88000</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>Hank</td>
+                          <td>85000</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>Charlie</td>
+                          <td>80000</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>Nick</td>
+                          <td>79000</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>Ivy</td>
+                          <td>78000</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>Diana</td>
+                          <td>75000</td>
+                        </tr>
+                        <tr>
+                          <td>5</td>
+                          <td>Olive</td>
+                          <td>53000</td>
+                        </tr>
+                        <tr>
+                          <td>5</td>
+                          <td>Jack</td>
+                          <td>52000</td>
+                        </tr>
+                        <tr>
+                          <td>5</td>
+                          <td>Eve</td>
+                          <td>50000</td>
+                        </tr>
+                      </table>
+                      
                 </div>
                 <br>
-                <p><b>Query: </b>
+                <p><b>Query: </b>SELECT e1.name, e1.department_id, e1.salary FROM organization.employee e1 WHERE (     SELECT COUNT(*)     FROM organization.employee e2     WHERE e2.department_id = e1.department_id       AND e2.salary &gt; e1.salary ) &lt; 3 ORDER BY e1.department_id, e1.salary DESC;
                 </p>
-                <p><b>Explanation: </b></p>
+                <p><b>Explanation: </b>The query retrieves the top 3 highest-paid employees in each department by using a correlated subquery. The subquery counts how many employees (e2) in the same department (e2.department_id = e1.department_id) have a salary greater than the current employee (e2.salary > e1.salary). The outer query filters employees where this count is less than 3, meaning they are among the top 3 earners in their department. The result is then ordered by department and salary, ensuring the highest-paid employees appear first.</p>
                 <br>
             </div>
             <br>
