@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Databases Practice Query 3</title>
+    <title>Databases Practice Query 4</title>
     <link rel="stylesheet" href="static/css/page-skeleton-design.css">
     <link rel="stylesheet" href="static/css/collapsible-design.css">
     <link rel="stylesheet" href="static/css/query-input-design.css">
@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <header>CSI 2132 Practice #3: Security Contests</header>
+    <header>CSI 2132 Practice #4: Sales Management</header>
     <div class="container">
         <nav>
             <a href="{{ url_for('student_homepage') }}">Home</a>
@@ -29,46 +29,81 @@
             <a href="{{ url_for('practice_query_five') }}">Practice Query 5</a>
         </nav>
         <main>
-            <h2>Security Contests Schema</h2>
-            <p>The schema "Security_Contests" consists of two tables: "Hackers" and "Submissions." The "Hackers" table holds unique identifiers and names of hackers. The "Submissions" table records the details of submissions made by hackers, including the submission date, a reference to the hacker who made the submission, and the score awarded. The schema establishes a relationship between hackers and their submissions through a foreign key.</p>
+            <h2>Sales Management Schema</h2>
+            <p>The schema "Sales_Management." consists of three tables: agents, customer, and orders. The agents table
+                stores details about sales agents, including their working area and contact information. The customer
+                table holds information about customers, such as their location, financial details, and the agent they
+                are associated with. The orders table records customer orders, including the order amount, advance
+                payment, and associated customer and agent details. Relationships are established between these tables
+                through foreign keys to ensure data integrity.</p>
             <h3>The Description of the tables:</h3>
-            <img src="{{ url_for('static', filename='images/organizationSchema.png') }}"
-                alt="Periodic Table Table Description" class="responsive-image">
+            <img src="{{ url_for('static', filename='images/salesManagementSchema1.png') }}"
+                alt="Sample Management Schema Tables Description" class="responsive-image">
+            <img src="{{ url_for('static', filename='images/salesManagementSchema2.png') }}"
+                alt="Sample Management Schema Tables Description" class="responsive-image">
             <br>
-            <h3>Sample Data from Department Table</h3>
-            <img src="{{ url_for('static', filename='images/departmentTable.png') }}"
-                alt="Organization Schema Department Table" class="responsive-image">
+            <h3>Sample Data from Agents Table</h3>
+            <img src="{{ url_for('static', filename='images/agentsTable.png') }}"
+                alt="Sales Management Schema Agents Table" class="responsive-image">
             <br>
-            <h3>Sample Data from Employee Table</h3>
-            <img src="{{ url_for('static', filename='images/employeeTable.png') }}"
-                alt="Organization Table Employee Table" class="responsive-image">
+            <h3>Sample Data from Customer Table</h3>
+            <img src="{{ url_for('static', filename='images/customerTable.png') }}"
+                alt="Sales Management Schema Customer Table" class="responsive-image">
+            <br>
+            <h3>Sample Data from Order Table</h3>
+            <img src="{{ url_for('static', filename='images/ordersTable.png') }}"
+                alt="Sales Management Schema Orders Table" class="responsive-image">
             <br>
             <h3>Attributes</h3>
             <ul>
-                <li>Schema Name: organization</li>
+                <li>Schema Name: sales_management</li>
                 <ul>
-                    <li>Table Name: department</li>
+                    <li>Table Name: agents</li>
                     <ul>
                         <li>Attributes</li>
                         <ul>
-                            <li>id</li>
-                            <li>name</li>
+                            <li>agent_code</li>
+                            <li>agent_name</li>
+                            <li>working_area</li>
+                            <li>commission</li>
+                            <li>phone_no</li>
                         </ul>
                     </ul>
-                    <li>Table Name: employee</li>
+                    <li>Table Name: customer</li>
+                    <ul>
+                        <li>Attributes</li>
+                        <ul>
+                            <li>code</li>
+                            <li>name</li>
+                            <li>city</li>
+                            <li>working_area</li>
+                            <li>country</li>
+                            <li>grade</li>
+                            <li>opening_amount</li>
+                            <li>receive_amount</li>
+                            <li>payment_amount</li>
+                            <li>outstanding_amount</li>
+                            <li>phone</li>
+                            <li>agent_code</li>
+                        </ul>
+                    </ul>
+                    <li>Table Name: orders</li>
                     <ul>
                         <li>Attributes</li>
                         <ul>
                             <li>id</li>
-                            <li>name</li>
-                            <li>salary</li>
-                            <li>department_id</li>
+                            <li>amount</li>
+                            <li>advance_amount</li>
+                            <li>date</li>
+                            <li>customer_code</li>
+                            <li>agent_code</li>
+                            <li>description</li>
                         </ul>
                     </ul>
                 </ul>
             </ul>
-            <h3>Query Organization Schema</h3>
-            <p>A</p>
+            <h3>Query Sales Management Schema</h3>
+            <p><b>1. </b></p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -76,7 +111,7 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p>B</p>
+            <p><b>2. </b></p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -84,7 +119,7 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p>C</p>
+            <p><b>3. </b></p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -92,7 +127,7 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p>D</p>
+            <p><b>4. </b></p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -100,7 +135,7 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p>E</p>
+            <p>4</p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -111,56 +146,48 @@
             <button class="collapsible">Query Organization Schema</button>
             <div class="content">
                 <br>
-                <h3>a</h3>
+                <h3><b>1. </b></h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
-                    <table>
-                        
-                    </table>
+                    
                 </div>
-                <p><b>Query: </b>
-                </p>
-                <p><b>Explanation: </b></p>
                 <br>
-                <h3>b</h3>
-                <p><b>Expected Results: </b></p>
-                <div style="overflow-x: auto; overflow-y: auto;">
-                    <table>
-
-                    </table>
-                </div>
                 <p><b>Query: </b>
                 </p>
                 <p><b>Explanation: </b></p>
+                <h3><b>2. </b></h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                 
+                </div>
                 <br>
-                <h3>c</h3>
-                <p><b>Expected Results: </b></p>
-                <div style="overflow-x: auto; overflow-y: auto;">
-                    <table>
-
-                    </table>
-                </div>
                 <p><b>Query: </b>
                 </p>
                 <p><b>Explanation: </b></p>
-                <h3>d</h3>
+                <h3><b>3. </b></h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
-                    <table>
-
-                    </table>
+               
                 </div>
-                <p><b>Query: </b>
-                </p>
-                <p><b>Explanation: </b></p>
                 <br>
-                <h3>e</h3>
+                <p><b>Query: </b>
+                </p>
+                <p><b>Explanation: </b></p>
+                <h3><b>4. </b></h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
-                    <table>
-
-                    </table>
+               
                 </div>
+                <br>
+                <p><b>Query: </b>
+                </p>
+                <p><b>Explanation: </b></p>
+                <h3><b>5. </b></h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                 
+                </div>
+                <br>
                 <p><b>Query: </b>
                 </p>
                 <p><b>Explanation: </b></p>

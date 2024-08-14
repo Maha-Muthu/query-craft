@@ -8,20 +8,6 @@ CREATE TABLE  sales_management.agents
 	commission DECIMAL(10,2), 
 	phone_no CHAR(15)  
 	);
-	
-INSERT INTO sales_management.agents VALUES 
-('A007', 'Ramasundar', 'Bangalore', '0.15', '077-25814763'),
-('A003', 'Alex ', 'London', '0.13', '075-12458969'),
-('A008', 'Alford', 'New York', '0.12', '044-25874365'),
-('A011', 'Ravi Kumar', 'Bangalore', '0.15', '077-45625874'),
-('A010', 'Santakumar', 'Chennai', '0.14', '007-22388644'),
-('A012', 'Lucida', 'San Jose', '0.12', '044-52981425'),
-('A005', 'Anderson', 'Brisban', '0.13', '045-21447739'),
-('A001', 'Subbarao', 'Bangalore', '0.14', '077-12346674'),
-('A002', 'Mukesh', 'Mumbai', '0.11', '029-12358964'),
-('A006', 'McDen', 'London', '0.15', '078-22255588'),
-('A004', 'Ivan', 'Torento', '0.15', '008-22544166'),
-('A009', 'Benjamin', 'Hampshair', '0.11', '008-22536178');
 
 CREATE TABLE sales_management.customer 
    (	
@@ -38,6 +24,31 @@ CREATE TABLE sales_management.customer
 	phone VARCHAR(17) NOT NULL, 
 	agent_code CHAR(6) NOT NULL REFERENCES sales_management.agents
 );
+
+CREATE TABLE sales_management.orders 
+   (
+    id DECIMAL(6,0) NOT NULL PRIMARY KEY, 
+	amount DECIMAL(12,2) NOT NULL, 
+	advance_amount DECIMAL(12,2) NOT NULL, 
+	date DATE NOT NULL, 
+	customer_code VARCHAR(6) NOT NULL REFERENCES sales_management.CUSTOMER, 
+	agent_code CHAR(6) NOT NULL REFERENCES sales_management.agents, 
+	description VARCHAR(60) NOT NULL
+   );
+	
+INSERT INTO sales_management.agents VALUES 
+('A007', 'Ramasundar', 'Bangalore', '0.15', '077-25814763'),
+('A003', 'Alex ', 'London', '0.13', '075-12458969'),
+('A008', 'Alford', 'New York', '0.12', '044-25874365'),
+('A011', 'Ravi Kumar', 'Bangalore', '0.15', '077-45625874'),
+('A010', 'Santakumar', 'Chennai', '0.14', '007-22388644'),
+('A012', 'Lucida', 'San Jose', '0.12', '044-52981425'),
+('A005', 'Anderson', 'Brisban', '0.13', '045-21447739'),
+('A001', 'Subbarao', 'Bangalore', '0.14', '077-12346674'),
+('A002', 'Mukesh', 'Mumbai', '0.11', '029-12358964'),
+('A006', 'McDen', 'London', '0.15', '078-22255588'),
+('A004', 'Ivan', 'Torento', '0.15', '008-22544166'),
+('A009', 'Benjamin', 'Hampshair', '0.11', '008-22536178');
 
 INSERT INTO sales_management.customer VALUES  ('C00013', 'Holmes', 'London', 'London', 'UK', '2', '6000.00', '5000.00', '7000.00', '4000.00', 'BBBBBBB', 'A003'),
 ('C00001', 'Micheal', 'New York', 'New York', 'USA', '2', '3000.00', '5000.00', '2000.00', '6000.00', 'CCCCCCC', 'A008'),
@@ -64,17 +75,6 @@ INSERT INTO sales_management.customer VALUES  ('C00013', 'Holmes', 'London', 'Lo
 ('C00014', 'Rangarappa', 'Bangalore', 'Bangalore', 'India', '2', '8000.00', '11000.00', '7000.00', '12000.00', 'AAAATGF', 'A001'),
 ('C00016', 'Venkatpati', 'Bangalore', 'Bangalore', 'India', '2', '8000.00', '11000.00', '7000.00', '12000.00', 'JRTVFDD', 'A007'),
 ('C00011', 'Sundariya', 'Chennai', 'Chennai', 'India', '3', '7000.00', '11000.00', '7000.00', '11000.00', 'PPHGRTS', 'A010');
-
-CREATE TABLE sales_management.orders 
-   (
-    id DECIMAL(6,0) NOT NULL PRIMARY KEY, 
-	amount DECIMAL(12,2) NOT NULL, 
-	advance_amount DECIMAL(12,2) NOT NULL, 
-	date DATE NOT NULL, 
-	customer_code VARCHAR(6) NOT NULL REFERENCES sales_management.CUSTOMER, 
-	agent_code CHAR(6) NOT NULL REFERENCES sales_management.agents, 
-	description VARCHAR(60) NOT NULL
-   );
 
 INSERT INTO sales_management.orders VALUES  ('200100', '1000.00', '600.00', '08/01/2008', 'C00013', 'A003', 'SOD'),
 ('200110', '3000.00', '500.00', '04/15/2008', 'C00019', 'A010', 'SOD'),
