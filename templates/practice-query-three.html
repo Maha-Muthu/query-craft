@@ -30,17 +30,21 @@
         </nav>
         <main>
             <h2>Security Contests Schema</h2>
-            <p>The schema "Security_Contests" consists of two tables: "Hackers" and "Submissions." The "Hackers" table holds unique identifiers and names of hackers. The "Submissions" table records the details of submissions made by hackers, including the submission date, a reference to the hacker who made the submission, and the score awarded. The schema establishes a relationship between hackers and their submissions through a foreign key.</p>
+            <p>The schema "Security_Contests" consists of two tables: "Hackers" and "Submissions." The "Hackers" table
+                holds unique identifiers and names of hackers. The "Submissions" table records the details of
+                submissions made by hackers, including the submission date, a reference to the hacker who made the
+                submission, and the score awarded. The schema establishes a relationship between hackers and their
+                submissions through a foreign key.</p>
             <h3>The Description of the tables:</h3>
-            <img src="{{ url_for('static', filename='images/contestsSchema.png') }}"
-                alt="Security Contests Tables" class="responsive-image">
+            <img src="{{ url_for('static', filename='images/contestsSchema.png') }}" alt="Security Contests Tables"
+                class="responsive-image">
             <br>
-            <h3>Sample Data from Department Table</h3>
+            <h3>Sample Data from Hackers Table</h3>
             <img src="{{ url_for('static', filename='images/hackersTable.png') }}"
                 alt="Security Contests Schema Hackers Table" class="responsive-image">
             <br>
-            <h3>Sample Data from Employee Table</h3>
-            <img src="{{ url_for('static', filename='images/contestsTable.png') }}"
+            <h3>Sample Data from Submissions Table</h3>
+            <img src="{{ url_for('static', filename='images/submissionsTable.png') }}"
                 alt="Security Contests Schema Contests Table" class="responsive-image">
             <br>
             <h3>Attributes</h3>
@@ -68,7 +72,7 @@
                 </ul>
             </ul>
             <h3>Query Security Contests Schema</h3>
-            <p><b>1. </b>Find all submissions made on '2023-08-01'.</p>
+            <p><b>1. </b>Retrieve all the columns for any 5 records from the hackers table.</p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -76,7 +80,7 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p><b>2. </b></p>
+            <p><b>2. </b>Find all submissions made on '2023-01-01'.</p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -84,7 +88,7 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p><b>3. </b></p>
+            <p><b>3. </b>Find the highest score submitted by a hacker with ID 3.</p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -92,7 +96,7 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p><b>4. </b></p>
+            <p><b>4. </b>Find the total score for each hacker.</p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -100,7 +104,7 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p><b>5. </b></p>
+            <p><b>5. </b>Count the number of submissions each hacker has made.</p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -108,60 +112,497 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <button class="collapsible">Security Contests</button>
+            <p><b>6. </b>Find the hacker with the highest average submission score.</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p><b>7. </b>Find the earliest submission date for each hacker.</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p><b>8. </b>Find hackers who share the same first character in their name with at least one other hacker.
+            </p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p><b>9. </b> Retrieve the list of hackers who have made submissions on exactly 3 distinct dates.</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p><b>10. </b>Find Hackers With Maximum Score Above 80.</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <button class="collapsible">Query Security Contests Schema</button>
             <div class="content">
                 <br>
-                <h3><b>1. </b>Find all submissions made on '2023-08-01'.</h3>
+                <h3><b>1. </b>Retrieve all the columns for any 5 records from the hackers table.</h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
-                    
+                    <table>
+                        <tr>
+                            <th>id</th>
+                            <th>name</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Ethan</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Sophia</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Jackson</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Olivia</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Liam</td>
+                        </tr>
+                    </table>
                 </div>
-                <p><b>Query: </b>
-                </p>
-                <p><b>Explanation: </b></p>
                 <br>
-                <h3><b>2. </b></h3>
+                <p><b>Query: </b>SELECT * FROM security_contests.hackers LIMIT 5;
+                </p>
+                <p><b>Explanation: </b>The query retrieves the first 5 records from the Hackers table by using LIMIT 5.
+                    The SELECT * ensures that all columns are included in the result, while LIMIT 5 restricts the output
+                    to just five rows. </p>
+                <h3><b>2. </b>Find all submissions made on '2023-01-01'.</h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
                     <table>
-
+                        <tr>
+                            <th>date</th>
+                            <th>hacker_id</th>
+                            <th>score</th>
+                            <th>submission_id</th>
+                        </tr>
+                        <tr>
+                            <td>2023-01-01</td>
+                            <td>1</td>
+                            <td>95</td>
+                            <td>1</td>
+                        </tr>
                     </table>
                 </div>
-                <p><b>Query: </b>
-                </p>
-                <p><b>Explanation: </b></p>
                 <br>
-                <h3><b>3. </b></h3>
+                <p><b>Query: </b>SELECT * FROM Security_Contests.Submissions WHERE date = '2023-01-01';
+                </p>
+                <p><b>Explanation: </b>The query filters the Submissions table using WHERE date = '2023-01-01', which
+                    ensures that only rows where the date matches the specified value are selected.</p>
+                <h3><b>3. </b>Find the highest score submitted by a hacker with ID 3.</h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
                     <table>
-
+                        <tr>
+                            <th>max</th>
+                        </tr>
+                        <tr>
+                            <td>91</td>
+                        </tr>
                     </table>
                 </div>
-                <p><b>Query: </b>
-                </p>
-                <p><b>Explanation: </b></p>
-                <h3><b>4. </b></h3>
-                <p><b>Expected Results: </b></p>
-                <div style="overflow-x: auto; overflow-y: auto;">
-                    <table>
-
-                    </table>
-                </div>
-                <p><b>Query: </b>
-                </p>
-                <p><b>Explanation: </b></p>
                 <br>
-                <h3><b>5. </b></h3>
+                <p><b>Query: </b>SELECT MAX(score) FROM Security_Contests.Submissions WHERE hacker_id = 3;
+                </p>
+                <p><b>Explanation: </b>The query retrieves the highest score submitted by the hacker with ID 3 by using
+                    MAX(score) to find the maximum value in the score column. The WHERE hacker_id = 3 clause filters the
+                    Submissions table to include only rows associated with hacker ID 3, ensuring that the maximum score
+                    is calculated specifically for this hacker. </p>
+                <h3><b>4. </b>Find the total score for each hacker.</h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
                     <table>
-
+                        <tr>
+                            <th>name</th>
+                            <th>total_score</th>
+                        </tr>
+                        <tr>
+                            <td>Jackson</td>
+                            <td>269</td>
+                        </tr>
+                        <tr>
+                            <td>Sophia</td>
+                            <td>266</td>
+                        </tr>
+                        <tr>
+                            <td>Liam</td>
+                            <td>274</td>
+                        </tr>
+                        <tr>
+                            <td>Olivia</td>
+                            <td>256</td>
+                        </tr>
+                        <tr>
+                            <td>Lucas</td>
+                            <td>284</td>
+                        </tr>
+                        <tr>
+                            <td>Ava</td>
+                            <td>270</td>
+                        </tr>
+                        <tr>
+                            <td>Noah</td>
+                            <td>265</td>
+                        </tr>
+                        <tr>
+                            <td>Ethan</td>
+                            <td>269</td>
+                        </tr>
+                        <tr>
+                            <td>Emma</td>
+                            <td>264</td>
+                        </tr>
+                        <tr>
+                            <td>Mia</td>
+                            <td>282</td>
+                        </tr>
                     </table>
                 </div>
-                <p><b>Query: </b>
+                <br>
+                <p><b>Query: </b>SELECT Hackers.name, SUM(Submissions.score) AS total_score FROM
+                    Security_Contests.Hackers JOIN Security_Contests.Submissions ON Hackers.id = Submissions.hacker_id
+                    GROUP BY Hackers.name;
                 </p>
-                <p><b>Explanation: </b></p>
+                <p><b>Explanation: </b>The query calculates the total score for each hacker by using
+                    SUM(Submissions.score) to sum the scores for each hacker. It joins the Hackers and Submissions
+                    tables on Hackers.id = Submissions.hacker_id, ensuring that scores are correctly matched to the
+                    corresponding hacker. The GROUP BY Hackers.name clause groups the results by hacker names, allowing
+                    the SUM function to calculate the total score for each individual hacker. This approach provides an
+                    aggregated view of scores per hacker.</p>
+                <h3><b>5. </b>Count the number of submissions each hacker has made.</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>name</th>
+                            <th>submission_count</th>
+                        </tr>
+                        <tr>
+                            <td>Jackson</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>Sophia</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>Liam</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>Olivia</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>Lucas</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>Ava</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>Noah</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>Ethan</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>Emma</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>Mia</td>
+                            <td>3</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p><b>Query: </b>SELECT Hackers.name, COUNT(Submissions.submission_id) AS submission_count
+                    FROM Security_Contests.Hackers
+                    JOIN Security_Contests.Submissions
+                    ON Hackers.id = Submissions.hacker_id
+                    GROUP BY Hackers.name;
+                </p>
+                <p><b>Explanation: </b>The query counts the number of submissions each hacker has made by using
+                    COUNT(Submissions.submission_id) to tally the total submissions. It joins the Hackers and
+                    Submissions tables on Hackers.id = Submissions.hacker_id, linking each submission to the
+                    corresponding hacker. The GROUP BY Hackers.name clause groups the results by hacker names, allowing
+                    the COUNT function to calculate the total number of submissions per hacker.</p>
+                <h3><b>6. </b>Find the hacker with the highest average submission score.</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>name</th>
+                        </tr>
+                        <tr>
+                            <td>Lucas</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p><b>Query: </b>SELECT name
+                    FROM Security_Contests.Hackers
+                    WHERE id = (
+                    SELECT hacker_id
+                    FROM Security_Contests.Submissions
+                    GROUP BY hacker_id
+                    ORDER BY AVG(score) DESC
+                    LIMIT 1
+                    );
+                </p>
+                <p><b>Explanation: </b>
+                    The query finds the hacker with the highest average submission score by first using a subquery to
+                    calculate the average score for each hacker with GROUP BY hacker_id and ORDER BY AVG(score) DESC to
+                    sort them in descending order. The LIMIT 1 ensures that only the hacker with the highest average
+                    score is selected. The outer query then retrieves the name of the hacker whose id matches the
+                    hacker_id from the subquery.</p>
+                <h3><b>7. </b>Find the earliest submission date for each hacker.</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>first_submission_date</th>
+                            <th>name</th>
+                        </tr>
+                        <tr>
+                            <td>2023-01-03</td>
+                            <td>Jackson</td>
+                        </tr>
+                        <tr>
+                            <td>2023-01-02</td>
+                            <td>Sophia</td>
+                        </tr>
+                        <tr>
+                            <td>2023-01-05</td>
+                            <td>Liam</td>
+                        </tr>
+                        <tr>
+                            <td>2023-01-04</td>
+                            <td>Olivia</td>
+                        </tr>
+                        <tr>
+                            <td>2023-01-09</td>
+                            <td>Lucas</td>
+                        </tr>
+                        <tr>
+                            <td>2023-01-08</td>
+                            <td>Ava</td>
+                        </tr>
+                        <tr>
+                            <td>2023-01-07</td>
+                            <td>Noah</td>
+                        </tr>
+                        <tr>
+                            <td>2023-01-01</td>
+                            <td>Ethan</td>
+                        </tr>
+                        <tr>
+                            <td>2023-01-06</td>
+                            <td>Emma</td>
+                        </tr>
+                        <tr>
+                            <td>2023-01-10</td>
+                            <td>Mia</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p><b>Query: </b>SELECT Hackers.name, MIN(Submissions.date) AS first_submission_date
+                    FROM Security_Contests.Hackers
+                    JOIN Security_Contests.Submissions
+                    ON Hackers.id = Submissions.hacker_id
+                    GROUP BY Hackers.name;
+                </p>
+                <p><b>Explanation: </b>The query finds the earliest submission date for each hacker by using
+                    MIN(Submissions.date) to determine the earliest date in the Submissions table for each hacker. It
+                    joins the Hackers and Submissions tables on Hackers.id = Submissions.hacker_id to associate each
+                    submission with the correct hacker. The GROUP BY Hackers.name clause groups the results by hacker
+                    names, allowing the MIN function to return the earliest submission date for each hacker.</p>
+                <h3><b>8. </b>Find hackers who share the same first character in their name with at least one other
+                    hacker.</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>id</th>
+                            <th>name</th>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Emma</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Liam</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Ethan</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>Lucas</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p><b>Query: </b>SELECT DISTINCT h1.id, h1.name
+                    FROM Security_Contests.Hackers h1
+                    JOIN Security_Contests.Hackers h2
+                    ON SUBSTRING(h1.name, 1, 1) = SUBSTRING(h2.name, 1, 1) AND h1.id &lt;&gt; h2.id;
+                </p>
+                <p><b>Explanation: </b>
+                    The query finds hackers who share the same first character in their name with at least one other
+                    hacker by using a self-join on the Hackers table. It compares the first character of each hacker's
+                    name using SUBSTRING(h1.name, 1, 1) = SUBSTRING(h2.name, 1, 1) and ensures that the hacker IDs are
+                    different with h1.id &lt;&gt; h2.id. The DISTINCT keyword removes duplicate results, providing a
+                    list of hackers who share the same initial character with at least one other hacker. </p>
+                <h3><b>9. </b>Retrieve the list of hackers who have made submissions on exactly 3 distinct dates.</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>name</th>
+                        </tr>
+                        <tr>
+                            <td>Ava</td>
+                        </tr>
+                        <tr>
+                            <td>Emma</td>
+                        </tr>
+                        <tr>
+                            <td>Ethan</td>
+                        </tr>
+                        <tr>
+                            <td>Jackson</td>
+                        </tr>
+                        <tr>
+                            <td>Liam</td>
+                        </tr>
+                        <tr>
+                            <td>Lucas</td>
+                        </tr>
+                        <tr>
+                            <td>Mia</td>
+                        </tr>
+                        <tr>
+                            <td>Noah</td>
+                        </tr>
+                        <tr>
+                            <td>Olivia</td>
+                        </tr>
+                        <tr>
+                            <td>Sophia</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p><b>Query: </b>SELECT Hackers.name
+                    FROM Security_Contests.Hackers
+                    JOIN Security_Contests.Submissions
+                    ON Hackers.id = Submissions.hacker_id
+                    GROUP BY Hackers.name
+                    HAVING COUNT(DISTINCT Submissions.date) = 3;
+                </p>
+                <p><b>Explanation: </b>The query retrieves the list of hackers who have made submissions on exactly 3
+                    distinct dates by using COUNT(DISTINCT Submissions.date) in the HAVING clause. It first joins the
+                    Hackers and Submissions tables on Hackers.id = Submissions.hacker_id, linking each submission to the
+                    corresponding hacker. The GROUP BY Hackers.name clause groups the results by hacker names, and the
+                    HAVING clause filters out hackers who do not have exactly 3 distinct submission dates.</p>
+                <h3><b>10. </b>Find Hackers With Maximum Score Above 80.</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>max_score</th>
+                            <th>name</th>
+                        </tr>
+                        <tr>
+                            <td>91</td>
+                            <td>Jackson</td>
+                        </tr>
+                        <tr>
+                            <td>90</td>
+                            <td>Sophia</td>
+                        </tr>
+                        <tr>
+                            <td>92</td>
+                            <td>Liam</td>
+                        </tr>
+                        <tr>
+                            <td>87</td>
+                            <td>Olivia</td>
+                        </tr>
+                        <tr>
+                            <td>96</td>
+                            <td>Lucas</td>
+                        </tr>
+                        <tr>
+                            <td>92</td>
+                            <td>Ava</td>
+                        </tr>
+                        <tr>
+                            <td>93</td>
+                            <td>Noah</td>
+                        </tr>
+                        <tr>
+                            <td>95</td>
+                            <td>Ethan</td>
+                        </tr>
+                        <tr>
+                            <td>91</td>
+                            <td>Emma</td>
+                        </tr>
+                        <tr>
+                            <td>95</td>
+                            <td>Mia</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p><b>Query: </b>SELECT Hackers.name, MAX(Submissions.score) AS max_score
+                    FROM Security_Contests.Hackers
+                    JOIN Security_Contests.Submissions
+                    ON Hackers.id = Submissions.hacker_id
+                    GROUP BY Hackers.name
+                    HAVING MAX(Submissions.score) &gt; 80;
+                </p>
+                <p><b>Explanation: </b>The query identifies hackers whose maximum score is above 80 by using
+                    MAX(Submissions.score) to determine the highest score for each hacker. It joins the Hackers and
+                    Submissions tables on Hackers.id = Submissions.hacker_id to correctly associate each score with the
+                    relevant hacker. The GROUP BY Hackers.name clause groups the results by hacker names, and the HAVING
+                    MAX(Submissions.score) > 80 condition filters the groups to include only those hackers with a
+                    maximum score greater than 80. </p>
                 <br>
             </div>
             <br>
