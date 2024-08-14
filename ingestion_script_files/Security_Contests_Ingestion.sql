@@ -2,11 +2,11 @@ CREATE SCHEMA Security_Contests;
 
 CREATE TABLE Security_Contests.Hackers (
     id INTEGER PRIMARY KEY,
-    nam VARCHAR(50)
+    name VARCHAR(50)
 );
 
 CREATE TABLE Security_Contests.Submissions (
-    date DATE,
+    date VARCHAR(20),
     submission_id INTEGER,
     hacker_id INTEGER REFERENCES Security_Contests.Hackers,
     score INTEGER

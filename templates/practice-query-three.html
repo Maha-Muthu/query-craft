@@ -32,22 +32,22 @@
             <h2>Security Contests Schema</h2>
             <p>The schema "Security_Contests" consists of two tables: "Hackers" and "Submissions." The "Hackers" table holds unique identifiers and names of hackers. The "Submissions" table records the details of submissions made by hackers, including the submission date, a reference to the hacker who made the submission, and the score awarded. The schema establishes a relationship between hackers and their submissions through a foreign key.</p>
             <h3>The Description of the tables:</h3>
-            <img src="{{ url_for('static', filename='images/organizationSchema.png') }}"
-                alt="Periodic Table Table Description" class="responsive-image">
+            <img src="{{ url_for('static', filename='images/contestsSchema.png') }}"
+                alt="Security Contests Tables" class="responsive-image">
             <br>
             <h3>Sample Data from Department Table</h3>
-            <img src="{{ url_for('static', filename='images/departmentTable.png') }}"
-                alt="Organization Schema Department Table" class="responsive-image">
+            <img src="{{ url_for('static', filename='images/hackersTable.png') }}"
+                alt="Security Contests Schema Hackers Table" class="responsive-image">
             <br>
             <h3>Sample Data from Employee Table</h3>
-            <img src="{{ url_for('static', filename='images/employeeTable.png') }}"
-                alt="Organization Table Employee Table" class="responsive-image">
+            <img src="{{ url_for('static', filename='images/contestsTable.png') }}"
+                alt="Security Contests Schema Contests Table" class="responsive-image">
             <br>
             <h3>Attributes</h3>
             <ul>
-                <li>Schema Name: organization</li>
+                <li>Schema Name: security_contests</li>
                 <ul>
-                    <li>Table Name: department</li>
+                    <li>Table Name: hackers</li>
                     <ul>
                         <li>Attributes</li>
                         <ul>
@@ -55,20 +55,20 @@
                             <li>name</li>
                         </ul>
                     </ul>
-                    <li>Table Name: employee</li>
+                    <li>Table Name: submissions</li>
                     <ul>
                         <li>Attributes</li>
                         <ul>
-                            <li>id</li>
-                            <li>name</li>
-                            <li>salary</li>
-                            <li>department_id</li>
+                            <li>date</li>
+                            <li>submission_id</li>
+                            <li>hacker_id</li>
+                            <li>score</li>
                         </ul>
                     </ul>
                 </ul>
             </ul>
-            <h3>Query Organization Schema</h3>
-            <p>A</p>
+            <h3>Query Security Contests Schema</h3>
+            <p><b>1. </b>Find all submissions made on '2023-08-01'.</p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -76,7 +76,7 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p>B</p>
+            <p><b>2. </b></p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -84,7 +84,7 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p>C</p>
+            <p><b>3. </b></p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -92,7 +92,7 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p>D</p>
+            <p><b>4. </b></p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -100,7 +100,7 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p>E</p>
+            <p><b>5. </b></p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -108,21 +108,19 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <button class="collapsible">Query Organization Schema</button>
+            <button class="collapsible">Security Contests</button>
             <div class="content">
                 <br>
-                <h3>a</h3>
+                <h3><b>1. </b>Find all submissions made on '2023-08-01'.</h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
-                    <table>
-                        
-                    </table>
+                    
                 </div>
                 <p><b>Query: </b>
                 </p>
                 <p><b>Explanation: </b></p>
                 <br>
-                <h3>b</h3>
+                <h3><b>2. </b></h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
                     <table>
@@ -133,7 +131,7 @@
                 </p>
                 <p><b>Explanation: </b></p>
                 <br>
-                <h3>c</h3>
+                <h3><b>3. </b></h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
                     <table>
@@ -143,7 +141,7 @@
                 <p><b>Query: </b>
                 </p>
                 <p><b>Explanation: </b></p>
-                <h3>d</h3>
+                <h3><b>4. </b></h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
                     <table>
@@ -154,7 +152,7 @@
                 </p>
                 <p><b>Explanation: </b></p>
                 <br>
-                <h3>e</h3>
+                <h3><b>5. </b></h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
                     <table>

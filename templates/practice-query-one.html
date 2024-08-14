@@ -55,7 +55,7 @@
             <br>
             <h3>Attributes</h3>
             <ul>
-                <li>Schema Name: periodic_table_schema</li>
+                <li>Schema Name: periodic_table</li>
                 <li>Table Name: PeriodicTable</li>
                 <li>Attributes:</li>
                 <ul>
@@ -182,7 +182,7 @@
                 </div>
                 <br>
                 <p class="prevent-select"><b>Query: </b>SELECT element_name
-                    FROM periodic_table_schema.periodic_table
+                    FROM periodic_table.periodic_table
                     WHERE element_Type = 'Nonmetal' AND Phase = 'gas';
                 </p>
                 <p><b>Explanation: </b>The query filters the periodic table data by checking for elements where
@@ -222,7 +222,7 @@
                 </div>
                 <br>
                 <p class="prevent-select"><b>Query: </b>SELECT element_name, number_of_neutrons
-                    FROM periodic_table_schema.periodic_table
+                    FROM periodic_table.periodic_table
                     ORDER BY number_of_neutrons DESC
                     LIMIT 5;
                 </p>
@@ -263,10 +263,10 @@
                 </div>
                 <br>
                 <p class="prevent-select"><b>Query: </b>SELECT phase, element_name, atomic_mass AS Lightest_Element_Mass
-                    FROM periodic_table_schema.periodic_table
+                    FROM periodic_table.periodic_table
                     WHERE (phase, atomic_mass) IN (
                     SELECT phase, MIN(atomic_mass)
-                    FROM periodic_table_schema.periodic_table
+                    FROM periodic_table.periodic_table
                     GROUP BY phase
                     );
                 </p>
@@ -291,7 +291,7 @@
                 </div>
                 <br>
                 <p class="prevent-select"><b>Query: </b>SELECT element_name, atomic_mass
-                    FROM periodic_table_schema.periodic_table
+                    FROM periodic_table.periodic_table
                     ORDER BY atomic_mass DESC
                     LIMIT 1;
                 </p>
@@ -312,7 +312,7 @@
                     </table>
                 </div>
                 <br>
-                <p class="prevent-select"><b>Query: </b>SELECT COUNT(*) FROM periodic_table_schema.periodic_table WHERE
+                <p class="prevent-select"><b>Query: </b>SELECT COUNT(*) FROM periodic_table.periodic_table WHERE
                     naturally_occurring = true;
                 </p>
                 <p><b>Explanation: </b>The query counts the number of naturally occurring elements by filtering the rows
@@ -338,7 +338,7 @@
                 </div>
                 <br>
                 <p class="prevent-select"><b>Query: </b>SELECT element_name, number_of_neutrons, number_of_protons FROM
-                    periodic_table_schema.periodic_table WHERE number_of_protons &gt; number_of_neutrons;
+                    periodic_table.periodic_table WHERE number_of_protons &gt; number_of_neutrons;
                 </p>
                 <p><b>Explanation: </b>The query identifies elements with more protons than neutrons by using the WHERE
                     clause to filter rows where the number_of_protons is greater than the number_of_neutrons. The query
@@ -413,7 +413,7 @@
                 </div>
                 <br>
                 <p class="prevent-select"><b>Query: </b>SELECT element_name, element_type
-                    FROM periodic_table_schema.periodic_table
+                    FROM periodic_table.periodic_table
                     WHERE element_type IN ('Metal', 'Metalloid');
                 </p>
                 <p><b>Explanation: </b>The query selects elements that are either metals or metalloids by using the
@@ -469,8 +469,8 @@
                 </div>
                 <br>
                 <p class="prevent-select"><b>Query: </b>SELECT period_number, element_name, atomic_mass AS
-                    Heaviest_Element_Mass FROM periodic_table_schema.periodic_table WHERE (period_number, atomic_mass)
-                    IN ( SELECT period_number, MAX(atomic_mass) FROM periodic_table_schema.periodic_table GROUP BY
+                    Heaviest_Element_Mass FROM periodic_table.periodic_table WHERE (period_number, atomic_mass)
+                    IN ( SELECT period_number, MAX(atomic_mass) FROM periodic_table.periodic_table GROUP BY
                     period_number );
                 </p>
                 <p><b>Explanation: </b>The query finds the heaviest element in each period by first determining the
@@ -507,7 +507,7 @@
                 </div>
                 <br>
                 <p class="prevent-select"><b>Query: </b>SELECT phase, COUNT(*) AS number_of_elements
-                    FROM periodic_table_schema.periodic_table
+                    FROM periodic_table.periodic_table
                     GROUP BY phase;
                 </p>
                 <p><b>Explanation: </b>The query counts the number of elements in each phase by grouping the elements
@@ -555,7 +555,7 @@
                 </div>
                 <br>
                 <p class="prevent-select"><b>Query: </b>SELECT element_name, atomic_mass FROM
-                    periodic_table_schema.periodic_table WHERE element_type = 'Nonmetal' ORDER BY atomic_mass DESC;
+                    periodic_table.periodic_table WHERE element_type = 'Nonmetal' ORDER BY atomic_mass DESC;
                 </p>
                 <p><b>Explanation: </b>The query lists all nonmetal elements by first filtering the elements where
                     element_type is 'Nonmetal' using the WHERE clause. The query then orders these nonmetal elements in
