@@ -103,7 +103,7 @@
                 </ul>
             </ul>
             <h3>Query Sales Management Schema</h3>
-            <p><b>1. </b></p>
+            <p><b>1. </b>Find all customers whose working area is 'New York'.</p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -111,7 +111,7 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p><b>2. </b></p>
+            <p><b>2. </b>List all unique working areas of agents.</p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -119,7 +119,7 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p><b>3. </b></p>
+            <p><b>3. List any 5 orders along with the customer name and agent name.</b></p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -135,7 +135,7 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p>4</p>
+            <p><b>5. </b></p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -143,31 +143,82 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <button class="collapsible">Query Organization Schema</button>
+            <button class="collapsible">Query Sales Management Schema</button>
             <div class="content">
                 <br>
-                <h3><b>1. </b></h3>
+                <h3><b>1. </b>Find all customers whose working area is 'New York'.</h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
-                    
+                    <table>
+                        <tr>
+                            <th>code</th>
+                            <th>working_area</th>
+                        </tr>
+                        <tr>
+                            <td>C00001</td>
+                            <td>New York</td>
+                        </tr>
+                        <tr>
+                            <td>C00020</td>
+                            <td>New York</td>
+                        </tr>
+                        <tr>
+                            <td>C00002</td>
+                            <td>New York</td>
+                        </tr>
+                    </table>
                 </div>
                 <br>
-                <p><b>Query: </b>
+                <p><b>Query: </b>SELECT code,working_area FROM sales_management.customer WHERE working_area = 'New
+                    York';
                 </p>
-                <p><b>Explanation: </b></p>
-                <h3><b>2. </b></h3>
+                <p><b>Explanation: </b>The query uses a SELECT statement to retrieve the code and working_area columns
+                    from the customer table. The WHERE clause filters the results to include only rows where the
+                    working_area column's value is 'New York'.</p>
+                <h3><b>2. </b>List all unique working areas of agents.</h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
-                 
+                    <table>
+                        <tr>
+                          <th>working_area</th>
+                        </tr>
+                        <tr>
+                          <td>Mumbai</td>
+                        </tr>
+                        <tr>
+                          <td>San Jose</td>
+                        </tr>
+                        <tr>
+                          <td>New York</td>
+                        </tr>
+                        <tr>
+                          <td>Brisban</td>
+                        </tr>
+                        <tr>
+                          <td>Chennai</td>
+                        </tr>
+                        <tr>
+                          <td>Hampshair</td>
+                        </tr>
+                        <tr>
+                          <td>London</td>
+                        </tr>
+                        <tr>
+                          <td>Bangalore</td>
+                        </tr>
+                        <tr>
+                          <td>Torento</td>
+                        </tr>
+                      </table>                      
                 </div>
                 <br>
-                <p><b>Query: </b>
+                <p><b>Query: </b>SELECT DISTINCT working_area FROM sales_management.agents;
                 </p>
-                <p><b>Explanation: </b></p>
-                <h3><b>3. </b></h3>
+                <p><b>Explanation: </b>The query uses SELECT DISTINCT to retrieve unique values from the working_area column in the agents table. This ensures that each working area is listed only once, filtering out any duplicates and providing a list of all distinct working areas where agents operate.</p>
+                <h3><b>3. </b>List any 5 orders along with the customer name and agent name.</h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
-               
+
                 </div>
                 <br>
                 <p><b>Query: </b>
@@ -176,7 +227,7 @@
                 <h3><b>4. </b></h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
-               
+
                 </div>
                 <br>
                 <p><b>Query: </b>
@@ -185,7 +236,7 @@
                 <h3><b>5. </b></h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
-                 
+
                 </div>
                 <br>
                 <p><b>Query: </b>
