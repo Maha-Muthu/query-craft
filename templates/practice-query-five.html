@@ -30,28 +30,39 @@
         </nav>
         <main>
             <h2>Movie Review Schema</h2>
-            <p>The schema "Security_Contests" consists of two tables: "Hackers" and "Submissions." The "Hackers" table
-                holds unique identifiers and names of hackers. The "Submissions" table records the details of
-                submissions made by hackers, including the submission date, a reference to the hacker who made the
-                submission, and the score awarded. The schema establishes a relationship between hackers and their
-                submissions through a foreign key.</p>
+            <p>TThis schema, named movie_review, consists of three tables: Movies, Users, and Movie_Rating. The Movies
+                table stores unique movie records, and the Users table stores unique user records, each with their own
+                identifier. The Movie_Rating table links movies and users together, allowing each user to rate specific
+                movies, with a composite primary key ensuring that each movie-user pair is unique.</p>
             <h3>The Description of the tables:</h3>
-            <img src="{{ url_for('static', filename='images/organizationSchema.png') }}"
-                alt="Periodic Table Table Description" class="responsive-image">
+            <img src="{{ url_for('static', filename='images/movieReviewSchema.png') }}"
+                alt="Movie Review Schema Tables Description" class="responsive-image">
             <br>
-            <h3>Sample Data from Department Table</h3>
-            <img src="{{ url_for('static', filename='images/departmentTable.png') }}"
-                alt="Organization Schema Department Table" class="responsive-image">
+            <h3>Sample Data from Movies Table</h3>
+            <img src="{{ url_for('static', filename='images/moviesTable.png') }}" alt="Movie Review Schema Movies Table"
+                class="responsive-image">
             <br>
-            <h3>Sample Data from Employee Table</h3>
-            <img src="{{ url_for('static', filename='images/employeeTable.png') }}"
-                alt="Organization Table Employee Table" class="responsive-image">
+            <h3>Sample Data from Users Table</h3>
+            <img src="{{ url_for('static', filename='images/usersTable.png') }}" alt="Movie Review Schema Users Table"
+                class="responsive-image">
             <br>
+            <br>
+            <h3>Sample Data from Movie Rating Table</h3>
+            <img src="{{ url_for('static', filename='images/movieRatingTable.png') }}"
+                alt="Movie Review Schema Movie Rating Table" class="responsive-image">
             <h3>Attributes</h3>
             <ul>
-                <li>Schema Name: organization</li>
+                <li>Schema Name: movie_review</li>
                 <ul>
-                    <li>Table Name: department</li>
+                    <li>Table Name: movies</li>
+                    <ul>
+                        <li>Attributes</li>
+                        <ul>
+                            <li>id</li>
+                            <li>title</li>
+                        </ul>
+                    </ul>
+                    <li>Table Name: users</li>
                     <ul>
                         <li>Attributes</li>
                         <ul>
@@ -59,28 +70,19 @@
                             <li>name</li>
                         </ul>
                     </ul>
-                    <li>Table Name: employee</li>
+                    <li>Table Name: movie_rating</li>
                     <ul>
                         <li>Attributes</li>
                         <ul>
-                            <li>id</li>
-                            <li>name</li>
-                            <li>salary</li>
-                            <li>department_id</li>
-                        </ul>
-                    </ul>
-                    <li>Table Name: department</li>
-                    <ul>
-                        <li>Attributes</li>
-                        <ul>
-                            <li>id</li>
-                            <li>name</li>
+                            <li>movie_id</li>
+                            <li>user_id</li>
+                            <li>rating</li>
                         </ul>
                     </ul>
                 </ul>
             </ul>
-            <h3>Movie Review Schema</h3>
-            <p><b>1. </b></p>
+            <h3>Query Movie Review Schema</h3>
+            <p><b>1. </b>Find the average rating of movie with id 7.</p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -88,7 +90,7 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p><b>2. </b></p>
+            <p><b>2. </b>Find the highest rating given to any movie.</p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -96,7 +98,7 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p><b>3. </b></p>
+            <p><b>3. </b>Find the titles of all movies rated by user 2.</p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -104,7 +106,7 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p><b>4. </b></p>
+            <p><b>4. </b>Find the total number of movies in the database.</p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -112,7 +114,7 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p><b>5. </b></p>
+            <p><b>5. </b>Find users who have rated more than one movie.</p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -120,54 +122,382 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <button class="collapsible">Query Organization Schema</button>
+            <p><b>6. </b>Find the movies that have received the same rating from every user who rated them.</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p><b>7. </b>Find the top 3 highest-rated movies based on average rating.</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p><b>8. </b>Find movies that have an average rating higher than the overall average rating of all movies.
+            </p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p><b>9. </b>Find the average rating(Rounded to 2 decimal places) for each movie, including movies that
+                haven't been rated, and show the number of ratings for each movie.</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p><b>10. List all users and the total number of movies they have rated, including users who haven't rated
+                    any movies.</b></p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <button class="collapsible">Query Movie Review Schema</button>
             <div class="content">
                 <br>
-                <h3><b>1. </b></h3>
+                <h3><b>1. </b>Find the average rating of movie with id 7.</h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
-
+                    <table>
+                        <tr>
+                            <th>average_rating</th>
+                        </tr>
+                        <tr>
+                            <td>10.0000000000000000</td>
+                        </tr>
+                    </table>
                 </div>
                 <br>
-                <p><b>Query: </b>
+                <p><b>Query: </b>SELECT AVG(rating) AS average_rating
+                    FROM movie_review.Movie_Rating
+                    WHERE movie_id = 7;
                 </p>
-                <p><b>Explanation: </b></p>
-                <br>
-                <h3><b>2. </b></h3>
+                <p><b>Explanation: </b>The query uses the AVG() aggregate function to calculate the average value of the
+                    rating column from the Movie_Rating table. The WHERE clause filters the rows to include only those
+                    where movie_id equals 7. This ensures that the average rating is computed specifically for the movie
+                    with ID 7, and the result is returned as average_rating.</p>
+                <h3><b>2. </b>Find the highest rating given to any movie.</h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
-
+                    <table>
+                        <tr>
+                            <th>highest_rating</th>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                        </tr>
+                    </table>
                 </div>
                 <br>
-                <p><b>Query: </b>
+                <p><b>Query: </b>SELECT MAX(rating) AS highest_rating
+                    FROM movie_review.Movie_Rating;
                 </p>
-                <p><b>Explanation: </b></p>
-                <h3><b>3. </b></h3>
+                <p><b>Explanation: </b>The query uses the MAX() aggregate function to find the highest value in the
+                    rating column of the Movie_Rating table. Since there is no WHERE clause or specific filtering, the
+                    query considers all ratings across all movies. The result is returned as highest_rating,
+                    representing the maximum rating given to any movie in the database.</p>
+                <h3><b>3. </b>Find the titles of all movies rated by user 2.</h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
-
+                    <table>
+                        <tr>
+                            <th>title</th>
+                        </tr>
+                        <tr>
+                            <td>Interstellar</td>
+                        </tr>
+                        <tr>
+                            <td>The Dark Knight</td>
+                        </tr>
+                        <tr>
+                            <td>Pulp Fiction</td>
+                        </tr>
+                    </table>
                 </div>
                 <br>
-                <p><b>Query: </b>
+                <p><b>Query: </b>SELECT title FROM movie_review.Movies INNER JOIN movie_review.Movie_Rating ON id =
+                    movie_id WHERE user_id = 2;
                 </p>
-                <p><b>Explanation: </b></p>
-                <h3><b>4. </b></h3>
+                <p><b>Explanation: </b>The query utilizes an INNER JOIN to combine the Movies and Movie_Rating tables
+                    based on the id column from the Movies table and the movie_id column from the Movie_Rating table.
+                    The WHERE clause filters the results to include only those ratings made by the user with user_id =
+                    2.</p>
+                <h3><b>4. </b>Find the total number of movies in the database.</h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
-
+                    <table>
+                        <tr>
+                            <th>total_movies</th>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                        </tr>
+                    </table>
                 </div>
                 <br>
-                <p><b>Query: </b>
+                <p><b>Query: </b>SELECT COUNT(*) AS total_movies
+                    FROM movie_review.Movies;
                 </p>
-                <p><b>Explanation: </b></p>
-                <h3><b>5. </b></h3>
+                <p><b>Explanation: </b>The query counts all the rows in the Movies table using the COUNT(*) function,
+                    which counts every row regardless of whether any specific column has a value. This query returns the
+                    total number of movies in the database, with the result labeled as total_movies.</p>
+                <h3><b>5. </b>Find users who have rated more than one movie.</h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
-
+                    <table>
+                        <tr>
+                            <th>movies_rated</th>
+                            <th>name</th>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Eve</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Alice</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Bob</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Charlie</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Diana</td>
+                        </tr>
+                    </table>
                 </div>
-                <p><b>Query: </b>
+                <br>
+                <p><b>Query: </b>SELECT name, COUNT(movie_id) AS movies_rated FROM movie_review.Users INNER JOIN
+                    movie_review.Movie_Rating ON id = user_id GROUP BY name HAVING COUNT(movie_id) > 1;
                 </p>
-                <p><b>Explanation: </b></p>
+                <p><b>Explanation: </b>The query uses an INNER JOIN to link the Users table with the Movie_Rating table
+                    based on the id column from Users and the user_id column from Movie_Rating. The query groups the
+                    results by name, which represents each user, and counts the number of movies (movie_id) each user
+                    has rated. The HAVING clause filters the groups to include only those users who have rated more than
+                    one movie. The query then returns the name of users along with the count of movies they have rated
+                    as movies_rated.</p>
+                <h3><b>6. </b>Find the movies that have received the same rating from every user who rated them.</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>title</th>
+                        </tr>
+                        <tr>
+                            <td>Inception</td>
+                        </tr>
+                        <tr>
+                            <td>Interstellar</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p><b>Query: </b>SELECT title FROM movie_review.Movies INNER JOIN movie_review.Movie_Rating ON id =
+                    movie_id GROUP BY title HAVING MIN(rating) = MAX(rating);
+                </p>
+                <p><b>Explanation: </b>The query utilizes an INNER JOIN to combine the Movies and Movie_Rating tables
+                    based on the id column from Movies and the movie_id column from Movie_Rating. The query groups the
+                    results by title, which represents each movie. The HAVING clause checks whether the minimum rating
+                    (MIN(rating)) is equal to the maximum rating (MAX(rating)) within each group. If these two values
+                    are equal, it indicates that all users who rated the movie gave it the same rating. The query then
+                    returns the title of movies that meet this condition.</p>
+                <h3><b>7. </b>Find the top 3 highest-rated movies based on average rating.</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>average_rating</th>
+                            <th>title</th>
+                        </tr>
+                        <tr>
+                            <td>10.0000000000000000</td>
+                            <td>Interstellar</td>
+                        </tr>
+                        <tr>
+                            <td>9.0000000000000000</td>
+                            <td>Inception</td>
+                        </tr>
+                        <tr>
+                            <td>8.6666666666666667</td>
+                            <td>The Dark Knight</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p><b>Query: </b>SELECT title, AVG(rating) AS average_rating
+                    FROM movie_review.Movies
+                    INNER JOIN movie_review.Movie_Rating ON id = movie_id
+                    GROUP BY title
+                    ORDER BY average_rating DESC
+                    LIMIT 3;
+
+                </p>
+                <p><b>Explanation: </b>The query uses an INNER JOIN to combine the Movies and Movie_Rating tables based
+                    on the id column from Movies and the movie_id column from Movie_Rating. The query groups the results
+                    by title and calculates the average rating for each movie using the AVG() function. The ORDER BY
+                    clause sorts these averages in descending order, meaning from highest to lowest. The LIMIT 3 clause
+                    then restricts the result to the top 3 movies with the highest average ratings, returning their
+                    titles and corresponding average ratings.</p>
+                <h3><b>8. </b>Find movies that have an average rating higher than the overall average rating of all
+                    movies.</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>title</th>
+                        </tr>
+                        <tr>
+                            <td>Inception</td>
+                        </tr>
+                        <tr>
+                            <td>Interstellar</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p><b>Query: </b>SELECT M.title
+                    FROM movie_review.Movies M
+                    INNER JOIN movie_review.Movie_Rating MR ON M.id = MR.movie_id
+                    GROUP BY M.title
+                    HAVING AVG(MR.rating) > (SELECT AVG(rating) FROM movie_review.Movie_Rating);
+                </p>
+                <p><b>Explanation: </b>The query performs an INNER JOIN between the Movies table (aliased as M) and the
+                    Movie_Rating table (aliased as MR) using the id column from Movies and the movie_id column from
+                    Movie_Rating. The query groups the results by title and calculates the average rating for each movie
+                    using AVG(MR.rating). The HAVING clause compares each movie's average rating to the overall average
+                    rating of all movies, which is calculated by a subquery: (SELECT AVG(rating) FROM
+                    movie_review.Movie_Rating). Only movies with an average rating higher than this overall average are
+                    returned, with their titles listed in the result.</p>
+                <h3><b>9. </b>Find the average rating(Rounded to 2 decimal places) for each movie, including movies that
+                    haven't been rated, and show the number of ratings for each movie.</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>average_rating</th>
+                            <th>number_of_ratings</th>
+                            <th>title</th>
+                        </tr>
+                        <tr>
+                            <td>7.67</td>
+                            <td>3</td>
+                            <td>The Matrix</td>
+                        </tr>
+                        <tr>
+                            <td>9.00</td>
+                            <td>3</td>
+                            <td>Inception</td>
+                        </tr>
+                        <tr>
+                            <td>0</td>
+                            <td></td>
+                            <td>Avatar</td>
+                        </tr>
+                        <tr>
+                            <td>8.00</td>
+                            <td>3</td>
+                            <td>Pulp Fiction</td>
+                        </tr>
+                        <tr>
+                            <td>10.00</td>
+                            <td>3</td>
+                            <td>Interstellar</td>
+                        </tr>
+                        <tr>
+                            <td>8.67</td>
+                            <td>3</td>
+                            <td>The Dark Knight</td>
+                        </tr>
+                        <tr>
+                            <td>0</td>
+                            <td></td>
+                            <td>Gladiator</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p><b>Query: </b>SELECT title, ROUND(AVG(rating),2) AS average_rating, COUNT(rating) AS
+                    number_of_ratings FROM movie_review.Movies LEFT OUTER JOIN movie_review.Movie_Rating ON id =
+                    movie_id GROUP BY title;
+                </p>
+                <p><b>Explanation: </b>The query uses a LEFT OUTER JOIN to combine the Movies table with the
+                    Movie_Rating table based on the id column from Movies and the movie_id column from Movie_Rating. The
+                    LEFT OUTER JOIN ensures that all movies are included in the result, even if they haven't been rated
+                    (i.e., no matching rows in Movie_Rating). The query groups the results by title and calculates the
+                    average rating using AVG(rating), rounding the result to 2 decimal places with ROUND(AVG(rating),
+                    2). It also counts the number of ratings for each movie using COUNT(rating). The query returns the
+                    title, the rounded average rating as average_rating, and the count of ratings as number_of_ratings.
+                </p>
+                <h3><b>10. </b>List all users and the total number of movies they have rated, including users who
+                    haven't rated any movies.</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>name</th>
+                            <th>total_movies_rated</th>
+                        </tr>
+                        <tr>
+                            <td>Isabella</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Eve</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>Alice</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>Bob</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>Charlie</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>James</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Diana</td>
+                            <td>3</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p><b>Query: </b>SELECT name, COUNT(movie_id) AS total_movies_rated
+                    FROM movie_review.Movie_Rating
+                    RIGHT OUTER JOIN movie_review.Users ON user_id = id
+                    GROUP BY name;
+                </p>
+                <p><b>Explanation: </b>The query uses a RIGHT OUTER JOIN to combine the Users table with the
+                    Movie_Rating table, joining on the user_id column from Movie_Rating and the id column from Users.
+                    The RIGHT OUTER JOIN ensures that all users are included in the result, even if they haven't rated
+                    any movies (i.e., no matching rows in Movie_Rating). The query groups the results by name and counts
+                    the number of movies each user has rated using COUNT(movie_id). The result includes the name of each
+                    user and the total count of movies they have rated as total_movies_rated, with users who haven't
+                    rated any movies showing a count of zero.</p>
                 <br>
             </div>
             <br>
