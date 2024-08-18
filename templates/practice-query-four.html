@@ -119,7 +119,7 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p><b>3. List any 5 orders along with the customer name and agent name.</b></p>
+            <p><b>3. </b>List any 5 orders along with the customer name and agent name.</p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -127,7 +127,7 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p><b>4. </b></p>
+            <p><b>4. </b>Find the orders placed by customers in "London".</p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -135,7 +135,48 @@
                 <div class="alert-container"></div>
             </form>
             <br>
-            <p><b>5. </b></p>
+            <p><b>5. </b>Find the total number of orders placed by the customer 'C00007'.</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p><b>6. </b>Find the agent code of agents who serve more than 1 customer.</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p><b>7. </b>List all agents along with the total commission they have earned.</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p><b>8. </b>Find all customers who have placed an order with an advance payment greater than $1,000 and the
+                agents who handled those orders.</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p><b>9. </b>Find the total number of orders for each working area.</p>
+            <form class="queryForm">
+                <input type="text" class="query" placeholder="Query" required>
+                <br><br>
+                <input type="submit" value="Execute Query">
+                <div class="alert-container"></div>
+            </form>
+            <br>
+            <p><b>10. </b>Find the maximum and minimum outstanding amount for customers handled by each agent.</p>
             <form class="queryForm">
                 <input type="text" class="query" placeholder="Query" required>
                 <br><br>
@@ -180,68 +221,466 @@
                 <div style="overflow-x: auto; overflow-y: auto;">
                     <table>
                         <tr>
-                          <th>working_area</th>
+                            <th>working_area</th>
                         </tr>
                         <tr>
-                          <td>Mumbai</td>
+                            <td>Mumbai</td>
                         </tr>
                         <tr>
-                          <td>San Jose</td>
+                            <td>San Jose</td>
                         </tr>
                         <tr>
-                          <td>New York</td>
+                            <td>New York</td>
                         </tr>
                         <tr>
-                          <td>Brisban</td>
+                            <td>Brisban</td>
                         </tr>
                         <tr>
-                          <td>Chennai</td>
+                            <td>Chennai</td>
                         </tr>
                         <tr>
-                          <td>Hampshair</td>
+                            <td>Hampshair</td>
                         </tr>
                         <tr>
-                          <td>London</td>
+                            <td>London</td>
                         </tr>
                         <tr>
-                          <td>Bangalore</td>
+                            <td>Bangalore</td>
                         </tr>
                         <tr>
-                          <td>Torento</td>
+                            <td>Torento</td>
                         </tr>
-                      </table>                      
+                    </table>
                 </div>
                 <br>
                 <p><b>Query: </b>SELECT DISTINCT working_area FROM sales_management.agents;
                 </p>
-                <p><b>Explanation: </b>The query uses SELECT DISTINCT to retrieve unique values from the working_area column in the agents table. This ensures that each working area is listed only once, filtering out any duplicates and providing a list of all distinct working areas where agents operate.</p>
+                <p><b>Explanation: </b>The query uses SELECT DISTINCT to retrieve unique values from the working_area
+                    column in the agents table. This ensures that each working area is listed only once, filtering out
+                    any duplicates and providing a list of all distinct working areas where agents operate.</p>
                 <h3><b>3. </b>List any 5 orders along with the customer name and agent name.</h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
-
+                    <table>
+                        <tr>
+                            <th>agent_name</th>
+                            <th>amount</th>
+                            <th>customer_name</th>
+                            <th>date</th>
+                            <th>id</th>
+                        </tr>
+                        <tr>
+                            <td>Alex</td>
+                            <td>1000.00</td>
+                            <td>Holmes</td>
+                            <td>08/01/2008</td>
+                            <td>200100</td>
+                        </tr>
+                        <tr>
+                            <td>Santakumar</td>
+                            <td>3000.00</td>
+                            <td>Yearannaidu</td>
+                            <td>04/15/2008</td>
+                            <td>200110</td>
+                        </tr>
+                        <tr>
+                            <td>Santakumar</td>
+                            <td>4500.00</td>
+                            <td>Ramanathan</td>
+                            <td>08/30/2008</td>
+                            <td>200107</td>
+                        </tr>
+                        <tr>
+                            <td>Ramasundar</td>
+                            <td>2000.00</td>
+                            <td>Venkatpati</td>
+                            <td>05/30/2008</td>
+                            <td>200112</td>
+                        </tr>
+                        <tr>
+                            <td>Mukesh</td>
+                            <td>4000.00</td>
+                            <td>Avinash</td>
+                            <td>06/10/2008</td>
+                            <td>200113</td>
+                        </tr>
+                    </table>
                 </div>
                 <br>
-                <p><b>Query: </b>
+                <p><b>Query: </b>SELECT o.id, o.amount, o.date, c.name AS customer_name, a.agent_name
+                    FROM sales_management.orders o
+                    JOIN sales_management.customer c ON o.customer_code = c.code
+                    JOIN sales_management.agents a ON o.agent_code = a.agent_code
+                    LIMIT 5;
                 </p>
-                <p><b>Explanation: </b></p>
-                <h3><b>4. </b></h3>
+                <p><b>Explanation: </b>The query uses SELECT to retrieve the id, amount, and date from the orders table,
+                    along with the name of the customer and the agent_name from the related customer and agents tables.
+                    It employs JOIN operations to link the orders table with the customer table using the customer_code
+                    foreign key and with the agents table using the agent_code foreign key. These joins ensure that the
+                    query matches each order with the corresponding customer and agent information. The LIMIT 5 clause
+                    restricts the result set to only 5 rows</p>
+                <h3><b>4. </b>Find the orders placed by customers in "London".</h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
-
+                    <table>
+                        <tr>
+                            <th>amount</th>
+                            <th>date</th>
+                            <th>id</th>
+                        </tr>
+                        <tr>
+                            <td>1000.00</td>
+                            <td>08/01/2008</td>
+                            <td>200100</td>
+                        </tr>
+                        <tr>
+                            <td>500.00</td>
+                            <td>07/20/2008</td>
+                            <td>200118</td>
+                        </tr>
+                        <tr>
+                            <td>2500.00</td>
+                            <td>07/20/2008</td>
+                            <td>200129</td>
+                        </tr>
+                        <tr>
+                            <td>2500.00</td>
+                            <td>07/20/2008</td>
+                            <td>200127</td>
+                        </tr>
+                    </table>
                 </div>
                 <br>
-                <p><b>Query: </b>
+                <p><b>Query: </b>SELECT o.id, o.amount, o.date
+                    FROM sales_management.orders o
+                    JOIN sales_management.customer c ON o.customer_code = c.code
+                    WHERE c.city = 'London';
                 </p>
-                <p><b>Explanation: </b></p>
-                <h3><b>5. </b></h3>
+                <p><b>Explanation: </b>The query uses SELECT to retrieve the id, amount, and date from the orders table.
+                    It employs a JOIN operation to link the orders table with the customer table using the customer_code
+                    foreign key. The WHERE clause filters the results to include only those orders where the associated
+                    customer's city is 'London'. </p>
+                <h3><b>5. </b>Find the total number of orders placed by the customer 'C00007'.</h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
-
+                    <table>
+                        <tr>
+                            <th>customer_code</th>
+                            <th>total_orders</th>
+                        </tr>
+                        <tr>
+                            <td>C00007</td>
+                            <td>3</td>
+                        </tr>
+                    </table>
                 </div>
                 <br>
-                <p><b>Query: </b>
+                <p><b>Query: </b>SELECT customer_code, COUNT(*) AS total_orders FROM sales_management.orders GROUP BY
+                    customer_code HAVING customer_code ='C00007';
                 </p>
-                <p><b>Explanation: </b></p>
+                <p><b>Explanation: </b>The query uses SELECT to retrieve the customer_code and the total count of orders
+                    associated with that code using COUNT(*). The GROUP BY clause groups the results by customer_code,
+                    allowing the aggregation of orders per customer. The HAVING clause then filters the grouped results
+                    to include only the customer with the code 'C00007'.</p>
+                <h3><b>6. </b></h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>agent_code</th>
+                            <th>customer_count</th>
+                        </tr>
+                        <tr>
+                            <td>A002</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>A005</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>A010</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>A008</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>A003</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>A004</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>A006</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>A007</td>
+                            <td>2</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p><b>Query: </b>SELECT agent_code, COUNT(*) AS customer_count FROM sales_management.customer GROUP BY
+                    agent_code HAVING COUNT(*) > 1;
+                </p>
+                <p><b>Explanation: </b>he query uses SELECT to retrieve the agent_code and the count of customers served
+                    by each agent using COUNT(*). The GROUP BY clause groups the results by agent_code, aggregating the
+                    number of customers associated with each agent. The HAVING clause filters the results to include
+                    only those agents who serve more than 1 customer (COUNT(*) > 1).</p>
+                <h3><b>7. </b>List all agents along with the total commission they have earned.</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>agent_name</th>
+                            <th>total_commission</th>
+                        </tr>
+                        <tr>
+                            <td>Lucida</td>
+                            <td>348.0000</td>
+                        </tr>
+                        <tr>
+                            <td>McDen</td>
+                            <td>450.0000</td>
+                        </tr>
+                        <tr>
+                            <td>Santakumar</td>
+                            <td>2380.0000</td>
+                        </tr>
+                        <tr>
+                            <td>Alex</td>
+                            <td>455.0000</td>
+                        </tr>
+                        <tr>
+                            <td>Ravi Kumar</td>
+                            <td>750.0000</td>
+                        </tr>
+                        <tr>
+                            <td>Ivan</td>
+                            <td>1425.0000</td>
+                        </tr>
+                        <tr>
+                            <td>Subbarao</td>
+                            <td>112.0000</td>
+                        </tr>
+                        <tr>
+                            <td>Alford</td>
+                            <td>900.0000</td>
+                        </tr>
+                        <tr>
+                            <td>Anderson</td>
+                            <td>1001.0000</td>
+                        </tr>
+                        <tr>
+                            <td>Ramasundar</td>
+                            <td>375.0000</td>
+                        </tr>
+                        <tr>
+                            <td>Benjamin</td>
+                            <td>55.0000</td>
+                        </tr>
+                        <tr>
+                            <td>Mukesh</td>
+                            <td>1397.0000</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p><b>Query: </b>SELECT a.agent_name, SUM(o.amount * a.commission) AS total_commission FROM
+                    sales_management.agents a JOIN sales_management.orders o ON a.agent_code = o.agent_code GROUP BY
+                    a.agent_name;
+                </p>
+                <p><b>Explanation: </b>The query uses SELECT to retrieve the agent_name and the total commission earned
+                    by each agent. It calculates the total commission by multiplying the amount from the orders table
+                    with the commission rate from the agents table and summing these values using SUM(). A JOIN
+                    operation links the agents table with the orders table via the agent_code foreign key. The GROUP BY
+                    clause groups the results by agent_name, ensuring the total commission is calculated individually
+                    for each agent.</p>
+                <h3><b>8. </b>Find all customers who have placed an order with an advance payment greater than $1,000
+                    and the agents who handled those orders.</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>advance_amount</th>
+                            <th>agent_name</th>
+                            <th>customer_name</th>
+                            <th>order_id</th>
+                        </tr>
+                        <tr>
+                            <td>2000.00</td>
+                            <td>Alford</td>
+                            <td>Bolt</td>
+                            <td>200114</td>
+                        </tr>
+                        <tr>
+                            <td>1800.00</td>
+                            <td>Anderson</td>
+                            <td>Winston</td>
+                            <td>200134</td>
+                        </tr>
+                        <tr>
+                            <td>1500.00</td>
+                            <td>Mukesh</td>
+                            <td>Ramesh</td>
+                            <td>200128</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p><b>Query: </b>SELECT c.name AS customer_name, o.id AS order_id, o.advance_amount, a.agent_name
+                    FROM sales_management.orders o
+                    JOIN sales_management.customer c ON o.customer_code = c.code
+                    JOIN sales_management.agents a ON o.agent_code = a.agent_code
+                    WHERE o.advance_amount > 1000;
+
+                </p>
+                <p><b>Explanation: </b>The query uses SELECT to retrieve the name of the customer, the id of the order,
+                    the advance_amount, and the agent_name. It employs JOIN operations to link the orders table with the
+                    customer and agents tables using the customer_code and agent_code foreign keys, respectively. The
+                    WHERE clause filters the results to include only those orders where the advance_amount is greater
+                    than $1,000.</p>
+                <h3><b>9. </b>Find the total number of orders for each working area.</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>total_orders</th>
+                            <th>working_area</th>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Mumbai</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>San Jose</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>New York</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Brisban</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Chennai</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Hampshair</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>London</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Bangalore</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Torento</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p><b>Query: </b>SELECT a.working_area, COUNT(o.id) AS total_orders FROM sales_management.orders o JOIN
+                    sales_management.agents a ON o.agent_code = a.agent_code GROUP BY a.working_area;
+                </p>
+                <p><b>Explanation: </b>The query uses SELECT to retrieve the working_area and the total number of orders
+                    associated with each area. It employs a JOIN operation to link the orders table with the agents
+                    table using the agent_code foreign key. The COUNT(o.id) function counts the number of orders, and
+                    the GROUP BY clause groups the results by working_area, ensuring the total number of orders is
+                    calculated for each distinct working area. </p>
+                <h3><b>10. </b>Find the maximum and minimum outstanding amount for customers handled by each agent.</h3>
+                <p><b>Expected Results: </b></p>
+                <div style="overflow-x: auto; overflow-y: auto;">
+                    <table>
+                        <tr>
+                            <th>agent_name</th>
+                            <th>max_outstanding</th>
+                            <th>min_outstanding</th>
+                        </tr>
+                        <tr>
+                            <td>Lucida</td>
+                            <td>3000.00</td>
+                            <td>3000.00</td>
+                        </tr>
+                        <tr>
+                            <td>McDen</td>
+                            <td>6000.00</td>
+                            <td>3000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Santakumar</td>
+                            <td>11000.00</td>
+                            <td>8000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Alex</td>
+                            <td>11000.00</td>
+                            <td>4000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Ravi Kumar</td>
+                            <td>8000.00</td>
+                            <td>8000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Ivan</td>
+                            <td>11000.00</td>
+                            <td>5000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Subbarao</td>
+                            <td>12000.00</td>
+                            <td>12000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Alford</td>
+                            <td>6000.00</td>
+                            <td>3000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Anderson</td>
+                            <td>7000.00</td>
+                            <td>5000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Ramasundar</td>
+                            <td>12000.00</td>
+                            <td>9000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Benjamin</td>
+                            <td>5000.00</td>
+                            <td>5000.00</td>
+                        </tr>
+                        <tr>
+                            <td>Mukesh</td>
+                            <td>12000.00</td>
+                            <td>9000.00</td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p><b>Query: </b>SELECT a.agent_name, MAX(c.outstanding_amount) AS max_outstanding,
+                    MIN(c.outstanding_amount) AS min_outstanding FROM sales_management.customer c JOIN
+                    sales_management.agents a ON c.agent_code = a.agent_code GROUP BY a.agent_name;
+                </p>
+                <p><b>Explanation: </b>The query uses SELECT to retrieve the agent_name along with the maximum (MAX())
+                    and minimum (MIN()) outstanding_amount for customers handled by each agent. It employs a JOIN
+                    operation to link the customer table with the agents table using the agent_code foreign key. The
+                    GROUP BY clause groups the results by agent_name, allowing the calculation of the maximum and
+                    minimum outstanding amounts for each agent's customers.</p>
                 <br>
             </div>
             <br>
