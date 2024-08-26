@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Databases Lab 1</title>
+  <!-- Stylesheet files for the page.  -->
   <link rel="stylesheet" href="static/css/page-skeleton-design.css">
   <link rel="stylesheet" href="static/css/collapsible-design.css">
   <link rel="stylesheet" href="static/css/table-design.css">
@@ -41,8 +42,8 @@
     <main>
       <h2>Introduction to PostgreSQL: Installation & Configuration</h2>
       <p>Learn about the installation and setup of PostgreSQL and its client tool, pgAdmin. A guide through installing a
-        Database Management System (DBMS), logging in, importing sample schemas, and using PostgreSQL's features.
-        Supported and unsupported DBMSs and development tools are outlined, with an emphasis on recommended practices.
+        Database Management System (DBMS), logging in, importing schemas, and using PostgreSQL's features.
+        Supported and unsupported DBMS and development tools are outlined, with an emphasis on recommended practices.
         Including details on setting up web development stacks (XAMPP, MAMP, LAMP) and generating dummy data
         for projects. At the end learners will have a comprehensive understanding of PostgreSQL installation,
         configuration, and basic operations, enabling them to effectively manage and interact with databases using
@@ -57,8 +58,8 @@
           <li>MariaDB</li>
           <li>PostgreSQL</li>
         </ul>
-        <p>Throughout the lectures and lab will be on PostgresSQL</p>
-        <p>Other DBMS Available include:</p>
+        <p>Throughout the lectures and lab will be on PostgreSQL.</p>
+        <p>Other DBMS available include:</p>
         <ul>
           <li>ORACLE</li>
           <li>Microsoft SQL Server</li>
@@ -71,8 +72,8 @@
           <li>Column-oriented databases</li>
           <li>Document-oriented databases</li>
           <li>Graph databases</li>
-          <li>Object-Oriented databases</li>
-          <li>Map/Reduce frameworks</li>
+          <li>Object-oriented databases</li>
+          <li>Map/reduce frameworks</li>
           <li>Semantic data stores</li>
         </ul>
         <p>Some DBMS Clients are:</p>
@@ -97,12 +98,12 @@
         <p>For this course the suggested development tools are Java, PHP, JavaScript and Python</p>
       </div>
       <br>
-      <h2>Object-Relational Mapping</h2>
+      <h3>Object-Relational Mapping</h3>
       <p>Object-Relational Mapping (ORM) frameworks simplify database interactions by allowing developers to work with
         database records using object-oriented programming instead of raw SQL. They enhance productivity,
         maintainability, and security by abstracting database operations and providing a consistent API. Popular ORM
         frameworks include Hibernate (Java), Entity Framework (C#), Django ORM (Python), and Sequelize (Node.js).</p>
-      <h2>Web Development Stack</h2>
+      <h3>Web Development Stack</h3>
       <p>Bundles with <b>A</b>pache, <b>M</b>ySql/ MariaDB, <b>P</b>HP</p>
       <ul>
         <li>Windows XAMP</li>
@@ -110,7 +111,7 @@
         <li>Linux LAMP</li>
       </ul>
 
-      <h2>MySQL-vs-PostgreSQL Comparison</h2>
+      <h3>MySQL-vs-PostgreSQL Comparison</h3>
       <div style="overflow-x: auto; overflow-y: auto;">
         <table>
           <thead>
@@ -123,18 +124,18 @@
           <tbody>
             <tr>
               <td>Data Safety</td>
-              <td>Ensures data safety (ACID) based on an explicit setting</td>
-              <td>Always ensures data safety (ACID) by default</td>
+              <td>Ensures data safety (ACID) based on an explicit setting.</td>
+              <td>Always ensures data safety (ACID) by default.</td>
             </tr>
             <tr>
               <td>Following Rules</td>
-              <td>Doesn't always follow SQL rules strictly</td>
-              <td>Follows SQL rules very strictly</td>
+              <td>Doesn't always follow SQL rules strictly.</td>
+              <td>Follows SQL rules very strictly.</td>
             </tr>
             <tr>
               <td>JSON Data</td>
-              <td>Can handle JSON data, but not as well as PostgreSQL</td>
-              <td>Great at handling JSON data, good for NoSQL tasks</td>
+              <td>Can handle JSON data, but not as well as PostgreSQL.</td>
+              <td>Great at handling JSON data, good for NoSQL tasks.</td>
             </tr>
             <tr>
               <td>Extensibility</td>
@@ -167,10 +168,10 @@
         <ul>
           <li><a href="https://www.postgresql.org/" target="_blank">PostgreSQL</a></li>
           <li>It is a powerful, open source object-relational database
-            management system (ORDBMS)</li>
+            management system (ORDBMS).</li>
           <li>Since it is open source, it is not controlled by any single
             company. Thus, its development relies on the global
-            community of developers and companies</li>
+            community of developers and companies.</li>
           <li>We can download, install, use and inspect its source
             code at no cost.</li>
           <li><a href="https://www.pgadmin.org/" target="_blank">Client tool: pgAdmin</a></li>
@@ -178,16 +179,26 @@
         <p>pgAdmin is a comprehensive open-source management tool for PostgreSQL, a powerful relational database system.
           It provides a graphical interface to manage databases, run SQL queries, and administer database operations.
           pgAdmin supports a wide range of PostgreSQL features.</p>
-        <p>Using the link below you can use pgAdmin as well to run queries.</p>
-        <a href="http://localhost:8080" target="_blank">pgAdmin</a>
-        <br><br>
+        <br>
       </div>
       <br>
       <button class="collapsible">pgAdmin Guide</button>
       <div class="content">
         <br>
-        <h3>Setting up and using pgAdmin in your local machine or use the pgAdmin Tool from <a
-            href="http://localhost:8080" target="_blank">here</a></h3>
+        <h3>Using pgAdmin from this application: </h3>
+        <ul>
+          <li><b>Open docker-compose.yml: </b>Locate and open docker-compose.yml file in a text editor.</li>
+          <li><b>Find pgAdmin Service: </b>Look for the pgAdmin service section.</li>
+          <li><b>Identify Port Number: </b>Note the port number before the colon in the ports section (e.g., "8081:80" -
+            here, 8081 is the port number).</li>
+          <li><b>Construct URL:</b>Replace &lt;port number&gt; with the identified port number in
+            http://localhost:&lt;port number&gt;.
+            <br>Example: <b>http://localhost:8081.</b> If you haven't made any changes to the Docker Compose file, you
+            can use this url directly.
+          </li>
+          <li><b>Access pgAdmin: </b>Open the constructed URL in your web browser to access pgAdmin.</li>
+        </ul>
+        <h3>Setting up and using pgAdmin in your local machine: </h3>
         <ul>
           <li>Download and install PostgreSQL</li>
           <li>The installation includes pgAdmin</li>
@@ -211,14 +222,14 @@
         <img src="{{ url_for('static', filename='images/dashboard.png') }}" alt="pgAdmin Dashboard"
           class="responsive-image">
         <br>
-        <h3>Query Tool: Can be accessed through Tools->Query Tool or Right click on resource->Query Tool. Used to type
+        <h3>Query Tool: Can be accessed through Tools → Query Tool or Right click on resource → Query Tool. Used to type
           sql statements to create query. After running the query, query results displayed at the bottom.
         </h3>
         <img src="{{ url_for('static', filename='images/queryTool.png') }}" alt="pgAdmin Query Tool"
           class="responsive-image">
         <br>
       </div>
-      <script src="static/js/collapsiblescript.js"></script>
+      <script src="static/js/collapsiblescript.js"></script> <!-- Javascript file for the collapsible.  -->
     </main>
   </div>
 </body>

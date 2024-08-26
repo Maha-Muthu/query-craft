@@ -24,7 +24,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
     ports:
-      - "8081:80" #Change the Port 8082 if aldready beimg used.
+      - "8081:80" #Change the Port 8081 if aldready beimg used.
     volumes:
       - query-craft_pgadmin_data:/var/lib/pgadmin
     depends_on:

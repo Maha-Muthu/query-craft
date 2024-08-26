@@ -10,6 +10,16 @@
   <link rel="stylesheet" href="static/css/query-input-design.css">
   <link rel="stylesheet" href="static/css/query-response-table-design.css">
   <link rel="stylesheet" href="static/css/table-design.css">
+  <style>
+    .prevent-select {
+      -webkit-user-select: none;
+      /* Safari */
+      -ms-user-select: none;
+      /* IE 10 and IE 11 */
+      user-select: none;
+      /* Standard syntax */
+    }
+  </style>
 </head>
 
 <body>
@@ -42,12 +52,14 @@
     </nav>
     <main>
       <h2>Basic SQL Programming and Schema Management</h2>
-      <p>Discusses on creating a new schema, defining database structures with DDL statements (CREATE, ALTER, DROP),
-        and manipulating data using DML statements (INSERT, SELECT, UPDATE, DELETE). It includes exercises for
+      <p>This material discusses on creating a new schema, defining database structures with Data Definition Language
+        (DDL) statements (CREATE, ALTER, DROP),
+        and manipulating data using Data Manipulation Language (DML) statements (INSERT, SELECT, UPDATE, DELETE). It
+        includes exercises for
         creating tables from ER diagrams, inserting data, querying the database, updating, and deleting specific data.
         Gain practical skills in managing PostgreSQL databases, understanding key constraints, and writing SQL queries
         to effectively manage and manipulate data.</p>
-      <h2>Schema</h2>
+      <h3>Schema</h3>
       <p>A schema is a collection of database objects associated with one particular database username.</p>
       <button class="collapsible">Create Schema</button>
       <div class="content">
@@ -55,15 +67,15 @@
         <p>When naming a PostgreSQL schema, the rules and conventions to follow:</p>
         <ul>
           <li><b>Start with a letter or underscore('_')</b>.</li>
-          <li><b>Subsequent characters:</b>After the first character, the name can include letters, digits (0-9),
+          <li><b>Subsequent characters: </b>After the first character, the name can include letters, digits (0-9),
             underscores (_), or dollar signs ($).</li>
-          <li><b>Case sensitivity:</b>Schema names are case-sensitive. By default, unquoted names are converted to
+          <li><b>Case sensitivity: </b>Schema names are case-sensitive. By default, unquoted names are converted to
             lowercase, so ProductCatalogSchema and productcatalogchema are treated as the same name unless quoted (eg.
             "ProductCatalogSchema") when the casing is preserved.</li>
-          <li><b>Length limit:</b>The maximum length for a schema name is 63 characters.</li>
-          <li><b>Reserved prefix:</b>Names beginning with "pg_" are reserved for system purposes and cannot be used by
+          <li><b>Length limit: </b>The maximum length for a schema name is 63 characters.</li>
+          <li><b>Reserved prefix: </b>Names beginning with "pg_" are reserved for system purposes and cannot be used by
             users.</li>
-          <li><b>Avoid keywords:</b>While you can use keywords as schema names if they are quoted, it is generally
+          <li><b>Avoid keywords: </b>While you can use keywords as schema names if they are quoted, it is generally
             best to avoid doing so to prevent confusion and potential errors in queries.</li>
         </ul>
         <h3>Query syntax to create schema:</h3>
@@ -79,19 +91,16 @@ CREATE SCHEMA SchemaName;
           <div class="alert-container"></div>
         </form>
         <br>
-        <button class="collapsible">Create Laboratories Schema</button>
+        <button class="collapsible">Create laboratories Schema</button>
         <div class="content">
           <br>
-          <p>CREATE SCHEMA laboratories;</p>
+          <p class="prevent-select">CREATE SCHEMA laboratories;</p>
           <br>
         </div>
         <br>
         <p>The default schema is "public", in order to use another schema, just append the queries with "requiredSchema"
           before the table name.</p>
         <h3>Alternatively, Create a schema using pgAdmin</h3>
-        <a href="http://localhost:8080" target="_blank">Open pgAdmin</a>
-        <br><br>
-        <p>After logging in and reaching the homepage, expand the Servers section and enter the database password.</p>
         <p>Right Click over Schemas Section and Select "Create Schema"</p>
         <img src="{{ url_for('static', filename='images/createSchema.png') }}" alt="Create Schema"
           class="responsive-image">
@@ -101,12 +110,12 @@ CREATE SCHEMA SchemaName;
         <br>
         <p>The default schema is "public", in order to use another schema, first execute
         <pre>
-  SET search_path = "requiredSchema" </pre>
-        in the Query Tool. This sentence has to be executed everytime we start the Query Tool in pgAdmin.</p>
+SET search_path = "requiredSchema"; </pre>
+        in the Query Tool. This sentence has to be executed every time we start the Query Tool in pgAdmin.</p>
         <br>
       </div>
       <br>
-      <h2>Data Definition Language</h2>
+      <h3>Data Definition Language</h3>
       <p>Statements used to create the structure of the database
         and the other database objects.
       </p>
@@ -150,7 +159,7 @@ ADD column_name datatype;
         <li><b>DROP</b>
           <ul>
             <li>
-              Use: To delete entire database and tables
+              Use: To delete entire database and tables.
             </li>
             <li>Syntax:
               <pre>
@@ -160,7 +169,7 @@ DROP TABLE TableName;
           </ul>
         </li>
       </ul>
-      <h2>Data Manipulation Language</h2>
+      <h3>Data Manipulation Language</h3>
       <p>Statements used to manage the data stored in the
         database.
       </p>
@@ -187,7 +196,7 @@ VALUES (Value1,…,ValueN);
               <pre>
 SELECT attr1,att2,…,attrN
 FROM tableName
-WHERE &lt;Conditions&gt;
+WHERE &lt;Conditions&gt;;
               </pre>
             </li>
           </ul>
@@ -195,14 +204,14 @@ WHERE &lt;Conditions&gt;
         <li><b>UPDATE</b>
           <ul>
             <li>
-              Use: To modify or update the pre-existing data in a database
+              Use: To modify or update the pre-existing data in a database.
             </li>
             <li>Syntax:
               <pre>
 UPDATE TableName
 SET Att1 = NewValueAtt1,
 Att2 = NewValueAtt2 
-WHERE &lt;Conditions&gt;
+WHERE &lt;Conditions&gt;;
               </pre>
             </li>
           </ul>
@@ -210,12 +219,12 @@ WHERE &lt;Conditions&gt;
         <li><b>DELETE</b>
           <ul>
             <li>
-              Use: To delete row/rows from a table
+              Use: To delete row/rows from a table.
             </li>
             <li>Syntax:
               <pre>
 DELETE FROM TableName 
-WHERE &lt;Conditions&gt;
+WHERE &lt;Conditions&gt;;
               </pre>
             </li>
           </ul>
@@ -224,19 +233,19 @@ WHERE &lt;Conditions&gt;
       <h3>More on SQL Syntax</h3>
       <a href="http://www.faqs.org/docs/ppbook/c22759.htm" target="_blank">About SQL Syntax</a>
       <br> <br>
-      <h2>Table</h2>
+      <h3>Table</h3>
       <p>
         A table is a structured collection of data organized into rows and columns, where each column represents a
         specific
         attribute, and each row represents a single record or data entry.
       </p>
-      <h2>Data Types</h2>
+      <h3>Data Types</h3>
       <p>
-        PostgreSQL supports various datatypes, the categories of datatypes it supports are: numeric types, monetary
+        PostgreSQL supports various data types, the categories of data types it supports are: numeric types, monetary
         type,
         character types, binary data types, date/time types, boolean type, array types, JSON types, geometric types,
         ENUM etc.
-        <a href="https://www.postgresql.org/docs/9.5/datatype.html" target="_blank">more on datatypes</a>. Some of the
+        <a href="https://www.postgresql.org/docs/9.5/datatype.html" target="_blank">more on data types</a>. Some of the
         commonly used data types are:
       </p>
       <ul>
@@ -247,7 +256,7 @@ WHERE &lt;Conditions&gt;
         <li>CHAR(n): Fixed-length character string</li>
         <li>BOOLEAN: Logical boolean (true/false)</li>
       </ul>
-      <h2>Primary & Foreign Key Constraints</h2>
+      <h3>Primary & Foreign Key Constraints</h3>
       <p>
         A primary key constraint ensures that a column (or a set of columns) uniquely identifies each row in a table. It
         enforces uniqueness and implicitly creates a unique index on the column(s). A table can have only one primary
@@ -292,7 +301,7 @@ WHERE &lt;Conditions&gt;
         <button class="collapsible">Create Art Work Tables</button>
         <div class="content">
           <br>
-          <p>CREATE TABLE laboratories.Artist(
+          <p class="prevent-select">CREATE TABLE laboratories.Artist(
             AName VARCHAR(20),
             Birthplace
             VARCHAR(20),
@@ -300,7 +309,7 @@ WHERE &lt;Conditions&gt;
             DateOfBirth DATE,
             PRIMARY KEY
             (AName));</p>
-          <p>
+          <p class="prevent-select">
             CREATE TABLE laboratories.Customer(
             CustId INTEGER,
             Name VARCHAR(20),
@@ -308,7 +317,7 @@ WHERE &lt;Conditions&gt;
             Amount NUMERIC(8,2),
             PRIMARY KEY (CustId));
           </p>
-          <p>CREATE TABLE laboratories.Artwork(
+          <p class="prevent-select">CREATE TABLE laboratories.Artwork(
             Title VARCHAR(20),
             Year INTEGER,
             Type VARCHAR(20),
@@ -317,7 +326,7 @@ WHERE &lt;Conditions&gt;
             PRIMARY KEY (Title),
             FOREIGN KEY(AName)
             REFERENCES laboratories.Artist);</p>
-          <p>
+          <p class="prevent-select">
             CREATE TABLE laboratories.LikeArtist(
             CustId INTEGER,
             AName VARCHAR(20),
@@ -337,9 +346,9 @@ WHERE &lt;Conditions&gt;
       <div class="content">
         <br>
         <ul>
-          <li>Character values are quoted by ' ' , and numerical values are unquoted when inserting</li>
-          <li>Several inserts can be done consecutively in Query Tool</li>
-          <li>Multiple inserts into the same table can be done by separating them with a comma(,)</li>
+          <li>Character values are quoted by ' ' , and numerical values are unquoted when inserting.</li>
+          <li>Several inserts can be done consecutively in Query Tool.</li>
+          <li>Multiple inserts into the same table can be done by separating them with a comma(,).</li>
         </ul>
         <p>Insert the following 3 Rows, make sure to use the laboratories schema created above (append schemaName to the
           tableName):</p>
@@ -363,7 +372,7 @@ WHERE &lt;Conditions&gt;
             <li>Title: Blue, The Cardsharps</li>
             <li>Year: 2000, 1594</li>
             <li>Type: Modern, Baroque</li>
-            <li>Price: 10000.00, 400000.00</li>
+            <li>Price: 10000.00, 40000.00</li>
             <li>AName: Smith, Caravaggio</li>
           </ul>
         </ul>
@@ -378,15 +387,15 @@ WHERE &lt;Conditions&gt;
         <button class="collapsible">Insert Into Art Work Tables</button>
         <div class="content">
           <br><br>
-          <p>INSERT INTO laboratories.Artist(AName,Birthplace, Style, DateOfBirth) VALUES
+          <p class="prevent-select">INSERT INTO laboratories.Artist(AName,Birthplace, Style, DateOfBirth) VALUES
             ('Caravaggio','Milan','Baroque','1571-09-28' ), ('Smith', 'Ottawa', 'Modern', '1977-12-12'),
             ('Picasso','Malaga','Cubism','1881-10-25');
           </p>
-          <p>
+          <p class="prevent-select">
             INSERT INTO laboratories.Customer(CustId,Name,Address,Amount) VALUES (1,'John','Ottawa',8.5),
             (2,'Amy','Orleans',9.0), (3,'Peter','Gatineau',6.3);
           </p>
-          <p>
+          <p class="prevent-select">
             INSERT INTO laboratories.Artwork(Title,Year,Type,Price,AName) VALUES ('Blue',
             2000,'Modern',10000.00,'Smith'),
             ('The Cardsharps', 1594,'Baroque',40000.00,'Caravaggio');
@@ -399,7 +408,7 @@ WHERE &lt;Conditions&gt;
       <button class="collapsible"><b>Exercise 4:</b> Retrieve Values</button>
       <div class="content">
         <br>
-        <p>Retrieve data using SELECT Statement</p>
+        <p>Retrieve data using SELECT Statements.</p>
         <p>Get the style of the artist whose name is Smith.</p>
         <form class="queryForm">
           <input type="text" class="query" placeholder="Query" required>
@@ -425,7 +434,7 @@ WHERE &lt;Conditions&gt;
 
         </form>
         <br>
-        <button class="collapsible">Retrieve Data From Art Work Tables</button>
+        <button class="collapsible">Retrieve Data from Art Work Tables</button>
         <div class="content">
           <br><br>
           <h3>Get the style of the artist whose name is Smith.</h3>
@@ -445,7 +454,7 @@ WHERE &lt;Conditions&gt;
             </table>
             <br>
           </div>
-          <p><b>Query: </b>SELECT Style FROM laboratories.Artist WHERE AName = 'Smith';</p>
+          <p class="prevent-select"><b>Query: </b>SELECT Style FROM laboratories.Artist WHERE AName = 'Smith';</p>
 
           <h3>List all artists that are born in Ottawa.</h3>
           <p><b>Expected Results: </b></p>
@@ -460,7 +469,7 @@ WHERE &lt;Conditions&gt;
             </table>
             <br>
           </div>
-          <p><b>Query: </b>
+          <p class="prevent-select"><b>Query: </b>
             SELECT Aname FROM laboratories.Artist WHERE Birthplace = 'Ottawa';
           </p>
           <h3>List the titles and prices of all artworks painted in 2000.</h3>
@@ -478,8 +487,8 @@ WHERE &lt;Conditions&gt;
             </table>
             <br>
           </div>
-          <p><b>Query: </b>
-            SELECT Title,Price FROM laboratories.Artwork WHERE Year =2000;
+          <p class="prevent-select"><b>Query: </b>
+            SELECT Title,Price FROM laboratories.Artwork WHERE Year = 2000;
           </p>
           <br>
         </div>
@@ -491,7 +500,7 @@ WHERE &lt;Conditions&gt;
         <br>
         <p>Modify certain data satisfying a condition
           from a table with UPDATE command. If the WHERE clause is omitted, all records will be
-          updated permanently</p>
+          updated permanently.</p>
         <p>Change the name of the customer with id 1 to Bruce.</p>
         <form class="queryForm">
           <input type="text" class="query" placeholder="Query" required>
@@ -500,8 +509,8 @@ WHERE &lt;Conditions&gt;
           <div class="alert-container"></div>
         </form>
         <br>
-        <p>Update the Amount value for all the Customers in the
-          Database to be 9.8 and the address to be Gatineau.
+        <p>Update the amount value for all the customers in the
+          database to be 9.8 and the address to be Gatineau.
         </p>
         <form class="queryForm">
           <input type="text" class="query" placeholder="Query" required>
@@ -510,15 +519,15 @@ WHERE &lt;Conditions&gt;
           <div class="alert-container"></div>
         </form>
         <br>
-        <button class="collapsible">Update Data From Art Work Tables</button>
+        <button class="collapsible">Update Data from Art Work Tables</button>
         <div class="content">
           <br><br>
           <h3>Change the name of the customer with id 1 to Bruce.</h3>
-          <p>UPDATE laboratories.Customer SET Name = 'Bruce' WHERE CustId = 1;
+          <p class="prevent-select">UPDATE laboratories.Customer SET Name = 'Bruce' WHERE CustId = 1;
           </p>
-          <h3>Update the Amount value for all the Customers in the
+          <h3>Update the amount value for all the customers in the
             Database to be 9.8 and the address to be Gatineau.</h3>
-          <p>
+          <p class="prevent-select">
             UPDATE laboratories.Customer SET Amount = 9.8, Address = 'Gatineau';
           </p>
           <br>
@@ -531,11 +540,11 @@ WHERE &lt;Conditions&gt;
         <br>
         <p>We can delete certain rows satisfying a condition from a table
           with DELETE command. If the WHERE clause is omitted, all records will be
-          deleted permanently</p>
+          deleted permanently.</p>
         <pre>
-DELETE FROM TableName WHERE Condition
+DELETE FROM TableName WHERE Condition;
           </pre>
-        <p>Remove Customer Bruce from our Database.</p>
+        <p>Remove customer Bruce from our database.</p>
         <form class="queryForm">
           <input type="text" class="query" placeholder="Query" required>
           <br><br>
@@ -543,7 +552,7 @@ DELETE FROM TableName WHERE Condition
           <div class="alert-container"></div>
         </form>
         <br>
-        <p>Remove all the remaining Customers from the Database.
+        <p>Remove all the remaining customers from the database.
         </p>
         <form class="queryForm">
           <input type="text" class="query" placeholder="Query" required>
@@ -552,16 +561,15 @@ DELETE FROM TableName WHERE Condition
           <div class="alert-container"></div>
         </form>
         <br>
-        <button class="collapsible">Delete Data From Art Work Tables</button>
+        <button class="collapsible">Delete Data from Art Work Tables</button>
         <div class="content">
           <br><br>
-          <h3>Remove Customer Bruce from our Database.</h3>
-          <p>DELETE FROM laboratories.Customer WHERE Name = 'Bruce';
-
+          <h3>Remove customer Bruce from our database.</h3>
+          <p class="prevent-select">DELETE FROM laboratories.Customer WHERE Name = 'Bruce';
           </p>
-          <h3>Remove all the remaining Customers from the Database.
+          <h3>Remove all the remaining customers from the database.
           </h3>
-          <p>
+          <p class="prevent-select">
             DELETE FROM laboratories.Customer;
           </p>
           <br>
@@ -569,10 +577,9 @@ DELETE FROM TableName WHERE Condition
         <br>
       </div>
       <br>
-      <script src="static/js/collapsiblescript.js"></script>
     </main>
   </div>
-
+  <script src="static/js/collapsiblescript.js"></script>
   <script src="static/js/query-execution.js"></script>
 </body>
 
