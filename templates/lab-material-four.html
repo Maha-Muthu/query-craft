@@ -44,24 +44,24 @@
             <h2>Advanced Database Queries with SQL Joins</h2>
             <p>
                 This material provides a comprehensive guide on SQL joins, explaining various types of joins and their
-                applications. The document covers Cross Join, Natural Join, Full Outer Join, Left Outer Join, Right
+                applications. The material covers Cross Join, Natural Join, Full Outer Join, Left Outer Join, Right
                 Outer Join, Inner Join, Self Join, Semi Join, and Anti Join. Each join type is described with its
                 syntax, use cases, and impact on table cardinality. Learning outcomes include mastering different join
                 operations, understanding table relationships, and enhancing data retrieval techniques in SQL.
             </p>
-            <h2>Foreign Key Constraint</h2>
+            <h3>Foreign Key Constraint</h3>
             <ul>
-                <li>Verify that the values in one table exist in another table</li>
+                <li>Verify that the values in one table exist in another table.</li>
                 <li>It is not necessary to have a foreign key constraint in place in order
-                    to join two tables</li>
-                <li> Uses the "REFERENCES constraint" in create table command
+                    to join two tables.</li>
+                <li> Uses the "REFERENCES constraint" in create table command:
                     <pre>
 &lt;col_name&gt; &lt;col_type&gt; &lt;constraints&gt; REFERENCES 
 &lt;table_name&gt;(&lt;column_name&gt;);  
                     </pre>
                 </li>
             </ul>
-            <h2>Cardinality & Degree</h2>
+            <h3>Cardinality & Degree</h3>
             <p><b>Cardinality:</b> Number of tuples or rows in a table is
                 called the cardinality of the table.</p>
             <p><b>Degree:</b> Number of attributes or columns in a table is
