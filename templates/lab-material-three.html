@@ -12,14 +12,14 @@
     <link rel="stylesheet" href="static/css/table-design.css">
     <style>
         .prevent-select {
-          -webkit-user-select: none;
-          /* Safari */
-          -ms-user-select: none;
-          /* IE 10 and IE 11 */
-          user-select: none;
-          /* Standard syntax */
+            -webkit-user-select: none;
+            /* Safari */
+            -ms-user-select: none;
+            /* IE 10 and IE 11 */
+            user-select: none;
+            /* Standard syntax */
         }
-      </style>
+    </style>
 </head>
 
 <body>
@@ -53,7 +53,8 @@
         <main>
             <h2>More SQL Commands: Drop, Alter, and Query</h2>
             <p>Focus on advanced SQL commands and practices, including altering and deleting database tables,
-                performing insertions and deletions, and writing complex queries involving multiple tables. Provides practical exercises to reinforce these concepts,
+                performing insertions and deletions, and writing complex queries involving multiple tables. Provides
+                practical exercises to reinforce these concepts,
                 such as adding columns with constraints, inserting specific records, and crafting queries to retrieve
                 and manipulate data. Learning outcomes include a deeper understanding of SQL syntax, database
                 management, and the ability to execute complex data operations.</p>
@@ -194,7 +195,8 @@ ALTER TABLE TableName ADD COLUMN ColumnName ColumnType CHECK ( Constraint );
                 <button class="collapsible">Insert Into Art Work Tables</button>
                 <div class="content">
                     <br><br>
-                    <p class="prevent-select">INSERT INTO laboratories.Artist (AName,Birthplace, Style, DateOfBirth, Country)
+                    <p class="prevent-select">INSERT INTO laboratories.Artist (AName,Birthplace, Style, DateOfBirth,
+                        Country)
                         VALUES('Leonardo', 'Florence', 'Renaissance', '1452-04-15', 'Italy'), ('Michelangelo', 'Arezzo',
                         'Renaissance', '1475-03-06','Italy'), ('Josefa', 'Seville', 'Baroque', '1630-09-09', 'Spain'),
                         ('Hans Hofmann', 'Weisenburg', 'Modern', '1966-02-17', 'Germany'), ('John', 'San Francisco',
@@ -229,7 +231,8 @@ ALTER TABLE TableName ADD COLUMN ColumnName ColumnType CHECK ( Constraint );
                 <pre>
 <b>DELETE FROM</b> TableName <b>WHERE</b> Condition;           
                 </pre>
-                <li>When a record being deleted is referenced by a foreign key in another table, the DBMS checks for these dependencies to maintain referential integrity. If such a dependency
+                <li>When a record being deleted is referenced by a foreign key in another table, the DBMS checks for
+                    these dependencies to maintain referential integrity. If such a dependency
                     exists, the delete operation will fail to prevent orphaned records in the child table.</li>
                 <li>To handle this:
                     <ul>

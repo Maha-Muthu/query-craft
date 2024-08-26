@@ -10,6 +10,16 @@
     <link rel="stylesheet" href="static/css/query-input-design.css">
     <link rel="stylesheet" href="static/css/query-response-table-design.css">
     <link rel="stylesheet" href="static/css/table-design.css">
+    <style>
+        .prevent-select {
+            -webkit-user-select: none;
+            /* Safari */
+            -ms-user-select: none;
+            /* IE 10 and IE 11 */
+            user-select: none;
+            /* Standard syntax */
+        }
+    </style>
 </head>
 
 <body>
@@ -39,7 +49,7 @@
             <a href="{{ url_for('lab_material_ten') }}">Lab Material 10</a>
             <br>
             <a href="{{ url_for('lab_material_eleven') }}">Lab Material 11</a>
-            </nav>
+        </nav>
         <main>
             <h2>SQL Data Manipulation and Retrieval</h2>
             <p>This material focuses on advanced SQL query techniques, covering multiple table joins, group operations,
@@ -70,19 +80,19 @@
                 <button class="collapsible">Create Sailor Tables</button>
                 <div class="content">
                     <br>
-                    <p>CREATE TABLE laboratories.Sailors(
+                    <p class="prevent-select">CREATE TABLE laboratories.Sailors(
                         sid INTEGER,
                         sname VARCHAR(50),
                         age INTEGER,
                         rating VARCHAR(20),
                         PRIMARY KEY (sid));
                     </p>
-                    <p>CREATE TABLE laboratories.Boats(
+                    <p class="prevent-select">CREATE TABLE laboratories.Boats(
                         bid INTEGER,
                         color VARCHAR(20),
                         PRIMARY KEY (bid));
                     </p>
-                    <p>CREATE TABLE laboratories.Reserves(
+                    <p class="prevent-select">CREATE TABLE laboratories.Reserves(
                         sid INTEGER,
                         bid INTEGER,
                         PRIMARY KEY(sid, bid),
@@ -97,7 +107,7 @@
             <button class="collapsible"><b>Exercise 21:</b> Insert Values into Sailor Tables</button>
             <div class="content">
                 <br>
-                <p>Insert the following Rows, make sure to use the laboratories schema created previously (append
+                <p>Insert the following rows, make sure to use the laboratories schema created previously (append
                     schemaName to the
                     tableName):</p>
                 <ul>
@@ -130,16 +140,16 @@
                 <button class="collapsible">Insert Into Sailor Tables</button>
                 <div class="content">
                     <br><br>
-                    <p>INSERT INTO laboratories.Sailors(sid, sname, age, rating) VALUES
+                    <p class="prevent-select">INSERT INTO laboratories.Sailors(sid, sname, age, rating) VALUES
                         (1, 'Salvador', 26, 'Good'), (2, 'Rafael', 28, 'Good'), (3, 'John', 10, 'Good'), (4, 'Bruce',
                         18, 'Fair'), (5, 'James', 17, 'Fair'), (6, 'Smith', 18, 'Poor'), (7, 'Peter', 22, 'Poor');
                     </p>
-                    <p>
+                    <p class="prevent-select">
                         INSERT INTO laboratories.Boats(bid, color) VALUES
-                        (1, 'red'), (2, 'green')
+                        (1, 'red'), (2, 'green');
                     </p>
-                    <p>
-                        INSERT INTO laboratories.Reserves(sid, bid) VALUES (1,1), (1,2), (2,1)
+                    <p class="prevent-select">
+                        INSERT INTO laboratories.Reserves(sid, bid) VALUES (1,1), (1,2), (2,1);
                     </p>
                     <br>
                 </div>
@@ -162,7 +172,8 @@ group-qualification
                 <li>
                     HAVING → Filters groups of rows (use with GROUP BY).
                 </li>
-                <li>So, when using SELECT without GROUP BY, use WHERE to filter rows. When using GROUP BY, use HAVING to filter groups.</li>
+                <li>So, when using SELECT without GROUP BY, use WHERE to filter rows. When using GROUP BY, use HAVING to
+                    filter groups.</li>
             </ul>
             <br>
             <button class="collapsible"><b>Exercise 22:</b> Retrieve Values from Sailor Tables</button>
@@ -185,7 +196,7 @@ group-qualification
                     <div class="alert-container"></div>
                 </form>
                 <br>
-                <p>Find the age of the youngest sailor with age > 18, for each rating level 
+                <p>Find the age of the youngest sailor with age > 18, for each rating level
                     with at least 2 sailors (of any age).</p>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
@@ -222,7 +233,8 @@ group-qualification
                         </table>
                         <br>
                     </div>
-                    <p><b>Query: </b>SELECT S.sname FROM laboratories.Sailors S, laboratories.Reserves R, laboratories.Boats B WHERE
+                    <p><b>Query: </b>SELECT S.sname FROM laboratories.Sailors S, laboratories.Reserves R,
+                        laboratories.Boats B WHERE
                         S.sid = R.sid AND R.bid = B.bid AND B.color = 'red' AND S.sid IN (SELECT S2.sid FROM
                         laboratories.Sailors S2,laboratories.Boats B2, laboratories.Reserves R2 WHERE S2.sid = R2.sid
                         AND R2.bid = B2.bid AND B2.color = 'green' );
@@ -261,39 +273,39 @@ group-qualification
                         SELECT S.rating, AVG(S.age) AS avgage FROM laboratories.Sailors S WHERE S.age
                         >= 18 GROUP BY S.rating HAVING COUNT(*) > 1
                     </p>
-                    <p><b>Explanation: </b>HAVING clause allows us to specify a qualification (filter) for each 
-                        group. COUNT(*) >1 in the HAVING clause eliminates all the rating groups 
+                    <p><b>Explanation: </b>HAVING clause allows us to specify a qualification (filter) for each
+                        group. COUNT(*) >1 in the HAVING clause eliminates all the rating groups
                         which do not have at least two sailors.</p>
-                    <h3>Find the age of the youngest sailor with age > 18, for each rating level 
+                    <h3>Find the age of the youngest sailor with age > 18, for each rating level
                         with at least 2 sailors (of any age).</h3>
                     <p><b>Expected Results: </b></p>
                     <div style="overflow-x: auto; overflow-y: auto;">
                         <table>
                             <tr>
-                              <th>minage</th>
-                              <th>rating</th>
+                                <th>minage</th>
+                                <th>rating</th>
                             </tr>
                             <tr>
-                              <td>18</td>
-                              <td>Poor</td>
+                                <td>18</td>
+                                <td>Poor</td>
                             </tr>
                             <tr>
-                              <td>18</td>
-                              <td>Fair</td>
+                                <td>18</td>
+                                <td>Fair</td>
                             </tr>
                             <tr>
-                              <td>26</td>
-                              <td>Good</td>
+                                <td>26</td>
+                                <td>Good</td>
                             </tr>
-                          </table>                          
+                        </table>
                     </div>
                     <p><b>Query: </b>
-                        SELECT S.rating, MIN(S.age) AS minage FROM laboratories.Sailors S WHERE S.age 
->= 18 GROUP BY S.rating HAVING ( SELECT COUNT (*) FROM laboratories.Sailors 
-S2 WHERE S.rating=S2.rating ) >= 2
+                        SELECT S.rating, MIN(S.age) AS minage FROM laboratories.Sailors S WHERE S.age
+                        >= 18 GROUP BY S.rating HAVING ( SELECT COUNT (*) FROM laboratories.Sailors
+                        S2 WHERE S.rating=S2.rating ) >= 2
                     </p>
-                    <p><b>Explanation: </b>Since group qualification is having 2 sailors of any age, we 
-                        get the total number of rows for that rating group with the query inside 
+                    <p><b>Explanation: </b>Since group qualification is having 2 sailors of any age, we
+                        get the total number of rows for that rating group with the query inside
                         HAVING clause, and check if this number is at least 2.</p>
                     <br>
                 </div>
@@ -311,7 +323,8 @@ S2 WHERE S.rating=S2.rating ) >= 2
                     <div class="alert-container"></div>
                 </form>
                 <br>
-                <p>Find the average price of artworks which are painted after 1490, for each artwork type that has at least two such artworks. 
+                <p>Find the average price of artworks which are painted after 1490, for each artwork type that has at
+                    least two such artworks.
                 </p>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
@@ -320,7 +333,8 @@ S2 WHERE S.rating=S2.rating ) >= 2
                     <div class="alert-container"></div>
                 </form>
                 <br>
-                <p>Find the average price of artworks which are painted after 1490, for each artwork type that has at least two artworks (painted in any year)
+                <p>Find the average price of artworks which are painted after 1490, for each artwork type that has at
+                    least two artworks (painted in any year)
                 </p>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
@@ -333,17 +347,18 @@ S2 WHERE S.rating=S2.rating ) >= 2
                 <button class="collapsible">Retrieve Data From Art Work Tables</button>
                 <div class="content">
                     <br>
-                    <h3>Find names of Customers who likes both an artist born in Malaga and an artist born in Florence.</h3>
+                    <h3>Find names of Customers who likes both an artist born in Malaga and an artist born in Florence.
+                    </h3>
                     <p><b>Expected Results: </b></p>
                     <div style="overflow-x: auto; overflow-y: auto;">
                         <table>
                             <tr>
-                              <th>name</th>
+                                <th>name</th>
                             </tr>
                             <tr>
-                              <td>Saeid</td>
+                                <td>Saeid</td>
                             </tr>
-                          </table>                          
+                        </table>
                         <br>
                     </div>
                     <p><b>Query: </b>Select c.name
@@ -363,7 +378,8 @@ S2 WHERE S.rating=S2.rating ) >= 2
                         where a.birthplace='Malaga');
                     </p>
                     <br>
-                    <h3>Find the average price of artworks which are painted after 1490, for each artwork type that has at least two such artworks. 
+                    <h3>Find the average price of artworks which are painted after 1490, for each artwork type that has
+                        at least two such artworks.
                     </h3>
                     <p><b>Expected Results: </b></p>
                     <div style="overflow-x: auto; overflow-y: auto;">
@@ -391,40 +407,40 @@ S2 WHERE S.rating=S2.rating ) >= 2
                         SELECT S.rating, AVG(S.age) AS avgage FROM laboratories.Sailors S WHERE S.age
                         >= 18 GROUP BY S.rating HAVING COUNT(*) > 1
                     </p>
-                    <p><b>Explanation: </b>HAVING clause allows us to specify a qualification (filter) for each 
-                        group. COUNT(*) >1 in the HAVING clause eliminates all the rating groups 
+                    <p><b>Explanation: </b>HAVING clause allows us to specify a qualification (filter) for each
+                        group. COUNT(*) >1 in the HAVING clause eliminates all the rating groups
                         which do not have at least two sailors.</p>
-                    <h3>Find the age of the youngest sailor with age > 18, for each rating level 
+                    <h3>Find the age of the youngest sailor with age > 18, for each rating level
                         with at least 2 sailors (of any age).</h3>
                     <p><b>Expected Results: </b></p>
                     <div style="overflow-x: auto; overflow-y: auto;">
                         <table>
                             <tr>
-                              <th>minage</th>
-                              <th>rating</th>
+                                <th>minage</th>
+                                <th>rating</th>
                             </tr>
                             <tr>
-                              <td>18</td>
-                              <td>Poor</td>
+                                <td>18</td>
+                                <td>Poor</td>
                             </tr>
                             <tr>
-                              <td>18</td>
-                              <td>Fair</td>
+                                <td>18</td>
+                                <td>Fair</td>
                             </tr>
                             <tr>
-                              <td>26</td>
-                              <td>Good</td>
+                                <td>26</td>
+                                <td>Good</td>
                             </tr>
-                          </table>
-                          <br>                          
+                        </table>
+                        <br>
                     </div>
                     <p><b>Query: </b>
-                        SELECT S.rating, MIN(S.age) AS minage FROM laboratories.Sailors S WHERE S.age 
->= 18 GROUP BY S.rating HAVING ( SELECT COUNT (*) FROM laboratories.Sailors 
-S2 WHERE S.rating=S2.rating ) >= 2
+                        SELECT S.rating, MIN(S.age) AS minage FROM laboratories.Sailors S WHERE S.age
+                        >= 18 GROUP BY S.rating HAVING ( SELECT COUNT (*) FROM laboratories.Sailors
+                        S2 WHERE S.rating=S2.rating ) >= 2
                     </p>
-                    <p><b>Explanation: </b>Since group qualification is having 2 sailors of any age, we 
-                        get the total number of rows for that rating group with the query inside 
+                    <p><b>Explanation: </b>Since group qualification is having 2 sailors of any age, we
+                        get the total number of rows for that rating group with the query inside
                         HAVING clause, and check if this number is at least 2.</p>
                     <br>
                 </div>
