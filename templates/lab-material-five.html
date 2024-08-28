@@ -157,13 +157,13 @@
             </div>
             <br>
             <br>
-            <h2>More on Select Statements</h2>
-            <p>Select statements with GROUP BY and HAVING clauses</p>
+            <h3>More on Select Statements</h3>
+            <p>Select statements with GROUP BY and HAVING clauses:</p>
             <pre>
 SELECT select-list FROM from-list
 WHERE record-qualification GROUP BY
 grouping-list HAVING 
-group-qualification                               
+group-qualification;                              
             </pre>
             <p>Tip</p>
             <ul>
@@ -179,7 +179,7 @@ group-qualification
             <button class="collapsible"><b>Exercise 22:</b> Retrieve Values from Sailor Tables</button>
             <div class="content">
                 <br>
-                <p>Find the names of sailors who have reserved both a red and a green boat.</p>
+                <h3>Find the names of sailors who have reserved both a red and a green boat.</h3>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
                     <br><br>
@@ -187,8 +187,8 @@ group-qualification
                     <div class="alert-container"></div>
                 </form>
                 <br>
-                <p>Find the average age of sailors who are at least 18 years old, for each rating
-                    level that has at least two such sailors.</p>
+                <h3>Find the average age of sailors who are at least 18 years old, for each rating
+                    level that has at least two such sailors.</h3>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
                     <br><br>
@@ -196,8 +196,8 @@ group-qualification
                     <div class="alert-container"></div>
                 </form>
                 <br>
-                <p>Find the age of the youngest sailor with age > 18, for each rating level
-                    with at least 2 sailors (of any age).</p>
+                <h3>Find the age of the youngest sailor with age > 18, for each rating level
+                    with at least 2 sailors (of any age).</h3>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
                     <br><br>
@@ -205,7 +205,7 @@ group-qualification
                     <div class="alert-container"></div>
                 </form>
                 <br>
-                <p>Find name of the sailors who reserved all the boats.</p>
+                <h3>Find name of the sailors who reserved all the boats.</h3>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
                     <br><br>
@@ -213,7 +213,7 @@ group-qualification
                     <div class="alert-container"></div>
                 </form>
                 <br>
-                <button class="collapsible">Retrieve Data From Sailor Tables</button>
+                <button class="collapsible">Retrieve Data from Sailor Tables</button>
                 <div class="content">
                     <br>
                     <h3>Find the names of sailors who have reserved both a red and a green boat.</h3>
@@ -233,7 +233,8 @@ group-qualification
                         </table>
                         <br>
                     </div>
-                    <p><b>Query: </b>SELECT S.sname FROM laboratories.Sailors S, laboratories.Reserves R,
+                    <p class="prevent-select"><b>Query: </b>SELECT S.sname FROM laboratories.Sailors S,
+                        laboratories.Reserves R,
                         laboratories.Boats B WHERE
                         S.sid = R.sid AND R.bid = B.bid AND B.color = 'red' AND S.sid IN (SELECT S2.sid FROM
                         laboratories.Sailors S2,laboratories.Boats B2, laboratories.Reserves R2 WHERE S2.sid = R2.sid
@@ -259,19 +260,19 @@ group-qualification
                             <tbody>
                                 <tr>
                                     <td>Good</td>
-                                    <td>27</td>
+                                    <td>27.0000000000000000</td>
                                 </tr>
                                 <tr>
                                     <td>Poor</td>
-                                    <td>20</td>
+                                    <td>20.0000000000000000 </td>
                                 </tr>
                             </tbody>
                         </table>
                         <br>
                     </div>
-                    <p><b>Query: </b>
+                    <p class="prevent-select"><b>Query: </b>
                         SELECT S.rating, AVG(S.age) AS avgage FROM laboratories.Sailors S WHERE S.age
-                        >= 18 GROUP BY S.rating HAVING COUNT(*) > 1
+                        >= 18 GROUP BY S.rating HAVING COUNT(*) > 1;
                     </p>
                     <p><b>Explanation: </b>HAVING clause allows us to specify a qualification (filter) for each
                         group. COUNT(*) >1 in the HAVING clause eliminates all the rating groups
@@ -299,14 +300,44 @@ group-qualification
                             </tr>
                         </table>
                     </div>
-                    <p><b>Query: </b>
+                    <br>
+                    <p class="prevent-select"><b>Query: </b>
                         SELECT S.rating, MIN(S.age) AS minage FROM laboratories.Sailors S WHERE S.age
                         >= 18 GROUP BY S.rating HAVING ( SELECT COUNT (*) FROM laboratories.Sailors
-                        S2 WHERE S.rating=S2.rating ) >= 2
+                        S2 WHERE S.rating=S2.rating ) >= 2;
                     </p>
                     <p><b>Explanation: </b>Since group qualification is having 2 sailors of any age, we
                         get the total number of rows for that rating group with the query inside
                         HAVING clause, and check if this number is at least 2.</p>
+                    <h3>Find name of the sailors who reserved all the boats.</h3>
+                    <p><b>Expected Results: </b></p>
+                    <div style="overflow-x: auto; overflow-y: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>sname</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Salvador</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                    </div>
+                    <p class="prevent-select"><b>Query: </b>Select S.sname from laboratories.Sailors S Where Not
+                        Exists(Select B.bid From laboratories.Boats B Where Not Exists ( Select R.bid From
+                        laboratories.Reserves R Where R.bid=B.bid and R.sid = S.sid));
+                    </p>
+                    <p><b>Explanation: </b>The query retrieves the names of sailors who have reserved all available
+                        boats. It starts by selecting sailors from the Sailors table. For each sailor, it uses a NOT
+                        EXISTS clause to verify if there are any boats that they haven't reserved. This is done by
+                        checking if for each boat in the Boats table, there is a corresponding reservation entry for
+                        that sailor in the Reserves table. If no such unreserved boat exists, meaning every boat has
+                        been reserved by the sailor, the NOT EXISTS condition is satisfied, and the sailor's name is
+                        included in the result. Thus, it effectively filters out sailors who haven't reserved all boats.
+                    </p>
                     <br>
                 </div>
                 <br>
@@ -315,7 +346,7 @@ group-qualification
             <button class="collapsible"><b>Exercise 23:</b> Retrieve Values from Art Work Tables</button>
             <div class="content">
                 <br>
-                <p>Find names of Customers who likes both an artist born in Malaga and an artist born in Florence.</p>
+                <h3>Find names of Customers who likes both an artist born in Malaga and an artist born in Florence.</h3>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
                     <br><br>
@@ -323,9 +354,9 @@ group-qualification
                     <div class="alert-container"></div>
                 </form>
                 <br>
-                <p>Find the average price of artworks which are painted after 1490, for each artwork type that has at
+                <h3>Find the average price of artworks which are painted after 1490, for each artwork type that has at
                     least two such artworks.
-                </p>
+                </h3>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
                     <br><br>
@@ -333,9 +364,9 @@ group-qualification
                     <div class="alert-container"></div>
                 </form>
                 <br>
-                <p>Find the average price of artworks which are painted after 1490, for each artwork type that has at
+                <h3>Find the average price of artworks which are painted after 1490, for each artwork type that has at
                     least two artworks (painted in any year)
-                </p>
+                </h3>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
                     <br><br>
@@ -344,7 +375,7 @@ group-qualification
 
                 </form>
                 <br>
-                <button class="collapsible">Retrieve Data From Art Work Tables</button>
+                <button class="collapsible">Retrieve Data from Art Work Tables</button>
                 <div class="content">
                     <br>
                     <h3>Find names of Customers who likes both an artist born in Malaga and an artist born in Florence.
@@ -361,7 +392,7 @@ group-qualification
                         </table>
                         <br>
                     </div>
-                    <p><b>Query: </b>Select c.name
+                    <p class="prevent-select"><b>Query: </b>Select c.name
                         from laboratories.Customer c
                         inner join laboratories.likeartist l
                         on c.custid=l.custid
@@ -377,7 +408,13 @@ group-qualification
                         on l.aname = a.aname
                         where a.birthplace='Malaga');
                     </p>
-                    <br>
+                    <p><b>Explanation: </b>This query retrieves the names of customers who like at least one artist born
+                        in Malaga and one artist born in Florence. It first joins the Customer and likeartist tables to
+                        identify which artists each customer likes, then joins with the Artist table to get the artist's
+                        birthplace. The outer query filters for customers who like artists born in Florence, while using
+                        a subquery to ensure that these customers are also present in the set of those who like artists
+                        born in Malaga. The IN clause in the subquery effectively checks for customers who meet both
+                        conditions, ensuring only those who like artists from both birthplaces are selected.</p>
                     <h3>Find the average price of artworks which are painted after 1490, for each artwork type that has
                         at least two such artworks.
                     </h3>
@@ -403,9 +440,9 @@ group-qualification
                         </table>
                         <br>
                     </div>
-                    <p><b>Query: </b>
+                    <p class="prevent-select"><b>Query: </b>
                         SELECT S.rating, AVG(S.age) AS avgage FROM laboratories.Sailors S WHERE S.age
-                        >= 18 GROUP BY S.rating HAVING COUNT(*) > 1
+                        >= 18 GROUP BY S.rating HAVING COUNT(*) > 1;
                     </p>
                     <p><b>Explanation: </b>HAVING clause allows us to specify a qualification (filter) for each
                         group. COUNT(*) >1 in the HAVING clause eliminates all the rating groups
@@ -434,10 +471,10 @@ group-qualification
                         </table>
                         <br>
                     </div>
-                    <p><b>Query: </b>
+                    <p class="prevent-select"><b>Query: </b>
                         SELECT S.rating, MIN(S.age) AS minage FROM laboratories.Sailors S WHERE S.age
                         >= 18 GROUP BY S.rating HAVING ( SELECT COUNT (*) FROM laboratories.Sailors
-                        S2 WHERE S.rating=S2.rating ) >= 2
+                        S2 WHERE S.rating=S2.rating ) >= 2;
                     </p>
                     <p><b>Explanation: </b>Since group qualification is having 2 sailors of any age, we
                         get the total number of rows for that rating group with the query inside
