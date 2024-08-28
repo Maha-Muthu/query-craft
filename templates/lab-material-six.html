@@ -29,7 +29,7 @@
             <a href="{{ url_for('lab_material_five') }}">Lab Material 5</a>
             <br>
             <a href="#">Lab Material 6</a>
-            <br>            
+            <br>
             <a href="{{ url_for('lab_material_seven') }}">Lab Material 7</a>
             <br>
             <a href="{{ url_for('lab_material_eight') }}">Lab Material 8</a>
@@ -39,8 +39,8 @@
             <a href="{{ url_for('lab_material_ten') }}">Lab Material 10</a>
             <br>
             <a href="{{ url_for('lab_material_eleven') }}">Lab Material 11</a>
-            </nav>
-            <main>
+        </nav>
+        <main>
             <h2>SQL Data Manipulation and Retrieval</h2>
             <p>This material covers the fundamentals of JDBC (Java Database Connectivity) and its application in
                 database programming using Java. It outlines the steps for setting up JDBC, including downloading and
@@ -48,7 +48,7 @@
                 Java code to connect to a database, issue SQL queries, and process the results. The lab exercises
                 provide practical examples of coding with JDBC to perform database operations, such as querying tables
                 and handling query results dynamically.</p>
-            <h2>What is JDBC</h2>
+            <h3>What is JDBC</h3>
             <ul>
                 <li>Java Database Connectivity (JDBC)</li>
                 <li>It is an API by Sun Microsystems to allow Java
@@ -81,7 +81,7 @@
                 </ul>
             </div>
             <br>
-            <h2>Download the Driver</h2>
+            <h3>Download the Driver</h3>
             <ul>
                 <li><a href="https://jdbc.postgresql.org/" target="_blank">Download JDBC</a></li>
                 <li>Use the latest version</li>
@@ -175,8 +175,8 @@ public class Main {
                             <ul>
                                 <li>jdbc:postgresql:database</li>
                                 <li>jdbc:postgresql://host:port/database</li>
-                                <li>Username:</li>
-                                <li>Password:</li>
+                                <li>Username: Username from Docker Compose File</li>
+                                <li>Password: Password from Docker Compose File</li>
                             </ul>
                         </ul>
                         <li>Issue a Query and process the result.</li>
