@@ -4,30 +4,30 @@ services:
   db:
     image: postgres
     environment:
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres #Do not change this value
+      POSTGRES_USER: postgres #Do not change this value
+      POSTGRES_PASSWORD: password #Change Password if you wish to, but make sure you use this value in the Server Password while using pgAdmin
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "8082:5432"
+      - "8082:5432" #Change the port 8082 if it is aldready being use
 
   web:
     build: .
     ports:
-      - "8083:5000"
+      - "8083:5000" #Change the Port 8083 if port 5432 is aldready being used.
     volumes:
       - .:/app
     depends_on:
-      - db
+      - db #Do not change this value
 
   pgadmin:
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com #Change EMAIL if you wish to, but make sure you use this value while logging into pgAdmin
+      PGADMIN_DEFAULT_PASSWORD: admin  #Change PASSWORD if you wish to, but make sure you use this value while logging into pgAdmin
     ports:
-      - "8081:80"
+      - "8081:80" #Change the Port 8081 if aldready being used.
     volumes:
       - pgadmin_data:/var/lib/pgadmin
     depends_on:
