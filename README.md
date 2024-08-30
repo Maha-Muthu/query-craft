@@ -2,6 +2,12 @@
 
 Query Craft is an educational tool designed to guide students how to craft SQL queries effectively. It provides interactive learning materials, examples, and practice problems to help users understand various SQL concepts and improve their query writing skills.
 
+## System Design
+![alt text](systemDesign.png)
+* The core component is the Query Craft application, built using the Flask framework.
+* Users interact with the application to practice SQL queries and learn database concepts.
+* The application is deployed in a Dockerized environment, making it compatible with cloud platforms and environments that support Docker.
+
 ## Setup 
 
 ### Prerequisites
