@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_DB: postgres #Do not change this value
       POSTGRES_USER: postgres #Do not change this value
-      POSTGRES_PASSWORD: password #Change Password if you wish to, but make sure you use this value in the Server Password while using pgAdmin
+      POSTGRES_PASSWORD: password #Do not change this value
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
@@ -24,8 +24,8 @@ services:
   pgadmin:
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com #Change EMAIL if you wish to, but make sure you use this value while logging into pgAdmin
-      PGADMIN_DEFAULT_PASSWORD: admin  #Change PASSWORD if you wish to, but make sure you use this value while logging into pgAdmin
+      PGADMIN_DEFAULT_EMAIL: username@mail.com #Do not change this value
+      PGADMIN_DEFAULT_PASSWORD: password  #Do not change this value
     ports:
       - "8081:80" #Change the Port 8081 if aldready being used.
     volumes:
