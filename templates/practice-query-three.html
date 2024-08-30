@@ -10,6 +10,16 @@
     <link rel="stylesheet" href="static/css/query-input-design.css">
     <link rel="stylesheet" href="static/css/query-response-table-design.css">
     <link rel="stylesheet" href="static/css/table-design.css">
+    <style>
+        .prevent-select {
+            -webkit-user-select: none;
+            /* Safari */
+            -ms-user-select: none;
+            /* IE 10 and IE 11 */
+            user-select: none;
+            /* Standard syntax */
+        }
+    </style>
 </head>
 
 <body>
@@ -30,7 +40,7 @@
         </nav>
         <main>
             <h2>Security Contests Schema</h2>
-            <p>The schema "Security_Contests" consists of two tables: "Hackers" and "Submissions." The "Hackers" table
+            <p>The schema "Security_Contests" consists of two tables: "Hackers" and "Submissions". The "Hackers" table
                 holds unique identifiers and names of hackers. The "Submissions" table records the details of
                 submissions made by hackers, including the submission date, a reference to the hacker who made the
                 submission, and the score awarded. The schema establishes a relationship between hackers and their
@@ -187,7 +197,7 @@
                     </table>
                 </div>
                 <br>
-                <p><b>Query: </b>SELECT * FROM security_contests.hackers LIMIT 5;
+                <p class="prevent-select"><b>Query: </b>SELECT * FROM security_contests.hackers LIMIT 5;
                 </p>
                 <p><b>Explanation: </b>The query retrieves the first 5 records from the Hackers table by using LIMIT 5.
                     The SELECT * ensures that all columns are included in the result, while LIMIT 5 restricts the output
@@ -211,7 +221,7 @@
                     </table>
                 </div>
                 <br>
-                <p><b>Query: </b>SELECT * FROM Security_Contests.Submissions WHERE date = '2023-01-01';
+                <p class="prevent-select"><b>Query: </b>SELECT * FROM Security_Contests.Submissions WHERE date = '2023-01-01';
                 </p>
                 <p><b>Explanation: </b>The query filters the Submissions table using WHERE date = '2023-01-01', which
                     ensures that only rows where the date matches the specified value are selected.</p>
@@ -228,7 +238,7 @@
                     </table>
                 </div>
                 <br>
-                <p><b>Query: </b>SELECT MAX(score) FROM Security_Contests.Submissions WHERE hacker_id = 3;
+                <p class="prevent-select"><b>Query: </b>SELECT MAX(score) FROM Security_Contests.Submissions WHERE hacker_id = 3;
                 </p>
                 <p><b>Explanation: </b>The query retrieves the highest score submitted by the hacker with ID 3 by using
                     MAX(score) to find the maximum value in the score column. The WHERE hacker_id = 3 clause filters the
@@ -285,7 +295,7 @@
                     </table>
                 </div>
                 <br>
-                <p><b>Query: </b>SELECT Hackers.name, SUM(Submissions.score) AS total_score FROM
+                <p class="prevent-select"><b>Query: </b>SELECT Hackers.name, SUM(Submissions.score) AS total_score FROM
                     Security_Contests.Hackers JOIN Security_Contests.Submissions ON Hackers.id = Submissions.hacker_id
                     GROUP BY Hackers.name;
                 </p>
@@ -346,7 +356,7 @@
                     </table>
                 </div>
                 <br>
-                <p><b>Query: </b>SELECT Hackers.name, COUNT(Submissions.submission_id) AS submission_count
+                <p class="prevent-select"><b>Query: </b>SELECT Hackers.name, COUNT(Submissions.submission_id) AS submission_count
                     FROM Security_Contests.Hackers
                     JOIN Security_Contests.Submissions
                     ON Hackers.id = Submissions.hacker_id
@@ -370,7 +380,7 @@
                     </table>
                 </div>
                 <br>
-                <p><b>Query: </b>SELECT name
+                <p class="prevent-select"><b>Query: </b>SELECT name
                     FROM Security_Contests.Hackers
                     WHERE id = (
                     SELECT hacker_id
@@ -437,7 +447,7 @@
                     </table>
                 </div>
                 <br>
-                <p><b>Query: </b>SELECT Hackers.name, MIN(Submissions.date) AS first_submission_date
+                <p class="prevent-select"><b>Query: </b>SELECT Hackers.name, MIN(Submissions.date) AS first_submission_date
                     FROM Security_Contests.Hackers
                     JOIN Security_Contests.Submissions
                     ON Hackers.id = Submissions.hacker_id
@@ -476,7 +486,7 @@
                     </table>
                 </div>
                 <br>
-                <p><b>Query: </b>SELECT DISTINCT h1.id, h1.name
+                <p class="prevent-select"><b>Query: </b>SELECT DISTINCT h1.id, h1.name
                     FROM Security_Contests.Hackers h1
                     JOIN Security_Contests.Hackers h2
                     ON SUBSTRING(h1.name, 1, 1) = SUBSTRING(h2.name, 1, 1) AND h1.id &lt;&gt; h2.id;
@@ -527,7 +537,7 @@
                     </table>
                 </div>
                 <br>
-                <p><b>Query: </b>SELECT Hackers.name
+                <p class="prevent-select"><b>Query: </b>SELECT Hackers.name
                     FROM Security_Contests.Hackers
                     JOIN Security_Contests.Submissions
                     ON Hackers.id = Submissions.hacker_id
@@ -590,7 +600,7 @@
                     </table>
                 </div>
                 <br>
-                <p><b>Query: </b>SELECT Hackers.name, MAX(Submissions.score) AS max_score
+                <p class="prevent-select"><b>Query: </b>SELECT Hackers.name, MAX(Submissions.score) AS max_score
                     FROM Security_Contests.Hackers
                     JOIN Security_Contests.Submissions
                     ON Hackers.id = Submissions.hacker_id

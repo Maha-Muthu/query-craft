@@ -10,6 +10,16 @@
     <link rel="stylesheet" href="static/css/query-input-design.css">
     <link rel="stylesheet" href="static/css/query-response-table-design.css">
     <link rel="stylesheet" href="static/css/table-design.css">
+    <style>
+        .prevent-select {
+            -webkit-user-select: none;
+            /* Safari */
+            -ms-user-select: none;
+            /* IE 10 and IE 11 */
+            user-select: none;
+            /* Standard syntax */
+        }
+    </style>
 </head>
 
 <body>
@@ -42,15 +52,13 @@
         </nav>
         <main>
             <h2>More SQL Commands: Drop, Alter, and Query</h2>
-            <p>Focus on advanced SQL commands and practices, including altering and destroying database tables,
-                performing insertions and deletions, and writing complex queries involving multiple tables. Key topics
-                covered include the use of DROP TABLE and ALTER TABLE commands for modifying table structures, inserting
-                data into existing tables, deleting rows based on conditions, and employing SELECT statements with
-                clauses like GROUP BY, HAVING, and ORDER BY. Provides practical exercises to reinforce these concepts,
+            <p>Focus on advanced SQL commands and practices, including altering and deleting database tables,
+                performing insertions and deletions, and writing complex queries involving multiple tables. Provides
+                practical exercises to reinforce these concepts,
                 such as adding columns with constraints, inserting specific records, and crafting queries to retrieve
                 and manipulate data. Learning outcomes include a deeper understanding of SQL syntax, database
                 management, and the ability to execute complex data operations.</p>
-            <h2>Destroying and Altering Relations</h2>
+            <h3>Deleting and Altering Relations</h3>
             <p>The command <b>DROP TABLE</b> destroys the table and
                 deletes all records on that relation.</p>
             <pre>
@@ -60,9 +68,9 @@ DROP TABLE TableName;
                 modifications to a table we have created before.</p>
             <p>We can add/drop columns and constraints, rename
                 table name, columns and do much more.</p>
-            <p>Adding a column to an already created table</p>
+            <p>Adding a column to an already created table:</p>
             <pre>
-ALTER TABLE TableName ADD COLUMN ColumnName ColumnType
+ALTER TABLE TableName ADD COLUMN ColumnName ColumnType;
             </pre>
             <p>We can also add a column with an additional integrity
                 constraint.</p>
@@ -74,7 +82,7 @@ ALTER TABLE TableName ADD COLUMN ColumnName ColumnType CHECK ( Constraint );
                 <br>
                 <p>This exercise requires the completion of all queries in all previous exercises. The schema name is
                     "laboratories" and it includes the following tables (to look at the schema refer to Exercise 2 in
-                    Lab Material 1.): </p>
+                    Lab Material 1): </p>
                 <ul>
                     <li>laboratories.Artist( AName VARCHAR(20), Birthplace VARCHAR(20), Style VARCHAR(20), DateOfBirth
                         DATE, PRIMARY KEY (AName))</li>
@@ -86,9 +94,7 @@ ALTER TABLE TableName ADD COLUMN ColumnName ColumnType CHECK ( Constraint );
                         KEY (Aname) REFERENCES laboratories.Artist, FOREIGN KEY (CustId) REFERENCES
                         laboratories.Customer)</li>
                 </ul>
-
-
-                <p>Add Country column to Artist table (type VARCHAR(20)).</p>
+                <h3>Add Country column to Artist table of type VARCHAR(20).</h3>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
                     <br><br>
@@ -96,8 +102,8 @@ ALTER TABLE TableName ADD COLUMN ColumnName ColumnType CHECK ( Constraint );
                     <div class="alert-container"></div>
                 </form>
                 <br>
-                <p>Add a Rating column to the Customer table, with the following check constraint: the rating value has
-                    to be BETWEEN 1 AND 10.</p>
+                <h3>Add a Rating column to the customer table, with the following check constraint: the rating value has
+                    to be BETWEEN 1 AND 10.</h3>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
                     <br><br>
@@ -108,12 +114,12 @@ ALTER TABLE TableName ADD COLUMN ColumnName ColumnType CHECK ( Constraint );
                 <button class="collapsible">Update Art Work Tables</button>
                 <div class="content">
                     <br><br>
-                    <h3>Add Country column to Artist table (type VARCHAR(20)).</h3>
-                    <p>ALTER TABLE laboratories.Artist ADD Country VARCHAR(20);</p>
-                    <h3>Add a Rating column to the Customer table, with the following check constraint: the rating value
+                    <h3>Add Country column to artist table (type VARCHAR(20)).</h3>
+                    <p class="prevent-select">ALTER TABLE laboratories.Artist ADD Country VARCHAR(20);</p>
+                    <h3>Add a Rating column to the customer table, with the following check constraint: the rating value
                         has
-                        to be BETWEEN 1 AND 10</h3>
-                    <p>
+                        to be BETWEEN 1 AND 10.</h3>
+                    <p class="prevent-select">
                         ALTER TABLE laboratories.Customer ADD Rating Numeric CONSTRAINT Rating CHECK (Rating &gt;= 1 and
                         Rating &lt;=10); </p>
                     <br>
@@ -121,7 +127,7 @@ ALTER TABLE TableName ADD COLUMN ColumnName ColumnType CHECK ( Constraint );
                 <br>
             </div>
             <br>
-            <h2>More on <b>SELECT</b> statements</h2>
+            <h3>More on <b>SELECT</b> statements</h3>
             <ul>
                 <li><b>GROUP BY</b>: Groups all resulting rows of our query
                     in terms of one or more attributes with this clause.</li>
@@ -136,7 +142,7 @@ ALTER TABLE TableName ADD COLUMN ColumnName ColumnType CHECK ( Constraint );
 <b>FROM</b> from-list
 <b>WHERE</b> record-qualification
 <b>GROUP</b> BY grouping-list
-<b>HAVING</b> group-qualification           
+<b>HAVING</b> group-qualification;          
                     </pre>
                 </li>
             </ul>
@@ -145,8 +151,8 @@ ALTER TABLE TableName ADD COLUMN ColumnName ColumnType CHECK ( Constraint );
             <div class="content">
                 <br>
                 <p>Let's insert additional data into the previously created tables, then delete specific rows from those
-                    tables. Next code queries involving both single and multiple tables.</p>
-                <p>Insert the following rows, make sure to use the laboratories schema created above (append
+                    tables.</p>
+                <p>Insert the following rows, make sure to use the laboratories schema created (append
                     schemaName to the tableName):</p>
                 <ul>
                     <li>Artist Table: </li>
@@ -189,24 +195,25 @@ ALTER TABLE TableName ADD COLUMN ColumnName ColumnType CHECK ( Constraint );
                 <button class="collapsible">Insert Into Art Work Tables</button>
                 <div class="content">
                     <br><br>
-                    <p>INSERT INTO laboratories.Artist (AName,Birthplace, Style, DateOfBirth, Country)
+                    <p class="prevent-select">INSERT INTO laboratories.Artist (AName,Birthplace, Style, DateOfBirth,
+                        Country)
                         VALUES('Leonardo', 'Florence', 'Renaissance', '1452-04-15', 'Italy'), ('Michelangelo', 'Arezzo',
                         'Renaissance', '1475-03-06','Italy'), ('Josefa', 'Seville', 'Baroque', '1630-09-09', 'Spain'),
                         ('Hans Hofmann', 'Weisenburg', 'Modern', '1966-02-17', 'Germany'), ('John', 'San Francisco',
                         'Modern', '1920-02-17', 'USA');
                     </p>
-                    <p>
+                    <p class="prevent-select">
                         INSERT INTO laboratories.Artwork (Title,Year,Type,Price,AName) VALUES('Waves', 2000, null,
                         4000.00, 'John'), ('Three Musicians', 1921, 'Modern', 11000.00, 'Picasso'), ('Saints', 1470,
                         'Renaissance', 30000.00, 'Leonardo'), ('Hand of god', 1510, 'Renaissance', 52000.00,
                         'Michelangelo'), ('Murder', 1600, 'Baroque', 15000.00, 'Caravaggio'), ('Green', 1950, 'Modern',
                         5000.00, 'John');
                     </p>
-                    <p>
+                    <p class="prevent-select">
                         INSERT INTO laboratories.Customer (CustId,Name,Address,Amount, Rating) VALUES(1, 'Emre',
                         'Preston', 20000.00, 5), (2, 'Saeid', null, 40000.00, 6), (3, 'Kate', 'Laurier', 30000.00, 4);
                     </p>
-                    <p>
+                    <p class="prevent-select">
                         INSERT INTO laboratories.LikeArtist (CustId, AName) VALUES (1, 'Picasso'), (2, 'Picasso'), (2,
                         'Leonardo'), (2,'Caravaggio'), (2,'Hans Hofmann'), (2,'John'), (2,'Josefa'), (2,'Michelangelo');
                     </p>
@@ -215,21 +222,21 @@ ALTER TABLE TableName ADD COLUMN ColumnName ColumnType CHECK ( Constraint );
                 <br>
             </div>
             <br>
-            <h2>Deleting Rows</h2>
+            <h3>Deleting Rows</h3>
             <ul>
                 <li>We can delete certain rows satisfying a condition from a
                     table with the <b>DELETE</b> command.</li>
                 <li>If you omit the <b>WHERE</b> clause, all records will be
                     permanently deleted.</li>
                 <pre>
-<b>DELETE FROM</b> TableName <b>WHERE</b> Condition           
+<b>DELETE FROM</b> TableName <b>WHERE</b> Condition;           
                 </pre>
-                <li>When a record being deleted is referenced by a foreign key in another table, the database management
-                    system (DBMS) checks for these dependencies to maintain referential integrity. If such a dependency
+                <li>When a record being deleted is referenced by a foreign key in another table, the DBMS checks for
+                    these dependencies to maintain referential integrity. If such a dependency
                     exists, the delete operation will fail to prevent orphaned records in the child table.</li>
                 <li>To handle this:
                     <ul>
-                        <li>Either manually delete the dependent rows first</li>
+                        <li>Either manually delete the dependent rows first.</li>
                         <li>Or use the ON DELETE CASCADE option when defining the foreign key
                             constraint. With ON DELETE CASCADE, deleting a record in the parent table will automatically
                             delete all related records in the child table, ensuring that no orphaned records are left
@@ -239,12 +246,12 @@ ALTER TABLE TableName ADD COLUMN ColumnName ColumnType CHECK ( Constraint );
                         <pre>
 ALTER TABLE [ParentTable] WITH CHECK ADD CONSTRAINT [FK_ChildParent] FOREIGN KEY([ParentID])
 REFERENCES [ParentTable] ([ParentID])
-ON DELETE CASCADE                            
+ON DELETE CASCADE;                            
                         </pre>
                     </ul>
                 </li>
             </ul>
-            <h2>Backup & Restore</h2>
+            <h3>Backup & Restore</h3>
             <p><b>Backup:</b> A snapshot of the database (including data and structure) at any point in time. Generates
                 a
                 data file *.backup that you save on disk.</p>
@@ -260,8 +267,8 @@ ON DELETE CASCADE
             <button class="collapsible"><b>Exercise 9:</b> Query Practice</button>
             <div class="content">
                 <br>
-                <p>Retrieve data using SELECT Statement</p>
-                <p>List the names and birthplaces of all Artists.</p>
+                <p>Retrieve data using SELECT Statement.</p>
+                <h3>List the names and birthplaces of all Artists.</h3>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
                     <br><br>
@@ -269,7 +276,7 @@ ON DELETE CASCADE
                     <div class="alert-container"></div>
                 </form>
                 <br>
-                <p>List the title and price of all Artworks that were painted after 1600.</p>
+                <h3>List the title and price of all Artworks that were painted after 1600.</h3>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
                     <br><br>
@@ -277,8 +284,8 @@ ON DELETE CASCADE
                     <div class="alert-container"></div>
                 </form>
                 <br>
-                <p>List the title and type of all Artworks that was either painted in 2000 or was painted by Picasso.
-                </p>
+                <h3>List the title and type of all Artworks that was either painted in 2000 or was painted by Picasso.
+                </h3>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
                     <br><br>
@@ -286,9 +293,9 @@ ON DELETE CASCADE
                     <div class="alert-container"></div>
                 </form>
                 <br>
-                <p>List the names and birthplaces of all Artists who were born between 1880 and 1930. (HINT:
+                <h3>List the names and birthplaces of all Artists who were born between 1880 and 1930. (HINT:
                     EXTRACT(YEAR FROM Dateofbirth) gives you the year from a DATE attribute)
-                </p>
+                </h3>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
                     <br><br>
@@ -296,9 +303,9 @@ ON DELETE CASCADE
                     <div class="alert-container"></div>
                 </form>
                 <br>
-                <p>List the names and country of birth of all Artists whose painting style are Modern, Baroque or
+                <h3>List the names and country of birth of all Artists whose painting style are Modern, Baroque or
                     Renaissance. (HINT: Use the IN keyword)
-                </p>
+                </h3>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
                     <br><br>
@@ -306,8 +313,8 @@ ON DELETE CASCADE
                     <div class="alert-container"></div>
                 </form>
                 <br>
-                <p>List all details of the Artworks in the database, ordered by Title.
-                </p>
+                <h3>List all details of the Artworks in the database, ordered by Title.
+                </h3>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
                     <br><br>
@@ -315,7 +322,7 @@ ON DELETE CASCADE
                     <div class="alert-container"></div>
                 </form>
                 <br>
-                <button class="collapsible">Retrieve Data From Art Work Tables</button>
+                <button class="collapsible">Retrieve data from Art Work Tables</button>
                 <div class="content">
                     <br><br>
                     <h3>List the names and birthplaces of all Artists.
@@ -363,7 +370,7 @@ ON DELETE CASCADE
 
                         <br>
                     </div>
-                    <p><b>Query: </b>SELECT Aname, Birthplace FROM laboratories.Artist;
+                    <p class="prevent-select"><b>Query: </b>SELECT Aname, Birthplace FROM laboratories.Artist;
                     </p>
                     <h3>List the title and price of all Artworks that were painted after 1600.</h3>
                     <p><b>Expected Results: </b></p>
@@ -392,13 +399,13 @@ ON DELETE CASCADE
                         </table>
                         <br>
                     </div>
-                    <p>
+                    <p class="prevent-select">
                         <b>Query: </b>SELECT Title, Price FROM laboratories.Artwork where Year>1600;
                     </p>
                     <h3>List the title and type of all Artworks that was either painted in 2000 or was painted by
                         Picasso.
                     </h3>
-                    <p><b>Expected Results: </b></p>
+                    <p class="prevent-select"><b>Expected Results: </b></p>
                     <div style="overflow-x: auto; overflow-y: auto;">
                         <table>
                             <tr>
@@ -420,10 +427,11 @@ ON DELETE CASCADE
                         </table>
                         <br>
                     </div>
-                    <p><b>Query: </b>
+                    <p class="prevent-select"><b>Query: </b>
                         SELECT Title, Type FROM laboratories.Artwork where Year=2000 OR Aname='Picasso';
                     </p>
-                    <h3>List the names and birthplaces of all Artists who were born between 1880 and 1930.
+                    <h3>List the names and birthplaces of all Artists who were born between 1880 and 1930. (HINT:
+                        EXTRACT(YEAR FROM Dateofbirth) gives you the year from a DATE attribute)
                     </h3>
                     <p><b>Expected Results: </b></p>
                     <div style="overflow-x: auto; overflow-y: auto;">
@@ -443,12 +451,12 @@ ON DELETE CASCADE
                         </table>
                         <br>
                     </div>
-                    <p><b>Query: </b>
+                    <p class="prevent-select"><b>Query: </b>
                         SELECT Aname, Birthplace FROM laboratories.Artist
                         WHERE (EXTRACT(YEAR FROM Dateofbirth) BETWEEN 1880 AND 1930);
                     </p>
                     <h3>List the names and country of birth of all Artists whose painting style are Modern, Baroque or
-                        Renaissance.
+                        Renaissance. (HINT: Use the IN keyword)
                     </h3>
                     <p><b>Expected Results: </b></p>
                     <div style="overflow-x: auto; overflow-y: auto;">
@@ -488,7 +496,7 @@ ON DELETE CASCADE
                         </table>
                         <br>
                     </div>
-                    <p><b>Query: </b>
+                    <p class="prevent-select"><b>Query: </b>
                         SELECT Aname, Country FROM laboratories.Artist
                         WHERE Style IN ('Modern','Baroque','Renaissance');
                     </p>
@@ -563,7 +571,7 @@ ON DELETE CASCADE
                         </table>
                         <br>
                     </div>
-                    <p><b>Query: </b>
+                    <p class="prevent-select"><b>Query: </b>
                         SELECT * FROM laboratories.Artwork Order By Title;
                     </p>
                     <br>

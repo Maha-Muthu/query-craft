@@ -3,8 +3,6 @@ setlocal
 
 REM The script file contains Docker commands to export the QueryCraft tool. It saves the images and exports the schemas from the Docker volumes into the backup folder.
 
-REM Apart from the Docker export commands in this file, the folder also contains a Docker Compose file. Docker Compose is used to define and manage multi-container Docker applications, specifying how services interact and are configured.
-
 REM Set the current directory to the location of this script.
 cd /d "%~dp0"
 

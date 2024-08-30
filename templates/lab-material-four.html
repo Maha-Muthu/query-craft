@@ -44,44 +44,30 @@
             <h2>Advanced Database Queries with SQL Joins</h2>
             <p>
                 This material provides a comprehensive guide on SQL joins, explaining various types of joins and their
-                applications. The document covers Cross Join, Natural Join, Full Outer Join, Left Outer Join, Right
+                applications. The material covers Cross Join, Natural Join, Full Outer Join, Left Outer Join, Right
                 Outer Join, Inner Join, Self Join, Semi Join, and Anti Join. Each join type is described with its
                 syntax, use cases, and impact on table cardinality. Learning outcomes include mastering different join
                 operations, understanding table relationships, and enhancing data retrieval techniques in SQL.
             </p>
-            <h2>Foreign Key Constraint</h2>
+            <h3>Foreign Key Constraint</h3>
             <ul>
-                <li>Verify that the values in one table exist in another table</li>
+                <li>Verify that the values in one table exist in another table.</li>
                 <li>It is not necessary to have a foreign key constraint in place in order
-                    to join two tables</li>
-                <li> Uses the "REFERENCES constraint" in create table command
+                    to join two tables.</li>
+                <li> Uses the "REFERENCES constraint" in create table command:
                     <pre>
 &lt;col_name&gt; &lt;col_type&gt; &lt;constraints&gt; REFERENCES 
 &lt;table_name&gt;(&lt;column_name&gt;);  
                     </pre>
                 </li>
             </ul>
-            <h2>Cardinality & Degree</h2>
+            <h3>Cardinality & Degree</h3>
             <p><b>Cardinality:</b> Number of tuples or rows in a table is
                 called the cardinality of the table.</p>
             <p><b>Degree:</b> Number of attributes or columns in a table is
                 called degree of the table.
             </p>
-            <br>
-            <p>This material requires the completion of all queries in all previous exercises. The schema used is
-                "laboratories" and it includes the following tables (to look at the schema refer to Exercise 2 in
-                Lab Material 1): </p>
-            <ul>
-                <li>laboratories.Artist(AName VARCHAR(20), Birthplace VARCHAR(20), Style VARCHAR(20), DateOfBirth
-                    DATE, PRIMARY KEY (AName))</li>
-                <li>laboratories.Customer(CustId INTEGER, Name VARCHAR(20), Address VARCHAR(20), Amount
-                    NUMERIC(8,2), PRIMARY KEY (CustId))</li>
-                <li>laboratories.Artwork(Title VARCHAR(20), Year INTEGER, Type VARCHAR(20), Price NUMERIC(8,2),
-                    AName VARCHAR(20), PRIMARY KEY (Title), FOREIGN KEY(AName) REFERENCES laboratories.Artist)</li>
-                <li>laboratories.LikeArtist(CustId INTEGER, AName VARCHAR(20), PRIMARY KEY(Aname, CustId), FOREIGN
-                    KEY (Aname) REFERENCES laboratories.Artist, FOREIGN KEY (CustId) REFERENCES
-                    laboratories.Customer)</li>
-            </ul>
+            <p>This material requires the completion of all queries in all previous exercises.</p>
             <br>
             <button class="collapsible"><b>Exercise 10:</b> Cross Join or Cartesian Product</button>
             <div class="content">
@@ -91,7 +77,7 @@
                     <li>Table B (Cardinality n)</li>
                     <li>Every column of Table A is
                         matched with every column of
-                        Table B.</li>
+                        Table B</li>
                     <li>Cross join table of A and B
                         (cardinality m * n)</li>
                     <li><b>Syntax:</b></li>
@@ -99,7 +85,7 @@
 SELECT &lt;column_names&gt; FROM &lt;table_name&gt; CROSS JOIN &lt;table_name&gt;;
                     </pre>
                     <li><b>Use Case:</b> Normal uses are for checking the database server's performance. Used to
-                        generate all possible combinations of two sets of data</li>
+                        generate all possible combinations of two sets of data.</li>
                     <li><b>Representation:</b><br>
                         <img src="{{ url_for('static', filename='images/crossJoin.png') }}" alt="Cross Join"
                             class="responsive-image">
@@ -120,120 +106,6 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; CROSS JOIN &lt;table_name&gt
                     <br>
                     <h3>List all possible combinations of customers and artworks, regardless of whether the customer has
                         shown interest in the artwork.</h3>
-                    <p><b>Expected Results: </b></p>
-                    <div style="overflow-x: auto; overflow-y: auto;">
-                        <table>
-                            <tr>
-                                <th>address</th>
-                                <th>amount</th>
-                                <th>aname</th>
-                                <th>custid</th>
-                                <th>name</th>
-                                <th>price</th>
-                                <th>rating</th>
-                                <th>title</th>
-                                <th>type</th>
-                                <th>year</th>
-                            </tr>
-                            <tr>
-                                <td>Preston</td>
-                                <td>20000.00</td>
-                                <td>Smith</td>
-                                <td>1</td>
-                                <td>Emre</td>
-                                <td>10000.00</td>
-                                <td>5</td>
-                                <td>Blue</td>
-                                <td>Modern</td>
-                                <td>2000</td>
-                            </tr>
-                            <tr>
-                                <td>Preston</td>
-                                <td>20000.00</td>
-                                <td>Caravaggio</td>
-                                <td>1</td>
-                                <td>Emre</td>
-                                <td>40000.00</td>
-                                <td>5</td>
-                                <td>The Cardsharps</td>
-                                <td>Baroque</td>
-                                <td>1594</td>
-                            </tr>
-                            <tr>
-                                <td>Preston</td>
-                                <td>20000.00</td>
-                                <td>John</td>
-                                <td>1</td>
-                                <td>Emre</td>
-                                <td>4000.00</td>
-                                <td>5</td>
-                                <td>Waves</td>
-                                <td></td>
-                                <td>2000</td>
-                            </tr>
-                            <tr>
-                                <td>Preston</td>
-                                <td>20000.00</td>
-                                <td>Picasso</td>
-                                <td>1</td>
-                                <td>Emre</td>
-                                <td>11000.00</td>
-                                <td>5</td>
-                                <td>Three Musicians</td>
-                                <td>Modern</td>
-                                <td>1921</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>40000.00</td>
-                                <td>Smith</td>
-                                <td>2</td>
-                                <td>Saeid</td>
-                                <td>10000.00</td>
-                                <td>6</td>
-                                <td>Blue</td>
-                                <td>Modern</td>
-                                <td>2000</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>40000.00</td>
-                                <td>Caravaggio</td>
-                                <td>2</td>
-                                <td>Saeid</td>
-                                <td>40000.00</td>
-                                <td>6</td>
-                                <td>The Cardsharps</td>
-                                <td>Baroque</td>
-                                <td>1594</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>40000.00</td>
-                                <td>John</td>
-                                <td>2</td>
-                                <td>Saeid</td>
-                                <td>4000.00</td>
-                                <td>6</td>
-                                <td>Waves</td>
-                                <td></td>
-                                <td>2000</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>40000.00</td>
-                                <td>Picasso</td>
-                                <td>2</td>
-                                <td>Saeid</td>
-                                <td>11000.00</td>
-                                <td>6</td>
-                                <td>Three Musicians</td>
-                                <td>Modern</td>
-                                <td>1921</td>
-                            </tr>
-                        </table>
-                        <br>
-                    </div>
                     <p><b>Query: </b>SELECT *
                         FROM laboratories.Customer
                         CROSS JOIN laboratories.Artwork;
@@ -251,11 +123,11 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; CROSS JOIN &lt;table_name&gt
                 <ul>
                     <li>Join is based on the same
                         attribute name between the
-                        two tables.</li>
+                        two tables</li>
                     <li>Join table contains all the
                         attributes of each table but
                         only one copy of each
-                        common column.</li>
+                        common column</li>
                     <li>Cardinality &lt; n*m</li>
                     <li><b>Syntax:</b></li>
                     <pre>
@@ -283,32 +155,6 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; NATURAL JOIN &lt;table_name&
                     <br>
                     <h3>Find the list of artists who have artworks and display their names along with their birthplaces.
                     </h3>
-                    <p><b>Expected Results: </b></p>
-                    <div style="overflow-x: auto; overflow-y: auto;">
-                        <table>
-                            <tr>
-                                <th>aname</th>
-                                <th>birthplace</th>
-                            </tr>
-                            <tr>
-                                <td>Smith</td>
-                                <td>Ottawa</td>
-                            </tr>
-                            <tr>
-                                <td>Caravaggio</td>
-                                <td>Milan</td>
-                            </tr>
-                            <tr>
-                                <td>John</td>
-                                <td>San Francisco</td>
-                            </tr>
-                            <tr>
-                                <td>Picasso</td>
-                                <td>Malaga</td>
-                            </tr>
-                        </table>
-                        <br>
-                    </div>
                     <p><b>Query: </b>SELECT AName, Birthplace
                         FROM laboratories.Artist
                         NATURAL JOIN laboratories.Artwork;
@@ -325,9 +171,9 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; NATURAL JOIN &lt;table_name&
                 <br>
                 <ul>
                     <li>Every column of table A is matched with every column of table B
-                        based on the join condition.</li>
+                        based on the join condition</li>
                     <li>Contains null padded values from both tables in case the
-                        condition does not match.</li>
+                        condition does not match</li>
                     <li><b>Syntax:</b></li>
                     <pre>
 SELECT &lt;column_names&gt; FROM &lt;table_name&gt; FULL OUTER JOIN &lt;table_name&gt; ON &lt;join_condition&gt;;
@@ -356,52 +202,6 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; FULL OUTER JOIN &lt;table_na
                     <h3>Get a list of all customers and artists, showing which customers like which artists. Include
                         customers who haven't liked any artists and artists who haven't been liked by any customers.
                     </h3>
-                    <p><b>Expected Results: </b></p>
-                    <div style="overflow-x: auto; overflow-y: auto;">
-                        <table>
-                            <tr>
-                                <th>artistname</th>
-                                <th>customername</th>
-                            </tr>
-                            <tr>
-                                <td>Picasso</td>
-                                <td>Emre</td>
-                            </tr>
-                            <tr>
-                                <td>Picasso</td>
-                                <td>Saeid</td>
-                            </tr>
-                            <tr>
-                                <td>Leonardo</td>
-                                <td>Saeid</td>
-                            </tr>
-                            <tr>
-                                <td>Smith</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>Josefa</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>Michelangelo</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>Caravaggio</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>Hans Hofmann</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>John</td>
-                                <td></td>
-                            </tr>
-                        </table>
-                        <br>
-                    </div>
                     <p><b>Query: </b>SELECT c.Name AS CustomerName, a.AName AS ArtistName
                         FROM laboratories.Customer c
                         FULL OUTER JOIN laboratories.LikeArtist l ON c.CustId = l.CustId
@@ -420,10 +220,10 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; FULL OUTER JOIN &lt;table_na
                 <br>
                 <ul>
                     <li>Join table is created based on
-                        the join condition.</li>
+                        the join condition</li>
                     <li>Contains all columns of the
                         table on the left (the one in
-                        the FROM clause).</li>
+                        the FROM clause)</li>
                     <li>Full outer join table of A and B
                         (cardinality m * n)</li>
                     <li><b>Syntax:</b></li>
@@ -453,28 +253,6 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; LEFT OUTER JOIN &lt;table_na
                     <br>
                     <h3>Find all customers and the artists they like, including customers who do not like any artist.
                     </h3>
-                    <p><b>Expected Results: </b></p>
-                    <div style="overflow-x: auto; overflow-y: auto;">
-                        <table>
-                            <tr>
-                                <th>artistname</th>
-                                <th>customername</th>
-                            </tr>
-                            <tr>
-                                <td>Picasso</td>
-                                <td>Emre</td>
-                            </tr>
-                            <tr>
-                                <td>Picasso</td>
-                                <td>Saeid</td>
-                            </tr>
-                            <tr>
-                                <td>Leonardo</td>
-                                <td>Saeid</td>
-                            </tr>
-                        </table>
-                        <br>
-                    </div>
                     <p><b>Query: </b>SELECT Customer.Name AS CustomerName, LikeArtist.AName AS ArtistName FROM
                         laboratories.Customer LEFT OUTER JOIN laboratories.LikeArtist ON Customer.CustId =
                         LikeArtist.CustId;
@@ -492,10 +270,10 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; LEFT OUTER JOIN &lt;table_na
                 <br>
                 <ul>
                     <li>Join table is created based on
-                        the join condition.</li>
+                        the join condition</li>
                     <li>Contains all columns of the
                         table on the right (the one in
-                        the JOIN clause).</li>
+                        the JOIN clause)</li>
                     <li>Full outer join table of A and B
                         (cardinality m * n)</li>
                     <li><b>Syntax:</b></li>
@@ -525,32 +303,7 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; RIGHT OUTER JOIN &lt;table_n
                     <br><br>
                     <h3>List all artists and the customers who like them, including artists that no customer likes.
                     </h3>
-                    <p><b>Expected Results: </b></p>
-                    <div style="overflow-x: auto; overflow-y: auto;">
-                        <table>
-                            <tr>
-                                <th>artistname</th>
-                                <th>customername</th>
-                            </tr>
-                            <tr>
-                                <td>Picasso</td>
-                                <td>Emre</td>
-                            </tr>
-                            <tr>
-                                <td>Picasso</td>
-                                <td>Saeid</td>
-                            </tr>
-                            <tr>
-                                <td>Leonardo</td>
-                                <td>Saeid</td>
-                            </tr>
-                        </table>
-                        <br>
-                    </div>
-                    <p><b>Query: </b>SELECT Customer.Name AS CustomerName, LikeArtist.AName AS ArtistName
-                        FROM laboratories.Customer
-                        RIGHT OUTER JOIN laboratories.LikeArtist
-                        ON Customer.CustId = LikeArtist.CustId;
+                    <p><b>Query: </b>SELECT Customer.Name AS CustomerName, LikeArtist.AName AS ArtistName FROM laboratories.LikeArtist RIGHT OUTER JOIN laboratories.Customer ON Customer.CustId = LikeArtist.CustId;
                     </p>
                     <p><b>Explanation: </b>This query returns all artists, including those who are not liked by any
                         customer, with nulls in the customer column where there is no match. Right Outer Join is used to
@@ -596,28 +349,6 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; [INNER] JOIN &lt;table_name&
                     <br>
                     <h3>Find the names of customers and the artists they specifically like.
                     </h3>
-                    <p><b>Expected Results: </b></p>
-                    <div style="overflow-x: auto; overflow-y: auto;">
-                        <table>
-                            <tr>
-                                <th>artistname</th>
-                                <th>customername</th>
-                            </tr>
-                            <tr>
-                                <td>Picasso</td>
-                                <td>Emre</td>
-                            </tr>
-                            <tr>
-                                <td>Picasso</td>
-                                <td>Saeid</td>
-                            </tr>
-                            <tr>
-                                <td>Leonardo</td>
-                                <td>Saeid</td>
-                            </tr>
-                        </table>
-                        <br>
-                    </div>
                     <p><b>Query: </b>SELECT Customer.Name AS CustomerName, LikeArtist.AName AS ArtistName FROM
                         laboratories.Customer INNER JOIN laboratories.LikeArtist ON Customer.CustId = LikeArtist.CustId;
                     </p>
@@ -712,20 +443,6 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; [INNER] JOIN &lt;table_name&
                     <br>
                     <h3>Find customers who like at least one artist.
                     </h3>
-                    <p><b>Expected Results: </b></p>
-                    <div style="overflow-x: auto; overflow-y: auto;">
-                        <table>
-                            <tr>
-                                <th>name</th>
-                            </tr>
-                            <tr>
-                                <td>Emre</td>
-                            </tr>
-                            <tr>
-                                <td>Saeid</td>
-                            </tr>
-                        </table>r>
-                    </div>
                     <p><b>Query: </b>SELECT DISTINCT Customer.Name FROM laboratories.Customer WHERE EXISTS (SELECT 1
                         FROM laboratories.LikeArtist WHERE LikeArtist.CustId = Customer.CustId );
                     </p>
@@ -773,13 +490,6 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; [INNER] JOIN &lt;table_name&
                     <br>
                     <h3>Find customers who do not like any artist.
                     </h3>
-                    <p><b>Expected Results: </b></p>
-                    <div style="overflow-x: auto; overflow-y: auto;">
-                        <table>
-
-                        </table>
-                        <br>
-                    </div>
                     <p><b>Query: </b>SELECT Customer.Name
                         FROM laboratories.Customer
                         WHERE NOT EXISTS (

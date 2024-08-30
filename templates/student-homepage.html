@@ -16,7 +16,7 @@
       <a href="/">Home</a>
       <br>
       <br>
-      <a href="#" id="myBtn">Dockers: Read on how this application runs</a>
+      <a href="#" id="myBtn">How Query Craft Works and How it Runs?</a>
       <br>
       <br>
       <a href="{{ url_for('lab_material_one') }}">Lab Material</a>
@@ -70,15 +70,54 @@
   <div id="myModal" class="docker-info-modal">
     <div class="modal-content">
       <span class="close">&times;</span>
-      <h2>Dockers</h2>
-      <h3>What is a Docker ? </h3>
-      <h4>Docker is like a magic box for your software! It's a tool that helps you pack up an entire application and
+      <h3>Query Craft</h3>
+      <h4>Overview</h4>
+      <p>Query Craft is an educational tool designed to guide students on effectively crafting SQL queries. It
+        provides interactive learning materials, examples, and practice problems to help users understand various SQL
+        concepts and improve their query writing skills.</p>
+      <h4>Components</h4>
+      <p>Query Craft focuses on two significant aspects: Learning Lab Material and Query Practice.</p>
+      <p>The <b>Lab Material</b> contains learning material along with examples. It covers basic data
+        manipulation, aggregation, joins, triggers, and advanced queries.</p>
+      <p>The <b>Query Practice</b> includes five schemas with tables and data loaded and contains a set of queries
+        to practice; the solution, along with the expected results and explanations, is also provided to improve
+        learning.</p>
+      <h3>How Query Craft Runs: Dockers</h3>
+      <h4>What is a Docker? </h4>
+      <p>Docker is like a magic box for your software! It's a tool that helps you pack up an entire application
+        and
         everything it needs to run smoothly, like libraries and settings, into a neat, portable package called a
         container. Imagine it's like a mini-virtual computer just for your app!<br>Docker is a platform that enables
         developers to package, deploy, and run applications within containers. Containers are lightweight, portable, and
         self-sufficient environments that contain everything needed to run an application, including code, runtime,
-        libraries, and depndencies. Docker uses containerization technology to ensure consistency across different
-        computing environments. </h4>.
+        libraries, and dependencies. Docker uses containerization technology to ensure consistency across different
+        computing environments.</p>
+      <h4>What are Docker Volumes ?</h4>
+      <p>
+        Docker Volumes are like special storage bins for your Docker containers! They let you save data outside your
+        containers so that even if you stop or delete a container, the data is safe and sound. Imagine a Docker
+        container is like a kitchen, and Docker Volumes are like a refrigerator. You can cook different meals (run
+        different applications) in the kitchen, but the food and ingredients (data) are kept safe in the refrigerator.
+        Even if you change the kitchen setup or clean it up (stop or remove a container), the food in the refrigerator
+        remains untouched. When you set up a new kitchen or start cooking again (start a new container), you can access
+        all the ingredients you saved in the refrigerator.<br>Docker Volumes are a mechanism for persisting data
+        generated and used by Docker containers. Unlike the container's writable layer, data in volumes isn't tied to
+        the lifecycle of a container, making it more durable and allowing it to be shared between multiple containers.
+        Volumes are managed by Docker and can be stored on the host filesystem or a remote machine, providing
+        flexibility and consistency for data storage in containerized applications.</p>
+      <h4>What is Docker Compose ?</h4>
+      <p>Docker Compose is like a conductor for an orchestra of Docker containers! It helps you organize and
+        manage multiple containers that need to work together to run a full application. With Docker Compose, you can
+        write a simple file that lists all the containers your app needs and how they should interact, and then start
+        them all with a single command. It's like having a remote control to turn on everything at once!<br>Docker
+        Compose is a tool that allows you to define and run multi-container Docker applications. Using a YAML file,
+        developers can specify the services, networks, and volumes required for an application and start everything with
+        a single command. This makes it easier to manage complex applications with multiple interconnected containers,
+        ensuring they run consistently across different environments.</p>
+      <h4>Query Draft setup is containerized using Docker, which packages the Flask application and the PostgreSQL
+        database into separate, connected containers. Docker Compose handles the setup, ensuring efficient communication
+        between the Flask server and the PostgreSQL database. Docker volumes store the schema for the practice material.
+      </h4>
     </div>
   </div>
   <script src="static/js/studenthomepage/dockerinfopopup.js"></script>

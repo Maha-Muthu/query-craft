@@ -4,6 +4,8 @@ set -e
 
 # The script file contains Docker commands to set up the QueryCraft tool. It loads the images, creates and adds the required schemas stored in Docker volumes, and then runs Docker Image.
 
+# Apart from the Docker export commands in this file, the folder also contains a Docker Compose file. Docker Compose is used to define and manage multi-container Docker applications, specifying how services interact and are configured.
+
 # Set the current directory to the location of this script.
 cd "$(dirname "$0")"
 
