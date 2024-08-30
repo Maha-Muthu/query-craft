@@ -10,6 +10,16 @@
     <link rel="stylesheet" href="static/css/query-input-design.css">
     <link rel="stylesheet" href="static/css/query-response-table-design.css">
     <link rel="stylesheet" href="static/css/table-design.css">
+    <style>
+        .prevent-select {
+            -webkit-user-select: none;
+            /* Safari */
+            -ms-user-select: none;
+            /* IE 10 and IE 11 */
+            user-select: none;
+            /* Standard syntax */
+        }
+    </style>
 </head>
 
 <body>
@@ -30,7 +40,7 @@
         </nav>
         <main>
             <h2>Sales Management Schema</h2>
-            <p>The schema "Sales_Management." consists of three tables: agents, customer, and orders. The agents table
+            <p>The schema "Sales_Management" consists of three tables: agents, customer, and orders. The agents table
                 stores details about sales agents, including their working area and contact information. The customer
                 table holds information about customers, such as their location, financial details, and the agent they
                 are associated with. The orders table records customer orders, including the order amount, advance
@@ -50,7 +60,7 @@
             <img src="{{ url_for('static', filename='images/customerTable.png') }}"
                 alt="Sales Management Schema Customer Table" class="responsive-image">
             <br>
-            <h3>Sample Data from Order Table</h3>
+            <h3>Sample Data from Orders Table</h3>
             <img src="{{ url_for('static', filename='images/ordersTable.png') }}"
                 alt="Sales Management Schema Orders Table" class="responsive-image">
             <br>
@@ -210,7 +220,8 @@
                     </table>
                 </div>
                 <br>
-                <p><b>Query: </b>SELECT code,working_area FROM sales_management.customer WHERE working_area = 'New
+                <p class="prevent-select"><b>Query: </b>SELECT code,working_area FROM sales_management.customer WHERE
+                    working_area = 'New
                     York';
                 </p>
                 <p><b>Explanation: </b>The query uses a SELECT statement to retrieve the code and working_area columns
@@ -253,7 +264,7 @@
                     </table>
                 </div>
                 <br>
-                <p><b>Query: </b>SELECT DISTINCT working_area FROM sales_management.agents;
+                <p class="prevent-select"><b>Query: </b>SELECT DISTINCT working_area FROM sales_management.agents;
                 </p>
                 <p><b>Explanation: </b>The query uses SELECT DISTINCT to retrieve unique values from the working_area
                     column in the agents table. This ensures that each working area is listed only once, filtering out
@@ -307,7 +318,8 @@
                     </table>
                 </div>
                 <br>
-                <p><b>Query: </b>SELECT o.id, o.amount, o.date, c.name AS customer_name, a.agent_name
+                <p class="prevent-select"><b>Query: </b>SELECT o.id, o.amount, o.date, c.name AS customer_name,
+                    a.agent_name
                     FROM sales_management.orders o
                     JOIN sales_management.customer c ON o.customer_code = c.code
                     JOIN sales_management.agents a ON o.agent_code = a.agent_code
@@ -351,7 +363,7 @@
                     </table>
                 </div>
                 <br>
-                <p><b>Query: </b>SELECT o.id, o.amount, o.date
+                <p class="prevent-select"><b>Query: </b>SELECT o.id, o.amount, o.date
                     FROM sales_management.orders o
                     JOIN sales_management.customer c ON o.customer_code = c.code
                     WHERE c.city = 'London';
@@ -375,14 +387,16 @@
                     </table>
                 </div>
                 <br>
-                <p><b>Query: </b>SELECT customer_code, COUNT(*) AS total_orders FROM sales_management.orders GROUP BY
+                <p class="prevent-select"><b>Query: </b>SELECT customer_code, COUNT(*) AS total_orders FROM
+                    sales_management.orders GROUP BY
                     customer_code HAVING customer_code ='C00007';
                 </p>
                 <p><b>Explanation: </b>The query uses SELECT to retrieve the customer_code and the total count of orders
                     associated with that code using COUNT(*). The GROUP BY clause groups the results by customer_code,
                     allowing the aggregation of orders per customer. The HAVING clause then filters the grouped results
                     to include only the customer with the code 'C00007'.</p>
-                <h3><b>6. </b></h3>
+                <h3><b>6. </b>Find the agent code of agents who serve more than 1 customer.
+                </h3>
                 <p><b>Expected Results: </b></p>
                 <div style="overflow-x: auto; overflow-y: auto;">
                     <table>
@@ -425,7 +439,8 @@
                     </table>
                 </div>
                 <br>
-                <p><b>Query: </b>SELECT agent_code, COUNT(*) AS customer_count FROM sales_management.customer GROUP BY
+                <p class="prevent-select"><b>Query: </b>SELECT agent_code, COUNT(*) AS customer_count FROM
+                    sales_management.customer GROUP BY
                     agent_code HAVING COUNT(*) > 1;
                 </p>
                 <p><b>Explanation: </b>he query uses SELECT to retrieve the agent_code and the count of customers served
@@ -491,7 +506,8 @@
                     </table>
                 </div>
                 <br>
-                <p><b>Query: </b>SELECT a.agent_name, SUM(o.amount * a.commission) AS total_commission FROM
+                <p class="prevent-select"><b>Query: </b>SELECT a.agent_name, SUM(o.amount * a.commission) AS
+                    total_commission FROM
                     sales_management.agents a JOIN sales_management.orders o ON a.agent_code = o.agent_code GROUP BY
                     a.agent_name;
                 </p>
@@ -533,7 +549,8 @@
                     </table>
                 </div>
                 <br>
-                <p><b>Query: </b>SELECT c.name AS customer_name, o.id AS order_id, o.advance_amount, a.agent_name
+                <p class="prevent-select"><b>Query: </b>SELECT c.name AS customer_name, o.id AS order_id,
+                    o.advance_amount, a.agent_name
                     FROM sales_management.orders o
                     JOIN sales_management.customer c ON o.customer_code = c.code
                     JOIN sales_management.agents a ON o.agent_code = a.agent_code
@@ -592,7 +609,8 @@
                     </table>
                 </div>
                 <br>
-                <p><b>Query: </b>SELECT a.working_area, COUNT(o.id) AS total_orders FROM sales_management.orders o JOIN
+                <p class="prevent-select"><b>Query: </b>SELECT a.working_area, COUNT(o.id) AS total_orders FROM
+                    sales_management.orders o JOIN
                     sales_management.agents a ON o.agent_code = a.agent_code GROUP BY a.working_area;
                 </p>
                 <p><b>Explanation: </b>The query uses SELECT to retrieve the working_area and the total number of orders
@@ -672,7 +690,8 @@
                     </table>
                 </div>
                 <br>
-                <p><b>Query: </b>SELECT a.agent_name, MAX(c.outstanding_amount) AS max_outstanding,
+                <p class="prevent-select"><b>Query: </b>SELECT a.agent_name, MAX(c.outstanding_amount) AS
+                    max_outstanding,
                     MIN(c.outstanding_amount) AS min_outstanding FROM sales_management.customer c JOIN
                     sales_management.agents a ON c.agent_code = a.agent_code GROUP BY a.agent_name;
                 </p>
