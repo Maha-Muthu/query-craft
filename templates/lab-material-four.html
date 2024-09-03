@@ -10,6 +10,16 @@
     <link rel="stylesheet" href="static/css/query-input-design.css">
     <link rel="stylesheet" href="static/css/query-response-table-design.css">
     <link rel="stylesheet" href="static/css/table-design.css">
+    <style>
+        .prevent-select {
+            -webkit-user-select: none;
+            /* Safari */
+            -ms-user-select: none;
+            /* IE 10 and IE 11 */
+            user-select: none;
+            /* Standard syntax */
+        }
+    </style>
 </head>
 
 <body>
@@ -141,7 +151,7 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; NATURAL JOIN &lt;table_name&
                         <br>
                     </li>
                 </ul>
-                <h3>Find the list of artists who have artworks and display their names along with their birthplaces.
+                <h3>List the names, birthplaces, and titles of the artworks for each artist.
                 </h3>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
@@ -153,14 +163,13 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; NATURAL JOIN &lt;table_name&
                 <button class="collapsible">Natural Join on Art Work Tables</button>
                 <div class="content">
                     <br>
-                    <h3>Find the list of artists who have artworks and display their names along with their birthplaces.
+                    <h3>List the names, birthplaces, and titles of the artworks for each artist.
                     </h3>
                     <p><b>Query: </b>SELECT AName, Birthplace
                         FROM laboratories.Artist
                         NATURAL JOIN laboratories.Artwork;
                     </p>
-                    <p><b>Explanation: </b>This query will automatically join 'Artist' and 'Artwork' tables based on the
-                        common column 'AName', returning artists who have artworks along with their birthplaces.</p>
+                    <p><b>Explanation: </b>Use a NATURAL JOIN to combine the Artist and Artwork tables based on the common AName column, automatically linking each artist to their artworks. The SELECT statement retrieves the AName, Birthplace, and Title columns, providing the artist's name, birthplace, and artwork title.</p>
                     <br>
                 </div>
                 <br>
@@ -289,7 +298,7 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; RIGHT OUTER JOIN &lt;table_n
                         <br>
                     </li>
                 </ul>
-                <h3>List all artists and the customers who like them, including artists that no customer likes.
+                <h3>List the names and artwork titles of all artists, including artists who do not have an artwork.
                 </h3>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
@@ -301,13 +310,11 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; RIGHT OUTER JOIN &lt;table_n
                 <button class="collapsible">Right Outer Join on Art Work Tables</button>
                 <div class="content">
                     <br><br>
-                    <h3>List all artists and the customers who like them, including artists that no customer likes.
+                    <h3>List the names and artwork titles of all artists, including artists who do not have an artwork.
                     </h3>
-                    <p><b>Query: </b>SELECT Customer.Name AS CustomerName, LikeArtist.AName AS ArtistName FROM laboratories.LikeArtist RIGHT OUTER JOIN laboratories.Customer ON Customer.CustId = LikeArtist.CustId;
+                    <p><b>Query: </b>SELECT laboratories.Artist.AName, laboratories.Artwork.Title FROM laboratories.Artwork RIGHT JOIN laboratories.Artist ON laboratories.Artist.AName = laboratories.Artwork.AName;
                     </p>
-                    <p><b>Explanation: </b>This query returns all artists, including those who are not liked by any
-                        customer, with nulls in the customer column where there is no match. Right Outer Join is used to
-                        ensure that all artists are included in the result.</p>
+                    <p><b>Explanation: </b>Use a RIGHT JOIN to combine the Artist and Artwork tables based on the condition Artist.AName = Artwork.AName. A RIGHT JOIN returns all rows from the right table (Artist) and the matching rows from the left table (Artwork). If no match is found, the result is NULL for columns from the left table. By selecting AName and Title, the query ensures that all artists are listed, including those without associated artworks, as artists without artworks will still appear due to the RIGHT JOIN behavior, with Title showing as NULL for those cases.</p>
                     <br>
                 </div>
                 <br>
@@ -376,7 +383,7 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; [INNER] JOIN &lt;table_name&
                         <br>
                     </li>
                 </ul>
-                <h3>List pairs of artists from the same birthplace.
+                <h3>List pairs of artists who have the same style.
                 </h3>
                 <form class="queryForm">
                     <input type="text" class="query" placeholder="Query" required>
@@ -388,21 +395,15 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; [INNER] JOIN &lt;table_name&
                 <button class="collapsible">Self Join on Art Work Tables</button>
                 <div class="content">
                     <br><br>
-                    <h3>List pairs of artists from the same birthplace.
+                    <h3>List pairs of artists who have the same style.
                     </h3>
-                    <p><b>Expected Results: </b></p>
-                    <div style="overflow-x: auto; overflow-y: auto;">
-                        <table>
-                        </table>
-                        <br>
-                    </div>
                     <p><b>Query: </b>SELECT A1.AName AS Artist1, A2.AName AS Artist2
                         FROM laboratories.Artist A1
                         JOIN laboratories.Artist A2
-                        ON A1.Birthplace = A2.Birthplace AND A1.AName &lt;&gt; A2.AName;
+                        ON A1.Style = A2.Style AND A1.AName &lt;&gt; A2.AName;
                     </p>
                     <p><b>Explanation: </b> This query joins the Artist table with itself to find pairs of artists with
-                        the same birthplace. Self Join is useful for finding relationships within the same table.</p>
+                        the same style. Self Join is useful for finding relationships within the same table.</p>
                     <br>
                 </div>
                 <br>
@@ -553,7 +554,7 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; [INNER] JOIN &lt;table_name&
 
                         <br>
                     </div>
-                    <p><b>Query: </b>SELECT c.name, c.custid
+                    <p class="prevent-select"><b>Query: </b>SELECT c.name, c.custid
                         from laboratories.customer c
                         inner join laboratories.likeartist l
                         on c.custid=l.custid
@@ -574,7 +575,7 @@ SELECT &lt;column_names&gt; FROM &lt;table_name&gt; [INNER] JOIN &lt;table_name&
                         </table>
                         <br>
                     </div>
-                    <p><b>Query: </b>
+                    <p class="prevent-select"><b>Query: </b>
                         SELECT c.name
                         FROM laboratories.customer c
                         INNER JOIN laboratories.likeartist l
