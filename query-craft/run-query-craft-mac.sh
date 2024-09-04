@@ -32,40 +32,27 @@ fi
 
 echo "All Docker images loaded successfully!"
 
-# Create and restore Docker volumes
-echo "Creating and restoring Docker Volumes..."
-
-docker volume create --name query-craft_postgres_data
-if [ $? -ne 0 ]; then
-    echo "Error: Failed to create volume query-craft_postgres_data. Exiting..."
-    exit 1
-fi
-
-docker volume create --name query-craft_pgadmin_data
-if [ $? -ne 0 ]; then
-    echo "Error: Failed to create volume query-craft_pgadmin_data. Exiting..."
-    exit 1
-fi
-
-echo "All Docker Volumes created successfully!"
-
 # Set the backup directory
 BACKUP_DIR="$(pwd)/backup"
 
-# Restore the volumes
-echo "Restoring the postgres_data volume..."
+# Create and restore Docker volumes
+#Check if query-craft_postgres_data volume exists, create and restore if not
 
-docker run --rm -v query-craft_postgres_data:/volume -v "$BACKUP_DIR":/backup ubuntu sh -c "mkdir -p /backup && tar xvf /backup/postgres_data.tar -C /volume --strip-components=1 && chown -R 999:999 /volume"
-if [ $? -ne 0 ]; then
-    echo "Failed to restore the postgres_data volume. Exiting..."
-    exit 1
+if ! docker volume inspect query-craft_postgres_data > /dev/null 2>&1
+then
+    echo "Volume query-craft_postgres_data does not exist. Creating and restoring volume..."
+    docker run --rm -v query-craft_postgres_data:/volume -v "$BACKUP_DIR":/backup ubuntu sh -c "mkdir -p /backup && tar xvf /backup/postgres_data.tar -C /volume --strip-components=1 && chown -R 999:999 /volume" > /dev/null 2>&1
+else
+    echo Volume query-craft_postgres_data already exists...
 fi
 
-echo "Restoring the pgadmin_data volume..."
-docker run --rm -v query-craft_pgadmin_data:/volume -v "$BACKUP_DIR":/backup ubuntu sh -c "mkdir -p /backup && tar xvf /backup/pgadmin_data.tar -C /volume --strip-components=1 && chown -R 5050:5050 /volume"
-if [ $? -ne 0 ]; then
-    echo "Failed to restore the pgadmin_data volume. Exiting..."
-    exit 1
+#Check if query-craft_pgadmin_data volume exists, create and restore if not
+if ! docker volume inspect query-craft_pgadmin_data > /dev/null 2>&1 
+then
+    echo "Volume query-craft_pgadmin_data does not exist. Creating and restoring volume..."
+    docker run --rm -v query-craft_pgadmin_data:/volume -v "$BACKUP_DIR":/backup ubuntu sh -c "mkdir -p /backup && tar xvf /backup/pgadmin_data.tar -C /volume --strip-components=1 && chown -R 5050:5050 /volume" > /dev/null 2>&1
+else
+    echo Volume query-craft_pgadmin_data already exists...
 fi
 
 # Start the Docker Compose project
